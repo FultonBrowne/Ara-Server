@@ -17,4 +17,5 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile  group: 'com.rometools', name: 'rome', version: '1.12.1'
 }
