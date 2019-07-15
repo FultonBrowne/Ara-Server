@@ -1,19 +1,40 @@
 package com.andromeda.araserver;
 
+import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.FeedException;
+import com.rometools.rome.io.SyndFeedOutput;
 import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 
+
+
+
 public class main {
     public static String version = "ara 0.1 in progress ";
 
-    public static void main (String args[]){
+    public static void main (String args[]) {
+
+        SyndFeed feed = null;
+        try {
+            feed = (rss_main.rss_main1());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FeedException e) {
+            e.printStackTrace();
+        }
+        azure(feed);
+
+
+    }
+    /**public static void remote(){
         InetAddress mIP;
         String mIP2;
 
@@ -21,9 +42,9 @@ public class main {
         System.out.println(version);
         System.out.println("RSS server URL or IP");
         try {
-          mIP  = InetAddress.getLocalHost();
-          mIP2 = mIP.toString();
-          System.out.println(mIP2);
+            mIP  = InetAddress.getLocalHost();
+            mIP2 = mIP.toString();
+            System.out.println(mIP2);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -37,7 +58,27 @@ public class main {
         System.out.println(mInputUrl);
         try {
             URL url = new URL(mInputUrl) ;
+            url.openConnection();
+            System.out.println("connected");
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+
+
+
+    }**/
+    public static void azure(SyndFeed feed){
+
+        SyndFeedOutput output = new SyndFeedOutput();
+        try {
+            output.output(feed,new PrintWriter(System.out));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (FeedException e) {
             e.printStackTrace();
         }
 

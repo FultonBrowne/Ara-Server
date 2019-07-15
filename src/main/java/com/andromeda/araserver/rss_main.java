@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class rss_main {
-    public static SyndFeed rss_main() throws IOException, FeedException {
-        String feeds[] = new String[3];
+    public static SyndFeed rss_main1() throws IOException, FeedException {
+        String feeds[] = new String[1];
         feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
         SyndFeed feed = new SyndFeedImpl();
         feed.setFeedType("rss_2.0");
@@ -34,7 +34,9 @@ public class rss_main {
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed inFeed = input.build(new XmlReader(inputUrl));
 
-            entries.addAll(inFeed.getEntries());
+             entries.addAll(inFeed.getEntries());
+
+
 
 
         }
