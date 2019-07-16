@@ -6,15 +6,23 @@ import com.rometools.rome.io.SyndFeedOutput;
 import com.sun.net.httpserver.HttpServer;
 import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.*;
+import java.util.Date;
+
+import static sun.management.jmxremote.ConnectorBootstrap.DefaultValues.PORT;
 
 
-public class main {
+public class main implements Runnable {
     public static String version = "ara 0.1 in progress ";
+    static final int PORT = 8080;
+    static File mrss= new File("rss.xml");
+
+    private Socket connect;
+    static final boolean verbose = true;
+    public main(Socket c) {
+        connect = c;
+    }
 
     public static void main (String args[]) {
 
@@ -27,65 +35,33 @@ public class main {
             e.printStackTrace();
         }
         //azure(feed);
-        HttpServer server = null;
         try {
-            server = HttpServer.create(new InetSocketAddress(8000), 0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        server.createContext("/test", new Output());
-        server.setExecutor(null); // creates a default executor
-        server.start();
+            ServerSocket serverConnect = new ServerSocket(PORT);
+            System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
 
+            // we listen until user halts server execution
+            while (true) {
+                main myServer = new main(serverConnect.accept());
+
+                if (verbose) {
+                    System.out.println("Connecton opened. (" + new Date() + ")");
+                }
+
+                // create dedicated thread to manage the client connection
+                Thread thread = new Thread(myServer);
+                thread.start();
+            }
+
+        } catch (IOException e) {
+            System.err.println("Server Connection error : " + e.getMessage());
+        }
 
     }
-    public static void remote(){
-        InetAddress mIP;
-        String mIP2;
-
-        System.out.println("Starting Ara");
-        System.out.println(version);
-        System.out.println("RSS server URL or IP");
-        try {
-            mIP  = InetAddress.getLocalHost();
-            mIP2 = mIP.toString();
-            System.out.println(mIP2);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String mInputUrl = null;
-        try {
-            mInputUrl = br.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(mInputUrl);
-        try {
-            URL url = new URL(mInputUrl) ;
-            url.openConnection();
-            System.out.println("connected");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        }
 
 
 
-    }
-    public static void azure(SyndFeed feed){
-
-        SyndFeedOutput output = new SyndFeedOutput();
-        try {
-            output.output(feed,new PrintWriter(System.out));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (FeedException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public void run() {
 
     }
 }

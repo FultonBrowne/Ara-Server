@@ -28,7 +28,7 @@ public class Output implements HttpHandler {
             try {
               // main = output.outputString(feed, false);
                 assert feed != null;
-                output.output(feed,writer);
+                main = new SyndFeedOutput().outputString(feed);
 
                 writer.close();
 
