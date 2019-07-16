@@ -20,5 +20,7 @@ dependencies {
     compile  group: 'com.rometools', name: 'rome', version: '1.12.1'
     // https://mvnrepository.com/artifact/org.eclipse.swt.gtk.solaris/sparc
     compile group: 'org.eclipse.swt.gtk.solaris', name: 'sparc', version: '3.3.0-v3346'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.5"
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: "1.7.5"
 
 }

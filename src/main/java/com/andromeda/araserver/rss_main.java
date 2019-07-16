@@ -1,5 +1,6 @@
 package com.andromeda.araserver;
 
+import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.feed.synd.SyndFeedImpl;
 import com.rometools.rome.io.FeedException;
@@ -19,7 +20,7 @@ public class rss_main {
         feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
         SyndFeed feed = new SyndFeedImpl();
         feed.setFeedType("rss_2.0");
-        List entries = new ArrayList();
+        ArrayList<SyndEntry> entries = new ArrayList<SyndEntry>();
         feed.setEntries(entries);
 
         feed.setTitle("Ara feed");
@@ -28,18 +29,15 @@ public class rss_main {
         feed.setLink("");
 
 
-        for (int i=1;i<feeds.length;i++) {
+        for (int i=0;i<feeds.length;i++) {
             URL inputUrl = new URL(feeds[i]);
 
             SyndFeedInput input = new SyndFeedInput();
             SyndFeed inFeed = input.build(new XmlReader(inputUrl));
 
              entries.addAll(inFeed.getEntries());
+            feed.setEntries(entries);}
 
-
-
-
-        }
         return feed;
     }
 }

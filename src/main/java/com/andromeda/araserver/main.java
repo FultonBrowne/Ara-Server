@@ -3,18 +3,14 @@ package com.andromeda.araserver;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;
+import com.sun.net.httpserver.HttpServer;
 import org.graalvm.compiler.asm.sparc.SPARCAssembler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.UnknownHostException;
-
-
+import java.net.*;
 
 
 public class main {
@@ -30,11 +26,20 @@ public class main {
         } catch (FeedException e) {
             e.printStackTrace();
         }
-        azure(feed);
+        //azure(feed);
+        HttpServer server = null;
+        try {
+            server = HttpServer.create(new InetSocketAddress(8000), 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        server.createContext("/test", new Output());
+        server.setExecutor(null); // creates a default executor
+        server.start();
 
 
     }
-    /**public static void remote(){
+    public static void remote(){
         InetAddress mIP;
         String mIP2;
 
@@ -70,7 +75,7 @@ public class main {
 
 
 
-    }**/
+    }
     public static void azure(SyndFeed feed){
 
         SyndFeedOutput output = new SyndFeedOutput();
