@@ -3,65 +3,59 @@ package com.andromeda.araserver;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;
-import com.sun.net.httpserver.HttpServer;
-import org.graalvm.compiler.asm.sparc.SPARCAssembler;
+import fi.iki.elonen.NanoHTTPD;
 
-import java.io.*;
-import java.net.*;
-import java.util.Date;
-
-import static sun.management.jmxremote.ConnectorBootstrap.DefaultValues.PORT;
+import java.io.IOException;
+import java.util.Map;
 
 
-public class main implements Runnable {
-    public static String version = "ara 0.1 in progress ";
-    static final int PORT = 8080;
-    static File mrss= new File("rss.xml");
+public class main extends NanoHTTPD {
 
-    private Socket connect;
-    static final boolean verbose = true;
-    public main(Socket c) {
-        connect = c;
+
+    public main() throws IOException {
+        super(80);
+        start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+        System.out.println("\nRunning! Point your browsers to http://localhost:80/ \n");
     }
 
-    public static void main (String args[]) {
-
-        SyndFeed feed = null;
+    public static void main(String[] args) {
         try {
-            feed = (rss_main.rss_main1());
+            new main();
+        } catch (IOException ioe) {
+            System.err.println("Couldn't start server:\n" + ioe);
+        }
+    }
+
+    @Override
+    public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
+        SyndFeed main1 = null;
+        String main2 = "err";
+        try {
+            main1 = rss_main.rss_main1();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (FeedException e) {
             e.printStackTrace();
         }
-        //azure(feed);
         try {
-            ServerSocket serverConnect = new ServerSocket(PORT);
-            System.out.println("Server started.\nListening for connections on port : " + PORT + " ...\n");
-
-            // we listen until user halts server execution
-            while (true) {
-                main myServer = new main(serverConnect.accept());
-
-                if (verbose) {
-                    System.out.println("Connecton opened. (" + new Date() + ")");
-                }
-
-                // create dedicated thread to manage the client connection
-                Thread thread = new Thread(myServer);
-                thread.start();
-            }
-
-        } catch (IOException e) {
-            System.err.println("Server Connection error : " + e.getMessage());
+            main2 = new SyndFeedOutput().outputString(main1);
+        } catch (FeedException e) {
+            e.printStackTrace();
         }
 
-    }
-
-
-
-    @Override
-    public void run() {
-
+       /** String msg = "<html><body><h1>Hello server</h1>\n";
+        Map<String, String> parms = session.getParms();
+        if (parms.get("username") == null) {
+            msg += "<form action='?' method='get'>\n  <p>Your name: <input type='text' name='username'></p>\n" + "</form>\n";
+        } else {
+            msg += "<p>Hello, " + parms.get("username") + "!</p>";
+        }**/
+        System.out.println(main2);
+        // return newFixedLengthResponse(msg + "</body></html>\n");
+        return newFixedLengthResponse(main2);
     }
 }
+
+
+
+
