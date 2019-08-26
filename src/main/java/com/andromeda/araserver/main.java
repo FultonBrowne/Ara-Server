@@ -28,10 +28,26 @@ public class main extends NanoHTTPD {
 
     @Override
     public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
+        int tag = 0;
+        String test = session.getUri();
         SyndFeed main1 = null;
         String main2 = "err";
+        switch (test) {
+            case "/world":
+                tag = 1;
+                break;
+            case "/us":
+                tag = 2;
+                break;
+            case "/tech":
+                tag = 3;
+                break;
+            case "/money":
+                tag = 4;
+                break;
+        }
         try {
-            main1 = rss_main.rss_main1();
+            main1 = rss_main.rss_main1(tag);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (FeedException e) {
@@ -50,7 +66,7 @@ public class main extends NanoHTTPD {
         } else {
             msg += "<p>Hello, " + parms.get("username") + "!</p>";
         }**/
-        System.out.println(main2);
+        System.out.println(test);
         // return newFixedLengthResponse(msg + "</body></html>\n");
         return newFixedLengthResponse(main2);
     }

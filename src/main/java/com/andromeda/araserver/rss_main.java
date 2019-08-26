@@ -12,10 +12,33 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class rss_main {
-    public static SyndFeed rss_main1() throws IOException, FeedException {
+    public static SyndFeed rss_main1(int main12) throws IOException, FeedException {
         String[] feeds = new String[2];
-        feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
-        feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+        switch (main12){
+            case 1:
+                feeds[0] = "https://www.cbsnews.com/latest/rss/world";
+                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                break;
+            case 2:
+                feeds[0] = "https://www.cbsnews.com/latest/rss/us";
+                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                break;
+            case 3:
+                feeds[0] = "https://www.cnet.com/rss/news/";
+                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                break;
+            case 4:
+                feeds[0] = "http://feeds.reuters.com/reuters/businessNews";
+                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                break;
+            default:
+                feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
+                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                break;
+
+        }
+        //feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
+        //feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
         SyndFeed feed = new SyndFeedImpl();
         feed.setFeedType("rss_2.0");
         ArrayList<SyndEntry> entries = new ArrayList<SyndEntry>();
