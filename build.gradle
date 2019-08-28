@@ -33,3 +33,6 @@ dependencies {
     compile 'org.nanohttpd:nanohttpd:2.3.1'
 
 }
+task stage {
+    dependsOn build
+}
