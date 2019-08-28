@@ -12,16 +12,24 @@ import java.util.Map;
 public class main extends NanoHTTPD {
 
 
-    public main() throws IOException {
-        super(8000);
+
+
+
+     public main(int port) throws IOException {
+        super(port);
+
         System.getenv("PORT");
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
         System.out.println(  System.getenv("PORT") + "\n hi Running! Point your browsers to http://localhost:80/ \n");
     }
 
     public static void main(String[] args) {
+        String webPort = System.getenv("PORT");
+        if(webPort == null || webPort.isEmpty()) {
+            webPort = "8080";
+        }
         try {
-            new main();
+            new main(Integer.parseInt(webPort));
         } catch (IOException ioe) {
             System.err.println("Couldn't start server:\n" + ioe);
         }
