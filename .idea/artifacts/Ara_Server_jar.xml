@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" build-on-make="true" name="Ara-Server:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Ara_Server_jar</output-path>
+    <output-path>$PROJECT_DIR$/bin/jar</output-path>
     <root id="archive" name="Ara-Server.jar">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF" />
