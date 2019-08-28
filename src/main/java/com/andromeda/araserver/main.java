@@ -66,7 +66,7 @@ public class main extends NanoHTTPD {
         } else {
             msg += "<p>Hello, " + parms.get("username") + "!</p>";
         }**/
-        System.out.println(test);
+        //System.out.println(test);
         // return newFixedLengthResponse(msg + "</body></html>\n");
         return newFixedLengthResponse(main2);
     }
