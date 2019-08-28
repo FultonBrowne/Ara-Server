@@ -13,9 +13,10 @@ public class main extends NanoHTTPD {
 
 
     public main() throws IOException {
-        super(Integer.parseInt(System.getenv("PORT")));
+        super(5000);
+        System.getenv("PORT");
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-        System.out.println( "\n hi Running! Point your browsers to http://localhost:80/ \n");
+        System.out.println(  System.getenv("PORT") + "\n hi Running! Point your browsers to http://localhost:80/ \n");
     }
 
     public static void main(String[] args) {
@@ -66,7 +67,7 @@ public class main extends NanoHTTPD {
         } else {
             msg += "<p>Hello, " + parms.get("username") + "!</p>";
         }**/
-        //System.out.println(test);
+        System.out.println(test);
         // return newFixedLengthResponse(msg + "</body></html>\n");
         return newFixedLengthResponse(main2);
     }
