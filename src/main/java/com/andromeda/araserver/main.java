@@ -13,9 +13,9 @@ public class main extends NanoHTTPD {
 
 
     public main() throws IOException {
-        super($PORT);
+        super(5000);
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-        System.out.println("\nRunning! Point your browsers to http://localhost:80/ \n");
+        System.out.println( "\n hi Running! Point your browsers to http://localhost:80/ \n");
     }
 
     public static void main(String[] args) {
