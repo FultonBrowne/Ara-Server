@@ -1,1 +1,1 @@
-web: java -jar bin/jar/Ara-Server.jar
+web: java -jar -Dserver.port=$PORT bin/jar/Ara-Server.jar
