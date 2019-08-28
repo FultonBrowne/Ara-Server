@@ -13,7 +13,7 @@ public class main extends NanoHTTPD {
 
 
     public main() throws IOException {
-        super(5000);
+        super(Integer.parseInt(System.getenv("PORT")));
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
         System.out.println( "\n hi Running! Point your browsers to http://localhost:80/ \n");
     }
