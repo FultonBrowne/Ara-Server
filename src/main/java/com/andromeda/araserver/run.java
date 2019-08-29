@@ -9,13 +9,13 @@ import java.io.IOException;
 
 
 
-public class main extends NanoHTTPD {
+public class run extends NanoHTTPD {
 
 
 
 
 
-     private main(int port) throws IOException {
+     private run(int port) throws IOException {
         super(port);
 
         System.getenv("PORT");
@@ -23,14 +23,14 @@ public class main extends NanoHTTPD {
         System.out.println(  System.getenv("PORT") + "\n hi Running! Point your browsers to http://localhost:80/ \n");
     }
 
-    @SuppressWarnings("MethodNameSameAsClassName")
+
     public static void main(String[] args) {
         String webPort = System.getenv("PORT");
         if(webPort == null || webPort.isEmpty()) {
             webPort = "8080";
         }
         try {
-            new main(Integer.parseInt(webPort));
+            new run(Integer.parseInt(webPort));
         } catch (IOException ioe) {
             System.err.println("Couldn't start server:\n" + ioe);
         }
@@ -38,7 +38,7 @@ public class main extends NanoHTTPD {
 
     @Override
     public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
-        int tag = 0;
+        int tag;
         String test = session.getUri();
         SyndFeed main1 = null;
         String main2 = "err";
@@ -54,6 +54,9 @@ public class main extends NanoHTTPD {
                 break;
             case "/money":
                 tag = 4;
+                break;
+            default:
+                tag = 0;
                 break;
         }
         try {
