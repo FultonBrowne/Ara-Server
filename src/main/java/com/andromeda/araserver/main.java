@@ -6,7 +6,7 @@ import com.rometools.rome.io.SyndFeedOutput;
 import fi.iki.elonen.NanoHTTPD;
 
 import java.io.IOException;
-import java.util.Map;
+
 
 
 public class main extends NanoHTTPD {
@@ -15,7 +15,7 @@ public class main extends NanoHTTPD {
 
 
 
-     public main(int port) throws IOException {
+     private main(int port) throws IOException {
         super(port);
 
         System.getenv("PORT");
@@ -23,6 +23,7 @@ public class main extends NanoHTTPD {
         System.out.println(  System.getenv("PORT") + "\n hi Running! Point your browsers to http://localhost:80/ \n");
     }
 
+    @SuppressWarnings("MethodNameSameAsClassName")
     public static void main(String[] args) {
         String webPort = System.getenv("PORT");
         if(webPort == null || webPort.isEmpty()) {
@@ -57,25 +58,20 @@ public class main extends NanoHTTPD {
         }
         try {
             main1 = rss_main.rss_main1(tag);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (FeedException e) {
+
+        } catch (IOException | FeedException e) {
             e.printStackTrace();
         }
         try {
+            assert main1 != null;
             main2 = new SyndFeedOutput().outputString(main1);
         } catch (FeedException e) {
             e.printStackTrace();
         }
 
-       /** String msg = "<html><body><h1>Hello server</h1>\n";
-        Map<String, String> parms = session.getParms();
-        if (parms.get("username") == null) {
-            msg += "<form action='?' method='get'>\n  <p>Your name: <input type='text' name='username'></p>\n" + "</form>\n";
-        } else {
-            msg += "<p>Hello, " + parms.get("username") + "!</p>";
-        }**/
+
         System.out.println(test);
+
         // return newFixedLengthResponse(msg + "</body></html>\n");
         return newFixedLengthResponse(main2);
     }
