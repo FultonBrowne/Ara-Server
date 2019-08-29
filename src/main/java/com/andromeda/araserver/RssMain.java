@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class rss_main {
+public class RssMain {
     public static SyndFeed rss_main1(int main12) throws IOException, FeedException {
         String[] feeds = new String[2];
         switch (main12){

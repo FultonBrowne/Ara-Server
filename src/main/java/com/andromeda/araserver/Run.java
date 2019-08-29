@@ -9,13 +9,13 @@ import java.io.IOException;
 
 
 
-public class run extends NanoHTTPD {
+public class Run extends NanoHTTPD {
 
 
 
 
 
-     private run(int port) throws IOException {
+     private Run(int port) throws IOException {
         super(port);
 
         System.getenv("PORT");
@@ -30,7 +30,7 @@ public class run extends NanoHTTPD {
             webPort = "8080";
         }
         try {
-            new run(Integer.parseInt(webPort));
+            new Run(Integer.parseInt(webPort));
         } catch (IOException ioe) {
             System.err.println("Couldn't start server:\n" + ioe);
         }
@@ -60,7 +60,7 @@ public class run extends NanoHTTPD {
                 break;
         }
         try {
-            main1 = rss_main.rss_main1(tag);
+            main1 = RssMain.rss_main1(tag);
 
         } catch (IOException | FeedException e) {
             e.printStackTrace();
