@@ -12,20 +12,20 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class RssMain {
-    public static SyndFeed rss_main1(int main12) throws IOException, FeedException {
+    public static SyndFeed rss_main1(int mode) throws IOException, FeedException {
         String[] feeds = new String[2];
-        switch (main12){
+        switch (mode){
             case 1:
                 feeds[0] = "https://www.cbsnews.com/latest/rss/world";
-                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                feeds[1] = "https://feeds.foxnews.com/foxnews/world";
                 break;
             case 2:
                 feeds[0] = "https://www.cbsnews.com/latest/rss/us";
-                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                feeds[1] = "https://feeds.foxnews.com/foxnews/national";
                 break;
             case 3:
                 feeds[0] = "https://www.cnet.com/rss/news/";
-                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                feeds[1] = "https://www.foxnews.com/about/rss";
                 break;
             case 4:
                 feeds[0] = "http://feeds.reuters.com/reuters/businessNews";
@@ -33,7 +33,7 @@ public class RssMain {
                 break;
             default:
                 feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
-                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+                feeds[1] = "https://feeds.foxnews.com/foxnews/latest";
                 break;
 
         }
