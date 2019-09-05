@@ -17,15 +17,15 @@ public class RssMain {
         switch (mode){
             case 1:
                 feeds[0] = "https://www.cbsnews.com/latest/rss/world";
-                feeds[1] = "https://feeds.foxnews.com/foxnews/world";
+                feeds[1] = "http://feeds.foxnews.com/foxnews/world";
                 break;
             case 2:
                 feeds[0] = "https://www.cbsnews.com/latest/rss/us";
-                feeds[1] = "https://feeds.foxnews.com/foxnews/national";
+                feeds[1] = "http://feeds.foxnews.com/foxnews/national";
                 break;
             case 3:
                 feeds[0] = "https://www.cnet.com/rss/news/";
-                feeds[1] = "https://www.foxnews.com/about/rss";
+                feeds[1] = "http://www.foxnews.com/about/rss";
                 break;
             case 4:
                 feeds[0] = "http://feeds.reuters.com/reuters/businessNews";
@@ -33,7 +33,7 @@ public class RssMain {
                 break;
             default:
                 feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
-                feeds[1] = "https://feeds.foxnews.com/foxnews/latest";
+                feeds[1] = "http://feeds.foxnews.com/foxnews/latest";
                 break;
 
         }

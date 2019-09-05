@@ -27,7 +27,7 @@ public class Run extends NanoHTTPD {
     public static void main(String[] args) {
         String webPort = System.getenv("PORT");
         if(webPort == null || webPort.isEmpty()) {
-            webPort = "8080";
+            webPort = "80";
         }
         try {
             new Run(Integer.parseInt(webPort));
@@ -39,10 +39,11 @@ public class Run extends NanoHTTPD {
     @Override
     public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
         int tag;
-        String test = session.getUri();
+        String sessionUri = session.getUri();
         SyndFeed main1 = null;
         String main2 = "err";
-        switch (test) {
+
+        switch (sessionUri) {
             case "/world":
                 tag = 1;
                 break;
@@ -55,10 +56,12 @@ public class Run extends NanoHTTPD {
             case "/money":
                 tag = 4;
                 break;
+
             default:
                 tag = 0;
                 break;
         }
+
         try {
             main1 = RssMain.rss_main1(tag);
 
@@ -71,11 +74,10 @@ public class Run extends NanoHTTPD {
         } catch (FeedException e) {
             e.printStackTrace();
         }
+        if (sessionUri.startsWith("/api")) main2 = new apiStart().apiMain(sessionUri);
 
 
-        System.out.println(test);
-
-        // return newFixedLengthResponse(msg + "</body></html>\n");
+        System.out.println(sessionUri);
         return newFixedLengthResponse(main2);
     }
 }
