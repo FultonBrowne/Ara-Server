@@ -1,11 +1,19 @@
 package com.andromeda.araserver;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 
-public class apiStart {
-    Gson output = new Gson();
-    public String apiMain(String mainUri){
+class apiStart {
+    private GsonBuilder gsonBuilder = new GsonBuilder();
+     ArrayList<RssFeedModel> test = new ArrayList<>();
+
+    String apiMain(String mainUri){
         String searchterm = mainUri.replaceFirst("/api/", "");
-        return searchterm;
+        Gson output = gsonBuilder.create();
+        test.add(new RssFeedModel("hi","hi","hi","hi"));
+        test.add(new RssFeedModel("hi","hi","hi","hi"));
+
+        return output.toJson(test);
     }
 }
