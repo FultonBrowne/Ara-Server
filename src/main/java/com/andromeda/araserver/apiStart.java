@@ -3,8 +3,11 @@ package com.andromeda.araserver;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 class apiStart {
@@ -24,15 +27,22 @@ class apiStart {
         Connection c = null;
         try {
            Class.forName("org.postgresql.Driver");
-            c = DriverManager
-                    .getConnection("jdbc:postgresql://ztpysbtdtzkeyt:344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d40qc3ivndkhlh",
-                            "ztpysbtdtzkeyt", "344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6");
+           getConnection();
+           // c = DriverManager
+             //       .getConnection("jdbc:postgresql://ztpysbtdtzkeyt:344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d40qc3ivndkhlh",
+               //             "ztpysbtdtzkeyt", "344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
             System.exit(0);
         }
         System.out.println("Opened database successfully");
+    }
+    private static Connection getConnection() throws URISyntaxException, SQLException {
+        URI dbUri = new URI("jdbc:postgresql://ztpysbtdtzkeyt:344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d40qc3ivndkhlh");
+        String dbUrl = "jdbc:postgresql://" + "ec2-54-221-214-3.compute-1.amazonaws.com" + ':' + "5432" + "/d40qc3ivndkhlh" + "?ssl=true" + "sslmode=require";
+        return DriverManager.getConnection(dbUrl,
+                             "ztpysbtdtzkeyt", "344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6");
     }
 
 }
