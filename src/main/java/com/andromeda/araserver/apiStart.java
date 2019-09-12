@@ -11,6 +11,9 @@ import java.util.ArrayList;
 class apiStart {
     private GsonBuilder gsonBuilder = new GsonBuilder();
      private ArrayList<RssFeedModel> test = new ArrayList<>();
+     protected ArrayList<SqlModel> sqlmodel = new ArrayList<SqlModel>();
+     protected SqlModel temsqlmodel;
+
 
     String apiMain(String mainUri){
         String searchterm = mainUri.replaceFirst("/api/", "");
@@ -46,7 +49,21 @@ class apiStart {
             rs.close();
             stmt.close();
             c.close();**/
-           sqladd(stmt, c);
+          // sqladd(stmt, c);
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM skills;" );
+            while ( rs.next() ) {
+
+                String  start = rs.getString("start");
+                String  endtxt = rs.getString("endtxt");
+                String link = rs.getString("link");
+                System.out.println( "start = " + start );
+
+                System.out.println( "endtxt = " + endtxt );
+                System.out.println( "link = " + link );
+                temsqlmodel = new SqlModel(start, endtxt, link);
+                sqlmodel.add(temsqlmodel);
+                System.out.println();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +73,9 @@ class apiStart {
         System.out.println("Opened database successfully");
     }
     public void sqladd(Statement stmt, Connection c) throws SQLException {
-        String sql = "CREATE TABLE skills(start varchar(80) ,endtxt varchar(225), link varchar(225)); ";
+       // String sql = "CREATE TABLE skills(start varchar(80) ,endtxt varchar(225), link varchar(225)); ";
+        //TODO work on this \/
+        String sql = "INSERT INTO SKILLS(start,endtxt,link) VALUES ('nearest','near me', 'https://araserver.herokuapp.com/yelpclient')";
         stmt.executeUpdate(sql);
         //String sql = "INSERT INTO SKILLS (ID,NAME,AGE,ADDRESS,SALARY) "
           //      + "VALUES (1, 'Paul', 32, 'California', 20000.00 );";
