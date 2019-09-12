@@ -31,6 +31,8 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.5"
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: "1.7.5"
     compile 'org.nanohttpd:nanohttpd:2.3.1'
+    compile 'org.hibernate:hibernate-agroal:5.3.11.Final'
+
     implementation 'com.google.code.gson:gson:2.8.5'
     // https://mvnrepository.com/artifact/postgresql/postgresql
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
