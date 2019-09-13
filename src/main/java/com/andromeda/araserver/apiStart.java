@@ -11,8 +11,8 @@ import java.util.ArrayList;
 class apiStart {
     private GsonBuilder gsonBuilder = new GsonBuilder();
      private ArrayList<RssFeedModel> test = new ArrayList<>();
-     protected ArrayList<SqlModel> sqlmodel = new ArrayList<SqlModel>();
-     protected SqlModel temsqlmodel;
+     private ArrayList<SqlModel> sqlmodel = new ArrayList<>();
+     private String linkval;
 
 
     String apiMain(String mainUri){
@@ -20,37 +20,19 @@ class apiStart {
         Gson output = gsonBuilder.create();
         test.add(new RssFeedModel("hi","hi","hi","hi"));
         test.add(new RssFeedModel("hi","hi","hi","hi"));
-        sqltest();
+        sqltest(searchterm);
 
 
         return output.toJson(test);
     }
-    private void sqltest(){
+    private void sqltest(String search){
         try {
            Class.forName("org.postgresql.Driver");
           Connection c = getConnection();
             Statement stmt = c.createStatement();
-           /** ResultSet rs = stmt.executeQuery( "SELECT * FROM SKILLS;" );
-            while ( rs.next() ) {
-                int id = rs.getInt("id");
-
-                String  name = rs.getString("name");
-                int age  = rs.getInt("age");
-                String  address = rs.getString("address");
-                float salary = rs.getFloat("salary");
-                System.out.println( "ID = " + id );
-                System.out.println( "NAME = " + name );
-                System.out.println( "AGE = " + age );
-                System.out.println( "ADDRESS = " + address );
-                System.out.println( "SALARY = " + salary );
-                System.out.println();
-
-            }
-            rs.close();
-            stmt.close();
-            c.close();**/
           // sqladd(stmt, c);
             ResultSet rs = stmt.executeQuery( "SELECT * FROM skills;" );
+            // I dont know how this works but it does :)
             while ( rs.next() ) {
 
                 String  start = rs.getString("start");
@@ -60,10 +42,11 @@ class apiStart {
 
                 System.out.println( "endtxt = " + endtxt );
                 System.out.println( "link = " + link );
-                temsqlmodel = new SqlModel(start, endtxt, link);
+                SqlModel temsqlmodel = new SqlModel(start, endtxt, link);
                 sqlmodel.add(temsqlmodel);
                 System.out.println();
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -71,6 +54,19 @@ class apiStart {
             System.exit(0);
         }
         System.out.println("Opened database successfully");
+        for (int i = 0; i < sqlmodel.size() ; i++) {
+            if (search.startsWith(sqlmodel.get(i).title)){
+                linkval = sqlmodel.get(i).link;
+            }
+            else if (search.startsWith(sqlmodel.get(i).description)){
+                linkval = sqlmodel.get(i).link;
+
+            }
+        }
+        if (linkval == null){
+            linkval = "error";
+        }
+        System.out.println(linkval + "/" + search);
     }
     public void sqladd(Statement stmt, Connection c) throws SQLException {
        // String sql = "CREATE TABLE skills(start varchar(80) ,endtxt varchar(225), link varchar(225)); ";
