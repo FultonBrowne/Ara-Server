@@ -7,7 +7,7 @@ public class OutputModel {
     public String image;
     String OutputTxt;
 
-    public OutputModel(String description, String link, String title, String image, String OutputTxt) {
+    public OutputModel(String title, String description, String link, String image, String OutputTxt) {
         this.title = title;
         this.link = link;
         this.description = description;
