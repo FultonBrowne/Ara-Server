@@ -11,7 +11,7 @@ public class Hello {
         GsonBuilder gsonBuilder = new GsonBuilder();
         ArrayList<OutputModel>  test = new ArrayList<>();
         Gson output = gsonBuilder.create();
-        test.add(new OutputModel("hi","hi","hi","hi", "Hello Person"));
+        test.add(new OutputModel("hi","hi","hi","hi", "Hello Human"));
         return output.toJson(test);
     }
 }
