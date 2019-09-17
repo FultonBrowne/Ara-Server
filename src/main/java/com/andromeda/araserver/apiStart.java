@@ -3,10 +3,13 @@ package com.andromeda.araserver;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.io.*;
+import java.net.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+
 
 class apiStart {
     private GsonBuilder gsonBuilder = new GsonBuilder();
@@ -63,10 +66,51 @@ class apiStart {
 
             }
         }
+
         if (linkval == null){
             linkval = "error";
         }
         System.out.println(linkval + "/" + search);
+        String url = linkval;
+        if (!linkval.endsWith("/")) url = url +"/";
+
+        URL obj = null;
+        try {
+            obj = new URL(url);
+
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        // optional default is GET
+        con.setRequestMethod("GET");
+
+        //add request header
+        //con.setRequestProperty("User-Agent", USER_AGENT);
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'GET' request to URL : " + url);
+        System.out.println("Response Code : " + responseCode);
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+
+        }
+            Scanner s = new Scanner(in).useDelimiter("\\A");
+            String result = s.hasNext() ? s.next() : "";
+            System.out.println(result);
+
+        in.close();
+
+
+        //print result
+        System.out.println(response.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void sqladd(Statement stmt, Connection c) throws SQLException {
        // String sql = "CREATE TABLE skills(start varchar(80) ,endtxt varchar(225), link varchar(225)); ";

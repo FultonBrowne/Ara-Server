@@ -42,39 +42,43 @@ public class Run extends NanoHTTPD {
         String sessionUri = session.getUri();
         SyndFeed main1 = null;
         String main2 = "err";
-
-        switch (sessionUri) {
-            case "/world":
-                tag = 1;
-                break;
-            case "/us":
-                tag = 2;
-                break;
-            case "/tech":
-                tag = 3;
-                break;
-            case "/money":
-                tag = 4;
-                break;
-
-            default:
-                tag = 0;
-                break;
-        }
-
-        try {
-            main1 = RssMain.rss_main1(tag);
-
-        } catch (IOException | FeedException e) {
-            e.printStackTrace();
-        }
-        try {
-            assert main1 != null;
-            main2 = new SyndFeedOutput().outputString(main1);
-        } catch (FeedException e) {
-            e.printStackTrace();
-        }
         if (sessionUri.startsWith("/api")) main2 = new apiStart().apiMain(sessionUri);
+        else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
+        else {
+
+            switch (sessionUri) {
+                case "/world":
+                    tag = 1;
+                    break;
+                case "/us":
+                    tag = 2;
+                    break;
+                case "/tech":
+                    tag = 3;
+                    break;
+                case "/money":
+                    tag = 4;
+                    break;
+
+                default:
+                    tag = 0;
+                    break;
+            }
+
+            try {
+                main1 = RssMain.rss_main1(tag);
+
+            } catch (IOException | FeedException e) {
+                e.printStackTrace();
+            }
+            try {
+                assert main1 != null;
+                main2 = new SyndFeedOutput().outputString(main1);
+            } catch (FeedException e) {
+                e.printStackTrace();
+            }
+        }
+
 
 
         System.out.println(sessionUri);
