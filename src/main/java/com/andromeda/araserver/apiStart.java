@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 
 class apiStart {
+    private String result;
     private GsonBuilder gsonBuilder = new GsonBuilder();
      private ArrayList<RssFeedModel> test = new ArrayList<>();
      private ArrayList<SqlModel> sqlmodel = new ArrayList<>();
@@ -23,12 +24,13 @@ class apiStart {
         Gson output = gsonBuilder.create();
         test.add(new RssFeedModel("hi","hi","hi","hi"));
         test.add(new RssFeedModel("hi","hi","hi","hi"));
-        sqltest(searchterm);
 
 
-        return output.toJson(test);
+
+        return sqltest(searchterm);
     }
-    private void sqltest(String search){
+    private String sqltest(String search){
+        String out = "hi";
         try {
            Class.forName("org.postgresql.Driver");
           Connection c = getConnection();
@@ -100,17 +102,22 @@ class apiStart {
 
         }
             Scanner s = new Scanner(in).useDelimiter("\\A");
-            String result = s.hasNext() ? s.next() : "";
-            System.out.println(result);
+        result = s.hasNext() ? s.next() : "";
+            System.out.println(result + "hi");
+            //out = result;
+
 
         in.close();
 
 
         //print result
-        System.out.println(response.toString());
+        out = response.toString();
+        System.out.println(out);
         } catch (Exception e) {
             e.printStackTrace();
+            result = "err";
         }
+        return out;
     }
     public void sqladd(Statement stmt, Connection c) throws SQLException {
        // String sql = "CREATE TABLE skills(start varchar(80) ,endtxt varchar(225), link varchar(225)); ";
