@@ -60,22 +60,35 @@ class apiStart {
         }
         System.out.println("Opened database successfully");
         System.out.println(search);
-        System.out.println(search.startsWith(sqlmodel.get(0).title));
-        if(!search.equals("")){
+
+
 
             for (SqlModel sqlModel : sqlmodel) {
-                if (search.startsWith(sqlModel.title)) {
+                 boolean test = false;
+                boolean test2 = false;
+
+                 test = search.startsWith(sqlModel.title);
+                 test2 = search.endsWith(sqlModel.title);
+                 System.out.println(test);
+                if (test) {
                     linkval = sqlModel.link;
+                    System.out.println(search.startsWith(sqlModel.title.toLowerCase()));
                     System.out.println("BT");
-                } else if (search.endsWith(sqlModel.description)) {
+                } else if (test2) {
 
                     linkval = sqlModel.link;
                 }
-                System.out.println("AT");
+                else if(!test) {
+                    //linkval = sqlModel.link;
+                    System.out.println("BTbfgbtbvg");
+                    System.out.println(search.startsWith(sqlModel.title.toLowerCase()));
+
+                }
+
 
 
             }
-        }
+
 
         if (linkval == null){
             linkval = "error";
