@@ -2,11 +2,11 @@ package com.andromeda.araserver;
 
 @SuppressWarnings({"FieldCanBeLocal", "unused"})
 class OutputModel {
-    private String title;
-    private String link;
-    private String description;
-    private String OutputTxt;
-    private String exes;
+     String title;
+     String link;
+     String description;
+     String OutputTxt;
+     String exes;
 
     OutputModel(String title, String description, String link, String image, String OutputTxt, String exes) {
         this.title = title;

@@ -14,7 +14,7 @@ import java.util.Scanner;
 class apiStart {
     private String result;
     private GsonBuilder gsonBuilder = new GsonBuilder();
-     private ArrayList<RssFeedModel> test = new ArrayList<>();
+     private ArrayList<OutputModel> test = new ArrayList<>();
      private ArrayList<SqlModel> sqlmodel = new ArrayList<>();
      private String linkval;
 
@@ -22,8 +22,8 @@ class apiStart {
     String apiMain(String mainUri){
         String searchterm = mainUri.replaceFirst("/api/", "");
         Gson output = gsonBuilder.create();
-        test.add(new RssFeedModel("hi","hi","hi","hi"));
-        test.add(new RssFeedModel("hi","hi","hi","hi"));
+        test.add(new OutputModel("Blank Input Received", "Please Try Again", "https://github.com/fultonbrowne/ara-android","","Error Was Encountered", ""));
+
 
 
 
@@ -59,12 +59,20 @@ class apiStart {
             System.exit(0);
         }
         System.out.println("Opened database successfully");
-        for (int i = 0; i < sqlmodel.size() ; i++) {
-            if (search.startsWith(sqlmodel.get(i).title)){
-                linkval = sqlmodel.get(i).link;
-            }
-            else if (search.startsWith(sqlmodel.get(i).description)){
-                linkval = sqlmodel.get(i).link;
+        System.out.println(search);
+        System.out.println(search.startsWith(sqlmodel.get(0).title));
+        if(!search.equals("")){
+
+            for (SqlModel sqlModel : sqlmodel) {
+                if (search.startsWith(sqlModel.title)) {
+                    linkval = sqlModel.link;
+                    System.out.println("BT");
+                } else if (search.endsWith(sqlModel.description)) {
+
+                    linkval = sqlModel.link;
+                }
+                System.out.println("AT");
+
 
             }
         }
@@ -72,9 +80,9 @@ class apiStart {
         if (linkval == null){
             linkval = "error";
         }
-        System.out.println(linkval + "/" + search);
+        //System.out.println(linkval + "/" + search);
         String url = linkval;
-        if (!linkval.endsWith("/")) url = url +"/";
+        //if (!linkval.endsWith("/")) url = url +"/";
 
         URL obj = null;
         try {
@@ -115,6 +123,7 @@ class apiStart {
         System.out.println(out);
         } catch (Exception e) {
             e.printStackTrace();
+            out = new Gson().toJson(test);
             result = "err";
         }
         return out;
