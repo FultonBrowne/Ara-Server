@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
 }
 application {
     mainClassName('com.andromeda.araserver.Run')
@@ -36,9 +37,20 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     // https://mvnrepository.com/artifact/postgresql/postgresql
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 
 }
 task stage {
     dependsOn build
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }

@@ -62,40 +62,14 @@ class apiStart {
         System.out.println(search);
 
 
-boolean done = true;
-            for (SqlModel sqlModel : sqlmodel) {
-                 boolean test = false;
-                boolean test2 = false;
-                
-
-                 test = search.startsWith(sqlModel.title);
-                 test2 = search.endsWith(sqlModel.title);
-                 System.out.println(test);
-                if (test && done) {
-                    linkval = sqlModel.link;
-                    System.out.println(search.startsWith(sqlModel.title.toLowerCase()));
-                    done = false;
-
-                    System.out.println("BT");
-                } else if (test2 && done) {
-
-                    linkval = sqlModel.link;
-                    done = false;
-                }
-                else{
-                    linkval = "done";
-                    System.out.println("BTbfgbtbvg");
-                    System.out.println(search.startsWith(sqlModel.title.toLowerCase()));
-
-                }
-
-
-
+        for (int i = 0; i < sqlmodel.size(); i++) {
+            System.out.println(sqlmodel.get(i).description);
+            System.out.println(search.startsWith(sqlmodel.get(i).description));
+            if (search.startsWith(sqlmodel.get(i).description)){
+                linkval = sqlmodel.get(i).link;
+                break;
             }
-
-
-        if (linkval == null){
-            linkval = "error";
+           // if (search.endsWith(sqlmodel.get(i).title)) {linkval = sqlmodel.get(i).link; break;}
         }
         //System.out.println(linkval + "/" + search);
         String url = linkval;
