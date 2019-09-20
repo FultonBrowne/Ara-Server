@@ -62,24 +62,28 @@ class apiStart {
         System.out.println(search);
 
 
-
+boolean done = true;
             for (SqlModel sqlModel : sqlmodel) {
                  boolean test = false;
                 boolean test2 = false;
+                
 
                  test = search.startsWith(sqlModel.title);
                  test2 = search.endsWith(sqlModel.title);
                  System.out.println(test);
-                if (test) {
+                if (test && done) {
                     linkval = sqlModel.link;
                     System.out.println(search.startsWith(sqlModel.title.toLowerCase()));
+                    done = false;
+
                     System.out.println("BT");
-                } else if (test2) {
+                } else if (test2 && done) {
 
                     linkval = sqlModel.link;
+                    done = false;
                 }
-                else if(!test) {
-                    //linkval = sqlModel.link;
+                else{
+                    linkval = "done";
                     System.out.println("BTbfgbtbvg");
                     System.out.println(search.startsWith(sqlModel.title.toLowerCase()));
 
