@@ -69,7 +69,7 @@ class apiStart {
                 linkval = sqlmodel.get(i).link;
                 break;
             }
-           // if (search.endsWith(sqlmodel.get(i).title)) {linkval = sqlmodel.get(i).link; break;}
+            if (search.endsWith(sqlmodel.get(i).title) && search.equals("")) {linkval = sqlmodel.get(i).link; break;}
         }
         //System.out.println(linkval + "/" + search);
         String url = linkval;
