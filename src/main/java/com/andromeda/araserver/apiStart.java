@@ -66,12 +66,15 @@ class apiStart {
             System.out.println(sqlmodel.get(i).description);
             System.out.println(search.startsWith(sqlmodel.get(i).description));
             if (search.startsWith(sqlmodel.get(i).description)){
-                linkval = sqlmodel.get(i).link;
+                linkval = sqlmodel.get(i).link + search.replace(sqlmodel.get(i).description,"");
                 break;
             }
-            if (search.endsWith(sqlmodel.get(i).title) && !search.equals("")) {linkval = sqlmodel.get(i).link; break;}
+            if (search.endsWith(sqlmodel.get(i).title) && !sqlmodel.get(i).title.equals("")) {
+                linkval = sqlmodel.get(i).link + search.replace(sqlmodel.get(i).title,"");;
+
+            break;}
         }
-        //System.out.println(linkval + "/" + search);
+        System.out.println(linkval );
         String url = linkval;
         //if (!linkval.endsWith("/")) url = url +"/";
 
