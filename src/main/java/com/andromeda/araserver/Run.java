@@ -44,6 +44,7 @@ public class Run extends NanoHTTPD {
         String main2 = "err";
         if (sessionUri.startsWith("/api")) main2 = new apiStart().apiMain(sessionUri);
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
+        //else if(sessionUri.startsWith())
         else {
 
             switch (sessionUri) {
