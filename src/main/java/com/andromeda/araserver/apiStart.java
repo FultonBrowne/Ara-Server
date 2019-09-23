@@ -12,16 +12,13 @@ import java.util.Scanner;
 
 
 class apiStart {
-    private String result;
-    private GsonBuilder gsonBuilder = new GsonBuilder();
-     private ArrayList<OutputModel> test = new ArrayList<>();
+    private ArrayList<OutputModel> test = new ArrayList<>();
      private ArrayList<SqlModel> sqlmodel = new ArrayList<>();
      private String linkval;
 
 
     String apiMain(String mainUri){
         String searchterm = mainUri.replaceFirst("/api/", "");
-        Gson output = gsonBuilder.create();
         test.add(new OutputModel("Blank Input Received", "Please Try Again", "https://github.com/fultonbrowne/ara-android","","Error Was Encountered", ""));
 
 
@@ -30,7 +27,7 @@ class apiStart {
         return sqltest(searchterm);
     }
     private String sqltest(String search){
-        String out = "hi";
+        String out;
         try {
            Class.forName("org.postgresql.Driver");
           Connection c = getConnection();
@@ -62,23 +59,26 @@ class apiStart {
         System.out.println(search);
 
 
-        for (int i = 0; i < sqlmodel.size(); i++) {
-            System.out.println(sqlmodel.get(i).description);
-            System.out.println(search.startsWith(sqlmodel.get(i).description));
-            if (search.startsWith(sqlmodel.get(i).description)){
-                linkval = sqlmodel.get(i).link + search.replace(sqlmodel.get(i).description,"");
+        for (SqlModel sqlModel : sqlmodel) {
+            System.out.println(sqlModel.description);
+            System.out.println(search.startsWith(sqlModel.description));
+            if (search.startsWith(sqlModel.description)) {
+                linkval = sqlModel.link + search.replace(sqlModel.description, "");
                 break;
             }
-            if (search.endsWith(sqlmodel.get(i).title) && !sqlmodel.get(i).title.equals("")) {
-                linkval = sqlmodel.get(i).link + search.replace(sqlmodel.get(i).title,"");;
+            if (search.endsWith(sqlModel.title) && !sqlModel.title.equals("")) {
+                linkval = sqlModel.link + search.replace(sqlModel.title, "");
+                ;
 
-            break;}
+                break;
+            }
         }
         System.out.println(linkval );
         String url = linkval;
         //if (!linkval.endsWith("/")) url = url +"/";
 
         URL obj = null;
+        String result;
         try {
             obj = new URL(url);
 
