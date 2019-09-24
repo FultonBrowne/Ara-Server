@@ -1,66 +1,67 @@
-package com.andromeda.araserver;
+package com.andromeda.araserver
 
-import com.rometools.rome.feed.synd.SyndEntry;
-import com.rometools.rome.feed.synd.SyndFeed;
-import com.rometools.rome.feed.synd.SyndFeedImpl;
-import com.rometools.rome.io.FeedException;
-import com.rometools.rome.io.SyndFeedInput;
-import com.rometools.rome.io.XmlReader;
+import com.rometools.rome.feed.synd.SyndEntry
+import com.rometools.rome.feed.synd.SyndFeed
+import com.rometools.rome.feed.synd.SyndFeedImpl
+import com.rometools.rome.io.FeedException
+import com.rometools.rome.io.SyndFeedInput
+import com.rometools.rome.io.XmlReader
 
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
+import java.io.IOException
+import java.net.URL
+import java.util.ArrayList
 
-public class RssMain {
-    public static SyndFeed rss_main1(int mode) throws IOException, FeedException {
-        String[] feeds = new String[2];
-        switch (mode){
-            case 1:
-                feeds[0] = "https://www.cbsnews.com/latest/rss/world";
-                feeds[1] = "http://feeds.foxnews.com/foxnews/world";
-                break;
-            case 2:
-                feeds[0] = "https://www.cbsnews.com/latest/rss/us";
-                feeds[1] = "http://feeds.foxnews.com/foxnews/national";
-                break;
-            case 3:
-                feeds[0] = "https://www.cnet.com/rss/news/";
-                feeds[1] = "http://www.foxnews.com/about/rss";
-                break;
-            case 4:
-                feeds[0] = "http://feeds.reuters.com/reuters/businessNews";
-                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
-                break;
-            default:
-                feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
-                feeds[1] = "http://feeds.foxnews.com/foxnews/latest";
-                break;
-
+object RssMain {
+    @Throws(IOException::class, FeedException::class)
+    fun rss_main1(mode: Int): SyndFeed {
+        val feeds = arrayOfNulls<String>(2)
+        when (mode) {
+            1 -> {
+                feeds[0] = "https://www.cbsnews.com/latest/rss/world"
+                feeds[1] = "http://feeds.foxnews.com/foxnews/world"
+            }
+            2 -> {
+                feeds[0] = "https://www.cbsnews.com/latest/rss/us"
+                feeds[1] = "http://feeds.foxnews.com/foxnews/national"
+            }
+            3 -> {
+                feeds[0] = "https://www.cnet.com/rss/news/"
+                feeds[1] = "http://www.foxnews.com/about/rss"
+            }
+            4 -> {
+                feeds[0] = "http://feeds.reuters.com/reuters/businessNews"
+                feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml"
+            }
+            else -> {
+                feeds[0] = "https://www.cbsnews.com/latest/rss/main/"
+                feeds[1] = "http://feeds.foxnews.com/foxnews/latest"
+            }
         }
         //feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
         //feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
-        SyndFeed feed = new SyndFeedImpl();
-        feed.setFeedType("rss_2.0");
-        ArrayList<SyndEntry> entries = new ArrayList<SyndEntry>();
-        feed.setEntries(entries);
+        val feed = SyndFeedImpl()
+        feed.feedType = "rss_2.0"
+        val entries = ArrayList<SyndEntry>()
+        feed.entries = entries
 
-        feed.setTitle("Ara feed");
-        feed.setDescription("a hole lot of feeds in one");
-        feed.setAuthor("Andromeda Software");
-        feed.setLink("");
+        feed.title = "Ara feed"
+        feed.description = "a hole lot of feeds in one"
+        feed.author = "Andromeda Software"
+        feed.link = ""
 
 
-        for (int i = 0; i < feeds.length; i++) {
-            URL inputUrl = new URL(feeds[i]);
+        for (i in feeds.indices) {
+            val inputUrl = URL(feeds[i])
 
-            SyndFeedInput input = new SyndFeedInput();
-            SyndFeed inFeed = input.build(new XmlReader(inputUrl));
+            val input = SyndFeedInput()
+            val inFeed = input.build(XmlReader(inputUrl))
 
-            entries.addAll(inFeed.getEntries());
-            feed.setEntries(entries);
+            entries.addAll(inFeed.entries)
+            feed.entries = entries
         }
 
-        return feed;
+
+        return feed
     }
 }
