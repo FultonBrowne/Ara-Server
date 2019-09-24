@@ -10,11 +10,13 @@ import com.rometools.rome.io.XmlReader
 
 import java.io.IOException
 import java.net.URL
-import java.util.ArrayList
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 object RssMain {
     @Throws(IOException::class, FeedException::class)
-    fun rss_main1(mode: Int): SyndFeed {
+    fun rssMain1(mode: Int): SyndFeed {
         val feeds = arrayOfNulls<String>(2)
         when (mode) {
             1 -> {
@@ -43,6 +45,7 @@ object RssMain {
         val feed = SyndFeedImpl()
         feed.feedType = "rss_2.0"
         val entries = ArrayList<SyndEntry>()
+        val sortedEntries = ArrayList<SyndEntry>()
         feed.entries = entries
 
         feed.title = "Ara feed"
@@ -58,8 +61,16 @@ object RssMain {
             val inFeed = input.build(XmlReader(inputUrl))
 
             entries.addAll(inFeed.entries)
-            feed.entries = entries
+
+
         }
+
+        sortedEntries.addAll( sort().sortDateSyndEntry(entries))
+
+        feed.entries = sortedEntries.reversed()
+
+
+
 
 
         return feed
