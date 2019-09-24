@@ -71,7 +71,7 @@ public class Run extends NanoHTTPD {
             }
 
             try {
-                main1 = RssMain.INSTANCE.rss_main1(tag);
+                main1 = RssMain.INSTANCE.rssMain1(tag);
 
             } catch (IOException | FeedException e) {
                 e.printStackTrace();
