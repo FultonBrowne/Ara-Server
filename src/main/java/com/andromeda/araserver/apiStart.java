@@ -1,7 +1,6 @@
 package com.andromeda.araserver;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.*;
 import java.net.*;
@@ -32,14 +31,11 @@ class apiStart {
         String term = null;
         ArrayList<String> pairs = new ArrayList<>();
         pairs.addAll(Arrays.asList(search.split("&")));
-        for (int i = 0; i < pairs.size(); i++) {
-            if (pairs.get(i).startsWith("log")){
+        for (String pair : pairs) {
+            if (!pair.startsWith("log") || !pair.startsWith("lat")) {
                 //log = pairs.get(i).replace("log=", "");
+                term = pair;
             }
-            else if (pairs.get(i).startsWith("lat")){
-                //lat = pairs.get(i).replace("lat=", "");
-            }
-            else term = pairs.get(i);
         }
         //String query = search.getQuery();
 
@@ -153,8 +149,7 @@ class apiStart {
         //c.commit();
         c.close();
     }
-    private static Connection getConnection() throws URISyntaxException, SQLException {
-        URI dbUri = new URI("jdbc:postgresql://ztpysbtdtzkeyt:344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d40qc3ivndkhlh");
+    private static Connection getConnection() throws SQLException {
         String dbUrl = "jdbc:postgresql://" + "ec2-54-221-214-3.compute-1.amazonaws.com" + ':' + "5432" + "/d40qc3ivndkhlh" + "?ssl=true" + "&sslfactory=org.postgresql.ssl.NonValidatingFactory" ;
         return DriverManager.getConnection(dbUrl,
                              "ztpysbtdtzkeyt", "344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6");
