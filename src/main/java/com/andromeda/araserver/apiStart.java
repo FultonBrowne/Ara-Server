@@ -7,6 +7,7 @@ import java.io.*;
 import java.net.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -28,11 +29,26 @@ class apiStart {
     }
     private String sqltest(String search){
         String out;
+        String term = null;
+        ArrayList<String> pairs = new ArrayList<>();
+        pairs.addAll(Arrays.asList(search.split("&")));
+        for (int i = 0; i < pairs.size(); i++) {
+            if (pairs.get(i).startsWith("log")){
+                //log = pairs.get(i).replace("log=", "");
+            }
+            else if (pairs.get(i).startsWith("lat")){
+                //lat = pairs.get(i).replace("lat=", "");
+            }
+            else term = pairs.get(i);
+        }
+        //String query = search.getQuery();
+
+
         try {
            Class.forName("org.postgresql.Driver");
           Connection c = getConnection();
             Statement stmt = c.createStatement();
-          
+
             ResultSet rs = stmt.executeQuery( "SELECT * FROM skills;" );
             // I dont know how this works but it does :)
             while ( rs.next() ) {
@@ -62,17 +78,19 @@ class apiStart {
         for (SqlModel sqlModel : sqlmodel) {
             System.out.println(sqlModel.description);
             System.out.println(search.startsWith(sqlModel.description));
-            if (search.startsWith(sqlModel.description)) {
+            assert term != null;
+            if (term.startsWith(sqlModel.description)) {
                 linkval = sqlModel.link + search.replace(sqlModel.description, "");
                 break;
             }
-            if (search.endsWith(sqlModel.title) && !sqlModel.title.equals("")) {
+            if (term.endsWith(sqlModel.title) && !sqlModel.title.equals("")) {
                 linkval = sqlModel.link + search.replace(sqlModel.title, "");
                 ;
 
                 break;
             }
         }
+        linkval = linkval.replace(" ", "");
         System.out.println(linkval );
         String url = linkval;
         //if (!linkval.endsWith("/")) url = url +"/";
