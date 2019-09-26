@@ -32,7 +32,7 @@ class apiStart {
            Class.forName("org.postgresql.Driver");
           Connection c = getConnection();
             Statement stmt = c.createStatement();
-          // sqladd(stmt, c);
+          
             ResultSet rs = stmt.executeQuery( "SELECT * FROM skills;" );
             // I dont know how this works but it does :)
             while ( rs.next() ) {
@@ -120,12 +120,13 @@ class apiStart {
             out = new Gson().toJson(test);
             result = "err";
         }
+
         return out;
     }
     public void sqladd(Statement stmt, Connection c) throws SQLException {
        // String sql = "CREATE TABLE skills(start varchar(80) ,endtxt varchar(225), link varchar(225)); ";
         //TODO work on this \/
-        String sql = "INSERT INTO SKILLS(start,endtxt,link) VALUES ('nearest','near me', 'https://araserver.herokuapp.com/yelpclient')";
+        String sql = "INSERT INTO SKILLS(start,endtxt,link) VALUES ('calculate','', 'https://araserver.herokuapp.com/math')";
         stmt.executeUpdate(sql);
         //String sql = "INSERT INTO SKILLS (ID,NAME,AGE,ADDRESS,SALARY) "
           //      + "VALUES (1, 'Paul', 32, 'California', 20000.00 );";
