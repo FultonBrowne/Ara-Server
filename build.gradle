@@ -26,14 +26,24 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://repository-achartengine.forge.cloudbees.com/snapshot/"
+        mavenContent {
+            snapshotsOnly()
+        }
+
+
+    }
 }
 
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'com.rometools', name: 'rome', version: '1.12.1'
+    //implementation 'io.sirix.sirix-core:0.9.3'
+   // compile group: 'io.sirix', name: 'sirix-core', version: '0.9.4-SNAPSHOT', changing: true
     // https://mvnrepository.com/artifact/org.eclipse.swt.gtk.solaris/sparc
-    compile group: 'org.eclipse.swt.gtk.solaris', name: 'sparc', version: '3.3.0-v3346'
+    compile group:'org.eclipse.swt.gtk.solaris', name: 'sparc', version: '3.3.0-v3346'
     compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.5"
     compile group: 'org.slf4j', name: 'slf4j-log4j12', version: "1.7.5"
     compile 'org.nanohttpd:nanohttpd:2.3.1'
