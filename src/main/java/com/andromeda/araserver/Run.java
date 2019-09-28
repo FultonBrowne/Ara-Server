@@ -8,20 +8,16 @@ import fi.iki.elonen.NanoHTTPD;
 import java.io.IOException;
 
 
-
 public class Run extends NanoHTTPD {
 
 
-
-
-
     //Function to declare port
-     private Run(int port) throws IOException {
-         //Get Port
+    private Run(int port) throws IOException {
+        //Get Port
         super(port);
-         //Start Server
+        //Start Server
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-        System.out.println(  System.getenv("PORT") + "\n hi Running! Point your browsers to http://localhost:80/ \n");
+        System.out.println(System.getenv("PORT") + "\n hi Running! Point your browsers to http://localhost:80/ \n");
     }
 
 
@@ -29,7 +25,7 @@ public class Run extends NanoHTTPD {
     public static void main(String[] args) {
         // If this is in a heroku environment, get the port number
         String webPort = System.getenv("PORT");
-        if(webPort == null || webPort.isEmpty()) {
+        if (webPort == null || webPort.isEmpty()) {
             // If not set to 80
             webPort = "80";
         }
@@ -44,7 +40,7 @@ public class Run extends NanoHTTPD {
     @Override
     //If connected to
     public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
-         //RSS feed type, if any
+        //RSS feed type, if any
         int tag;
         //URI passed from client
         String sessionUri = session.getUri();
@@ -55,9 +51,9 @@ public class Run extends NanoHTTPD {
         //Functions related to the search api
         //Start API function
         if (sessionUri.startsWith("/api")) main2 = new apiStart().apiMain(sessionUri);
-        //Start the Hello function
+            //Start the Hello function
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
-        else if(sessionUri.startsWith("/yelpclient")) main2 = new locdec().main(sessionUri);
+        else if (sessionUri.startsWith("/yelpclient")) main2 = new locdec().main(sessionUri);
         else if (sessionUri.startsWith("/search")) main2 = new GetInfo().main(sessionUri);
         else if (sessionUri.startsWith("/math")) main2 = new equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
@@ -97,7 +93,6 @@ public class Run extends NanoHTTPD {
                 e.printStackTrace();
             }
         }
-
 
 
         System.out.println(sessionUri);

@@ -17,12 +17,17 @@
 package com.andromeda.araserver
 
 class Update {
-    fun update(ver:String):String{
-        val ver1 = ver.removeRange(0,8)
-        val vers:Double = ver1.toDouble()
-        val out:String
-        out = if(vers > 0.1) "link here"
+    //the code used for running update from beta testers
+    fun update(ver: String): String {
+        //Remove the "/update from the uri
+        val ver1 = ver.removeRange(0, 8)
+        //Convert version string to version double
+        val vers: Double = ver1.toDouble()
+        //set a link value if update
+        val out: String
+        out = if (vers > 0.1) "link here"
         else "nope"
+        //Return the fina value
         return out
     }
 }

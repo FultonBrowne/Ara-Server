@@ -7,11 +7,14 @@ import java.util.ArrayList;
 
 
 public class Hello {
-    String hello(){
+    String hello() {
+        //new Gson instance
         GsonBuilder gsonBuilder = new GsonBuilder();
-        ArrayList<OutputModel>  test = new ArrayList<>();
         Gson output = gsonBuilder.create();
-        test.add(new OutputModel("hi","hi","hi","hi", "Hello Human", ""));
+        ArrayList<OutputModel> test = new ArrayList<>();
+        //say hi
+        test.add(new OutputModel("hi", "hi", "hi", "hi", "Hello Human", ""));
+        //return string value
         return output.toJson(test);
     }
 }

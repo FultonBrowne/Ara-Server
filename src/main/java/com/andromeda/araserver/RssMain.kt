@@ -63,6 +63,7 @@ object RssMain {
         feed.link = ""
 
 
+        //get all the feed results
         for (i in feeds.indices) {
             val inputUrl = URL(feeds[i])
 
@@ -73,15 +74,10 @@ object RssMain {
 
 
         }
-
-        sortedEntries.addAll( sort().sortDateSyndEntry(entries))
-
+        //sort and reverse
+        sortedEntries.addAll(sort().sortDateSyndEntry(entries))
         feed.entries = sortedEntries.reversed()
-
-
-
-
-
+        //return the value
         return feed
     }
 }
