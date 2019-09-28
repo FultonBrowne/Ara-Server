@@ -13,39 +13,50 @@ import java.net.URL
 import java.util.*
 
 object RssMain {
+    //Exceptions Throne
     @Throws(IOException::class, FeedException::class)
+    //Main Function
     fun rssMain1(mode: Int): SyndFeed {
+        //Feed link text
         val feeds = arrayOfNulls<String>(2)
         when (mode) {
             1 -> {
+                //World news
                 feeds[0] = "https://www.cbsnews.com/latest/rss/world"
                 feeds[1] = "http://feeds.foxnews.com/foxnews/world"
             }
             2 -> {
+                // Us news
                 feeds[0] = "https://www.cbsnews.com/latest/rss/us"
                 feeds[1] = "http://feeds.foxnews.com/foxnews/national"
             }
             3 -> {
+                //Tech news
                 feeds[0] = "https://www.cnet.com/rss/news/"
                 feeds[1] = "http://www.foxnews.com/about/rss"
             }
             4 -> {
+                //Business news
                 feeds[0] = "http://feeds.reuters.com/reuters/businessNews"
                 feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml"
             }
             else -> {
+                // general news
                 feeds[0] = "https://www.cbsnews.com/latest/rss/main/"
                 feeds[1] = "http://feeds.foxnews.com/foxnews/latest"
             }
         }
-        //feeds[0] = "https://www.cbsnews.com/latest/rss/main/";
-        //feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml";
+        //Declare Feed
         val feed = SyndFeedImpl()
+        //Set feed type
         feed.feedType = "rss_2.0"
+        //Entries of the feeds
         val entries = ArrayList<SyndEntry>()
+        //Entries after sorting by date
         val sortedEntries = ArrayList<SyndEntry>()
-        feed.entries = entries
 
+
+        // set general feed info
         feed.title = "Ara feed"
         feed.description = "a hole lot of feeds in one"
         feed.author = "Andromeda Software"

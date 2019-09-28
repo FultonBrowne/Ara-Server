@@ -86,6 +86,7 @@ class apiStart {
                 break;
             }
         }
+     if(!(linkval == null))   if (linkval.contains(" "))
         linkval = linkval.replace(" ", "");
         System.out.println(linkval );
         String url = linkval;
