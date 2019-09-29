@@ -1,12 +1,13 @@
 package com.andromeda.araserver;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
+import jdk.internal.org.jline.keymap.BindingReader;
 import okhttp3.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.Objects;
 
 
 public class locdec {
@@ -25,6 +26,7 @@ public class locdec {
                 lat = pair.replace("lat=", "");
             } else search = pair;
         }
+        yelpSearch();
         //place holder text for testing
         ArrayList<OutputModel> mainout = new ArrayList<>();
         mainout.add(new OutputModel(search, "this is a test", "", "", "", ""));
@@ -35,31 +37,7 @@ public class locdec {
     ArrayList<OutputModel> yelpSearch(){
         ArrayList<OutputModel> returedval = new ArrayList<>();
         // POST https://api.yelp.com/oauth2/token
-        String accessToken=null;
 
-        OkHttpClient client = new OkHttpClient();
-        MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-        RequestBody body = RequestBody.create(mediaType, "client_id=<YOUR_CLIENT_ID>&client_secret=<YOUR_CLIENT_SECRET>&grant_type=client_credentials");
-        Request request = new Request.Builder()
-                .url("https://api.yelp.com/oauth2/token")
-                .post(body)
-                .addHeader("cache-control", "no-cache")
-                .addHeader("postman-token", "8d9de8ad-800c-50e1-fb4a-46fcb5f2f209")
-                .addHeader("content-type", "application/x-www-form-urlencoded")
-                .build();
-
-        try {
-            Response response = client.newCall(request).execute();
-
-            //JSONObject jsonObjectToken = new JSONObject(response.body().string().trim());
-
-           // accessToken = jsonObjectToken.getString("access_token");
-
-
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
 
         // GET /businesses/search
@@ -74,13 +52,14 @@ public class locdec {
         Request request2 = new Request.Builder()
                 .url("https://api.yelp.com/v3/businesses/search?term=" + term + "&location=" + location + "&limit=1&sort_by=rating&price="+price+"")
                 .get()
-                .addHeader("authorization", "Bearer"+" "+accessToken)
+                .addHeader("Authorization", "Bearer fghjk")
                 .addHeader("cache-control", "no-cache")
-                .addHeader("postman-token", "b5fc33ce-3dad-86d7-6e2e-d67e14e8071b")
+
                 .build();
 
         try {
             Response response2 = client2.newCall(request2).execute();
+            System.out.println(response2.body().string());
 
            // JSONObject jsonObject = new JSONObject(response2.body().string().trim());       // parser
             //JSONArray myResponse = (JSONArray)jsonObject.get("businesses");
