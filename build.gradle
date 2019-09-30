@@ -55,7 +55,7 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
     // https://mvnrepository.com/artifact/postgresql/postgresql
-    compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
+    compile group: 'postgresql', name: 'postgresql', version: '9.4.1208-jdbc42-atlassian-hosted'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
 
