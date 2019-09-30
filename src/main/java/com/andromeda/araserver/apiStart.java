@@ -78,7 +78,7 @@ class apiStart {
             System.out.println(search.startsWith(sqlModel.description));
 
             assert term != null;
-            if (term.startsWith(sqlModel.description)) {
+            if (search.startsWith(sqlModel.description)) {
                 linkval = sqlModel.link +"/"+ search.replace(sqlModel.description, "");
                 break;
             }
