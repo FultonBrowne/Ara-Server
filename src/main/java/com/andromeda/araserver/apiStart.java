@@ -34,11 +34,8 @@ class apiStart {
         String term = null;
         //parse for search term
         ArrayList<String> pairs = new ArrayList<>(Arrays.asList(search.split("&")));
-        for (String pair : pairs) {
-            if (!pair.startsWith("log") || !pair.startsWith("lat")) {
-                term = pair;
-            }
-        }
+        term = pairs.get(0);
+        System.out.println(term);
         //connect to DB
         try {
             //get DB driver
