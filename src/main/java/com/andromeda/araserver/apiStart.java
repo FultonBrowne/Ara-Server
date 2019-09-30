@@ -76,11 +76,11 @@ class apiStart {
 
             assert term != null;
             if (search.startsWith(sqlModel.description)) {
-                linkval = sqlModel.link +"/"+ search.replace(sqlModel.description, "");
+                linkval = sqlModel.link + "/" + search.replace(sqlModel.description, "");
                 break;
             }
             if (term.endsWith(sqlModel.title) && !sqlModel.title.equals("")) {
-                linkval = sqlModel.link  + "/"+ search.replace(sqlModel.title, "");
+                linkval = sqlModel.link + "/" + search.replace(sqlModel.title, "");
 
                 break;
             }

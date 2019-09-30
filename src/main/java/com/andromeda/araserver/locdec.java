@@ -1,12 +1,13 @@
 package com.andromeda.araserver;
 
 import com.google.gson.*;
-import okhttp3.*;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 
 public class locdec {
@@ -26,49 +27,47 @@ public class locdec {
                 lat = pair.replace("lat=", "");
             } else term = pair.replace("/yelpclient/", "");
         }
-        //place holder text for testing
-        ArrayList<OutputModel> mainout = new ArrayList<>();
-        mainout.add(new OutputModel(search, "this is a test", "", "", "", ""));
-        mainout.add(new OutputModel(log, lat, "", "", "", ""));
-        //return new gson value
+        //return new gson value from the yelpsearch() function
         return new Gson().toJson(yelpSearch());
     }
-    ArrayList<OutputModel> yelpSearch(){
+
+    ArrayList<OutputModel> yelpSearch() {
+        //new array list for out put
         ArrayList<OutputModel> returedval = new ArrayList<>();
+        // http client
         OkHttpClient client2 = new OkHttpClient();
-        System.out.println("https://api.yelp.com/v3/businesses/search?term=" + term + "&latitude=" + lat + "&longitude="+ log +"&limit=25&sort_by=rating");
+        //swo url in logs or on console
+        System.out.println("https://api.yelp.com/v3/businesses/search?term=" + term + "&latitude=" + lat + "&longitude=" + log + "&limit=25&sort_by=rating");
+        //new http request
         Request request2 = new Request.Builder()
-                .url("https://api.yelp.com/v3/businesses/search?term=" + term + "&latitude=" + lat + "&longitude="+ log +"&limit=25&sort_by=rating")
+                .url("https://api.yelp.com/v3/businesses/search?term=" + term + "&latitude=" + lat + "&longitude=" + log + "&limit=25&sort_by=rating")
                 .get()
                 .addHeader("Authorization", "Bearer cflXv51tAXEtctkOgrdD3CIUculH7ieskJc6fKTguo4XXYx")
                 .addHeader("cache-control", "no-cache")
 
                 .build();
 
+
         try {
+            //get response
             Response response2 = client2.newCall(request2).execute();
-           // System.out.println(response2.body().string());
+            //parse the json
             JsonElement jelement = new JsonParser().parse(response2.body().string());
-            JsonObject  jobject = jelement.getAsJsonObject();
+            JsonObject jobject = jelement.getAsJsonObject();
             System.out.println(jobject);
-           JsonArray jsonArray = jobject.getAsJsonArray("businesses");
-           System.out.println(jsonArray.size());
-           OutputModel outputModel;
+            JsonArray jsonArray = jobject.getAsJsonArray("businesses");
+            System.out.println(jsonArray.size());
+            OutputModel outputModel;
+            //keep parsing
             for (int i = 0; i < jsonArray.size(); i++) {
                 jobject = jsonArray.get(i).getAsJsonObject();
                 System.out.println(jobject.get("name").getAsString());
                 jobject.get("name").getAsString();
-                outputModel = new OutputModel(jobject.get("name").getAsString(), jobject.get("display_phone").getAsString(),jobject.get("url").getAsString(),"","", "" );
+                //add to list
+                outputModel = new OutputModel(jobject.get("name").getAsString(), jobject.get("display_phone").getAsString(), jobject.get("url").getAsString(), "", "", "");
                 returedval.add(outputModel);
 
             }
-
-
-
-
-           // JSONObject jsonObject = new JSONObject(response2.body().string().trim());       // parser
-            //JSONArray myResponse = (JSONArray)jsonObject.get("businesses");
-           // System.out.println(myResponse.getJSONObject(0).getString("id"));
 
 
         } catch (IOException e) {
@@ -77,7 +76,7 @@ public class locdec {
         }
 
 
-
-        return  returedval;
+        // return val
+        return returedval;
     }
 }
