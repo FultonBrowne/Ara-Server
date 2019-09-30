@@ -30,6 +30,9 @@ If you contribute please commit to a new branch and explain details in your pull
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/fultonbrowne/ara-server)
 
 
+If you want to become an active contributor go [here](https://findcollabs.com/project/RRBNiqp3CQVNFGTsHWQn).
+
+
 ## Show your support
 
 Give a ⭐️ if this project helped you!
