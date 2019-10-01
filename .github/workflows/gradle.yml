@@ -21,7 +21,4 @@ jobs:
       with:
         text: all done, thanks!
 
-  push
-
-
-:
+  push:
