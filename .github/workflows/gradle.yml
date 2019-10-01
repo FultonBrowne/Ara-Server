@@ -15,3 +15,15 @@ jobs:
         java-version: 1.8
     - name: Build with Gradle
       run: ./gradlew build
+      on:
+      - name: finish
+      uses: mscoutermarsh/cowsays-action@master
+      with:
+        text: all done, thanks!
+
+  push
+
+name: Cowsays
+on:
+  push:
+
