@@ -25,7 +25,7 @@ class Update {
         val vers: Double = ver1.toDouble()
         //set a link value if update
         val out: String
-        out = if (vers > 0.1) "link here"
+        out = if (vers > 0.2) "link here"
         else "nope"
         //Return the fina value
         return out
