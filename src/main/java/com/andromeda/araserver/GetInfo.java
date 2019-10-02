@@ -16,11 +16,11 @@ public class GetInfo {
         String urlText = ("https://en.wikipedia.org/w/api.php?" +
                 "format=json" +
                 "&action=query" +
-                "&prop=extracts" +
+                "&prop=description" +
                 "&explaintext=true" +
                 "&titles="+"lcars");
         URL url = new URL(urlText);
-        //System.out.println(new com.andromeda.araserver.url().main(url));
+        System.out.println(new com.andromeda.araserver.url().main(url));
         //parse the json
         JsonElement jelement = new JsonParser().parse(new com.andromeda.araserver.url().main(url));
         JsonObject jobject = jelement.getAsJsonObject();
