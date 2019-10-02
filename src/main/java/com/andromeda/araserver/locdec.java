@@ -14,7 +14,6 @@ public class locdec {
     String log;
     String lat;
     String term;
-    Gson gson = new Gson();
 
     String main(String search) {
         //get api params

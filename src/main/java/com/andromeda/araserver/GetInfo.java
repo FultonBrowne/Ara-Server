@@ -1,6 +1,6 @@
 package com.andromeda.araserver;
 
-import com.google.gson.Gson;
+import com.google.gson.*;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,15 +12,23 @@ public class GetInfo {
         Gson gson = new Gson();
         //place holder values
         ArrayList<OutputModel> outputModels = new ArrayList<>();
+        //get url
         String urlText = ("https://en.wikipedia.org/w/api.php?" +
                 "format=json" +
                 "&action=query" +
                 "&prop=extracts" +
-
                 "&explaintext=" +
                 "&titles="+"fulton");
         URL url = new URL(urlText);
-        System.out.println(new com.andromeda.araserver.url().main(url));
+        //System.out.println(new com.andromeda.araserver.url().main(url));
+        //parse the json
+        JsonElement jelement = new JsonParser().parse(new com.andromeda.araserver.url().main(url));
+        JsonObject jobject = jelement.getAsJsonObject();
+        System.out.println(jobject);
+        JsonArray jsonArray = jobject.getAsJsonArray("batchcomplete");
+        System.out.println(jsonArray.size());
+        OutputModel outputModel;
+        //keep parsing
 
 
         outputModels.add(new OutputModel("test", mainurl, "https://github.com/FultonBrowne/Ara-Server", "", "", ""));
