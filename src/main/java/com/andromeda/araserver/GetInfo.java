@@ -17,18 +17,19 @@ public class GetInfo {
                 "format=json" +
                 "&action=query" +
                 "&prop=extracts" +
-                "&explaintext=" +
-                "&titles="+"fulton");
+                "&explaintext=true" +
+                "&titles="+"lcars");
         URL url = new URL(urlText);
         //System.out.println(new com.andromeda.araserver.url().main(url));
         //parse the json
         JsonElement jelement = new JsonParser().parse(new com.andromeda.araserver.url().main(url));
         JsonObject jobject = jelement.getAsJsonObject();
-        System.out.println(jobject);
-        JsonArray jsonArray = jobject.getAsJsonArray("batchcomplete");
-        System.out.println(jsonArray.size());
+        //JsonArray jsonArray = jobject.getAsJsonArray("query");
+         jobject = jobject.getAsJsonObject("query");
+         System.out.println(jobject);
+         System.out.println(jobject.size());
         OutputModel outputModel;
-        //keep parsing
+
 
 
         outputModels.add(new OutputModel("test", mainurl, "https://github.com/FultonBrowne/Ara-Server", "", "", ""));
