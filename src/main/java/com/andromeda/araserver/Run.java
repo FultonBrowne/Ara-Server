@@ -6,6 +6,7 @@ import com.rometools.rome.io.SyndFeedOutput;
 import fi.iki.elonen.NanoHTTPD;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 
 public class Run extends NanoHTTPD {
@@ -66,7 +67,13 @@ public class Run extends NanoHTTPD {
             //Start the Hello function
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
         else if (sessionUri.startsWith("/yelpclient")) main2 = new locdec().main(sessionUri);
-        else if (sessionUri.startsWith("/search")) main2 = new GetInfo().main(sessionUri);
+        else if (sessionUri.startsWith("/search")) {
+            try {
+                main2 = new GetInfo().main(sessionUri);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+        }
         else if (sessionUri.startsWith("/math")) main2 = new equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
         else {
