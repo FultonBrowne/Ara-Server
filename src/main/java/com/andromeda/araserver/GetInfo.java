@@ -1,6 +1,9 @@
 package com.andromeda.araserver;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -8,6 +11,7 @@ import java.util.ArrayList;
 
 public class GetInfo {
     public String main(String mainurl) throws MalformedURLException {
+        Boolean try1 = true;
         //new gson instance
         Gson gson = new Gson();
         //place holder values
@@ -17,22 +21,18 @@ public class GetInfo {
                 "format=json" +
                 "&action=query" +
                 "&prop=description" +
-                "&explaintext=true" +
-                "&titles="+"lcars");
+                "&titles=" + "apple");
         URL url = new URL(urlText);
-        System.out.println(new com.andromeda.araserver.url().main(url));
         //parse the json
         JsonElement jelement = new JsonParser().parse(new com.andromeda.araserver.url().main(url));
+        System.out.println(jelement);
         JsonObject jobject = jelement.getAsJsonObject();
-        //JsonArray jsonArray = jobject.getAsJsonArray("query");
-         jobject = jobject.getAsJsonObject("query");
-         System.out.println(jobject);
-         System.out.println(jobject.size());
-        OutputModel outputModel;
-
-
-
+        jobject = jobject.getAsJsonObject("query");
+        jobject = jobject.getAsJsonObject("pages");
+        System.out.println(jobject);
+        System.out.println(jobject.get("18978754").getAsJsonObject().get("title"));
         outputModels.add(new OutputModel("test", mainurl, "https://github.com/FultonBrowne/Ara-Server", "", "", ""));
+
         //Return gson values
         return gson.toJson(outputModels);
     }
