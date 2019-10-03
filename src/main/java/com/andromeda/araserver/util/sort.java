@@ -1,4 +1,4 @@
-package com.andromeda.araserver;
+package com.andromeda.araserver.util;
 
 import com.rometools.rome.feed.synd.SyndEntry;
 
@@ -7,7 +7,7 @@ import java.util.Comparator;
 
 public class sort {
     //sort Rss data
-    ArrayList<SyndEntry> sortDateSyndEntry(ArrayList<SyndEntry> tosort) {
+   public ArrayList<SyndEntry> sortDateSyndEntry(ArrayList<SyndEntry> tosort) {
         //sort by date
         tosort.sort(Comparator.comparing(SyndEntry::getPublishedDate));
         // return sorted value

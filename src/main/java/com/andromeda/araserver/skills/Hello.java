@@ -1,5 +1,6 @@
-package com.andromeda.araserver;
+package com.andromeda.araserver.skills;
 
+import com.andromeda.araserver.util.OutputModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class Hello {
-    String hello() {
+    public String hello() {
         //new Gson instance
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson output = gsonBuilder.create();

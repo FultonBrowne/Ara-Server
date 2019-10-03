@@ -1,5 +1,12 @@
 package com.andromeda.araserver;
 
+import com.andromeda.araserver.pages.Update;
+import com.andromeda.araserver.skills.Hello;
+import com.andromeda.araserver.pages.RssMain;
+import com.andromeda.araserver.pages.apiStart;
+import com.andromeda.araserver.skills.GetInfo;
+import com.andromeda.araserver.skills.equations;
+import com.andromeda.araserver.skills.locdec;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;

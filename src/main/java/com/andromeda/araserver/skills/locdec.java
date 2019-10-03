@@ -1,5 +1,6 @@
-package com.andromeda.araserver;
+package com.andromeda.araserver.skills;
 
+import com.andromeda.araserver.util.OutputModel;
 import com.google.gson.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -15,7 +16,7 @@ public class locdec {
     String lat;
     String term;
 
-    String main(String search) {
+    public String main(String search) {
         //get api params
         ArrayList<String> pairs = new ArrayList<>(Arrays.asList(search.split("&")));
         //Finish the job an get the raw values

@@ -14,7 +14,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.andromeda.araserver
+package com.andromeda.araserver.pages
 
 class Update {
     //the code used for running update from beta testers

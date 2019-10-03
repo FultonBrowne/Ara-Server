@@ -1,5 +1,7 @@
-package com.andromeda.araserver;
+package com.andromeda.araserver.pages;
 
+import com.andromeda.araserver.util.OutputModel;
+import com.andromeda.araserver.util.SqlModel;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -12,7 +14,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 
-class apiStart {
+public class apiStart {
     //output to be printed if error
     private ArrayList<OutputModel> outputModels = new ArrayList<>();
     //output from DB
@@ -20,7 +22,7 @@ class apiStart {
     private String linkval;
 
 
-    String apiMain(String mainUri) {
+    public String apiMain(String mainUri) {
         String searchterm = mainUri.replaceFirst("/api/", "");
         outputModels.add(new OutputModel("Blank Input Received", "Please Try Again", "https://github.com/fultonbrowne/ara-android", "", "Error Was Encountered", ""));
 

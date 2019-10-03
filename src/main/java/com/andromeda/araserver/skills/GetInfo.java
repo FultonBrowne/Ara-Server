@@ -1,5 +1,7 @@
-package com.andromeda.araserver;
+package com.andromeda.araserver.skills;
 
+import com.andromeda.araserver.util.OutputModel;
+import com.andromeda.araserver.util.url;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -19,12 +21,12 @@ public class GetInfo {
         //get url
         String urlText = ("https://en.wikipedia.org/w/api.php?" +
                 "format=json" +
-                "&action=query" +
+                "&action=query&prop=links" +
                 "&prop=description" +
                 "&titles=" + "apple");
         URL url = new URL(urlText);
         //parse the json
-        JsonElement jelement = new JsonParser().parse(new com.andromeda.araserver.url().main(url));
+        JsonElement jelement = new JsonParser().parse(new url().main(url));
         System.out.println(jelement);
         JsonObject jobject = jelement.getAsJsonObject();
         jobject = jobject.getAsJsonObject("query");

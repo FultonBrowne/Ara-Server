@@ -1,5 +1,6 @@
-package com.andromeda.araserver;
+package com.andromeda.araserver.skills;
 
+import com.andromeda.araserver.util.OutputModel;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

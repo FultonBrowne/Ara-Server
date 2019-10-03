@@ -1,4 +1,4 @@
-package com.andromeda.araserver
+package com.andromeda.araserver.util
 
 import java.net.URL
 

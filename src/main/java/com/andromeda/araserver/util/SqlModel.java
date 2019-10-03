@@ -1,4 +1,4 @@
-package com.andromeda.araserver;
+package com.andromeda.araserver.util;
 
 public class SqlModel {
     public String title;
