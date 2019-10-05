@@ -42,7 +42,7 @@ public class locdec {
         Request request2 = new Request.Builder()
                 .url("https://api.yelp.com/v3/businesses/search?term=" + term + "&latitude=" + lat + "&longitude=" + log + "&limit=25&sort_by=rating")
                 .get()
-                .addHeader("Authorization", "Bearer cflXv51tAXEtctkOgrdD3CIUculH7ieskJc6fKTguo4XXYx")
+                .addHeader("Authorization", "Bearer " + System.getenv("YELPKEY"))
                 .addHeader("cache-control", "no-cache")
 
                 .build();
@@ -56,7 +56,6 @@ public class locdec {
             JsonObject jobject = jelement.getAsJsonObject();
             System.out.println(jobject);
             JsonArray jsonArray = jobject.getAsJsonArray("businesses");
-            System.out.println(jsonArray.size());
             OutputModel outputModel;
             //keep parsing
             for (int i = 0; i < jsonArray.size(); i++) {
