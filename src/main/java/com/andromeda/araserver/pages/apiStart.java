@@ -33,7 +33,7 @@ public class apiStart {
     private String ParseApi(String search) {
         //text to be outputted
         String out;
-        String term = null;
+        String term;
         //parse for search term
         ArrayList<String> pairs = new ArrayList<>(Arrays.asList(search.split("&")));
         term = pairs.get(0);
@@ -92,7 +92,7 @@ public class apiStart {
             linkval = linkval.replace(" ", "");
         System.out.println(linkval);
         String url = linkval;
-        URL obj = null;
+        URL obj;
         String result;
         try {
             //get data from correct link
@@ -105,7 +105,7 @@ public class apiStart {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
@@ -122,18 +122,17 @@ public class apiStart {
             e.printStackTrace();
             //print error msg
             out = new Gson().toJson(outputModels);
-            result = "err";
         }
         //return the output
         return out;
     }
 
-    public void sqladd(Statement stmt, Connection c) throws SQLException {
+    /*public void sqladd(Statement stmt, Connection c) throws SQLException {
         //this is for testing
         String sql = "INSERT INTO SKILLS(start,endtxt,link) VALUES ('calculate','', 'https://araserver.herokuapp.com/math')";
         stmt.executeUpdate(sql);
         c.close();
-    }
+    }*/
 
     private static Connection getConnection() throws SQLException {
         //get a SQL connection (Note these creds are for test DB)
