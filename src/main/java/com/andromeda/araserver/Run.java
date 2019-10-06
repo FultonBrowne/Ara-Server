@@ -3,10 +3,10 @@ package com.andromeda.araserver;
 import com.andromeda.araserver.pages.Update;
 import com.andromeda.araserver.skills.Hello;
 import com.andromeda.araserver.pages.RssMain;
-import com.andromeda.araserver.pages.apiStart;
+import com.andromeda.araserver.pages.ApiStart;
 import com.andromeda.araserver.skills.GetInfo;
-import com.andromeda.araserver.skills.equations;
-import com.andromeda.araserver.skills.locdec;
+import com.andromeda.araserver.skills.Equations;
+import com.andromeda.araserver.skills.Locdec;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;
@@ -70,10 +70,10 @@ public class Run extends NanoHTTPD {
         String main2 = "err";
         //Functions related to the search api
         //Start API function
-        if (sessionUri.startsWith("/api")) main2 = new apiStart().apiMain(sessionUri);
+        if (sessionUri.startsWith("/api")) main2 = new ApiStart().apiMain(sessionUri);
             //Start the Hello function
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
-        else if (sessionUri.startsWith("/yelpclient")) main2 = new locdec().main(sessionUri);
+        else if (sessionUri.startsWith("/yelpclient")) main2 = new Locdec().main(sessionUri);
         else if (sessionUri.startsWith("/search")) {
             try {
                 main2 = new GetInfo().main(sessionUri);
@@ -81,7 +81,7 @@ public class Run extends NanoHTTPD {
                 e.printStackTrace();
             }
         }
-        else if (sessionUri.startsWith("/math")) main2 = new equations().main(sessionUri);
+        else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
         else {
             // if getting RSS info set tag value this will be used to get the correct feed

@@ -16,8 +16,15 @@
 
 package com.andromeda.araserver.pages
 
+/**
+ * Class used to for running update from beta testers.
+ */
 class Update {
-    //the code used for running update from beta testers
+    /**
+     * Function used for running update from beta testers.
+     * @param ver version string.
+     * @return String.
+     */
     fun update(ver: String): String {
         //Remove the "/update from the uri
         val ver1 = ver.removeRange(0, 8)
