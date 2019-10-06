@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class locdec {
-    String log;
-    String lat;
-    String term;
+public class Locdec {
+    private String log;
+    private String lat;
+    private String term;
 
     public String main(String search) {
         //get api params
@@ -31,7 +31,7 @@ public class locdec {
         return new Gson().toJson(yelpSearch());
     }
 
-    ArrayList<OutputModel> yelpSearch() {
+    private ArrayList<OutputModel> yelpSearch() {
         //new array list for out put
         ArrayList<OutputModel> returedval = new ArrayList<>();
         // http client

@@ -1,6 +1,14 @@
 package com.andromeda.araserver
 
+/**
+ * TBC
+ */
 object getUrl {
-    fun getUrl1() {}
+    /**
+     * TBC
+     */
+    fun getUrl1() {
+        var changeme = "TBC changeMe"
+    }
 
 }

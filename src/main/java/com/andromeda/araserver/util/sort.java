@@ -5,7 +5,7 @@ import com.rometools.rome.feed.synd.SyndEntry;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class sort {
+public class Sort {
     //sort Rss data
    public ArrayList<SyndEntry> sortDateSyndEntry(ArrayList<SyndEntry> tosort) {
         //sort by date

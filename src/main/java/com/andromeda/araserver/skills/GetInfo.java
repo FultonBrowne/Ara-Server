@@ -1,7 +1,7 @@
 package com.andromeda.araserver.skills;
 
 import com.andromeda.araserver.util.OutputModel;
-import com.andromeda.araserver.util.url;
+import com.andromeda.araserver.util.Url;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class GetInfo {
     public String main(String mainurl) throws MalformedURLException {
-        Boolean try1 = true;
         //new gson instance
         Gson gson = new Gson();
         //place holder values
@@ -26,7 +25,7 @@ public class GetInfo {
                 "&titles=" + "apple");
         URL url = new URL(urlText);
         //parse the json
-        JsonElement jelement = new JsonParser().parse(new url().main(url));
+        JsonElement jelement = new JsonParser().parse(new Url().main(url));
         System.out.println(jelement);
         JsonObject jobject = jelement.getAsJsonObject();
         jobject = jobject.getAsJsonObject("query");
