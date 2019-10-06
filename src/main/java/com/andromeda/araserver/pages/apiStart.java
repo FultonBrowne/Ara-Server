@@ -81,7 +81,7 @@ public class ApiStart {
                 linkval = sqlModel.link + "/" + search.replace(sqlModel.description, "");
                 break;
             }
-            if (!sqlModel.title.equals("") && term.endsWith(sqlModel.title)) {
+            if (!"".equals(sqlModel.title) && term.endsWith(sqlModel.title)) {
                 linkval = sqlModel.link + "/" + search.replace(sqlModel.title, "");
 
                 break;
