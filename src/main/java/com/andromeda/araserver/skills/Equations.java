@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-public class equations {
+public class Equations {
     public String main(String mainurl) {
         //new Gson instance
         Gson gson = new Gson();

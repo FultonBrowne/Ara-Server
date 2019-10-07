@@ -1,6 +1,6 @@
 package com.andromeda.araserver.pages
 
-import com.andromeda.araserver.util.sort
+import com.andromeda.araserver.util.Sort
 import com.rometools.rome.feed.synd.SyndEntry
 import com.rometools.rome.feed.synd.SyndFeed
 import com.rometools.rome.feed.synd.SyndFeedImpl
@@ -13,10 +13,18 @@ import java.io.IOException
 import java.net.URL
 import java.util.*
 
+/**
+ * Object used to handle RSS Feeds.
+ */
 object RssMain {
-    //Exceptions Throne
+    /**
+     * Main Function. Returns feeds based on the passed in mode.
+     * @param mode the specify the type of feeds to return.
+     * @return The SyndFeed containing the feeds.
+     * @throws IOException
+     * @throws FeedException
+     */
     @Throws(IOException::class, FeedException::class)
-    //Main Function
     fun rssMain1(mode: Int): SyndFeed {
         //Feed link text
         val feeds = arrayOfNulls<String>(2)
@@ -76,7 +84,7 @@ object RssMain {
 
         }
         //sort and reverse
-        sortedEntries.addAll(sort().sortDateSyndEntry(entries))
+        sortedEntries.addAll(Sort().sortDateSyndEntry(entries))
         feed.entries = sortedEntries.reversed()
         //return the value
         return feed

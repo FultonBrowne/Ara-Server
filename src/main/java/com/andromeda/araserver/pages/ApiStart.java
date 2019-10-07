@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 
-public class apiStart {
+public class ApiStart {
     //output to be printed if error
     private ArrayList<OutputModel> outputModels = new ArrayList<>();
     //output from DB
@@ -67,7 +67,7 @@ public class apiStart {
             //print errors
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+            return new Gson().toJson(outputModels);
         }
         System.out.println("Opened database successfully");
         System.out.println(search);
@@ -81,14 +81,14 @@ public class apiStart {
                 linkval = sqlModel.link + "/" + search.replace(sqlModel.description, "");
                 break;
             }
-            if (term.endsWith(sqlModel.title) && !sqlModel.title.equals("")) {
+            if (!"".equals(sqlModel.title) && term.endsWith(sqlModel.title)) {
                 linkval = sqlModel.link + "/" + search.replace(sqlModel.title, "");
 
                 break;
             }
         }
         // parse to avoid errors
-        if (!(linkval == null)) if (linkval.contains(" "))
+        if (linkval != null && linkval.contains(" "))
             linkval = linkval.replace(" ", "");
         System.out.println(linkval);
         String url = linkval;
