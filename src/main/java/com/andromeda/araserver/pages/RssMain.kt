@@ -1,4 +1,4 @@
-package com.andromeda.araserver
+package com.andromeda.araserver.pages
 
 import com.andromeda.araserver.util.Sort
 import com.rometools.rome.feed.synd.SyndEntry
@@ -27,7 +27,7 @@ object RssMain {
     @Throws(IOException::class, FeedException::class)
     fun rssMain1(mode: Int): SyndFeed {
         //Feed link text
-        val feeds = arrayOfNulls<String>(2)
+        val feeds = arrayOfNulls<String>(4)
         when (mode) {
             1 -> {
                 //World news
