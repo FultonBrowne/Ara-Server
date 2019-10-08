@@ -32,6 +32,7 @@ object RssMain {
                 //World news
                 feeds[0] = "https://www.cbsnews.com/latest/rss/world"
                 feeds[1] = "http://feeds.foxnews.com/foxnews/world"
+                feeds[2] = "https://abcnews.go.com/abcnews/topstories"
             }
             2 -> {
                 // Us news
@@ -42,6 +43,9 @@ object RssMain {
                 //Tech news
                 feeds[0] = "https://www.cnet.com/rss/news/"
                 feeds[1] = "http://www.foxnews.com/about/rss"
+                feeds[2] = "https://www.theverge.com/rss/index.xml"
+                feeds[3] = "https://www.gsmarena.com/rss-news-reviews.php3"
+                feeds[4] = "https://9to5mac.com/feed/"
             }
             4 -> {
                 //Business news
