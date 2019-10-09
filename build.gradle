@@ -46,7 +46,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.eclipse.swt.gtk.solaris/sparc
     compile group:'org.eclipse.swt.gtk.solaris', name: 'sparc', version: '3.3.0-v3346'
     compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.5"
-    compile group: 'org.slf4j', name: 'slf4j-log4j12', version: "1.7.5"
+    compile group: 'com.microsoft.azure', name: 'azure', version: "1.9.0"
+// https://mvnrepository.com/artifact/com.microsoft.azure.cognitiveservices/azure-cognitiveservices-parent
+    compile group: 'com.microsoft.azure.cognitiveservices', name: 'azure-cognitiveservices-parent', version: '1.0.2', ext: 'pom'
+
     compile 'org.nanohttpd:nanohttpd:2.3.1'
     compile 'org.hibernate:hibernate-agroal:5.3.11.Final'
     implementation"com.squareup.okhttp3:okhttp:4.2.0"

@@ -75,11 +75,7 @@ public class Run extends NanoHTTPD {
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
         else if (sessionUri.startsWith("/yelpclient")) main2 = new Locdec().main(sessionUri);
         else if (sessionUri.startsWith("/search")) {
-            try {
-                main2 = new GetInfo().main(sessionUri);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            }
+            main2 = new GetInfo().main(sessionUri);
         }
         else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
