@@ -29,7 +29,6 @@ public class GetInfo {
         ArrayList<String> pairs = new ArrayList<>(Arrays.asList(mainurl.split("&")));
         term = pairs.get(0);
         System.out.println(term);
-        //connect to DB
         outputModels.add(new OutputModel("test", mainurl, "https://github.com/FultonBrowne/Ara-Server", "", "", ""));
         try {
             outputModels.addAll(searchBing(term));
@@ -56,6 +55,7 @@ public class GetInfo {
         jsonObject = jsonObject.getAsJsonObject("webPages");
         JsonArray jsonArray = jsonObject.getAsJsonArray("value");
         System.out.println(jsonArray.size());
+        getFast("two times two");
         for (int i = 0; i < jsonArray.size(); i++) {
             System.out.println(jsonArray.get(i).isJsonObject());
             String title = jsonArray.get(i).getAsJsonObject().get("name").getAsString();
@@ -70,6 +70,25 @@ public class GetInfo {
         }
 
        return mainList;
+    }
+    private void getFast(String searchQuery) throws IOException {
+        ArrayList<OutputModel> mainList = new ArrayList<>();
+        @SuppressWarnings("CharsetObjectCanBeUsed") URL url = new URL(host + path + "?q=" +  URLEncoder.encode(searchQuery, "UTF-8"));
+
+        // Open the connection.
+        HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+        connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
+
+        // Receive the JSON response body.
+        InputStream stream = connection.getInputStream();
+        String response = new Scanner(stream).useDelimiter("\\A").next();
+        JsonElement jelement = new JsonParser().parse(response);
+        JsonObject jsonObject = jelement.getAsJsonObject();
+        jsonObject = jsonObject.getAsJsonObject("expression");
+        System.out.println(jsonObject);
+        //JsonArray jsonArray = jsonObject.getAsJsonArray("value");
+
+
     }
 
 
