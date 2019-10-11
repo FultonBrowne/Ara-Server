@@ -38,13 +38,14 @@ public class GetInfo {
         //Return gson values
         return gson.toJson(outputModels);
     }
+
     private ArrayList<OutputModel> searchBing(String searchQuery) throws IOException {
 
-       ArrayList<OutputModel> mainList = new ArrayList<>();
-        @SuppressWarnings("CharsetObjectCanBeUsed") URL url = new URL(host + path + "?q=" +  URLEncoder.encode(searchQuery, "UTF-8"));
+        ArrayList<OutputModel> mainList = new ArrayList<>();
+        @SuppressWarnings("CharsetObjectCanBeUsed") URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));
 
         // Open the connection.
-        HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
 
         // Receive the JSON response body.
@@ -69,14 +70,15 @@ public class GetInfo {
 
         }
 
-       return mainList;
+        return mainList;
     }
+
     private void getFast(String searchQuery) throws IOException {
         ArrayList<OutputModel> mainList = new ArrayList<>();
-        @SuppressWarnings("CharsetObjectCanBeUsed") URL url = new URL(host + path + "?q=" +  URLEncoder.encode(searchQuery, "UTF-8"));
+        @SuppressWarnings("CharsetObjectCanBeUsed") URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));
 
         // Open the connection.
-        HttpsURLConnection connection = (HttpsURLConnection)url.openConnection();
+        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
 
         // Receive the JSON response body.
@@ -90,7 +92,6 @@ public class GetInfo {
 
 
     }
-
 
 
 }
