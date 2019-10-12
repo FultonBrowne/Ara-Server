@@ -74,7 +74,7 @@ public class Run extends NanoHTTPD {
             //Start the Hello function
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
         else if (sessionUri.startsWith("/yelpclient")) main2 = new Locdec().main(sessionUri);
-        else if (sessionUri.startsWith("/search")) {
+        else if (sessionUri.startsWith("/searcht")) {
             main2 = new GetInfo().main(sessionUri);
         }
         else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);

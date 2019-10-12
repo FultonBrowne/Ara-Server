@@ -45,6 +45,8 @@ public class GetInfo {
     }
 
     private ArrayList<OutputModel> searchBing(String searchQuery) throws IOException {
+        System.out.println(searchQuery);
+        searchQuery = searchQuery.replace("/searcht/", "");
 
         ArrayList<OutputModel> mainList = new ArrayList<>();
         @SuppressWarnings("CharsetObjectCanBeUsed") URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));

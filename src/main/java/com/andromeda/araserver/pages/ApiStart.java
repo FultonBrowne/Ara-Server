@@ -89,7 +89,7 @@ public class ApiStart {
         }
         // parse to avoid errors
         if (linkval != null && linkval.contains(" "));
-        else linkval = "https://araserver.herokuapp.com/search" + search;
+        else linkval = "https://araserver.herokuapp.com/searcht/" + search;
         linkval = linkval.replace(" ", "");
         System.out.println(linkval);
         String url = linkval;
