@@ -1,4 +1,4 @@
-FROM alpine/git as clone
+FROM alpine/git:latest as clone
 WORKDIR /app
 RUN git clone https://github.com/FultonBrowne/Ara-Server.git
 
