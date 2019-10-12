@@ -77,8 +77,10 @@ public class ApiStart {
             System.out.println(search.startsWith(sqlModel.description));
 
             assert term != null;
-            if (search.startsWith(sqlModel.description)) {
+            if (search.startsWith(sqlModel.description) || search.equals(sqlModel.description)) {
+                System.out.println("Hiiiiiiii");
                 linkval = sqlModel.link + "/" + search.replace(sqlModel.description, "");
+                System.out.println(linkval);
                 break;
             }
             if (!"".equals(sqlModel.title) && term.endsWith(sqlModel.title)) {
@@ -88,8 +90,7 @@ public class ApiStart {
             }
         }
         // parse to avoid errors
-        if (linkval != null && linkval.contains(" "));
-        else linkval = "https://araserver.herokuapp.com/searcht/" + search;
+        if (linkval == null) linkval = "https://araserver.herokuapp.com/searcht/" + search;
         linkval = linkval.replace(" ", "");
         System.out.println(linkval);
         String url = linkval;
