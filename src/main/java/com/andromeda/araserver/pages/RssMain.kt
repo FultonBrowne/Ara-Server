@@ -12,6 +12,7 @@ import com.rometools.rome.io.XmlReader
 import java.io.IOException
 import java.net.URL
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Object used to handle RSS Feeds.
@@ -27,7 +28,7 @@ object RssMain {
     @Throws(IOException::class, FeedException::class)
     fun rssMain1(mode: Int): SyndFeed {
         //Feed link text
-        val feeds = arrayOfNulls<String>(4)
+        val feeds = ArrayList<String>();
         when (mode) {
             1 -> {
                 //World news
