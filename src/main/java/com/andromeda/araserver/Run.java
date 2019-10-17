@@ -25,7 +25,7 @@ public class Run extends NanoHTTPD {
         super(port);
         //Start Server
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-        System.out.println(" Ara server is running and is available on your domain, IP, or http://localhost:80/ \n");
+        System.out.println(" Ara server is running and is available on your domain, IP, or http://localhost:" + port +"/");
         System.out.println("This program is free software: you can redistribute it and/or modify\n" +
                 "    it under the terms of the GNU General Public License as published by\n" +
                 "    the Free Software Foundation, either version 3 of the License, or\n" +
