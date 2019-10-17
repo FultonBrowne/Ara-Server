@@ -11,7 +11,6 @@ import com.rometools.rome.io.XmlReader
 
 import java.io.IOException
 import java.net.URL
-import java.util.*
 import kotlin.collections.ArrayList
 
 /**
@@ -28,10 +27,10 @@ object RssMain {
     @Throws(IOException::class, FeedException::class)
     fun rssMain1(mode: Int): SyndFeed {
         //Feed link text
-        val feeds = ArrayList<String>();
+        val feeds = ArrayList<String>()
         when (mode) {
             1 -> {
-                //World news
+                //World news in english
                 feeds[0] = "https://www.cbsnews.com/latest/rss/world"
                 feeds[1] = "http://feeds.foxnews.com/foxnews/world"
                 feeds[2] = "http://feeds.bbci.co.uk/news/world/rss.xml"
@@ -45,21 +44,21 @@ object RssMain {
                 feeds[3] = "http://news.yahoo.com/rss/"
             }
             3 -> {
-                //Tech news
+                //Tech news in english
                 feeds[0] = "https://www.cnet.com/rss/news/"
                 feeds[1] = "http://www.foxnews.com/about/rss"
                 feeds[2] = "http://feeds.bbci.co.uk/news/technology/rss.xml"
                 feeds[3] = "https://hnrss.org/newest"
             }
             4 -> {
-                //Business news
+                //Business news in english
                 feeds[0] = "http://feeds.reuters.com/reuters/businessNews"
                 feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml"
                 feeds[2] = "http://feeds.bbci.co.uk/news/business/rss.xml"
                 feeds[3] = "http://feeds.reuters.com/reuters/businessNews"
             }
             else -> {
-                // general news
+                // general news in english
                 feeds[0] = "https://www.cbsnews.com/latest/rss/main/"
                 feeds[1] = "http://feeds.foxnews.com/foxnews/latest"
                 feeds[2] = "https://www.espn.com/espn/rss/news"
