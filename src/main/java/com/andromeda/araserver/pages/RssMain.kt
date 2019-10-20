@@ -57,6 +57,15 @@ object RssMain {
                 feeds[2] = "http://feeds.bbci.co.uk/news/business/rss.xml"
                 feeds[3] = "http://feeds.reuters.com/reuters/businessNews"
             }
+            5 -> {
+                //world news in spanish
+            }
+            6-> {
+                //tech news in spanish
+            }
+            7-> {
+                //Business news in spanish
+            }
             else -> {
                 // general news in english
                 feeds[0] = "https://www.cbsnews.com/latest/rss/main/"
