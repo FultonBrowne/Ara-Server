@@ -35,6 +35,7 @@ object RssMain {
                 feeds[1] = "http://feeds.foxnews.com/foxnews/world"
                 feeds[2] = "http://feeds.bbci.co.uk/news/world/rss.xml"
                 feeds[3] = "http://feeds.reuters.com/Reuters/worldNews"
+                feeds[4] = "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"
             }
             2 -> {
                 // Us news
@@ -42,6 +43,7 @@ object RssMain {
                 feeds[1] = "http://feeds.foxnews.com/foxnews/national"
                 feeds[2] = "http://feeds.reuters.com/Reuters/domesticNews"
                 feeds[3] = "http://news.yahoo.com/rss/"
+                feeds[4] = "https://elpais.com/tag/rss/estados_unidos/a/"
             }
             3 -> {
                 //Tech news in english
@@ -49,6 +51,7 @@ object RssMain {
                 feeds[1] = "http://www.foxnews.com/about/rss"
                 feeds[2] = "http://feeds.bbci.co.uk/news/technology/rss.xml"
                 feeds[3] = "https://hnrss.org/newest"
+                feeds[4] = "http://ep00.epimg.net/rss/tecnologia/portada.xml"
             }
             4 -> {
                 //Business news in english
@@ -56,6 +59,7 @@ object RssMain {
                 feeds[1] = "https://www.espn.com/espn/rss/news/rss.xml"
                 feeds[2] = "http://feeds.bbci.co.uk/news/business/rss.xml"
                 feeds[3] = "http://feeds.reuters.com/reuters/businessNews"
+                feeds[4] = "https://e00-elmundo.uecdn.es/elmundo/rss/economia.xml"
             }
             5 -> {
                 //world news in spanish
@@ -72,6 +76,7 @@ object RssMain {
                 feeds[1] = "http://feeds.foxnews.com/foxnews/latest"
                 feeds[2] = "https://www.espn.com/espn/rss/news"
                 feeds[3] = "http://feeds.reuters.com/Reuters/worldNews"
+                feeds[4] = "https://www.abc.es/rss/feeds/abc_ultima.xml"
             }
         }
         //Declare Feed
