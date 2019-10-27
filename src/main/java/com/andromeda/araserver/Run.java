@@ -7,6 +7,7 @@ import com.andromeda.araserver.pages.ApiStart;
 import com.andromeda.araserver.skills.GetInfo;
 import com.andromeda.araserver.skills.Equations;
 import com.andromeda.araserver.skills.Locdec;
+import com.andromeda.araserver.store.Main;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;
@@ -47,7 +48,7 @@ public class Run extends NanoHTTPD {
         String webPort = System.getenv("PORT");
         if (webPort == null || webPort.isEmpty()) {
             // If not set to 80
-            webPort = "80";
+            webPort = "8080";
         }
         //Get port value and start server
         try {
@@ -79,6 +80,7 @@ public class Run extends NanoHTTPD {
         }
         else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
+        else if(sessionUri.startsWith("/store")) main2 = new Main().GetStoreContent();
         else {
             // if getting RSS info set tag value this will be used to get the correct feed
             switch (sessionUri) {
