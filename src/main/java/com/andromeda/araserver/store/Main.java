@@ -1,7 +1,6 @@
 package com.andromeda.araserver.store;
 
 import com.andromeda.araserver.util.OutputModel;
-import com.andromeda.araserver.util.SqlModel;
 import com.google.gson.Gson;
 
 import java.sql.*;
@@ -11,14 +10,13 @@ public class Main {
     public String GetStoreContent() throws SQLException {
         Gson gson = new Gson();
         Connection c = null;
-        ArrayList<OutputModel> outputModelArrayList = new ArrayList<OutputModel>();
+        ArrayList<OutputModel> outputModelArrayList = new ArrayList<>();
         try {
             c = getConnection();
-           // add(c);
-            c.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        assert c != null;
         Statement stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM COMPANY;");
         // I dont know how this works but it does 😀
@@ -32,7 +30,6 @@ public class Main {
             outputModelArrayList.add(new OutputModel(name, endtxt,link,"", "", outText));
             System.out.println();
         }
-        outputModelArrayList.add(new OutputModel("Custom skills coming soon", "stay tune","", "","", ""));
 
 
         return gson.toJson(outputModelArrayList);
@@ -48,10 +45,10 @@ public class Main {
     void add(Connection c) throws SQLException {
         Statement stmt = c.createStatement();
         String sql;
-        sql = "INSERT INTO COMPANY(ID, NAME, INFO, LINK, PRE, SUF, ACTIONMAIN) VALUES (0, 'Wi-Fi on or off', 'turn on and off Wi-Fi','',turn on wifi,' ---\n" +
-                "    - action: \"WIFI\"\n" +
-                "      arg1: \"TERM\"\n" +
-                "      arg2: \"\"',)";
+        sql = "INSERT INTO COMPANY(ID, NAME, INFO, LINK, PRE, SUF, ACTIONMAIN) VALUES (0, 'toggle WI-FI', 'switch your Wi-Fi settings','','turn on wifi','', '---"+
+                "    - action: !WIFI!" +
+                "      arg1: !TERM!" +
+                "      arg2: !!')";
 
         stmt.executeUpdate(sql);
         stmt.close();
