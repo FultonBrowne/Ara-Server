@@ -15,6 +15,7 @@ import fi.iki.elonen.NanoHTTPD;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.sql.SQLException;
 
 
 public class Run extends NanoHTTPD {
@@ -80,7 +81,13 @@ public class Run extends NanoHTTPD {
         }
         else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
-        else if(sessionUri.startsWith("/store")) main2 = new Main().GetStoreContent();
+        else if(sessionUri.startsWith("/store")) {
+            try {
+                main2 = new Main().GetStoreContent();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         else {
             // if getting RSS info set tag value this will be used to get the correct feed
             switch (sessionUri) {
