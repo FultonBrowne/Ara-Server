@@ -34,7 +34,6 @@ public class GetInfo {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        outputModels.add(new OutputModel("test", mainurl, "https://github.com/FultonBrowne/Ara-Server", "", "", ""));
         try {
             outputModels.addAll(searchBing(term));
         } catch (IOException e) {
