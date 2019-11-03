@@ -2,11 +2,8 @@ package com.andromeda.araserver;
 
 import com.andromeda.araserver.pages.RssMain;
 import com.andromeda.araserver.pages.Update;
-import com.andromeda.araserver.skills.Hello;
+import com.andromeda.araserver.skills.*;
 import com.andromeda.araserver.pages.ApiStart;
-import com.andromeda.araserver.skills.GetInfo;
-import com.andromeda.araserver.skills.Equations;
-import com.andromeda.araserver.skills.Locdec;
 import com.andromeda.araserver.store.Main;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
@@ -81,6 +78,7 @@ public class Run extends NanoHTTPD {
         }
         else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
+        else if (sessionUri.startsWith("/what")) main2 = new SocialSkills().doYouLike(sessionUri.replace("/what/", ""));
         else if(sessionUri.startsWith("/store")) {
             try {
                 main2 = new Main().GetStoreContent();
