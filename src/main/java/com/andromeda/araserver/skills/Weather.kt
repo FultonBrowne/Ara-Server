@@ -1,5 +1,7 @@
 package com.andromeda.araserver.skills
 
+import com.google.gson.Gson
+import com.google.gson.JsonParser
 import java.net.URL
 import java.util.*
 
@@ -7,7 +9,7 @@ class Weather {
     private var log: String? = null
     private var lat: String? = null
     private var term: String? = null
-    fun getWeatherNow(url:String){
+    fun getWeatherNow(url:String): String {
         //get api params
         val pairs =
             ArrayList(listOf(*url.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
@@ -21,6 +23,9 @@ class Weather {
         }
         val urlGrid = URL("https://api.weather.gov/points/$lat,$log")
         val urlGridData = urlGrid.readText()
+        val json = JsonParser().parse(urlGridData)
+        print(json)
+        return "test"
 
 
     }
