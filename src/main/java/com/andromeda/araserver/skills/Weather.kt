@@ -1,5 +1,6 @@
 package com.andromeda.araserver.skills
 
+import com.andromeda.araserver.util.OutputModel
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import java.net.URL
@@ -29,9 +30,13 @@ class Weather {
         val finalData = links.readText()
         json = JsonParser().parse(finalData)
         val dataSet = json.asJsonObject.getAsJsonObject("properties").getAsJsonArray("periods")
+        val temp = dataSet[0].asJsonObject.get("temperature").asInt.toString()
+        val foreCast = dataSet[0].asJsonObject.get("shortForecast").asString
+        val full = dataSet[0].asJsonObject.get("detailedForecast").asString
+        val title = "$temp and $foreCast"
 
-        print(dataSet[0].asJsonObject.get("temperature").asInt)
-        return "test"
+        val toReturn = OutputModel(title,full, "", "", full, "");
+        return Gson().toJson(toReturn)
 
 
     }
