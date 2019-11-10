@@ -5,6 +5,7 @@ import com.google.gson.JsonParser
 import java.net.URL
 import java.util.*
 
+
 class Weather {
     private var log: String? = null
     private var lat: String? = null
@@ -25,10 +26,11 @@ class Weather {
         val urlGridData = urlGrid.readText()
         var json = JsonParser().parse(urlGridData)
         val links = URL(json.asJsonObject.getAsJsonObject("properties").get("forecast").asString)
-        print(links)
         val finalData = links.readText()
         json = JsonParser().parse(finalData)
-        print(json)
+        val dataSet = json.asJsonObject.getAsJsonObject("properties").getAsJsonArray("periods")
+
+        print(dataSet[0].asJsonObject.get("temperature").asInt)
         return "test"
 
 
