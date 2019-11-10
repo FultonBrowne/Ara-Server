@@ -23,9 +23,12 @@ class Weather {
         }
         val urlGrid = URL("https://api.weather.gov/points/$lat,$log")
         val urlGridData = urlGrid.readText()
-        val json = JsonParser().parse(urlGridData)
-        var links = json.asJsonObject.getAsJsonObject("properties").get("forecast").asString
+        var json = JsonParser().parse(urlGridData)
+        val links = URL(json.asJsonObject.getAsJsonObject("properties").get("forecast").asString)
         print(links)
+        val finalData = links.readText()
+        json = JsonParser().parse(finalData)
+        print(json)
         return "test"
 
 
