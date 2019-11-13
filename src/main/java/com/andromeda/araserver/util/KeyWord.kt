@@ -1,11 +1,9 @@
 package com.andromeda.araserver.util
 
 import opennlp.tools.cmdline.parser.ParserTool
-import opennlp.tools.langdetect.LanguageDetectorModel
 import opennlp.tools.parser.Parse
 import opennlp.tools.parser.ParserFactory
 import opennlp.tools.parser.ParserModel
-import java.io.FileInputStream
 import java.io.InputStream
 
 
