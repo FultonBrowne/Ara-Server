@@ -7,10 +7,10 @@ import junit.framework.TestResult;
 import java.io.FileInputStream;
 import java.io.InputStream;
 
-public class test1 extends TestCase {
+/*public class test1 extends TestCase {
     @Override
     protected void runTest() throws Throwable {
-        System.out.println(new KeyWord("this is a test", new FileInputStream("")));
+        //System.out.println(new KeyWord("this is a test", new FileInputStream("")));
         super.runTest();
     }
 
@@ -18,4 +18,4 @@ public class test1 extends TestCase {
     public TestResult run() {
         return super.run();
     }
-}
+}*/
