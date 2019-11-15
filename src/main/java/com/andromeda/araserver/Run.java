@@ -46,7 +46,7 @@ public class Run extends NanoHTTPD {
         InputStream is = classloader.getResourceAsStream("parse.bin");
         assert is != null;
         keyWord = new KeyWord(is);
-        //System.out.println(Arrays.toString(keyWord.getKeyWords("hello")));
+        System.out.println(keyWord.getKeyWords("The quick brown fox jumps over the lazy dog .")[0].getType());
     }
 
 
