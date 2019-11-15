@@ -12,6 +12,7 @@ import com.rometools.rome.io.SyndFeedOutput;
 import fi.iki.elonen.NanoHTTPD;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 
 
@@ -38,7 +39,12 @@ public class Run extends NanoHTTPD {
                 "\n" +
                 "    You should have received a copy of the GNU General Public License\n" +
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
-        //keyWord = new KeyWord()
+
+
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classloader.getResourceAsStream("parse.bin");
+        assert is != null;
+        keyWord = new KeyWord(is);
     }
 
 
