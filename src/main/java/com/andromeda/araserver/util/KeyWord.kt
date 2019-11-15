@@ -7,10 +7,9 @@ import opennlp.tools.parser.ParserModel
 import java.io.InputStream
 
 
-class KeyWord(text:String, is1:InputStream ) {
-    private val mainVal = text
+class KeyWord(is1:InputStream ) {
     private val mainIs = is1
-    fun getKeyWords(): Array<out Parse>? {
+    fun getKeyWords(mainVal:String): Array<out Parse>? {
         val m =ParserModel(mainIs)
         val parser = ParserFactory.create(m)
 

@@ -5,17 +5,18 @@ import com.andromeda.araserver.pages.Update;
 import com.andromeda.araserver.skills.*;
 import com.andromeda.araserver.pages.ApiStart;
 import com.andromeda.araserver.store.Main;
+import com.andromeda.araserver.util.KeyWord;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;
 import fi.iki.elonen.NanoHTTPD;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.sql.SQLException;
 
 
 public class Run extends NanoHTTPD {
+    KeyWord keyWord;
 
 
     //Function to declare port
@@ -37,6 +38,7 @@ public class Run extends NanoHTTPD {
                 "\n" +
                 "    You should have received a copy of the GNU General Public License\n" +
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
+        //keyWord = new KeyWord()
     }
 
 
@@ -45,7 +47,7 @@ public class Run extends NanoHTTPD {
         // If this is in a heroku environment, get the port number
         String webPort = System.getenv("PORT");
         if (webPort == null || webPort.isEmpty()) {
-            // If not set to 80
+            // If not set to 8080
             webPort = "8080";
         }
         //Get port value and start server
@@ -55,6 +57,7 @@ public class Run extends NanoHTTPD {
             System.err.println("Couldn't start server:\n" + ioe);
         }
     }
+
 
     @Override
     //If connected to
