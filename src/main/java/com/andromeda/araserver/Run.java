@@ -46,7 +46,7 @@ public class Run extends NanoHTTPD {
         InputStream is = classloader.getResourceAsStream("parse.bin");
         assert is != null;
         keyWord = new KeyWord(is);
-        System.out.println(keyWord.getKeyWords("What is the weather ?")[0].getChildren()[0].getText());
+        System.out.println(keyWord.getKeyWords("What is the weather ?")[0].getChildren()[0].getChildren()[0].getChildren()[0].getType());
     }
 
 
