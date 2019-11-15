@@ -14,6 +14,7 @@ import fi.iki.elonen.NanoHTTPD;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 
 public class Run extends NanoHTTPD {
@@ -45,6 +46,7 @@ public class Run extends NanoHTTPD {
         InputStream is = classloader.getResourceAsStream("parse.bin");
         assert is != null;
         keyWord = new KeyWord(is);
+        //System.out.println(Arrays.toString(keyWord.getKeyWords("hello")));
     }
 
 

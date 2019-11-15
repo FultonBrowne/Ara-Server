@@ -14,7 +14,7 @@ class KeyWord(is1:InputStream ) {
         val parser = ParserFactory.create(m)
 
 
-        return ParserTool.parseLine(mainVal, parser, 1)
+        return ParserTool.parseLine(mainVal, parser, 10)
     }
 
 
