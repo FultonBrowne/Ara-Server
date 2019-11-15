@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.50'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.60'
     id ("com.gradle.build-scan").version("2.4.2") 
 
     // ./gradlew :refreshVersions 
@@ -44,7 +44,7 @@ dependencies {
     compile group:'org.eclipse.swt.gtk.solaris', name: 'sparc', version: '3.3.0-v3346'
     compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.29"
     compile 'org.nanohttpd:nanohttpd:2.3.1'
-    compile 'org.hibernate:hibernate-agroal:5.4.8.Final'
+    compile 'org.hibernate:hibernate-agroal:5.4.9.Final'
     implementation"com.squareup.okhttp3:okhttp:4.2.0"
     compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.9.1'
 
