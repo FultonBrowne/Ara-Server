@@ -23,7 +23,7 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
                     }
                     else -> {
                         if (graph != null) {
-                            sortNouns(graph)
+                            sortForGraph(graph)
                         }
                         working = false
                         }
@@ -36,11 +36,14 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
 
 
     }
-    private fun sortNouns(graph: Parse){
+    private fun sortForGraph(graph: Parse): ArrayList<WordGraph> {
+        val toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
+            toReturn.add(WordGraph(i.coveredText, i.label))
             println(i.type)
-            if (i.childCount > 0) sortNouns(i)
+            if (i.childCount > 0) toReturn.addAll(sortForGraph(i))
             }
+        return toReturn
 
     }
 
