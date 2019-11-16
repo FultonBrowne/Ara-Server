@@ -1,11 +1,14 @@
 package com.andromeda.araserver.util
 
 import opennlp.tools.parser.Parse
+import java.util.ArrayList
 
 class SortWords(keyWord: KeyWord, mainVal: String) {
     val key = keyWord
     val mainText = mainVal
     fun getTopics() {
+        var toReturn = ArrayList<WordGraph>()
+
         var graph = key.getKeyWords(mainText)?.get(0)
 
         var working = true
@@ -14,15 +17,13 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
             while (working) {
                 when {
                     graph?.childCount == 1 -> {graph = graph.children?.get(0)
-                    println("is 1")
                     print(graph?.type)}
                     graph?.childCount == 0 -> {
                         working = false
-                        println("stop")
                     }
                     else -> {
                         if (graph != null) {
-                            sort(graph)
+                            sortNouns(graph)
                         }
                         working = false
                         }
@@ -35,13 +36,10 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
 
 
     }
-    private fun sort(graph: Parse){
+    private fun sortNouns(graph: Parse){
         for (i in graph.children!!) {
-            //println("go 2")
             println(i.type)
-            if (i.childCount > 0) sort(i)
-
-
+            if (i.childCount > 0) sortNouns(i)
             }
 
     }
