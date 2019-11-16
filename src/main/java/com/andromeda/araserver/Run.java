@@ -6,6 +6,7 @@ import com.andromeda.araserver.skills.*;
 import com.andromeda.araserver.pages.ApiStart;
 import com.andromeda.araserver.store.Main;
 import com.andromeda.araserver.util.KeyWord;
+import com.andromeda.araserver.util.SortWords;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;
@@ -47,7 +48,7 @@ public class Run extends NanoHTTPD {
         InputStream is = classloader.getResourceAsStream("parse.bin");
         assert is != null;
         keyWord = new KeyWord(is);
-        keyWord.getKeyWords("what is the value of pi")[0].show();
+        new SortWords(keyWord, "what is the weather in portland oregon ?").getTopics();
         //keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
         System.out.println();
         //(TOP (SBAR (WHNP (WP what)) (S (VP (VBZ is) (NP (NP (DT the) (NN value)) (PP (IN of) (NP (NN pi))))))))
