@@ -50,6 +50,7 @@ public class Run extends NanoHTTPD {
         keyWord.getKeyWords("what is the value of pi")[0].show();
         //keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
         System.out.println();
+        //(TOP (SBAR (WHNP (WP what)) (S (VP (VBZ is) (NP (NP (DT the) (NN value)) (PP (IN of) (NP (NN pi))))))))
     }
 
 
