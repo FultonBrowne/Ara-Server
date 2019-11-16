@@ -13,6 +13,7 @@ import fi.iki.elonen.NanoHTTPD;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.Arrays;
 
@@ -46,7 +47,8 @@ public class Run extends NanoHTTPD {
         InputStream is = classloader.getResourceAsStream("parse.bin");
         assert is != null;
         keyWord = new KeyWord(is);
-        System.out.println(keyWord.getKeyWords("What is the weather ?")[0].getChildren()[0].getChildren()[0].getChildren()[0].getType());
+        //keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
+        System.out.println();
     }
 
 
@@ -85,6 +87,9 @@ public class Run extends NanoHTTPD {
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
         else if (sessionUri.startsWith("/yelpclient")) main2 = new Locdec().main(sessionUri);
         else if (sessionUri.startsWith("/weat")) main2 = new Weather().getWeatherNow(sessionUri);
+        else if (sessionUri.startsWith("/search")) {
+            main2 = new GetInfo().main(sessionUri, keyWord);
+        }
 
         else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);

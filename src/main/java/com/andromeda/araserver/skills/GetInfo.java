@@ -1,5 +1,6 @@
 package com.andromeda.araserver.skills;
 
+import com.andromeda.araserver.util.KeyWord;
 import com.andromeda.araserver.util.OutputModel;
 import com.google.gson.*;
 
@@ -18,7 +19,7 @@ public class GetInfo {
     static String path = "/bing/v7.0/search";
 
 
-    public String main(String mainurl) {
+    public String main(String mainurl, KeyWord keyWord) {
         //new gson instance
         Gson gson = new Gson();
         //place holder values
