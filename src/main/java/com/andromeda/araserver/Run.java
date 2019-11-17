@@ -48,7 +48,6 @@ public class Run extends NanoHTTPD {
         InputStream is = classloader.getResourceAsStream("parse.bin");
         assert is != null;
         keyWord = new KeyWord(is);
-        new SortWords(keyWord, "what is the weather in portland oregon ?").getTopics();
         //keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
         System.out.println();
         //(TOP (SBAR (WHNP (WP what)) (S (VP (VBZ is) (NP (NP (DT the) (NN value)) (PP (IN of) (NP (NN pi))))))))

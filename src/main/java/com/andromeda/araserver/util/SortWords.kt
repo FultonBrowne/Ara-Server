@@ -7,7 +7,7 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
     private val key = keyWord
     private val mainText = mainVal
     fun getTopics(): ArrayList<WordGraph> {
-        var toReturn = ArrayList<WordGraph>()
+        val toReturn = ArrayList<WordGraph>()
 
         var graph = key.getKeyWords(mainText)?.get(0)
 

@@ -2,6 +2,8 @@ package com.andromeda.araserver.skills;
 
 import com.andromeda.araserver.util.KeyWord;
 import com.andromeda.araserver.util.OutputModel;
+import com.andromeda.araserver.util.SortWords;
+import com.andromeda.araserver.util.WordGraph;
 import com.google.gson.*;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -30,6 +32,8 @@ public class GetInfo {
         ArrayList<String> pairs = new ArrayList<>(Arrays.asList(mainurl.split("&")));
         term = pairs.get(0);
         System.out.println(term);
+        //NLP
+        ArrayList<WordGraph> graph = new SortWords(keyWord, "what is the weather in portland oregon ?").getTopics();
         try {
             getFast("ten times ten");
         } catch (IOException e) {
