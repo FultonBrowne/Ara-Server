@@ -35,11 +35,6 @@ public class GetInfo {
         //NLP
         ArrayList<WordGraph> graph = new SortWords(keyWord, "what is the weather in portland oregon ?").getTopics();
         try {
-            getFast("ten times ten");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
             outputModels.addAll(searchBing(term));
         } catch (IOException e) {
             e.printStackTrace();
