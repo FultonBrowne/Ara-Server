@@ -42,7 +42,7 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
     private fun sortForNoun(graph: Parse): ArrayList<WordGraph> {
         val toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
-            if (i.type == "NN") {
+            if (i.type == "NN" || i.type == "JJ") {
                 toReturn.add(WordGraph(i.coveredText, i.type))
                 //println("add")
             }
