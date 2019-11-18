@@ -29,7 +29,7 @@ public class Run extends NanoHTTPD {
         super(port);
         //Start Server
         start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
-        System.out.println(" Ara server is running and is available on your domain, IP, or http://localhost:" + port +"/");
+        System.out.println(" Ara server is running and is available on your domain, IP, or http://localhost:" + port + "/");
         System.out.println("This program is free software: you can redistribute it and/or modify\n" +
                 "    it under the terms of the GNU General Public License as published by\n" +
                 "    the Free Software Foundation, either version 3 of the License, or\n" +
@@ -43,15 +43,20 @@ public class Run extends NanoHTTPD {
                 "    You should have received a copy of the GNU General Public License\n" +
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
 
-
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("parse.bin");
-        assert is != null;
-        keyWord = new KeyWord(is);
-        //keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
-        System.out.println();
-        //(TOP (SBAR (WHNP (WP what)) (S (VP (VBZ is) (NP (NP (DT the) (NN value)) (PP (IN of) (NP (NN pi))))))))
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+                InputStream is = classloader.getResourceAsStream("parse.bin");
+                assert is != null;
+                keyWord = new KeyWord(is);
+                //keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
+                //System.out.println("go");
+            }
+        }).start();
     }
+        //(TOP (SBAR (WHNP (WP what)) (S (VP (VBZ is) (NP (NP (DT the) (NN value)) (PP (IN of) (NP (NN pi))))))))
+
 
 
     // Static function, to be run on start.
