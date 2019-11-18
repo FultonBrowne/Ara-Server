@@ -44,7 +44,6 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         for (i in graph.children!!) {
             if (i.type == "NN" || i.type == "JJ") {
                 toReturn.add(WordGraph(i.coveredText, i.type))
-                //println("add")
             }
             if (i.childCount > 0) toReturn.addAll(sortForNoun(i))
         }

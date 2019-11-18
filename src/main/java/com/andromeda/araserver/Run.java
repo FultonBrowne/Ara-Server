@@ -50,8 +50,10 @@ public class Run extends NanoHTTPD {
                 InputStream is = classloader.getResourceAsStream("parse.bin");
                 assert is != null;
                 keyWord = new KeyWord(is);
-                //keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
-                //System.out.println("go");
+
+                System.out.println("done");
+                keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
+                System.out.println("go");
             }
         }).start();
     }
