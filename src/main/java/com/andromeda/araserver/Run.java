@@ -53,13 +53,14 @@ public class Run extends NanoHTTPD {
                 keyWord = new KeyWord(is);
                 System.out.println("test 1 done");
                 Objects.requireNonNull(keyWord.getKeyWords("What is the weather in south oregon ?"))[0].show();
+                ;
+                keyWord.getKeyWords("What is the weather in south atlanta ?")[0].show();
+                System.out.println("done");
 
 
             }
         }).start();
-        ;
-        keyWord.getKeyWords("What is the weather in south atlanta ?")[0].show();
-        System.out.println("done");
+
     }
 
         //(TOP (SBAR (WHNP (WP what)) (S (VP (VBZ is) (NP (NP (DT the) (NN value)) (PP (IN of) (NP (NN pi))))))))

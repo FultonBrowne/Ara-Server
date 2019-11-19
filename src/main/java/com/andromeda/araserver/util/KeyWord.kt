@@ -10,8 +10,8 @@ import java.io.InputStream
 
 class KeyWord(parseIS:InputStream) {
     val parse = parseIS
-    var m =ParserModel(parse)
-     var parser = ParserFactory.create(m)
+
+     var parser:Parser? = null
 
 
     fun getKeyWords(mainVal:String): Array<out Parse>? {
@@ -19,16 +19,12 @@ class KeyWord(parseIS:InputStream) {
         return ParserTool.parseLine(mainVal, parser, 1)
     }
     init {
-        m =ParserModel(parse)
+       val m =ParserModel(parse)
         parser = ParserFactory.create(m)
     }
-    companion object{
-        @JvmStatic
-        fun test(){
 
-        }
     }
-    }
+
 
 
 
