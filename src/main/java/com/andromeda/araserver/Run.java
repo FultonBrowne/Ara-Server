@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Objects;
 
 
 public class Run extends NanoHTTPD {
@@ -50,13 +51,17 @@ public class Run extends NanoHTTPD {
                 InputStream is = classloader.getResourceAsStream("parse.bin");
                 assert is != null;
                 keyWord = new KeyWord(is);
+                System.out.println("test 1 done");
+                Objects.requireNonNull(keyWord.getKeyWords("What is the weather in south oregon ?"))[0].show();
 
-                System.out.println("done");
-                keyWord.getKeyWords("What is the weather in south oregon ?")[0].show();
-                System.out.println("go");
+
             }
         }).start();
+        ;
+        keyWord.getKeyWords("What is the weather in south atlanta ?")[0].show();
+        System.out.println("done");
     }
+
         //(TOP (SBAR (WHNP (WP what)) (S (VP (VBZ is) (NP (NP (DT the) (NN value)) (PP (IN of) (NP (NN pi))))))))
 
 
