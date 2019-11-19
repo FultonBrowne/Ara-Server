@@ -13,6 +13,7 @@ class KeyWord(parseIS:InputStream) {
     var m =ParserModel(parse)
      var parser = ParserFactory.create(m)
 
+
     fun getKeyWords(mainVal:String): Array<out Parse>? {
 
         return ParserTool.parseLine(mainVal, parser, 1)
@@ -22,7 +23,10 @@ class KeyWord(parseIS:InputStream) {
         parser = ParserFactory.create(m)
     }
     companion object{
-        
+        @JvmStatic
+        fun test(){
+
+        }
     }
     }
 
