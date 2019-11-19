@@ -8,7 +8,7 @@ import opennlp.tools.parser.ParserModel
 import java.io.InputStream
 
 
-class KeyWord(parseIS:InputStream) {
+class KeyWord(var parseIS:InputStream) {
    final val parse = parseIS
    final val m =ParserModel(parse)
    final val parser = ParserFactory.create(m)
@@ -17,6 +17,9 @@ class KeyWord(parseIS:InputStream) {
     fun getKeyWords(mainVal:String): Array<out Parse>? {
 
         return ParserTool.parseLine(mainVal, parser, 1)
+    }
+    companion object go{
+
     }
 
 
