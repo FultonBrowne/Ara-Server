@@ -53,23 +53,9 @@ public class Run extends NanoHTTPD {
         InputStream is = classloader.getResourceAsStream("parse.bin");
         model = new ParserModel(is);
         parser = ParserFactory.create(model);
-
-                keyWord = new KeyWord(is);
-                System.out.println("test 1 done");
-                keyWord.getKeyWords("What is the weather in south oregon ?", parser)[0].show();
-
-                keyWord.getKeyWords("What is the weather in south atlanta ?", parser)[0].show();
-                System.out.println("done");
-
-
-
+        keyWord = new KeyWord(is);
 
     }
-
-        //(TOP (SBAR (WHNP (WP what)) (S (VP (VBZ is) (NP (NP (DT the) (NN value)) (PP (IN of) (NP (NN pi))))))))
-
-
-
     // Static function, to be run on start.
     public static void main(String[] args) {
         // If this is in a heroku environment, get the port number
@@ -107,19 +93,16 @@ public class Run extends NanoHTTPD {
         else if (sessionUri.startsWith("/weat")) main2 = new Weather().getWeatherNow(sessionUri);
         else if (sessionUri.startsWith("/search")) {
             main2 = new GetInfo().main(sessionUri, keyWord, parser);
-        }
-
-        else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
+        } else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
         else if (sessionUri.startsWith("/what")) main2 = new SocialSkills().doYouLike(sessionUri.replace("/what/", ""));
-        else if(sessionUri.startsWith("/store")) {
+        else if (sessionUri.startsWith("/store")) {
             try {
                 main2 = new Main().GetStoreContent();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             // if getting RSS info set tag value this will be used to get the correct feed
             switch (sessionUri) {
                 case "/world":

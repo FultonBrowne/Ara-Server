@@ -11,7 +11,6 @@ public class NLPtests {
     public void mainTest(){
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream("parse.bin");
-        //new KeyWord(is).getKeyWords("Hello unit test")[0].show();
 
     }
 

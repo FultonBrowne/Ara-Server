@@ -34,7 +34,10 @@ public class GetInfo {
         term = pairs.get(0);
         System.out.println(term);
         //NLP
-        ArrayList<WordGraph> graph = new SortWords(keyWord, "what is the weather in portland oregon ?").getTopics(parse);
+        ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
+        for (int i = 0; i < graph.size(); i++) {
+
+        }
         try {
             outputModels.addAll(searchBing(term));
         } catch (IOException e) {
@@ -49,7 +52,7 @@ public class GetInfo {
         searchQuery = searchQuery.replace("/searcht/", "");
 
         ArrayList<OutputModel> mainList = new ArrayList<>();
-        @SuppressWarnings("CharsetObjectCanBeUsed") URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));
+        URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));
 
         // Open the connection.
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
