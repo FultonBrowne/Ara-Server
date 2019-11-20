@@ -9,16 +9,19 @@ import java.io.InputStream
 
 
 class KeyWord(var parseIS:InputStream) {
-   final val parse = parseIS
-   final val m =ParserModel(parse)
-   final val parser = ParserFactory.create(m)
 
 
-    fun getKeyWords(mainVal:String): Array<out Parse>? {
+
+    fun getKeyWords(mainVal:String, parser: Parser): Array<out Parse>? {
 
         return ParserTool.parseLine(mainVal, parser, 1)
     }
     companion object go{
+        fun go(k: KeyWord): Parser? {
+            val is1 = k.parseIS
+        val m =ParserModel(is1)
+            return ParserFactory.create(m)
+        }
 
     }
 

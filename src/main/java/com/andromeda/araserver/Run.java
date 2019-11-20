@@ -11,7 +11,11 @@ import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedOutput;
 import fi.iki.elonen.NanoHTTPD;
+import opennlp.tools.parser.Parser;
+import opennlp.tools.parser.ParserFactory;
+import opennlp.tools.parser.ParserModel;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -22,6 +26,8 @@ import java.util.Objects;
 
 public class Run extends NanoHTTPD {
     KeyWord keyWord;
+    ParserModel model = null;
+    Parser parser = null;
 
 
     //Function to declare port
@@ -43,23 +49,30 @@ public class Run extends NanoHTTPD {
                 "\n" +
                 "    You should have received a copy of the GNU General Public License\n" +
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        InputStream is = classloader.getResourceAsStream("parse.bin");
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-                InputStream is = classloader.getResourceAsStream("parse.bin");
-                assert is != null;
+
+
+
+
+       ;
+        model = new ParserModel(is);
+        parser = ParserFactory.create(model);
+
+
+
+
+
                 keyWord = new KeyWord(is);
                 System.out.println("test 1 done");
-                Objects.requireNonNull(keyWord.getKeyWords("What is the weather in south oregon ?"))[0].show();
-                ;
-                keyWord.getKeyWords("What is the weather in south atlanta ?")[0].show();
+                Objects.requireNonNull(keyWord.getKeyWords("What is the weather in south oregon ?", parser))[0].show();
+
+                keyWord.getKeyWords("What is the weather in south atlanta ?", parser)[0].show();
                 System.out.println("done");
 
 
-            }
-        }).start();
+
 
     }
 
@@ -103,7 +116,7 @@ public class Run extends NanoHTTPD {
         else if (sessionUri.startsWith("/yelpclient")) main2 = new Locdec().main(sessionUri);
         else if (sessionUri.startsWith("/weat")) main2 = new Weather().getWeatherNow(sessionUri);
         else if (sessionUri.startsWith("/search")) {
-            main2 = new GetInfo().main(sessionUri, keyWord);
+            main2 = new GetInfo().main(sessionUri, keyWord, parser);
         }
 
         else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);

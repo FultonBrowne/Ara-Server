@@ -1,15 +1,16 @@
 package com.andromeda.araserver.util
 
 import opennlp.tools.parser.Parse
+import opennlp.tools.parser.Parser
 import java.util.ArrayList
 
 class SortWords(keyWord: KeyWord, mainVal: String) {
     private val key = keyWord
     private val mainText = mainVal
-    fun getTopics(): ArrayList<WordGraph> {
+    fun getTopics(parse: Parser): ArrayList<WordGraph> {
         val toReturn = ArrayList<WordGraph>()
 
-        var graph = key.getKeyWords(mainText)?.get(0)
+        var graph = key.getKeyWords(mainText,parse)?.get(0)
 
         var working = true
         if (graph != null) {
@@ -52,6 +53,6 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
     }
 
     fun getActions() {
-        val graph = key.getKeyWords(mainText)?.get(0)
+        //val graph = key.getKeyWords(mainText)?.get(0)
     }
 }

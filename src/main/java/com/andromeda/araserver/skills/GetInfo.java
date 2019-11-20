@@ -5,6 +5,7 @@ import com.andromeda.araserver.util.OutputModel;
 import com.andromeda.araserver.util.SortWords;
 import com.andromeda.araserver.util.WordGraph;
 import com.google.gson.*;
+import opennlp.tools.parser.Parser;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class GetInfo {
     static String path = "/bing/v7.0/search";
 
 
-    public String main(String mainurl, KeyWord keyWord) {
+    public String main(String mainurl, KeyWord keyWord, Parser parse) {
         //new gson instance
         Gson gson = new Gson();
         //place holder values
@@ -33,7 +34,7 @@ public class GetInfo {
         term = pairs.get(0);
         System.out.println(term);
         //NLP
-        ArrayList<WordGraph> graph = new SortWords(keyWord, "what is the weather in portland oregon ?").getTopics();
+        ArrayList<WordGraph> graph = new SortWords(keyWord, "what is the weather in portland oregon ?").getTopics(parse);
         try {
             outputModels.addAll(searchBing(term));
         } catch (IOException e) {
