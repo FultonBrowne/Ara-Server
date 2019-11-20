@@ -51,22 +51,12 @@ public class Run extends NanoHTTPD {
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream("parse.bin");
-
-
-
-
-
-       ;
         model = new ParserModel(is);
         parser = ParserFactory.create(model);
 
-
-
-
-
                 keyWord = new KeyWord(is);
                 System.out.println("test 1 done");
-                Objects.requireNonNull(keyWord.getKeyWords("What is the weather in south oregon ?", parser))[0].show();
+                keyWord.getKeyWords("What is the weather in south oregon ?", parser)[0].show();
 
                 keyWord.getKeyWords("What is the weather in south atlanta ?", parser)[0].show();
                 System.out.println("done");
