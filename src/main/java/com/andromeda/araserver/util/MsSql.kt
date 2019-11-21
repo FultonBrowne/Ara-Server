@@ -19,6 +19,14 @@ class MsSql {
         var connection: Connection? = null
         val link = "test"
         connection = DriverManager.getConnection(url)
+        val statement = connection.createStatement()
+        val selectSql = ""
+        val resultSet = statement.executeQuery(selectSql)
+        while (resultSet.next())
+        {
+            println(resultSet.getString("link") + " "
+                    + resultSet.getString("hotWord"));
+        }
 
 
         return link
