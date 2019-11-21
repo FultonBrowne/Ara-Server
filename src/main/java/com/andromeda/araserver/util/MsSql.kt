@@ -2,6 +2,7 @@ package com.andromeda.araserver.util
 
 import java.sql.Connection
 import java.sql.DriverManager
+import java.sql.ResultSet
 
 class MsSql {
     private val link = "araresdb.database.windows.net"
@@ -17,7 +18,8 @@ class MsSql {
     fun getSkills(): String {
         var connection: Connection? = null
         val link = "test"
-        connection = DriverManager.getConnection(url);
+        connection = DriverManager.getConnection(url)
+
 
         return link
 
