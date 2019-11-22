@@ -88,13 +88,13 @@ public class Run extends NanoHTTPD {
         String main2 = "err";
         //Functions related to the search api
         //Start API function
-        if (sessionUri.startsWith("/api")) main2 = new ApiStart().apiMain(sessionUri);
+        if (sessionUri.startsWith("/api")) main2 = new ApiStart().apiMain(sessionUri, keyWord, parser);
             //Start the Hello function
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
         else if (sessionUri.startsWith("/yelpclient")) main2 = new Locdec().main(sessionUri);
         else if (sessionUri.startsWith("/weat")) main2 = new Weather().getWeatherNow(sessionUri);
         else if (sessionUri.startsWith("/search")) {
-            main2 = new GetInfo().main(sessionUri, keyWord, parser);
+            main2 = new GetInfo().main(sessionUri);
         } else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
         else if (sessionUri.startsWith("/what")) main2 = new SocialSkills().doYouLike(sessionUri.replace("/what/", ""));
