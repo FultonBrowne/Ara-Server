@@ -21,7 +21,7 @@ class MsSql {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         var connection: Connection? = null
         val phrases = SortWords(keyWord = keyWord, mainVal = phrase).getTopics(parse = parse)
-        val link = "test"
+        var link = "test"
         println(password)
         connection = DriverManager.getConnection(url)
         val statement = connection.createStatement()
@@ -29,8 +29,14 @@ class MsSql {
         val resultSet = statement.executeQuery(selectSql)
         while (resultSet.next())
         {
-            println(resultSet.getString("link") + " "
-                    + resultSet.getString("hotWord"));
+            val dbLink = resultSet.getString("link")
+            val dbWord = resultSet.getString("hotWord")
+            for (i in phrases){
+                if (i.word == dbWord){
+                    link = dbWord
+                    break
+                }
+            }
         }
 
 
