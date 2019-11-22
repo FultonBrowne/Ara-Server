@@ -22,7 +22,7 @@ public class GetInfo {
     static String path = "/bing/v7.0/search";
 
 
-    public String main(String mainurl, KeyWord keyWord, Parser parse) {
+    public String main(String mainurl ) {
         //new gson instance
         Gson gson = new Gson();
         //place holder values
@@ -34,10 +34,9 @@ public class GetInfo {
         term = pairs.get(0);
         System.out.println(term);
         //NLP
-        ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
-        for (int i = 0; i < graph.size(); i++) {
+        //ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
 
-        }
+
         try {
             outputModels.addAll(searchBing(term));
         } catch (IOException e) {

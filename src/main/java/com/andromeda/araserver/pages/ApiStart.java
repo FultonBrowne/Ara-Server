@@ -1,8 +1,11 @@
 package com.andromeda.araserver.pages;
 
+import com.andromeda.araserver.util.KeyWord;
+import com.andromeda.araserver.util.MsSql;
 import com.andromeda.araserver.util.OutputModel;
 import com.andromeda.araserver.util.SqlModel;
 import com.google.gson.Gson;
+import opennlp.tools.parser.Parser;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,12 +25,14 @@ public class ApiStart {
     private String linkval;
 
 
-    public String apiMain(String mainUri) {
+    public String apiMain(String mainUri, KeyWord keyWord, Parser parse) {
         String searchterm = mainUri.replaceFirst("/api/", "");
         outputModels.add(new OutputModel("Blank Input Received", "Please Try Again", "https://github.com/fultonbrowne/ara-android", "", "Error Was Encountered", ""));
+        ArrayList<String> pairs = new ArrayList<>(Arrays.asList(mainUri.split("&")));
+        String term = pairs.get(0);
 
 
-        return ParseApi(searchterm);
+        return new MsSql().getSkills(term, keyWord, parse);//ParseApi(searchterm);
     }
 
     private String ParseApi(String search) {
@@ -128,14 +133,6 @@ public class ApiStart {
         //return the output
         return out;
     }
-
-    /*public void sqladd(Statement stmt, Connection c) throws SQLException {
-        //this is for testing
-        String sql = "INSERT INTO SKILLS(start,endtxt,link) VALUES ('calculate','', 'https://araserver.herokuapp.com/math')";
-        stmt.executeUpdate(sql);
-        c.close();
-    }*/
-
     private static Connection getConnection() throws SQLException {
         //get a SQL connection (Note these creds are for test DB)
         String dbUrl = "jdbc:postgresql://" + "ec2-54-221-214-3.compute-1.amazonaws.com" + ':' + "5432" + "/d40qc3ivndkhlh" + "?ssl=true" + "&sslfactory=org.postgresql.ssl.NonValidatingFactory";
