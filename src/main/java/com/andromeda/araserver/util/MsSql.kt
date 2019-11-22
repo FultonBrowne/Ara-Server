@@ -1,10 +1,8 @@
 package com.andromeda.araserver.util
 
-import opennlp.tools.parser.Parse
 import opennlp.tools.parser.Parser
 import java.sql.Connection
 import java.sql.DriverManager
-import java.sql.ResultSet
 
 class MsSql {
     private val link = "araresdb.database.windows.net"
