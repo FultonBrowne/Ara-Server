@@ -33,7 +33,7 @@ class MsSql {
             val dbWord = resultSet.getString("hotWord")
             for (i in phrases){
                 if (i.word == dbWord){
-                    link = dbWord
+                    link = dbLink
                     break
                 }
             }
