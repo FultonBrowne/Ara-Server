@@ -28,7 +28,7 @@ public class ApiStart {
     public String apiMain(String mainUri, KeyWord keyWord, Parser parse) {
         String searchterm = mainUri.replaceFirst("/api/", "");
         outputModels.add(new OutputModel("Blank Input Received", "Please Try Again", "https://github.com/fultonbrowne/ara-android", "", "Error Was Encountered", ""));
-        ArrayList<String> pairs = new ArrayList<>(Arrays.asList(mainUri.split("&")));
+        ArrayList<String> pairs = new ArrayList<>(Arrays.asList(searchterm.split("&")));
         String term = pairs.get(0);
 
 
