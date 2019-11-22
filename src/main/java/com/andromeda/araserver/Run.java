@@ -50,7 +50,7 @@ public class Run extends NanoHTTPD {
                 "\n" +
                 "    You should have received a copy of the GNU General Public License\n" +
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
-        new MsSql().getSkills();
+        //new MsSql().getSkills();
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream("parse.bin");
         model = new ParserModel(is);

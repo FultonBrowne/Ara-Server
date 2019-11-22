@@ -1,5 +1,7 @@
 package com.andromeda.araserver.util
 
+import opennlp.tools.parser.Parse
+import opennlp.tools.parser.Parser
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.ResultSet
@@ -15,9 +17,10 @@ class MsSql {
         userName,
         password
     )
-    fun getSkills(): String {
+    fun getSkills(phrase:String, keyWord: KeyWord, parse: Parser): String {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         var connection: Connection? = null
+        val phrases = SortWords(keyWord = keyWord, mainVal = phrase).getTopics(parse = parse)
         val link = "test"
         println(password)
         connection = DriverManager.getConnection(url)
