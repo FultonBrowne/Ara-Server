@@ -6,6 +6,7 @@ import com.andromeda.araserver.skills.*;
 import com.andromeda.araserver.pages.ApiStart;
 import com.andromeda.araserver.store.Main;
 import com.andromeda.araserver.util.KeyWord;
+import com.andromeda.araserver.util.MsSql;
 import com.andromeda.araserver.util.SortWords;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
@@ -49,6 +50,7 @@ public class Run extends NanoHTTPD {
                 "\n" +
                 "    You should have received a copy of the GNU General Public License\n" +
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
+        new MsSql().getSkills();
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream("parse.bin");
         model = new ParserModel(is);
