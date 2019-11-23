@@ -57,7 +57,8 @@ public class Run extends NanoHTTPD {
         model = new ParserModel(is);
         parser = ParserFactory.create(model);
         keyWord = new KeyWord(is);
-        //System.out.println(new SortWords(keyWord, "where is a starbucks near me").getTopics(parser));
+        System.out.println(" reeeeesut");
+        System.out.println("                                                "  +new SortWords(keyWord, "where is a starbucks near me").getNNS(parser));
 
     }
     // Static function, to be run on start.

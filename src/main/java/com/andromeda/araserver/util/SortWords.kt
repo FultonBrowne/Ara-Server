@@ -52,11 +52,62 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
     private fun sortForNoun(graph: Parse): ArrayList<WordGraph> {
         val toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
-            print(i.coveredText+ " " + i.type)
             if (i.type == "NN" || i.type == "JJ"|| i.type == "PRP"|| i.type == "IN") {
                 toReturn.add(WordGraph(i.coveredText, i.type))
             }
             if (i.childCount > 0) toReturn.addAll(sortForNoun(i))
+        }
+        return toReturn
+
+    }
+    fun getNNS(parse: Parser): String {
+        var toReturn = "qwertyuio"
+
+        var graph = key.getKeyWords(mainText,parse)?.get(0)
+        graph?.show()
+
+
+        var working = true
+        if (graph != null) {
+            graph.show()
+
+            while (working) {
+                when {
+                    graph?.childCount == 1 -> {
+                        graph = graph.children?.get(0)
+                    }
+                    graph?.childCount == 0 -> {
+                        working = false
+                    }
+                    else -> {
+                        if (graph != null) {
+                            val toTest = sortForNNS(graph)
+                            if(toTest != "")toReturn = toTest
+                        }
+                        working = false
+                    }
+
+                }
+            }
+        } else {
+            print("null")
+            println("fail")
+        }
+        return toReturn
+
+
+    }
+
+    private fun sortForNNS(graph: Parse): String {
+        var toReturn = ""
+        for (i in graph.children!!) {
+            print(i.coveredText+ " " + i.type)
+            if (i.type == "NNS" ) {
+                toReturn = i.coveredText
+            }
+            if (i.childCount > 0){ val toTest = sortForNNS(i)
+                if(toTest != "")toReturn = toTest
+            }
         }
         return toReturn
 
