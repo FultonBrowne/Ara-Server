@@ -3,18 +3,24 @@ package com.andromeda.araserver.util
 import opennlp.tools.parser.Parse
 import opennlp.tools.parser.Parser
 import java.util.ArrayList
+import kotlin.AssertionError as AssertionError1
 
 class SortWords(keyWord: KeyWord, mainVal: String) {
+
     private val key = keyWord
     private val mainText = mainVal
     fun getTopics(parse: Parser): ArrayList<WordGraph> {
+        System.out.println("go")
         val toReturn = ArrayList<WordGraph>()
+        print("start")
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
+        graph?.show()
 
 
         var working = true
         if (graph != null) {
+            print("not null")
             graph.show()
 
             while (working) {
@@ -35,6 +41,7 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
                 }
             }
         } else {
+            print("null")
             println("fail")
         }
         return toReturn

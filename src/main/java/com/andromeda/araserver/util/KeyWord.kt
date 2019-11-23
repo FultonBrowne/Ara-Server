@@ -16,14 +16,6 @@ class KeyWord(var parseIS:InputStream) {
 
         return ParserTool.parseLine(mainVal, parser, 1)
     }
-    companion object go{
-        fun go(k: KeyWord): Parser? {
-            val is1 = k.parseIS
-        val m =ParserModel(is1)
-            return ParserFactory.create(m)
-        }
-
-    }
 
 
     }

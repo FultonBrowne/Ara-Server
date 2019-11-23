@@ -19,7 +19,7 @@ class MsSql {
     fun getSkills(phrase:String,fullDir:String, keyWord: KeyWord, parse: Parser): String {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         var connection: Connection? = null
-        val phrases = SortWords(keyWord = keyWord, mainVal = phrase).getTopics(parse = parse)
+        val phrases = SortWords(keyWord,phrase).getTopics(parse)
         println(phrases.size)
         var link = "test"
         println(password)
@@ -29,6 +29,7 @@ class MsSql {
         val resultSet = statement.executeQuery(selectSql)
         while (resultSet.next())
         {
+            print("test")
             val dbLink = resultSet.getString("link")
             val dbWord = resultSet.getString("hotWord")
             for (i in phrases){

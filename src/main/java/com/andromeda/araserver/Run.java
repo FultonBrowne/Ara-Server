@@ -53,9 +53,11 @@ public class Run extends NanoHTTPD {
         //new MsSql().getSkills();
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         InputStream is = classloader.getResourceAsStream("parse.bin");
+        assert is != null;
         model = new ParserModel(is);
         parser = ParserFactory.create(model);
         keyWord = new KeyWord(is);
+        //System.out.println(new SortWords(keyWord, "where is a starbucks near me").getTopics(parser));
 
     }
     // Static function, to be run on start.
