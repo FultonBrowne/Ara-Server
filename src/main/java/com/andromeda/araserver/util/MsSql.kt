@@ -16,7 +16,7 @@ class MsSql {
         userName,
         password
     )
-    fun getSkills(phrase:String, keyWord: KeyWord, parse: Parser): String {
+    fun getSkills(phrase:String,fullDir:String, keyWord: KeyWord, parse: Parser): String {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         var connection: Connection? = null
         val phrases = SortWords(keyWord = keyWord, mainVal = phrase).getTopics(parse = parse)
@@ -43,7 +43,7 @@ class MsSql {
         }
 
 
-        return URL(link).readText()
+        return URL("$link/$fullDir".replace(" ", "%20")).readText()
 
     }
 }

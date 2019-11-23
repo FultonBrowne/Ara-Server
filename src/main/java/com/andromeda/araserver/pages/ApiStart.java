@@ -32,7 +32,7 @@ public class ApiStart {
         String term = pairs.get(0);
 
 
-        return new MsSql().getSkills(term, keyWord, parse);//ParseApi(searchterm);
+        return new MsSql().getSkills(term, searchterm, keyWord, parse);//ParseApi(searchterm);
     }
 
     private String ParseApi(String search) {
