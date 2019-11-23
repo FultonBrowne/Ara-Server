@@ -1,6 +1,7 @@
 package com.andromeda.araserver.util
 
 import opennlp.tools.parser.Parser
+import java.net.URL
 import java.sql.Connection
 import java.sql.DriverManager
 
@@ -42,7 +43,7 @@ class MsSql {
         }
 
 
-        return link
+        return URL(link).readText()
 
     }
 }
