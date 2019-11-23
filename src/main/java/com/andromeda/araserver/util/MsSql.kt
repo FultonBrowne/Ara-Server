@@ -29,8 +29,12 @@ class MsSql {
         {
             val dbLink = resultSet.getString("link")
             val dbWord = resultSet.getString("hotWord")
+            println(dbWord)
             for (i in phrases){
-                if (i.word == dbWord){
+                println("db word is $dbWord")
+                println("word is "+i.word)
+                if (i.word.startsWith(dbWord.replace(" ", ""))){
+                    print("is true")
                     link = dbLink
                     break
                 }
