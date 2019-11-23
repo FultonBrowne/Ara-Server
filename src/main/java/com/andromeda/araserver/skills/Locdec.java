@@ -1,10 +1,14 @@
 package com.andromeda.araserver.skills;
 
+import com.andromeda.araserver.util.KeyWord;
 import com.andromeda.araserver.util.OutputModel;
+import com.andromeda.araserver.util.SortWords;
 import com.google.gson.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import opennlp.tools.parser.Parse;
+import opennlp.tools.parser.Parser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +20,7 @@ public class Locdec {
     private String lat;
     private String term;
 
-    public String main(String search) {
+    public String main(String search, KeyWord keyWord, Parser parser) {
         //get api params
         ArrayList<String> pairs = new ArrayList<>(Arrays.asList(search.split("&")));
         //Finish the job an get the raw values
@@ -27,6 +31,8 @@ public class Locdec {
                 lat = pair.replace("lat=", "");
             } else term = pair.replace("/yelpclient/", "");
         }
+        term = new SortWords(keyWord, term).getNNS(parser);
+        System.out.println(term);
         //return new gson value from the yelpsearch() function
         return new Gson().toJson(yelpSearch());
     }
