@@ -12,8 +12,10 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
 
+
         var working = true
         if (graph != null) {
+            graph.show()
 
             while (working) {
                 when {
@@ -43,6 +45,7 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
     private fun sortForNoun(graph: Parse): ArrayList<WordGraph> {
         val toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
+            print(i.coveredText+ " " + i.type)
             if (i.type == "NN" || i.type == "JJ") {
                 toReturn.add(WordGraph(i.coveredText, i.type))
             }
