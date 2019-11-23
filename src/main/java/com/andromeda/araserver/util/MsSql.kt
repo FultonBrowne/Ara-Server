@@ -42,7 +42,7 @@ class MsSql {
         }
 
 
-        return URL("$link/$fullDir".replace(" ", "%20")).readText()
+        return URL(link.replace(" ", "") + "/" +fullDir.replace(" ", "%20")).readText()
 
     }
 }

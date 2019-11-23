@@ -53,7 +53,7 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         val toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
             print(i.coveredText+ " " + i.type)
-            if (i.type == "NN" || i.type == "JJ") {
+            if (i.type == "NN" || i.type == "JJ"|| i.type == "PRP"|| i.type == "IN") {
                 toReturn.add(WordGraph(i.coveredText, i.type))
             }
             if (i.childCount > 0) toReturn.addAll(sortForNoun(i))
