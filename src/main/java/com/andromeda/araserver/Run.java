@@ -58,7 +58,7 @@ public class Run extends NanoHTTPD {
         parser = ParserFactory.create(model);
         keyWord = new KeyWord(is);
         System.out.println(" reeeeesut");
-        System.out.println("                                                "  +new SortWords(keyWord, "where is a starbucks near me").getNNS(parser));
+
 
     }
     // Static function, to be run on start.
@@ -81,6 +81,7 @@ public class Run extends NanoHTTPD {
     @Override
     //If connected to
     public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
+
         //RSS feed type, if any
         int tag;
         //URI passed from client
@@ -95,7 +96,7 @@ public class Run extends NanoHTTPD {
             //Start the Hello function
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
         else if (sessionUri.startsWith("/yelpclient")) main2 = new Locdec().main(sessionUri, keyWord, parser);
-        else if (sessionUri.startsWith("/weat")) main2 = new Weather().getWeatherNow(sessionUri);
+        else if (sessionUri.startsWith("/weath")) main2 = new Weather().getWeatherNow(sessionUri);
         else if (sessionUri.startsWith("/search")) {
             main2 = new GetInfo().main(sessionUri);
         } else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);

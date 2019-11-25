@@ -20,22 +20,19 @@ class Weather {
             when {
                 pair.startsWith("log") -> log = pair.replace("log=", "")
                 pair.startsWith("lat") -> lat = pair.replace("lat=", "")
-                else -> term = pair.replace("/yelpclient/", "")
+                else -> term = pair.replace("/weath/", "")
             }
         }
-        val urlGrid = URL("https://api.weather.gov/points/$lat,$log")
-        val urlGridData = urlGrid.readText()
-        var json = JsonParser().parse(urlGridData)
-        val links = URL(json.asJsonObject.getAsJsonObject("properties").get("forecast").asString)
-        val finalData = links.readText()
-        json = JsonParser().parse(finalData)
-        val dataSet = json.asJsonObject.getAsJsonObject("properties").getAsJsonArray("periods")
-        val temp = dataSet[0].asJsonObject.get("temperature").asInt.toString()
-        val foreCast = dataSet[0].asJsonObject.get("shortForecast").asString
-        val full = dataSet[0].asJsonObject.get("detailedForecast").asString
+        val urlGrid = URL("https://api.darksky.net/forecast/7b7fd158d8733db19ddac66bb71132b2/$lat,$log")
+        println(urlGrid.toString())
+        val finalData = urlGrid.readText()
+        val json = JsonParser().parse(finalData)
+        val dataSet = json.asJsonObject.getAsJsonObject("currently")
+        val temp = dataSet.asJsonObject.get("temperature").asInt.toString()
+        val foreCast = dataSet.asJsonObject.get("summary").asString
         val title = "$temp and $foreCast"
 
-        val toReturn = OutputModel(title,full, "", "", full, "");
+        val toReturn = OutputModel(title,"", "", "", title, "");
         return Gson().toJson(toReturn)
 
 
