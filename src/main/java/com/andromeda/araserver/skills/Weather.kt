@@ -37,12 +37,28 @@ class Weather {
 
 
     }
-    fun getCloudCover(num: Double): String {
-        return when {
-            num < 0.30 -> "sunny"
-            num > 0.80 -> "mostly cloudy"
-            else -> "partly cloudy"
+    fun mainPart(url: String){
+        val pairs =
+            ArrayList(listOf(*url.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
+        //Finish the job an get the raw values
+        for (pair in pairs) {
+            when {
+                pair.startsWith("log") -> log = pair.replace("log=", "")
+                pair.startsWith("lat") -> lat = pair.replace("lat=", "")
+                else -> term = pair.replace("/weath/", "")
+
+            }
         }
 
+    }
+    fun getTime(term:String){
+
+    }
+    fun getLocation(){
+
+    }
+
+    companion object {
+        const val NOW = 0
     }
 }
