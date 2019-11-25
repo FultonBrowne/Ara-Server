@@ -58,7 +58,7 @@ public class Run extends NanoHTTPD {
         parser = ParserFactory.create(model);
         keyWord = new KeyWord(is);
         System.out.println(" reeeeesut");
-        System.out.println(new SortWords(keyWord, "weather in portland oregon").getNNS(parser));
+        System.out.println(new SortWords(keyWord, "weather in portland oregon").getTopicsPhrase(parser));
 
     }
     // Static function, to be run on start.

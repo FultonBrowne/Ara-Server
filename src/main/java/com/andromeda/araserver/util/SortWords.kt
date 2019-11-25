@@ -149,14 +149,15 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
 
     }
 
-    private fun sortForTopics(graph: Parse): String {
+    fun sortForTopics(graph: Parse): String {
+        println("start")
         var toReturn = ""
         for (i in graph.children!!) {
             print(i.coveredText+ " " + i.type)
             if (i.type == "NP" && i.parent.type == "PP" ) {
                 toReturn = i.coveredText
             }
-            if (i.childCount > 0){ val toTest = sortForNNS(i)
+            if (i.childCount > 0){ val toTest = sortForTopics(i)
                 if(toTest != "")toReturn = toTest
             }
         }
