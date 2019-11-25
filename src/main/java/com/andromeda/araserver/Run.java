@@ -58,7 +58,7 @@ public class Run extends NanoHTTPD {
         parser = ParserFactory.create(model);
         keyWord = new KeyWord(is);
         System.out.println(" reeeeesut");
-
+        System.out.println(new SortWords(keyWord, "weather in portland oregon").getNNS(parser));
 
     }
     // Static function, to be run on start.
@@ -81,7 +81,6 @@ public class Run extends NanoHTTPD {
     @Override
     //If connected to
     public NanoHTTPD.Response serve(NanoHTTPD.IHTTPSession session) {
-
         //RSS feed type, if any
         int tag;
         //URI passed from client
