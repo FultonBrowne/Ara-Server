@@ -40,4 +40,12 @@ class Weather {
 
 
     }
+    fun getCloudCover(num: Double): String {
+        return when {
+            num < 0.30 -> "sunny"
+            num > 0.80 -> "mostly cloudy"
+            else -> "partly cloudy"
+        }
+
+    }
 }
