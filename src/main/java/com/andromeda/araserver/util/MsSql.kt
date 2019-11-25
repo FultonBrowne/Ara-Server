@@ -21,7 +21,7 @@ class MsSql {
         var connection: Connection? = null
         val phrases = SortWords(keyWord,phrase).getTopics(parse)
         println(phrases.size)
-        var link = "test"
+        var link = ""
         println(password)
         connection = DriverManager.getConnection(url)
         val statement = connection.createStatement()
@@ -40,6 +40,7 @@ class MsSql {
                 }
             }
         }
+        if (link == "") link = "https://araserver.herokuapp.com/searcht"
 
 
         return URL(link.replace(" ", "") + "/" +fullDir.replace(" ", "%20")).readText()
