@@ -112,8 +112,54 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         return toReturn
 
     }
+    fun getTopicsPhrase(parse: Parser): String {
+        var toReturn = "qwertyuio"
 
-    fun getActions() {
-        //val graph = key.getKeyWords(mainText)?.get(0)
+        var graph = key.getKeyWords(mainText,parse)?.get(0)
+        graph?.show()
+
+
+        var working = true
+        if (graph != null) {
+            graph.show()
+
+            while (working) {
+                when {
+                    graph?.childCount == 1 -> {
+                        graph = graph.children?.get(0)
+                    }
+                    graph?.childCount == 0 -> {
+                        working = false
+                    }
+                    else -> {
+                        if (graph != null) {
+                            val toTest = sortForTopics(graph)
+                            if(toTest != "")toReturn = toTest
+                        }
+                        working = false
+                    }
+
+                }
+            }
+        } else {
+            print("null")
+            println("fail")
+        }
+        return toReturn
+
+    }
+
+    private fun sortForTopics(graph: Parse): String {
+        var toReturn = ""
+        for (i in graph.children!!) {
+            print(i.coveredText+ " " + i.type)
+            if (i.type == "NP" && i.parent.type == "PP" ) {
+                toReturn = i.coveredText
+            }
+            if (i.childCount > 0){ val toTest = sortForNNS(i)
+                if(toTest != "")toReturn = toTest
+            }
+        }
+        return toReturn
     }
 }
