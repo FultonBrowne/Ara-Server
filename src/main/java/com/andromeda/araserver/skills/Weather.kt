@@ -40,7 +40,7 @@ class Weather {
 
 
     }
-    fun mainPart(url: String){
+    fun mainPart(url: String, key: KeyWord, parse: Parser){
         val pairs =
             ArrayList(listOf(*url.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
         //Finish the job an get the raw values
@@ -52,10 +52,13 @@ class Weather {
 
             }
         }
+       val loc = term?.let { getTime(it, key, parse) }
+
 
     }
-    fun getTime(term:String, key:KeyWord, parse:Parser){
+    fun getTime(term:String, key:KeyWord, parse:Parser): String {
         val toSort = SortWords(key, term).getTopicsPhrase(parse)
+        return ""
 
     }
     fun getLocation(){

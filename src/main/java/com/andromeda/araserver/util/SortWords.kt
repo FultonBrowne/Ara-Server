@@ -64,7 +64,6 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         var toReturn = "qwertyuio"
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
-        graph?.show()
 
 
         var working = true
@@ -101,7 +100,6 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
     private fun sortForNNS(graph: Parse): String {
         var toReturn = ""
         for (i in graph.children!!) {
-            print(i.coveredText+ " " + i.type)
             if (i.type == "NNS" ) {
                 toReturn = i.coveredText
             }
