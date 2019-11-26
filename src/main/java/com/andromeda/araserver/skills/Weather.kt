@@ -1,8 +1,11 @@
 package com.andromeda.araserver.skills
 
+import com.andromeda.araserver.util.KeyWord
 import com.andromeda.araserver.util.OutputModel
+import com.andromeda.araserver.util.SortWords
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import opennlp.tools.parser.Parser
 import java.net.URL
 import java.util.*
 
@@ -51,7 +54,8 @@ class Weather {
         }
 
     }
-    fun getTime(term:String){
+    fun getTime(term:String, key:KeyWord, parse:Parser){
+        val toSort = SortWords(key, term).getTopicsPhrase(parse)
 
     }
     fun getLocation(){
