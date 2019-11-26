@@ -112,8 +112,8 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         return toReturn
 
     }
-    fun getTopicsPhrase(parse: Parser): String {
-        var toReturn = "qwertyuio"
+    fun getTopicsPhrase(parse: Parser): ArrayList<WordGraph> {
+        var toReturn = ArrayList<WordGraph>()
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
         graph?.show()
@@ -134,7 +134,7 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
                     else -> {
                         if (graph != null) {
                             val toTest = sortForTopics(graph)
-                            if(toTest != "")toReturn = toTest
+                            toReturn.addAll(toTest)
                         }
                         working = false
                     }
@@ -149,18 +149,18 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
 
     }
 
-    fun sortForTopics(graph: Parse): String {
+    fun sortForTopics(graph: Parse): ArrayList<WordGraph> {
         println("start")
-        var toReturn = ""
+        var toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
             print(i.coveredText+ " " + i.type)
             if (i.type == "NP" && i.parent.type == "PP" ) {
-                toReturn = i.coveredText
+                toReturn.add(WordGraph(i.coveredText, i.type))
             }
-            if (i.childCount > 0){ val toTest = sortForTopics(i)
-                if(toTest != "")toReturn = toTest
+            if (i.childCount > 0) toReturn.addAll(sortForNoun(i))
             }
-        }
         return toReturn
-    }
+        }
+
+
 }
