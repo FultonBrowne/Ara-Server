@@ -52,16 +52,13 @@ class Weather {
 
             }
         }
-       val loc = term?.let { getTime(it, key, parse) }
+       val loc = term?.let { getLocAndTime(it, key, parse) }
 
 
     }
-    fun getTime(term:String, key:KeyWord, parse:Parser): String {
+    fun getLocAndTime(term:String, key:KeyWord, parse:Parser): String {
         val toSort = SortWords(key, term).getTopicsPhrase(parse)
         return ""
-
-    }
-    fun getLocation(){
 
     }
 
