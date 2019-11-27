@@ -68,6 +68,14 @@ class Weather {
                 break
             }
         }
+        var text = ""
+        for (i in toSort){
+            if (i.type == "NN" && i.word != time){
+                text += i.word
+            }
+        }
+        val urlSearch = URL("https://atlas.microsoft.com/search/address/json?subscription-key=fB86F9IVmt2S20DMe5rlo3kJOpNkaUp1Py5txnPQt-I&api-version=1.0&query=$text")
+        val jsonRawText = urlSearch.readText()
         return ""
 
     }
