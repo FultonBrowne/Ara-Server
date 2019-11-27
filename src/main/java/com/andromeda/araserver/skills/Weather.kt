@@ -59,7 +59,15 @@ class Weather {
     fun getLocAndTime(term:String, key:KeyWord, parse:Parser): String {
         val toSort = SortWords(key, term).getTopicsPhrase(parse)
         val dateArray =ArrayList<String>()
+        var time = ""
         dateArray.add( "tomorrow")
+        //work on this
+        for (i in dateArray){
+            for (i2 in toSort){
+                if (i == i2.word) time = i2.word
+                break
+            }
+        }
         return ""
 
     }
