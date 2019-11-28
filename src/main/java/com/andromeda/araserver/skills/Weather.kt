@@ -1,6 +1,7 @@
 package com.andromeda.araserver.skills
 
 import com.andromeda.araserver.util.KeyWord
+import com.andromeda.araserver.util.LocLatTime
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.SortWords
 import com.google.gson.Gson
@@ -52,12 +53,31 @@ class Weather {
 
             }
         }
+        try {
        val loc = term?.let { getLocAndTime(it, key, parse) }
-        return loc
+            if (loc != null) {
+                log = loc.loc
+                lat = loc.lat
+            }
+        }
+        catch (e:Exception){
+            e.printStackTrace()
+        }
+        val urlGrid = URL("https://api.darksky.net/forecast/7b7fd158d8733db19ddac66bb71132b2/$lat,$log")
+        println(urlGrid.toString())
+        val finalData = urlGrid.readText()
+        val json = JsonParser().parse(finalData)
+        val dataSet = json.asJsonObject.getAsJsonObject("currently")
+        val temp = dataSet.asJsonObject.get("temperature").asInt.toString()
+        val foreCast = dataSet.asJsonObject.get("summary").asString
+        val title = "$temp and $foreCast"
+
+        val toReturn = OutputModel(title,"", "", "", title, "");
+        return Gson().toJson(toReturn)
 
 
     }
-    fun getLocAndTime(term:String, key:KeyWord, parse:Parser): String {
+    fun getLocAndTime(term:String, key:KeyWord, parse:Parser): LocLatTime {
         println("Start NLP pls")
         val toSort = SortWords(key, term).getTopicsPhrase(parse)
         val dateArray =ArrayList<String>()
@@ -82,7 +102,11 @@ class Weather {
         val jArray = JsonParser().parse(jsonRawText).asJsonObject.getAsJsonArray("results")
         val lat = jArray[0].asJsonObject.getAsJsonObject("position").get("lat").asString
         val log = jArray[0].asJsonObject.getAsJsonObject("position").get("lon").asString
-        return "hello 2"
+        return LocLatTime(log, lat, dateWord(time))
 
+    }
+    fun dateWord(mainVal:String): Int {
+        println(mainVal)
+        return 0
     }
 }
