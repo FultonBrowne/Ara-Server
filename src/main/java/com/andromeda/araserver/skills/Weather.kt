@@ -40,7 +40,7 @@ class Weather {
 
 
     }
-    fun mainPart(url: String, key: KeyWord, parse: Parser){
+    fun mainPart(url: String, key: KeyWord, parse: Parser): String? {
         val pairs =
             ArrayList(listOf(*url.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
         //Finish the job an get the raw values
@@ -53,35 +53,36 @@ class Weather {
             }
         }
        val loc = term?.let { getLocAndTime(it, key, parse) }
+        return loc
 
 
     }
     fun getLocAndTime(term:String, key:KeyWord, parse:Parser): String {
+        println("Start NLP pls")
         val toSort = SortWords(key, term).getTopicsPhrase(parse)
         val dateArray =ArrayList<String>()
-        var time = ""
+        var time = "123456789"
         dateArray.add( "tomorrow")
         //work on this
         for (i in dateArray){
             for (i2 in toSort){
                 if (i == i2.word) time = i2.word
-                break
+
             }
         }
+        println(time)
         var text = ""
         for (i in toSort){
-            if (i.type == "NN" && i.word != time){
-                text += i.word
+            if (i.type == "NN" && i.word != time && i.word != "weather"){
+                text += i.word + "%20"
             }
         }
         val urlSearch = URL("https://atlas.microsoft.com/search/address/json?subscription-key=fB86F9IVmt2S20DMe5rlo3kJOpNkaUp1Py5txnPQt-I&api-version=1.0&query=$text")
         val jsonRawText = urlSearch.readText()
         val jArray = JsonParser().parse(jsonRawText).asJsonObject.getAsJsonArray("results")
-        return ""
+        val lat = jArray[0].asJsonObject.getAsJsonObject("position").get("lat").asString
+        val log = jArray[0].asJsonObject.getAsJsonObject("position").get("lon").asString
+        return "hello 2"
 
-    }
-
-    companion object {
-        const val NOW = 0
     }
 }
