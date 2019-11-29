@@ -66,6 +66,7 @@ class Weather {
         val urlGrid = URL("https://api.darksky.net/forecast/7b7fd158d8733db19ddac66bb71132b2/$lat,$log")
         println(urlGrid.toString())
         val finalData = urlGrid.readText()
+        println(finalData)
         val json = JsonParser().parse(finalData)
         val dataSet = json.asJsonObject.getAsJsonObject("currently")
         val temp = dataSet.asJsonObject.get("temperature").asInt.toString()
@@ -83,6 +84,7 @@ class Weather {
         val dateArray =ArrayList<String>()
         var time = "123456789"
         dateArray.add( "tomorrow")
+        dateArray.add("monday")
         //work on this
         for (i in dateArray){
             for (i2 in toSort){
@@ -102,11 +104,12 @@ class Weather {
         val jArray = JsonParser().parse(jsonRawText).asJsonObject.getAsJsonArray("results")
         val lat = jArray[0].asJsonObject.getAsJsonObject("position").get("lat").asString
         val log = jArray[0].asJsonObject.getAsJsonObject("position").get("lon").asString
-        return LocLatTime(log, lat, dateWord(time))
+        return LocLatTime(log, lat, dateWord(time, log, lat))
 
     }
-    fun dateWord(mainVal:String): Int {
-        println(mainVal)
+    fun dateWord(mainVal:String,log:String, lat:String): Int {
+        val url = URL("http://api.timezonedb.com/v2.1/get-time-zone?key=54K85TD0SUQQ&format=json&by=position&lat=$lat&lng=$log")
+        val rawJson = url.readText()
         return 0
     }
 }
