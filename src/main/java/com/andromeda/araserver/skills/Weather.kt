@@ -2,6 +2,7 @@ package com.andromeda.araserver.skills
 
 import com.andromeda.araserver.util.*
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import opennlp.tools.parser.Parser
 import java.net.URL
@@ -12,32 +13,7 @@ class Weather {
     private var log: String? = null
     private var lat: String? = null
     private var term: String? = null
-    fun getWeatherNow(url: String): String {
-        //get api params
-        val pairs =
-            ArrayList(listOf(*url.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
-        //Finish the job an get the raw values
-        for (pair in pairs) {
-            when {
-                pair.startsWith("log") -> log = pair.replace("log=", "")
-                pair.startsWith("lat") -> lat = pair.replace("lat=", "")
-                else -> term = pair.replace("/weath/", "")
-            }
-        }
-        val urlGrid = URL("https://api.darksky.net/forecast/7b7fd158d8733db19ddac66bb71132b2/$lat,$log")
-        println(urlGrid.toString())
-        val finalData = urlGrid.readText()
-        val json = JsonParser().parse(finalData)
-        val dataSet = json.asJsonObject.getAsJsonObject("currently")
-        val temp = dataSet.asJsonObject.get("temperature").asInt.toString()
-        val foreCast = dataSet.asJsonObject.get("summary").asString
-        val title = "$temp and $foreCast"
-
-        val toReturn = OutputModel(title, "", "", "", title, "");
-        return Gson().toJson(toReturn)
-
-
-    }
+    private var time: Int? = null
 
     fun mainPart(url: String, key: KeyWord, parse: Parser): String? {
         val pairs =
@@ -56,6 +32,7 @@ class Weather {
             if (loc != null) {
                 log = loc.loc
                 lat = loc.lat
+                time = loc.time
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -65,15 +42,24 @@ class Weather {
         val finalData = urlGrid.readText()
         println(finalData)
         val json = JsonParser().parse(finalData)
-        val dataSet = json.asJsonObject.getAsJsonObject("currently")
-        val temp = dataSet.asJsonObject.get("temperature").asInt.toString()
+        if (time == null || time == 0) return finishUp(json.asJsonObject.getAsJsonObject("currently"))
+        else return finishUp(json.asJsonObject.getAsJsonObject("daily").getAsJsonArray("data")[time!!].asJsonObject)
+    }
+    fun finishUp(dataSet: JsonObject): String? {
+        println("test 2")
+        val temp:String?
+        temp = try {
+            dataSet.asJsonObject.get("temperature").asInt.toString()
+        } catch (e:Exception){
+            dataSet.asJsonObject.get("temperatureHigh").asInt.toString()
+        }
+
+
         val foreCast = dataSet.asJsonObject.get("summary").asString
         val title = "$temp and $foreCast"
 
         val toReturn = OutputModel(title, "", "", "", title, "");
         return Gson().toJson(toReturn)
-
-
     }
 
     private fun getLocAndTime(term: String, key: KeyWord, parse: Parser): LocLatTime {
@@ -141,7 +127,7 @@ class Weather {
         else returnVal = timeMap(timeWord)?.let { getTime(dayOfWeek, it) }!!
         println("num is $returnVal")
 
-            return returnVal
+        return returnVal
     }
 
     private fun timeMap(mainVal: String): Int? {
@@ -157,7 +143,8 @@ class Weather {
         return mainMap[mainVal]
 
     }
-    private fun getTime(currentTime:Int, nextTime:Int): Int {
+
+    private fun getTime(currentTime: Int, nextTime: Int): Int {
         val firstResult = nextTime - currentTime
         return if (firstResult <= 0) firstResult + 7
         else firstResult
