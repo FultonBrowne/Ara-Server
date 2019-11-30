@@ -159,6 +159,64 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
             }
         return toReturn
         }
+    fun getComplexDate(parse: Parser): ArrayList<WordGraph> {
+        var toReturn = ArrayList<WordGraph>()
+
+        var graph = key.getKeyWords(mainText,parse)?.get(0)
+        graph?.show()
+
+
+        var working = true
+        if (graph != null) {
+            graph.show()
+
+            while (working) {
+                when {
+                    graph?.childCount == 1 -> {
+                        graph = graph.children?.get(0)
+                    }
+                    graph?.childCount == 0 -> {
+                        working = false
+                    }
+                    else -> {
+                        if (graph != null) {
+                            val toTest = sortForComplexDate(graph)
+                            toReturn.addAll(toTest)
+                        }
+                        working = false
+                    }
+
+                }
+            }
+        } else {
+            print("null")
+            println("fail")
+        }
+        return toReturn
+    }
+    private fun sortForComplexDate(graph: Parse): ArrayList<WordGraph> {
+        println("start")
+        var toReturn = ArrayList<WordGraph>()
+        for (i in graph.children!!) {
+            print(i.coveredText+ " " + i.type)
+            if (i.type == "NP" && i.parent.type == "PP" &&  sorter(i, "CD")) {
+                toReturn.add(WordGraph(i.coveredText, i.type))
+            }
+            if (i.childCount > 0) toReturn.addAll(sortForComplexDate(i))
+        }
+        return toReturn
+    }
+    private fun sorter(graph: Parse, type:String): Boolean {
+        var toReturn = false
+        for (i in graph.children){
+            if (i.type == type){
+                toReturn = true
+            }
+            else if (i.childCount > 0) toReturn = sorter(graph, type)
+        }
+        return toReturn
+
+    }
 
 
 }

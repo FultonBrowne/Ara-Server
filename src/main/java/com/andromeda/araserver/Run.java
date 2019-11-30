@@ -6,7 +6,6 @@ import com.andromeda.araserver.skills.*;
 import com.andromeda.araserver.pages.ApiStart;
 import com.andromeda.araserver.store.Main;
 import com.andromeda.araserver.util.KeyWord;
-import com.andromeda.araserver.util.MsSql;
 import com.andromeda.araserver.util.SortWords;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.FeedException;
@@ -16,19 +15,17 @@ import opennlp.tools.parser.Parser;
 import opennlp.tools.parser.ParserFactory;
 import opennlp.tools.parser.ParserModel;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
+
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.Objects;
+
 
 
 public class Run extends NanoHTTPD {
     KeyWord keyWord;
-    ParserModel model = null;
-    Parser parser = null;
+    ParserModel model;
+    Parser parser;
 
 
     //Function to declare port
@@ -58,7 +55,7 @@ public class Run extends NanoHTTPD {
         parser = ParserFactory.create(model);
         keyWord = new KeyWord(is);
         System.out.println(" reeeeesut");
-        System.out.println(new SortWords(keyWord, "weather in portland oregon tomorrow").getTopicsPhrase(parser));
+        System.out.println(new SortWords(keyWord, "weather in portland oregon in two days").getComplexDate(parser));
 
     }
     // Static function, to be run on start.
