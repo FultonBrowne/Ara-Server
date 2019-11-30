@@ -83,6 +83,12 @@ class Weather {
         var time = ""
         dateArray.add("tomorrow")
         dateArray.add("monday")
+        dateArray.add("sunday")
+        dateArray.add("tuesday")
+        dateArray.add("saturday")
+        dateArray.add("wednesday")
+        dateArray.add("thursday")
+        dateArray.add("friday")
         //work on this
         for (i in dateArray) {
             for (i2 in toSort) {
@@ -133,6 +139,7 @@ class Weather {
         if (timeWord == "" && timeWord != "tomorrow") phrase.addAll(SortWords(key, mainVal).getComplexDate(parse))
         else if (timeWord == "tomorrow") returnVal = 1
         else returnVal = timeMap(timeWord)?.let { getTime(dayOfWeek, it) }!!
+        println("num is $returnVal")
 
             return returnVal
     }
@@ -151,7 +158,7 @@ class Weather {
 
     }
     private fun getTime(currentTime:Int, nextTime:Int): Int {
-        val firstResult = currentTime - nextTime
+        val firstResult = nextTime - currentTime
         return if (firstResult <= 0) firstResult + 7
         else firstResult
     }

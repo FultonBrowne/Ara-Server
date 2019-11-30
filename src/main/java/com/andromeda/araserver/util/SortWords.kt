@@ -145,10 +145,8 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
     }
 
     fun sortForTopics(graph: Parse): ArrayList<WordGraph> {
-        println("start")
         var toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
-            print(i.coveredText+ " " + i.type)
             if (i.type == "NP" && i.parent.type == "PP" ) {
                 toReturn.add(WordGraph(i.coveredText, i.type))
             }
@@ -192,7 +190,6 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
     private fun sortForComplexDate(graph: Parse): ArrayList<WordGraph> {
         var toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
-            println(i.coveredText+ " " + i.type)
             if (i.type == "NP" && i.parent.type == "PP" &&  sorter(i, "CD")) {
                 toReturn.addAll(sortForAll(i))
             }
