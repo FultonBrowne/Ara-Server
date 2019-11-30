@@ -108,12 +108,14 @@ class Weather {
         return LocLatTime(log, lat, dateWord(time, log, lat))
 
     }
-    fun dateWord(mainVal:String,log:String, lat:String): Int {
+    private fun dateWord(mainVal:String, log:String, lat:String): Int {
         val url = URL("http://api.timezonedb.com/v2.1/get-time-zone?key=54K85TD0SUQQ&format=json&by=position&lat=$lat&lng=$log")
         val rawJson = url.readText()
-        print(rawJson)
-         val time = JsonParser().parse(rawJson).asJsonObject.get("timestamp").asInt
+         val time = JsonParser().parse(rawJson).asJsonObject.get("timestamp").asLong
         println(time)
+        val date = Date(time * 1000)
+        println(date)
+
         return 0
     }
 }
