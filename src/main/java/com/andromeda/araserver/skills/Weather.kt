@@ -104,12 +104,16 @@ class Weather {
         val jArray = JsonParser().parse(jsonRawText).asJsonObject.getAsJsonArray("results")
         val lat = jArray[0].asJsonObject.getAsJsonObject("position").get("lat").asString
         val log = jArray[0].asJsonObject.getAsJsonObject("position").get("lon").asString
+        dateWord(time, log, lat)
         return LocLatTime(log, lat, dateWord(time, log, lat))
 
     }
     fun dateWord(mainVal:String,log:String, lat:String): Int {
         val url = URL("http://api.timezonedb.com/v2.1/get-time-zone?key=54K85TD0SUQQ&format=json&by=position&lat=$lat&lng=$log")
         val rawJson = url.readText()
+        print(rawJson)
+         val time = JsonParser().parse(rawJson).asJsonObject.get("timestamp").asInt
+        println(time)
         return 0
     }
 }
