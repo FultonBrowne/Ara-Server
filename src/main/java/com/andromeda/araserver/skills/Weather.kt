@@ -6,6 +6,7 @@ import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.SortWords
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import opennlp.tools.parser.Parse
 import opennlp.tools.parser.Parser
 import java.net.URL
 import java.util.*
@@ -104,17 +105,17 @@ class Weather {
         val jArray = JsonParser().parse(jsonRawText).asJsonObject.getAsJsonArray("results")
         val lat = jArray[0].asJsonObject.getAsJsonObject("position").get("lat").asString
         val log = jArray[0].asJsonObject.getAsJsonObject("position").get("lon").asString
-        dateWord(time, log, lat)
-        return LocLatTime(log, lat, dateWord(time, log, lat))
+        return LocLatTime(log, lat, dateWord(time, log, lat,key, parse))
 
     }
-    private fun dateWord(mainVal:String, log:String, lat:String): Int {
+    private fun dateWord(mainVal:String, log:String, lat:String,key:KeyWord, parse: Parser): Int {
         val url = URL("http://api.timezonedb.com/v2.1/get-time-zone?key=54K85TD0SUQQ&format=json&by=position&lat=$lat&lng=$log")
         val rawJson = url.readText()
          val time = JsonParser().parse(rawJson).asJsonObject.get("timestamp").asLong
         println(time)
         val date = Date(time * 1000)
         println(date)
+        val phrase = SortWords(key, mainVal).getComplexDate(parse)
 
         return 0
     }

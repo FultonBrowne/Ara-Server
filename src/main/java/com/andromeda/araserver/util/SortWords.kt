@@ -122,11 +122,11 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
             graph.show()
 
             while (working) {
-                when {
-                    graph?.childCount == 1 -> {
+                when (graph?.childCount) {
+                    1 -> {
                         graph = graph.children?.get(0)
                     }
-                    graph?.childCount == 0 -> {
+                    0 -> {
                         working = false
                     }
                     else -> {
@@ -136,7 +136,6 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
                         }
                         working = false
                     }
-
                 }
             }
         } else {
@@ -163,14 +162,12 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         var toReturn = ArrayList<WordGraph>()
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
-        graph?.show()
 
 
         var working = true
         if (graph != null) {
-            graph.show()
-
             while (working) {
+                graph?.show()
                 when {
                     graph?.childCount == 1 -> {
                         graph = graph.children?.get(0)
@@ -195,12 +192,11 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         return toReturn
     }
     private fun sortForComplexDate(graph: Parse): ArrayList<WordGraph> {
-        println("start")
         var toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
-            print(i.coveredText+ " " + i.type)
+            println(i.coveredText+ " " + i.type)
             if (i.type == "NP" && i.parent.type == "PP" &&  sorter(i, "CD")) {
-                toReturn.add(WordGraph(i.coveredText, i.type))
+                toReturn.addAll(sortForAll(i))
             }
             if (i.childCount > 0) toReturn.addAll(sortForComplexDate(i))
         }
@@ -211,11 +207,20 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         for (i in graph.children){
             if (i.type == type){
                 toReturn = true
+                break
             }
-            else if (i.childCount > 0) toReturn = sorter(graph, type)
+            else if (i.childCount > 0) toReturn = sorter(i, type)
         }
         return toReturn
 
+    }
+    private fun sortForAll(graph: Parse): ArrayList<WordGraph> {
+        val  toReturn = ArrayList<WordGraph>()
+        for (i in graph.children){
+            if (i.childCount > 1) toReturn.addAll(sortForAll(i))
+            else if(i.type != "TK")toReturn.add(WordGraph(i.coveredText, i.type))
+        }
+        return toReturn
     }
 
 
