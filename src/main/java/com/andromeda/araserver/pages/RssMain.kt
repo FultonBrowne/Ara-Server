@@ -73,7 +73,7 @@ object RssMain {
             }
             else -> {
                 // general news in english
-                feeds[0] = "https://www.cbsnews.com/latest/rss/main/"
+                feeds[0] = "https://www.cbsnews.com/latest/rss/main"
                 feeds[1] = "http://feeds.foxnews.com/foxnews/latest"
                 feeds[2] = "https://www.espn.com/espn/rss/news"
                 feeds[3] = "http://feeds.reuters.com/Reuters/worldNews"
