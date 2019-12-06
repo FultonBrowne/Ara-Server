@@ -3,7 +3,7 @@ WORKDIR /app
 RUN git clone https://github.com/FultonBrowne/Ara-Server.git
 
 
-FROM openjdk:14-jdk-alpine as build
+FROM openjdk:12-jdk-alpine as build
 WORKDIR /app
 COPY --from=clone /app/Ara-Server /app
 RUN ./gradlew build
