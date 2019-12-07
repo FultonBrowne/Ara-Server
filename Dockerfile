@@ -8,7 +8,7 @@ WORKDIR /app
 COPY --from=clone /app/Ara-Server /app
 RUN ./gradlew build
 
-FROM openjdk:8-jre-alpine
+FROM openjdk:12-jre-alpine
 WORKDIR /app
 COPY --from=build /app/bin/jar /app
 EXPOSE 80
