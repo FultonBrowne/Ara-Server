@@ -7,6 +7,7 @@ import com.google.gson.JsonParser
 import opennlp.tools.parser.Parser
 import java.net.URL
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class Weather {
@@ -58,7 +59,8 @@ class Weather {
         val foreCast = dataSet.asJsonObject.get("summary").asString
         val title = "$temp and $foreCast"
 
-        val toReturn = OutputModel(title, "", "", "", title, "");
+        val toReturn = ArrayList<OutputModel>()
+        toReturn.add(OutputModel(title, "", "", "", title, ""))
         return Gson().toJson(toReturn)
     }
 
