@@ -47,7 +47,7 @@ class Weather {
         else return finishUp(json.asJsonObject.getAsJsonObject("daily").getAsJsonArray("data")[time!!].asJsonObject)
     }
     fun finishUp(dataSet: JsonObject): String? {
-        println("test 2")
+        println("test 3")
         val temp:String?
         temp = try {
             dataSet.asJsonObject.get("temperature").asInt.toString()
