@@ -4,3 +4,4 @@
 /build/classes/java/main/
 # Project exclude paths
 /out/
+*.jar
