@@ -15,5 +15,22 @@ pluginManagement {
         }
     }
 }
+ext.isCiServer = System.getenv().containsKey("CI")
+
+buildCache {
+    local {
+        enabled = !isCiServer
+    }
+    remote(HttpBuildCache) {
+        url = System.getenv("IP")
+        push = isCiServer
+
+        credentials {
+            username = 'fulton'
+            password = System.getenv("PASS")
+        }
+    }
+}
+
 rootProject.name = 'Ara-Server'
 
