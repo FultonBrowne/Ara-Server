@@ -75,8 +75,8 @@ compileTestKotlin {
 
 // ./gradlew --scan $TASKNAME 
 // see https://dev.to/jmfayard/the-one-gradle-trick-that-supersedes-all-the-others-5bpg
-buildScan {
-    termsOfServiceUrl = "https://gradle.com/terms-of-service"
-    termsOfServiceAgree = "yes"
-}
+//buildScan {
+  //  termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    //termsOfServiceAgree = "yes"
+//}
 
