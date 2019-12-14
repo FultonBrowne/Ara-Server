@@ -7,6 +7,7 @@ By Andromeda Software
 
 [![Known Vulnerabilities](https://snyk.io/test/github/FultonBrowne/Ara-Server/badge.svg)](https://snyk.io/test/github/FultonBrowne/Ara-Server})
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ede27c2ee51e43fbbc4667c4abc19118)](https://www.codacy.com/app/FultonBrowne/Ara-Server?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FultonBrowne/Ara-Server&amp;utm_campaign=Badge_Grade)
+[![CircleCI](https://circleci.com/gh/FultonBrowne/Ara-Server.svg?style=svg)](https://circleci.com/gh/FultonBrowne/Ara-Server)
 
 ## Author
 
