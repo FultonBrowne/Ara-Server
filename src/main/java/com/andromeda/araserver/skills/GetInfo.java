@@ -82,22 +82,8 @@ public class GetInfo {
     }
 
     private void getFast(String searchQuery) throws IOException {
-        ArrayList<OutputModel> mainList = new ArrayList<>();
-        @SuppressWarnings("CharsetObjectCanBeUsed") URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));
-
-        // Open the connection.
-        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-        connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
-
-        // Receive the JSON response body.
-        InputStream stream = connection.getInputStream();
-        String response = new Scanner(stream).useDelimiter("\\A").next();
-        JsonElement jelement = new JsonParser().parse(response);
-        JsonObject jsonObject = jelement.getAsJsonObject();
-        jsonObject = jsonObject.getAsJsonObject("Computation");
-        System.out.println(jsonObject);
-        //JsonArray jsonArray = jsonObject.getAsJsonArray("value");
-
+        String mainVal = searchQuery.replace(" ", "+");
+        URL url = new URL("https://api.duckduckgo.com/?q=" + mainVal+ "&format=json&pretty=1");
 
     }
 
