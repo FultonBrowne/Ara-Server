@@ -1,11 +1,7 @@
 package com.andromeda.araserver.skills;
 
-import com.andromeda.araserver.util.KeyWord;
-import com.andromeda.araserver.util.OutputModel;
-import com.andromeda.araserver.util.SortWords;
-import com.andromeda.araserver.util.WordGraph;
+import com.andromeda.araserver.util.*;
 import com.google.gson.*;
-import opennlp.tools.parser.Parser;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
@@ -50,7 +46,16 @@ public class GetInfo {
         System.out.println(searchQuery);
         searchQuery = searchQuery.replace("/searcht/", "");
 
+
         ArrayList<OutputModel> mainList = new ArrayList<>();
+        try{
+            mainList.addAll(getFast(searchQuery));
+            mainList.get(0);
+            return mainList;
+        }
+        catch (IndexOutOfBoundsException e){
+
+        }
         URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));
 
         // Open the connection.
@@ -64,7 +69,7 @@ public class GetInfo {
         JsonObject jsonObject = jelement.getAsJsonObject();
         jsonObject = jsonObject.getAsJsonObject("webPages");
         JsonArray jsonArray = jsonObject.getAsJsonArray("value");
-        getFast("two times two");
+
         for (int i = 0; i < jsonArray.size(); i++) {
             //System.out.println(jsonArray.get(i).isJsonObject());
             String title = jsonArray.get(i).getAsJsonObject().get("name").getAsString();
@@ -81,9 +86,15 @@ public class GetInfo {
         return mainList;
     }
 
-    private void getFast(String searchQuery) throws IOException {
+    private ArrayList<OutputModel> getFast(String searchQuery) throws IOException {
         String mainVal = searchQuery.replace(" ", "+");
         URL url = new URL("https://api.duckduckgo.com/?q=" + mainVal+ "&format=json&pretty=1");
+        String json = new Url().main(url);
+        JsonObject jsonParser = new JsonParser().parse(json).getAsJsonObject();
+        String describe = jsonParser.get("Abstract").getAsString();
+        ArrayList<OutputModel> outputModelArrayList = new ArrayList<>();
+        outputModelArrayList.add(new OutputModel("Search result by DuckDuckGo", describe, "", "", describe, ""));
+        return outputModelArrayList;
 
     }
 
