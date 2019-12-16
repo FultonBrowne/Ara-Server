@@ -1,103 +1,93 @@
-package com.andromeda.araserver.skills;
+package com.andromeda.araserver.skills
 
-import com.andromeda.araserver.util.*;
-import com.google.gson.*;
+import com.andromeda.araserver.util.OutputModel
+import com.andromeda.araserver.util.Url
+import com.google.gson.Gson
+import com.google.gson.JsonParser
+import java.io.IOException
+import java.net.URL
+import java.net.URLEncoder
+import java.util.*
+import javax.net.ssl.HttpsURLConnection
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-
-public class GetInfo {
-    static String subscriptionKey = System.getenv("BING");
-    static String host = "https://api.cognitive.microsoft.com";
-    static String path = "/bing/v7.0/search";
-
-
-    public String main(String mainurl ) {
-        //new gson instance
-        Gson gson = new Gson();
+class GetInfo {
+    fun main(mainurl: String): String { //new gson instance
+        val gson = Gson()
         //place holder values
-        ArrayList<OutputModel> outputModels = new ArrayList<>();
+        val outputModels = ArrayList<OutputModel>()
         //get url
-        String term;
+        val term: String
         //parse for search term
-        ArrayList<String> pairs = new ArrayList<>(Arrays.asList(mainurl.split("&")));
-        term = pairs.get(0);
-        System.out.println(term);
+        val pairs =
+            ArrayList(Arrays.asList(*mainurl.split("&").toTypedArray()))
+        term = pairs[0]
+        println(term)
         //NLP
-        //ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
-
-
+//ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
         try {
-            outputModels.addAll(searchBing(term));
-        } catch (IOException e) {
-            e.printStackTrace();
+            outputModels.addAll(searchBing(term))
+        } catch (e: IOException) {
+            e.printStackTrace()
         }
         //Return gson values
-        return gson.toJson(outputModels);
+        return gson.toJson(outputModels)
     }
 
-    private ArrayList<OutputModel> searchBing(String searchQuery) throws IOException {
-        System.out.println(searchQuery);
-        searchQuery = searchQuery.replace("/searcht/", "");
-
-
-        ArrayList<OutputModel> mainList = new ArrayList<>();
-        try{
-            mainList.addAll(getFast(searchQuery));
-            mainList.get(0);
-            return mainList;
+    @Throws(IOException::class)
+    private fun searchBing(searchQuery: String): ArrayList<OutputModel> {
+        var searchQuery = searchQuery
+        println(searchQuery)
+        searchQuery = searchQuery.replace("/searcht/", "")
+        val mainList = ArrayList<OutputModel>()
+        try {
+            mainList.addAll(getFast(searchQuery))
+            mainList[0]
+            return mainList
+        } catch (e: IndexOutOfBoundsException) {
         }
-        catch (Exception e){
-
-        }
-        URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));
-
+        val url = URL(
+            "$host$path?q=" + URLEncoder.encode(
+                searchQuery,
+                "UTF-8"
+            )
+        )
         // Open the connection.
-        HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-        connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey);
-
+        val connection = url.openConnection() as HttpsURLConnection
+        connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey)
         // Receive the JSON response body.
-        InputStream stream = connection.getInputStream();
-        String response = new Scanner(stream).useDelimiter("\\A").next();
-        JsonElement jelement = new JsonParser().parse(response);
-        JsonObject jsonObject = jelement.getAsJsonObject();
-        jsonObject = jsonObject.getAsJsonObject("webPages");
-        JsonArray jsonArray = jsonObject.getAsJsonArray("value");
-
-        for (int i = 0; i < jsonArray.size(); i++) {
-            //System.out.println(jsonArray.get(i).isJsonObject());
-            String title = jsonArray.get(i).getAsJsonObject().get("name").getAsString();
+        val stream = connection.inputStream
+        val response = Scanner(stream).useDelimiter("\\A").next()
+        val jelement = JsonParser().parse(response)
+        var jsonObject = jelement.asJsonObject
+        jsonObject = jsonObject.getAsJsonObject("webPages")
+        val jsonArray = jsonObject.getAsJsonArray("value")
+        for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
+            val title = jsonArray[i].asJsonObject["name"].asString
             //System.out.println(title);
-            String info = jsonArray.get(i).getAsJsonObject().get("snippet").getAsString();
-            System.out.println(info);
-            String link = jsonArray.get(i).getAsJsonObject().get("url").getAsString();
+            val info = jsonArray[i].asJsonObject["snippet"].asString
+            println(info)
+            val link = jsonArray[i].asJsonObject["url"].asString
             //System.out.println(link);
-            mainList.add(new OutputModel(title, info, link, "", "", ""));
-
-
+            mainList.add(OutputModel(title, info, link, "", "", ""))
         }
-
-        return mainList;
+        return mainList
     }
 
-    private ArrayList<OutputModel> getFast(String searchQuery) throws IOException {
-        String mainVal = searchQuery.replace(" ", "+");
-        URL url = new URL("https://api.duckduckgo.com/?q=" + mainVal+ "&format=json");
-        String json = new Url().main(url);
-        JsonObject jsonParser = new JsonParser().parse(json).getAsJsonObject();
-        String describe = jsonParser.get("Abstract").getAsString();
-        ArrayList<OutputModel> outputModelArrayList = new ArrayList<>();
-        outputModelArrayList.add(new OutputModel("Search result by DuckDuckGo", describe, "", "", describe, ""));
-        return outputModelArrayList;
-
+    @Throws(IOException::class)
+    private fun getFast(searchQuery: String): ArrayList<OutputModel> {
+        val mainVal = searchQuery.replace(" ", "+")
+        val url = URL("https://api.duckduckgo.com/?q=$mainVal&format=json")
+        val json = Url().other(url)
+        val jsonParser = JsonParser().parse(json).asJsonObject
+        val describe = jsonParser["Abstract"].asString
+        val outputModelArrayList = ArrayList<OutputModel>()
+        outputModelArrayList.add(OutputModel("Search result by DuckDuckGo", describe, "", "", describe, ""))
+        return outputModelArrayList
     }
 
-
-
+    companion object {
+        var subscriptionKey = System.getenv("BING")
+        var host = "https://api.cognitive.microsoft.com"
+        var path = "/bing/v7.0/search"
+    }
 }

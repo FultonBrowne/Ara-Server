@@ -12,6 +12,14 @@ class Url {
      * @return The entire content of the URL as a String as UTF-8.
      */
     fun main(url: URL): String {
+
       return url.readText()
+    }
+    fun other(url:URL): String {
+       val res = url.openStream()
+            .bufferedReader().use {
+                it.readText()
+            }
+        return res
     }
 }
