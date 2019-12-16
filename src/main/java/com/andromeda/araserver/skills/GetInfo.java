@@ -53,7 +53,7 @@ public class GetInfo {
             mainList.get(0);
             return mainList;
         }
-        catch (IndexOutOfBoundsException e){
+        catch (Exception e){
 
         }
         URL url = new URL(host + path + "?q=" + URLEncoder.encode(searchQuery, "UTF-8"));
@@ -88,7 +88,7 @@ public class GetInfo {
 
     private ArrayList<OutputModel> getFast(String searchQuery) throws IOException {
         String mainVal = searchQuery.replace(" ", "+");
-        URL url = new URL("https://api.duckduckgo.com/?q=" + mainVal+ "&format=json&pretty=1");
+        URL url = new URL("https://api.duckduckgo.com/?q=" + mainVal+ "&format=json");
         String json = new Url().main(url);
         JsonObject jsonParser = new JsonParser().parse(json).getAsJsonObject();
         String describe = jsonParser.get("Abstract").getAsString();
