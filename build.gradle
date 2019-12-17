@@ -56,7 +56,8 @@ dependencies {
     // https://mvnrepository.com/artifact/postgresql/postgresql
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile 'khttp:khttp:1.0.0'
+    implementation("com.squareup.okhttp3:okhttp:4.2.1")
+
 
 
 }

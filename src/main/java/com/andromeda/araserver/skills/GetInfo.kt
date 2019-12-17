@@ -4,10 +4,11 @@ import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.Url
 import com.google.gson.Gson
 import com.google.gson.JsonParser
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import java.io.IOException
 import java.net.URL
 import java.net.URLEncoder
-import khttp.delete as httpDelete
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
 
@@ -78,12 +79,26 @@ class GetInfo {
     private fun getFast(searchQuery: String): ArrayList<OutputModel> {
         val mainVal = searchQuery.replace(" ", "+")
         val url = "https://api.duckduckgo.com/?q=$mainVal&format=json"
-        val json = khttp.get(url).text
+        val client = OkHttpClient()
+        var json = ""
+            val request = Request.Builder()
+                .url(url)
+                .header("User-Agent", "OkHttp Headers.java")
+            .addHeader("Accept", "application/x-javascript")
+            //.addHeader("Accept", "application/vnd.github.v3+json")
+                .build()
 
+            client.newCall(request).execute().use { response ->
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
+                json = response.body!!.string()
+                println(json)
+            }
+        println(json)
         val jsonParser = JsonParser().parse(json).asJsonObject
-        val describe = jsonParser["Abstract"].asString
+        val describe = jsonParser["AbstractText"].asString
         val outputModelArrayList = ArrayList<OutputModel>()
-        outputModelArrayList.add(OutputModel("Search result by DuckDuckGo", describe, "", "", describe, ""))
+        outputModelArrayList.add(OutputModel("Search result by DuckDuckGo", describe, jsonParser["AbstractURL"].asString, "", describe, ""))
         return outputModelArrayList
     }
 
