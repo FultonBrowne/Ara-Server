@@ -22,7 +22,11 @@ buildCache {
         enabled = !isCiServer
     }
     remote(HttpBuildCache) {
-        url = System.getenv("IP")
+
+        if(System.getenv("IP") == null){
+            url = "0.0.0.0/"
+        }
+        else url = System.getenv("IP")
         push = isCiServer
 
         credentials {

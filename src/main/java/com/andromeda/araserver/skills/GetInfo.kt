@@ -7,6 +7,7 @@ import com.google.gson.JsonParser
 import java.io.IOException
 import java.net.URL
 import java.net.URLEncoder
+import khttp.delete as httpDelete
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
 
@@ -76,8 +77,9 @@ class GetInfo {
     @Throws(IOException::class)
     private fun getFast(searchQuery: String): ArrayList<OutputModel> {
         val mainVal = searchQuery.replace(" ", "+")
-        val url = URL("https://api.duckduckgo.com/?q=$mainVal&format=json")
-        val json = Url().other(url)
+        val url = "https://api.duckduckgo.com/?q=$mainVal&format=json"
+        val json = khttp.get(url).text
+
         val jsonParser = JsonParser().parse(json).asJsonObject
         val describe = jsonParser["Abstract"].asString
         val outputModelArrayList = ArrayList<OutputModel>()
