@@ -1,7 +1,7 @@
 <h1 align="center">Welcome to Ara's server👋</h1>
 By Andromeda Software
 
-The server that powers feed, AI seasrch, and skills to the ara voice assistant
+The server that powers feed, AI search, and skills to the ara voice assistant
 
 ![alt text](docs/scrs1.png)
 
