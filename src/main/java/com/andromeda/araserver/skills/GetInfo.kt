@@ -7,6 +7,7 @@ import com.google.gson.JsonParser
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
+import java.lang.NullPointerException
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
@@ -45,7 +46,8 @@ class GetInfo {
             mainList.addAll(getFast(searchQuery))
             mainList[0]
             return mainList
-        } catch (e: IndexOutOfBoundsException) {
+        } catch (e: Exception) {
+
         }
         val url = URL(
             "$host$path?q=" + URLEncoder.encode(
@@ -83,7 +85,7 @@ class GetInfo {
         var json = ""
             val request = Request.Builder()
                 .url(url)
-                .header("User-Agent", "OkHttp Headers.java")
+                //.header("User-Agent", "OkHttp Headers.java")
             .addHeader("Accept", "application/x-javascript")
             //.addHeader("Accept", "application/vnd.github.v3+json")
                 .build()
@@ -97,6 +99,7 @@ class GetInfo {
         println(json)
         val jsonParser = JsonParser().parse(json).asJsonObject
         val describe = jsonParser["AbstractText"].asString
+        if ( describe == "") throw NullPointerException()
         val outputModelArrayList = ArrayList<OutputModel>()
         outputModelArrayList.add(OutputModel("Search result by DuckDuckGo", describe, jsonParser["AbstractURL"].asString, "", describe, ""))
         return outputModelArrayList
