@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact name="Ara-Server:jar">
+  <artifact build-on-make="true" name="Ara-Server:jar">
     <output-path>$PROJECT_DIR$/bin/jar</output-path>
     <root id="root">
       <element id="archive" name="Ara-Server.jar">
@@ -8,7 +8,6 @@
         </element>
         <element id="module-output" name="ara-server.Ara-Server.main" />
       </element>
-      <element id="library" level="project" name="Gradle: com.squareup.okhttp3:okhttp:4.2.0" />
       <element id="library" level="project" name="Gradle: org.eclipse.swt.gtk.solaris:sparc:3.3.0-v3346" />
       <element id="library" level="project" name="Gradle: io.agroal:agroal-pool:1.6" />
       <element id="library" level="project" name="Gradle: org.jvnet.staxex:stax-ex:1.8" />
@@ -48,6 +47,8 @@
       <element id="library" level="project" name="Gradle: javax.activation:javax.activation-api:1.2.0" />
       <element id="library" level="project" name="Gradle: org.jboss:jandex:2.1.1.Final" />
       <element id="library" level="project" name="Gradle: org.javassist:javassist:3.24.0-GA" />
+      <element id="artifact" artifact-name="Gradle__com_squareup_okhttp3_okhttp_4_2_0" />
+      <element id="archive" name="okhttpd.jar" />
     </root>
   </artifact>
 </component>

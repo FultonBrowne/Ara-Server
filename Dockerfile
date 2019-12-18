@@ -10,7 +10,7 @@ RUN ./gradlew build
 
 FROM openjdk:11.0-jre
 WORKDIR /app
-COPY --from=build /app/bin/jar /app
+COPY --from=build /app/build/libs /app
 EXPOSE 80
 ENTRYPOINT ["sh", "-c"]
-CMD ["java -jar Ara-Server.jar"]
+CMD ["java -jar Ara-Server-1.0-SNAPSHOT-all.jar"]
