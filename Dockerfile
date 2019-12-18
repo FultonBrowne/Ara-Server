@@ -6,7 +6,7 @@ RUN git clone https://github.com/FultonBrowne/Ara-Server.git
 FROM openjdk:12-jdk-alpine as build
 WORKDIR /app
 COPY --from=clone /app/Ara-Server /app
-RUN ./gradlew build
+RUN ./gradlew build shadowJar
 
 FROM openjdk:11.0-jre
 WORKDIR /app
