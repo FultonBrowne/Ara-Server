@@ -18,6 +18,7 @@ import opennlp.tools.parser.ParserModel;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.net.URL;
 import java.sql.SQLException;
 
 
@@ -49,9 +50,12 @@ public class Run extends NanoHTTPD {
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
         //new MsSql().getSkills();
         ClassLoader classloader = getClass().getClassLoader();
-        InputStream is = classloader.getResourceAsStream("resources/parse.bin");
+        InputStream is = classloader.getResourceAsStream("resources/parse.bin");;
         System.out.println("test");
-        if(is == null) throw new NullPointerException();
+        if(is == null) {
+            URL url = new URL("https://arafilestore.file.core.windows.net/ara-server-files/parse.bin?sv=2019-02-02&ss=f&srt=sco&sp=rdl&se=2019-12-19T08:36:49Z&st=2019-12-19T00:36:49Z&spr=https&sig=1smGB3gCjEZHb63T%2B1c07%2FABDxb8ZwE91gXG67rWj0E%3D");
+            is = url.openStream();
+        }
         model = new ParserModel(is);
         parser = ParserFactory.create(model);
         keyWord = new KeyWord(is);
