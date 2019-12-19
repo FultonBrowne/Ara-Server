@@ -28,21 +28,22 @@ class MsSql {
         val resultSet = statement.executeQuery(selectSql)
         while (resultSet.next())
         {
-            print("test")
             val dbLink = resultSet.getString("link")
             val dbWord = resultSet.getString("hotWord")
             for (i in phrases){
                 if (i.word.startsWith(dbWord.replace(" ", ""))){
-                    print("is true")
                     link = dbLink
                     break
                 }
             }
         }
         if (link == "") link = "https://araserver.herokuapp.com/searcht"
+        val url = URL(link.replace(" ", "") + "/" +fullDir.replace(" ", "%20"))
+
+        println(url.toString())
 
 
-        return URL(link.replace(" ", "") + "/" +fullDir.replace(" ", "%20")).readText()
+        return url.readText()
 
     }
 }

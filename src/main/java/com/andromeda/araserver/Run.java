@@ -50,10 +50,10 @@ public class Run extends NanoHTTPD {
                 "    along with this program.  If not, see <https://www.gnu.org/licenses/>.");
         //new MsSql().getSkills();
         ClassLoader classloader = getClass().getClassLoader();
-        InputStream is = classloader.getResourceAsStream("resources/parse.bin");;
+        InputStream is = classloader.getResourceAsStream("resources/parse.bin");
         System.out.println("test");
         if(is == null) {
-            URL url = new URL("https://arafilestore.file.core.windows.net/ara-server-files/parse.bin?sv=2019-02-02&ss=f&srt=sco&sp=rdl&se=2019-12-19T08:36:49Z&st=2019-12-19T00:36:49Z&spr=https&sig=1smGB3gCjEZHb63T%2B1c07%2FABDxb8ZwE91gXG67rWj0E%3D");
+            URL url = new URL("https://arafilestore.file.core.windows.net/ara-server-files/parse.bin?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2024-04-01T22:11:11Z&st=2019-12-19T15:11:11Z&spr=https&sig=lfjMHSahA6fw8enCbx0hFTE1uAVJWvPmC4m6blVSuuo%3D");
             is = url.openStream();
         }
         model = new ParserModel(is);
