@@ -37,7 +37,7 @@ class MsSql {
                 }
             }
         }
-        if (link == "") link = "https://araserver.herokuapp.com/searcht"
+        if (link == "") link = "https://ara-server.azurewebsites.net/searcht"
         val url = URL(link.replace(" ", "") + "/" +fullDir.replace(" ", "%20"))
 
         println(url.toString())
