@@ -1,5 +1,6 @@
 package com.andromeda.araserver;
 
+import com.andromeda.araserver.pages.GetSkillData;
 import com.andromeda.araserver.pages.RssMain;
 import com.andromeda.araserver.pages.Update;
 import com.andromeda.araserver.skills.*;
@@ -101,6 +102,7 @@ public class Run extends NanoHTTPD {
         else if (sessionUri.startsWith("/search")) {
             main2 = new GetInfo().main(sessionUri);
         } else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
+        else if (sessionUri.startsWith("/skillsdata/")) main2 = new GetSkillData().main(sessionUri);
         else if (sessionUri.startsWith("/update")) main2 = new Update().update(sessionUri);
         else if (sessionUri.startsWith("/what")) main2 = new SocialSkills().doYouLike(sessionUri.replace("/what/", ""));
         else if (sessionUri.startsWith("/store")) {
