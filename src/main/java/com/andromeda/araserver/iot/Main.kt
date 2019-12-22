@@ -18,7 +18,6 @@ class Main {
              ConnectionPolicy(),
             ConsistencyLevel.Session
         )
-
         for (i in actions){
             when {
                 i.startsWith("id=") -> id = i.replace("id=", "")
@@ -31,6 +30,13 @@ class Main {
         val device = devices[0]
         val deviceClass = TypeClassMap().main(device.type)
         val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass?.declaringClass)
+        val pair = currentState!![0] to deviceClass
+        for (i in pair.second?.fields!!){
+            if (i.name == action){
+                break
+            }
+        }
+
 
 
     }
