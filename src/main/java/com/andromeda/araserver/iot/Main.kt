@@ -27,7 +27,7 @@ class Main {
             }
         }
         val devices = id?.let { GetDevices().main(client, it) }
-        if (devices?.size!! > 1) throw SecurityException("to may results for a valid request")
+        if (devices?.size!! != 1) throw SecurityException("to may results for a valid request")
         val device = devices[0]
 
     }
