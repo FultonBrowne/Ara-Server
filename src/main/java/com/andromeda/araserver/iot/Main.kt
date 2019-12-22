@@ -12,7 +12,7 @@ class Main {
         val dbLink = System.getenv("IOTDB")
         var id:String? = null
         var action:String? = null
-        var client = DocumentClient(
+        val client = DocumentClient(
             "https://ara-account-data.documents.azure.com:443/",
             dbLink,
              ConnectionPolicy(),
@@ -26,8 +26,9 @@ class Main {
                 else -> throw SecurityException("not a valid set of arguments")
             }
         }
-
-
+        val devices = id?.let { GetDevices().main(client, it) }
+        if (devices?.size!! > 1) throw SecurityException("to may results for a valid request")
+        val device = devices[0]
 
     }
 }

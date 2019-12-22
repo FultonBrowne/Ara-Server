@@ -15,6 +15,7 @@ class GetDevices {
             "SELECT * FROM c WHERE c.id = $id",
             null
         )
+
         for (i in queryResults.queryIterator){
             val deviceModel = DeviceModel(i["name"].toString(), i["type"].toString(), i["status"].toString(), i["group"].toString())
             devices.add(deviceModel)
