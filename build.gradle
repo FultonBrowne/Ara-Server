@@ -52,6 +52,7 @@ dependencies {
     compile 'org.hibernate:hibernate-agroal:5.4.10.Final'
     implementation"com.squareup.okhttp3:okhttp:4.2.0"
     implementation 'com.microsoft.azure:azure-documentdb:2.4.5'
+    implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.1'
     compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.9.1'
     compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.4.1.jre11'
 

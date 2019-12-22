@@ -29,6 +29,9 @@ class Main {
         val devices = id?.let { GetDevices().main(client, it) }
         if (devices?.size!! != 1) throw SecurityException("to may results for a valid request")
         val device = devices[0]
+        val deviceClass = TypeClassMap().main(device.type)
+        val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass?.declaringClass)
+
 
     }
 }
