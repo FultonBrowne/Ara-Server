@@ -20,13 +20,11 @@ class Main {
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
         val devices = id?.let { key?.let { it1 -> GetDevices().main(client, it, it1) } }
         val device = devices?.get(0)
-        val deviceClass = device?.type?.let { TypeClassMap().main(it) }
-        val currentState = GetDeviceValues().yamlArrayToObjectList(device?.status, deviceClass?.declaringClass)
+        val deviceClass = TypeClassMap().main(device!!.type)
+        val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass)
         val pair = currentState!![0] to deviceClass
-        for (i in pair.second?.fields!!){
-            if (i.name == action){
-                break
-            }
+        for (i in pair.second?.fields!!) if (i.name == action){
+            break
         }
         return ""
     }
