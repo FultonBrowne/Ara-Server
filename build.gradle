@@ -64,6 +64,7 @@ dependencies {
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation("com.squareup.okhttp3:okhttp:4.2.2")
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
 
 
 
