@@ -99,6 +99,7 @@ public class Run extends NanoHTTPD {
         else if (sessionUri.startsWith("/hi")) main2 = new Hello().hello();
         else if (sessionUri.startsWith("/yelpclient")) main2 = new Locdec().main(sessionUri, keyWord, parser);
         else if (sessionUri.startsWith("/weath")) main2 = new Weather().mainPart(sessionUri, keyWord, parser);
+        else if(sessionUri.startsWith("/devices/")) main2 = new com.andromeda.araserver.iot.Main().main(sessionUri);
         else if (sessionUri.startsWith("/search")) {
             main2 = new GetInfo().main(sessionUri);
         } else if (sessionUri.startsWith("/math")) main2 = new Equations().main(sessionUri);
