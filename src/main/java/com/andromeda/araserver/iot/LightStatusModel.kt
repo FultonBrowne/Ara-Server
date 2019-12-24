@@ -1,5 +1,5 @@
 package com.andromeda.araserver.iot
 
-data class LightStatusModel(val on:Boolean, val powerLevel: Int?, val color:Int?)
+data class LightStatusModel(var on:Boolean, var powerLevel: Int?, var color:Int?)
 
 
