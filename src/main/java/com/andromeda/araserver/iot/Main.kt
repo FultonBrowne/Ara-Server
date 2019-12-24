@@ -1,11 +1,10 @@
 package com.andromeda.araserver.iot
 
-import com.microsoft.azure.documentdb.*
-import kotlin.reflect.KType
-import kotlin.reflect.full.createInstance
-import kotlin.reflect.full.instanceParameter
+import com.microsoft.azure.documentdb.ConnectionPolicy
+import com.microsoft.azure.documentdb.ConsistencyLevel
+import com.microsoft.azure.documentdb.DocumentClient
+import java.util.*
 import kotlin.reflect.full.memberProperties
-import kotlin.reflect.jvm.javaType
 
 
 class Main {
@@ -25,19 +24,18 @@ class Main {
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
         val devices = id?.let { key?.let { it1 -> GetDevices().main(client, it, it1) } }
         val device = devices?.get(0)
-        val deviceClass = TypeClassMap().main(device!!.type)
+        val deviceClass = TypeClassMap().main(device!!.type)!!
         val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass)
         val pair = currentState!![0] to deviceClass
         println(currentState[0] )
-        val classToMod = pair.second?.kotlin?: throw NullPointerException()
-        val test = classToMod.createInstance()
+        val classToMod = pair.second.kotlin
+        val test = Any()
+        println(classToMod.memberProperties)
         classToMod.memberProperties.forEach { member ->
             println(member.name)
             println(member.returnType)
-            println(member)
-            val example = Any()
-            (println("${member.name}"))
-        }
+            println(member.get(test))
+            val example = Any() }
         return ""
     }
 }
