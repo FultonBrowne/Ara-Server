@@ -1,7 +1,10 @@
 package com.andromeda.araserver.iot
 
 import com.microsoft.azure.documentdb.*
+import kotlin.reflect.KType
+import kotlin.reflect.full.instanceParameter
 import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.javaType
 
 
 class Main {
@@ -24,10 +27,8 @@ class Main {
         val deviceClass = TypeClassMap().main(device!!.type)
         val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass)
         val pair = currentState!![0] to deviceClass
+        println(currentState[0] )
         val classToMod = pair.second ?: throw NullPointerException()
-        classToMod.kotlin.memberProperties.forEach { member ->
-            println("${member.name} ")
-        }
         return ""
     }
 }

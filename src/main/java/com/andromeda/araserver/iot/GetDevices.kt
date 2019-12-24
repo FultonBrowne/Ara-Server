@@ -12,15 +12,15 @@ class GetDevices {
         val devices = ArrayList<DeviceModel>()
         val options = FeedOptions()
         options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> = client.queryDocuments(
-            "/dbs/Ara-android-database/colls/Ara-android-collection",
-            "SELECT * FROM c WHERE c.id = '$id'",
-            options
-        )
-
+        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c WHERE c.id = '$id'", options)
         for (i in queryResults.queryIterator){
             val json = i.get("document") as JSONObject
-            val deviceModel = DeviceModel(json.getString("name"), json.getString("type"), json.getString("status"), "")
+            val deviceModel = DeviceModel(
+                name = json.getString("name"),
+                type = json.getString("type"),
+                status = json.getString("status"),
+                group = ""
+            )
             devices.add(deviceModel)
         }
         return devices
