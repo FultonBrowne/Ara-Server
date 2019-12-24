@@ -1,14 +1,14 @@
 package com.andromeda.araserver.iot
 
 import com.andromeda.araserver.util.DeviceModel
-import com.google.gson.JsonObject
 import com.microsoft.azure.documentdb.*
 import org.json.JSONObject
 import java.util.*
+import kotlin.reflect.KProperty1
 
 
-class GetDevices {
-    fun main(client: DocumentClient, id:String, key:String): ArrayList<DeviceModel> {
+class DevicesDB {
+    fun getDB(client: DocumentClient, id:String, key:String): ArrayList<DeviceModel> {
         val devices = ArrayList<DeviceModel>()
         val options = FeedOptions()
         options.partitionKey = PartitionKey("user-$key")

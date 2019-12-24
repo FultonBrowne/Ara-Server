@@ -1,0 +1,30 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run no cache" type="GradleRunConfiguration" factoryName="Gradle">
+    <ExternalSystemSettings>
+      <option name="env">
+        <map>
+          <entry key="IOTDB" value="Xk3bLVzuVKKWhTyDGRh8FLXgh78tiCLmDsuqKGD1Kt1W9MG4ugZoJwrPuApl4oDQRr6xUyj7d4MpK1D7sRA62Q==" />
+          <entry key="IP" value="http://52.141.222.41/cache/" />
+          <entry key="PASS" value="$PASSWORD$" />
+          <entry key="PASSWORD" value="$PASSWORD$" />
+        </map>
+      </option>
+      <option name="executionName" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$" />
+      <option name="externalSystemIdString" value="GRADLE" />
+      <option name="scriptParameters" value="--scan" />
+      <option name="taskDescriptions">
+        <list />
+      </option>
+      <option name="taskNames">
+        <list>
+          <option value="build" />
+          <option value="run" />
+        </list>
+      </option>
+      <option name="vmOptions" value="" />
+    </ExternalSystemSettings>
+    <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+    <method v="2" />
+  </configuration>
+</component>
