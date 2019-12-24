@@ -26,9 +26,8 @@ class Main {
         val device = devices?.get(0)
         val deviceClass = TypeClassMap().main(device!!.type)
         val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass)
-        val pair = currentState!![0] to deviceClass
-        println(currentState[0] )
-        val classToMod = pair.second ?: throw NullPointerException()
+
+        val classToMod = currentState!![0]
         return ""
     }
 }
