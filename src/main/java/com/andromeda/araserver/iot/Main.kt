@@ -3,7 +3,6 @@ package com.andromeda.araserver.iot
 import com.microsoft.azure.documentdb.ConnectionPolicy
 import com.microsoft.azure.documentdb.ConsistencyLevel
 import com.microsoft.azure.documentdb.DocumentClient
-import java.util.*
 import kotlin.reflect.full.memberProperties
 
 
@@ -24,18 +23,17 @@ class Main {
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
         val devices = id?.let { key?.let { it1 -> GetDevices().main(client, it, it1) } }
         val device = devices?.get(0)
-        val deviceClass = TypeClassMap().main(device!!.type)!!
+        val deviceClass = TypeClassMap().main(device!!.type)
         val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass)
         val pair = currentState!![0] to deviceClass
         println(currentState[0] )
         val classToMod = pair.second.kotlin
-        val test = Any()
         println(classToMod.memberProperties)
         classToMod.memberProperties.forEach { member ->
             println(member.name)
             println(member.returnType)
-            println(member.get(test))
-            val example = Any() }
+            println(member.get(currentState[0]))
+        }
         return ""
     }
 }
