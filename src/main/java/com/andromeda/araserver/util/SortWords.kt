@@ -155,7 +155,7 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         return toReturn
         }
     fun getComplexDate(parse: Parser): ArrayList<WordGraph> {
-        var toReturn = ArrayList<WordGraph>()
+        val toReturn = ArrayList<WordGraph>()
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
 
@@ -164,13 +164,9 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         if (graph != null) {
             while (working) {
                 graph?.show()
-                when {
-                    graph?.childCount == 1 -> {
-                        graph = graph.children?.get(0)
-                    }
-                    graph?.childCount == 0 -> {
-                        working = false
-                    }
+                when (graph?.childCount) {
+                    1 -> graph = graph.children?.get(0)
+                    0 -> working = false
                     else -> {
                         if (graph != null) {
                             val toTest = sortForComplexDate(graph)
@@ -178,7 +174,6 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
                         }
                         working = false
                     }
-
                 }
             }
         } else {
