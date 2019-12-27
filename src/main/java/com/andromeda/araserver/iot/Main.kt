@@ -29,7 +29,7 @@ class Main {
         println(currentState[0] )
         val classToMod = pair.second.kotlin
         println(classToMod.memberProperties)
-        WriteNewVal().main(classToMod, actionPair, currentState[0])
+        WriteNewVal().main( actionPair, currentState[0])
 
         return ""
     }
