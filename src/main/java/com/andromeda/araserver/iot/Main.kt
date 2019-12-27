@@ -26,7 +26,7 @@ class Main {
         val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass)
         val pair = currentState!![0] to deviceClass
         val actionPair = action?.split(":")
-        println(currentState[0] )
+        println(actionPair)
         val classToMod = pair.second.kotlin
         println(classToMod.memberProperties)
         WriteNewVal().main( actionPair, currentState[0])
