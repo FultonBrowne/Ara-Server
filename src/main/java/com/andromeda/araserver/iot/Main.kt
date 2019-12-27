@@ -1,5 +1,6 @@
 package com.andromeda.araserver.iot
 
+import com.andromeda.araserver.util.To
 import com.microsoft.azure.documentdb.ConnectionPolicy
 import com.microsoft.azure.documentdb.ConsistencyLevel
 import com.microsoft.azure.documentdb.DocumentClient
@@ -26,10 +27,15 @@ class Main {
         val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass)
         val pair = currentState!![0] to deviceClass
         val actionPair = action?.split(":")
-        println(actionPair)
+        val text:Any
+        text = try {
+            To().boolean(actionPair!![1])
+        } catch (e:Exception){
+            currentState[0]
+        }
         val classToMod = pair.second.kotlin
         println(classToMod.memberProperties)
-        WriteNewVal().main( actionPair, currentState[0])
+        WriteNewVal().main( actionPair, currentState[0], text)
 
         return ""
     }
