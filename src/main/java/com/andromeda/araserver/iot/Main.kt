@@ -4,6 +4,7 @@ import com.andromeda.araserver.util.To
 import com.microsoft.azure.documentdb.ConnectionPolicy
 import com.microsoft.azure.documentdb.ConsistencyLevel
 import com.microsoft.azure.documentdb.DocumentClient
+import java.util.ArrayList
 import kotlin.reflect.full.memberProperties
 
 class Main {
@@ -31,12 +32,12 @@ class Main {
         text = try {
             To().boolean(actionPair!![1])
         } catch (e:Exception){
-            currentState[0]
+            actionPair!![1]
         }
         val classToMod = pair.second.kotlin
         println(classToMod.memberProperties)
-        WriteNewVal().main( actionPair, currentState[0], text)
-
+        val toReturn = ArrayList<Any>()
+        toReturn.add(WriteNewVal().main( actionPair, currentState[0], text))
         return ""
     }
 }

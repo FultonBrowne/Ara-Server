@@ -13,7 +13,9 @@ class WriteNewVal {
                 println(member.name)
                 val text1:Any = try{
                     text.toString().toInt()
+
                 } catch (e:Exception){
+                    e.printStackTrace()
                     text
                 }
                 println(member.setter.call(any, text1))
