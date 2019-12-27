@@ -1,6 +1,9 @@
 package com.andromeda.araserver.iot
 
 import com.andromeda.araserver.util.To
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.microsoft.azure.documentdb.ConnectionPolicy
 import com.microsoft.azure.documentdb.ConsistencyLevel
 import com.microsoft.azure.documentdb.DocumentClient
@@ -38,6 +41,10 @@ class Main {
         println(classToMod.memberProperties)
         val toReturn = ArrayList<Any>()
         toReturn.add(WriteNewVal().main( actionPair, currentState[0], text))
+        val mapper = ObjectMapper(YAMLFactory())
+        val yml = mapper.writeValueAsString(toReturn)
+        println(yml)
+
         return ""
     }
 }
