@@ -1,5 +1,6 @@
 package com.andromeda.araserver.iot
 
+import com.andromeda.araserver.util.DeviceModel
 import com.andromeda.araserver.util.To
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
@@ -13,6 +14,7 @@ import kotlin.reflect.full.memberProperties
 
 class Main {
     fun main(url:String): String {
+        val db = DevicesDB()
         val mainVal = url.replace("/devices/", "")
         val actions = mainVal.split("&")
         val dbLink = System.getenv("IOTDB")
@@ -26,7 +28,7 @@ class Main {
             else -> throw SecurityException("not a valid set of arguments")
         }
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
-        val devices = id?.let { key?.let { it1 -> DevicesDB().getDB(client, it, it1) } }
+        val devices = id?.let { key?.let { it1 -> db.getDB(client, it, it1) } }
         val device = devices?.get(0)
         val deviceClass = TypeClassMap().main(device!!.type)
         val currentState = GetDeviceValues().yamlArrayToObjectList(device.status, deviceClass)
@@ -45,8 +47,8 @@ class Main {
         val mapper = ObjectMapper(YAMLFactory())
         val yml = mapper.writeValueAsString(toReturn)
         println(yml)
-        val doc = Document()
-
+        device.status = yml
+        db.updateDB(client, key!!, device)
 
         return ""
     }
