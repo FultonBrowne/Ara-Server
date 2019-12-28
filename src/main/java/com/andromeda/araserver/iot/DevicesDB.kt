@@ -25,9 +25,11 @@ class DevicesDB {
         }
         return devices
     }
-    fun updateDB(client: DocumentClient, id:String, key:String, data:DeviceModel){
-        val options = FeedOptions()
+    fun updateDB(client: DocumentClient,document: Document, key:String){
+        val options = RequestOptions()
         options.partitionKey = PartitionKey("user-$key")
+        client.replaceDocument(document,options)
+
 
     }
 }
