@@ -8,6 +8,7 @@ import kotlin.reflect.KProperty1
 
 
 class DevicesDB {
+    var document:Document? = null
     fun getDB(client: DocumentClient, id:String, key:String): ArrayList<DeviceModel> {
         val devices = ArrayList<DeviceModel>()
         val options = FeedOptions()
@@ -21,14 +22,18 @@ class DevicesDB {
                 status = json.getString("status"),
                 group = ""
             )
+            document = i
             devices.add(deviceModel)
+            break
         }
         return devices
     }
-    fun updateDB(client: DocumentClient,document: Document, key:String){
+    fun updateDB(client: DocumentClient, key:String, content:DeviceModel){
         val options = RequestOptions()
         options.partitionKey = PartitionKey("user-$key")
+        document!!.set("document", content)
         client.replaceDocument(document,options)
+
 
 
     }

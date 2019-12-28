@@ -6,6 +6,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.microsoft.azure.documentdb.ConnectionPolicy
 import com.microsoft.azure.documentdb.ConsistencyLevel
+import com.microsoft.azure.documentdb.Document
 import com.microsoft.azure.documentdb.DocumentClient
 import java.util.ArrayList
 import kotlin.reflect.full.memberProperties
@@ -44,6 +45,8 @@ class Main {
         val mapper = ObjectMapper(YAMLFactory())
         val yml = mapper.writeValueAsString(toReturn)
         println(yml)
+        val doc = Document()
+
 
         return ""
     }
