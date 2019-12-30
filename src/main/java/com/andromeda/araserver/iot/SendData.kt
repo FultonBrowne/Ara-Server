@@ -6,7 +6,8 @@ import com.microsoft.azure.sdk.iot.service.*
 class SendData {
     private val protocol = IotHubServiceClientProtocol.AMQPS
 
-    fun main(connectionString: String, deviceId:String){
+    fun main(deviceId:String, message: String){
+        val connectionString = "UxEGJfoC9IRnpeonMxDxo7A41ZT21+Z45+4CCeIeto0="
         val serviceClient = ServiceClient.createFromConnectionString(
             connectionString, protocol
         )
@@ -16,7 +17,7 @@ class SendData {
             val feedbackReceiver = serviceClient
                 .feedbackReceiver
             feedbackReceiver?.open()
-            val messageToSend = Message("Cloud to device message.")
+            val messageToSend = Message(message)
             messageToSend.deliveryAcknowledgement = DeliveryAcknowledgement.Full
             serviceClient.send(deviceId, messageToSend)
             println("Message sent to device")
@@ -27,7 +28,7 @@ class SendData {
                             + feedbackBatch.enqueuedTimeUtc.toString()
                 )
             }
-            feedbackReceiver?.close()
+            feedbackReceiver.close()
             serviceClient.close()
         }
     }
