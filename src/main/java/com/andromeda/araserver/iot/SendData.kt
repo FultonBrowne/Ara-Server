@@ -7,7 +7,7 @@ class SendData {
     private val protocol = IotHubServiceClientProtocol.AMQPS
 
     fun main(deviceId:String, message: String){
-        val connectionString = "UxEGJfoC9IRnpeonMxDxo7A41ZT21+Z45+4CCeIeto0="
+        val connectionString = "HostName=Ara-iot.azure-devices.net;SharedAccessKeyName=service;SharedAccessKey=oEfZ4s62hqhqkKaJtTlQ5+KJK7rbnCMB6Xu7wxqeY4I="
         val serviceClient = ServiceClient.createFromConnectionString(
             connectionString, protocol
         )
