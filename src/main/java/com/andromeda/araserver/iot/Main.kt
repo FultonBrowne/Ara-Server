@@ -46,8 +46,10 @@ class Main {
         toReturn.add(WriteNewVal().main( actionPair, currentState[0], text))
         val mapper = ObjectMapper(YAMLFactory())
         val yml = mapper.writeValueAsString(toReturn)
+        val deviceId = key+id
         println(yml)
         device.status = yml
+        SendData().main(deviceId, "test")
         db.updateDB(client, key!!, device)
 
         return ""
