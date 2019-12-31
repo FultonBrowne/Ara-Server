@@ -1,6 +1,7 @@
 package com.andromeda.araserver
 
 import com.andromeda.araserver.iot.Main
+import com.andromeda.araserver.iot.Status
 import com.andromeda.araserver.pages.ApiStart
 import com.andromeda.araserver.pages.GetSkillData
 import com.andromeda.araserver.pages.RssMain.rssMain1
@@ -45,6 +46,8 @@ class Run private constructor(port: Int) : NanoHTTPD(port) {
                 Weather().mainPart(sessionUri, keyWord, parser)
             sessionUri.startsWith("/devices/") -> main2 =
                 Main().main(sessionUri)
+            sessionUri.startsWith("/devicesinfo/") -> main2 =
+                Status().main(sessionUri)
             sessionUri.startsWith("/search") -> {
                 main2 = GetInfo().main(sessionUri)
             }
