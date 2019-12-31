@@ -25,7 +25,7 @@ class Run private constructor(port: Int) : NanoHTTPD(port) {
     var model: ParserModel
     var parser: Parser
     //If connected to
-    override fun serve(session: IHTTPSession): Response { //RSS feed type, if any
+    override fun serve(session: IHTTPSession): Response {
         val tag: Int
         //URI passed from client
         val sessionUri = session.uri
@@ -46,7 +46,7 @@ class Run private constructor(port: Int) : NanoHTTPD(port) {
                 Weather().mainPart(sessionUri, keyWord, parser)
             sessionUri.startsWith("/devices/") -> main2 =
                 Main().main(sessionUri)
-            sessionUri.startsWith("/devicesinfo/") -> main2 =
+            sessionUri.startsWith("/deviceinfo/") -> main2 =
                 Status().main(sessionUri)
             sessionUri.startsWith("/search") -> {
                 main2 = GetInfo().main(sessionUri)

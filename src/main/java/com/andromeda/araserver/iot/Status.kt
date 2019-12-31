@@ -7,7 +7,7 @@ import com.microsoft.azure.documentdb.DocumentClient
 class Status {
     fun main(url:String): String {
         val db = DevicesDB()
-        val mainVal = url.replace("/devices/", "")
+        val mainVal = url.replace("/deviceinfo/", "")
         val actions = mainVal.split("&")
         val dbLink = System.getenv("IOTDB")
         var id:String? = null
@@ -15,7 +15,6 @@ class Status {
         for (i in actions) when {
             i.startsWith("id=") -> id = i.replace("id=", "")
             i.startsWith("user=") -> key = i.replace("user=", "")
-            else -> throw SecurityException("not a valid set of arguments")
         }
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
         val devices = id?.let { key?.let { it1 -> db.getDB(client, it, it1) } }
