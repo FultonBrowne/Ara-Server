@@ -23,7 +23,7 @@ class NewDevice {
         }
         val idDB =key+id
         DevicesDB().getDB(client, key!!, id!!)
-        val rm = RegistryManager()
+        val rm = RegistryManager.createFromConnectionString("HostName=Ara-iot.azure-devices.net;SharedAccessKeyName=registryReadWrite;SharedAccessKey=jCfMMHFTQdud0aBUNy0fzWgmJLEh9T/xe0S4OZ6Xhtg=")
         val device = Device.createDevice( idDB, AuthenticationType.SAS)
         rm.addDevice(device)
 
