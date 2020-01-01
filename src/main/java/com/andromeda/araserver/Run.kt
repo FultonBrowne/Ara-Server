@@ -21,9 +21,9 @@ import java.net.URL
 import java.sql.SQLException
 
 class Run private constructor(port: Int) : NanoHTTPD(port) {
-    var keyWord: KeyWord
-    var model: ParserModel
-    var parser: Parser
+    private var keyWord: KeyWord
+    private var model: ParserModel
+    private var parser: Parser
     //If connected to
     override fun serve(session: IHTTPSession): Response {
         val tag: Int
