@@ -9,7 +9,6 @@ import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.pages.Update
 import com.andromeda.araserver.skills.*
 import com.andromeda.araserver.util.KeyWord
-import com.andromeda.araserver.util.SortWords
 import com.rometools.rome.feed.synd.SyndFeed
 import com.rometools.rome.io.FeedException
 import com.rometools.rome.io.SyndFeedOutput
@@ -20,11 +19,12 @@ import opennlp.tools.parser.ParserModel
 import java.io.IOException
 import java.net.URL
 import java.sql.SQLException
+import java.util.*
 
-class Run private constructor(port: Int) : NanoHTTPD(port) {
-    private var keyWord: KeyWord
-    private var model: ParserModel
-    private var parser: Parser
+object Run : NanoHTTPD(8080) {
+    private var keyWord: KeyWord? = null
+    private var model: ParserModel? = null
+    private var parser: Parser? = null
     //If connected to
     override fun serve(session: IHTTPSession): Response {
         val tag: Int
@@ -44,7 +44,7 @@ class Run private constructor(port: Int) : NanoHTTPD(port) {
             sessionUri.startsWith("/yelpclient") -> main2 =
                 Locdec().main(sessionUri, keyWord, parser)
             sessionUri.startsWith("/weath") -> main2 =
-                Weather().mainPart(sessionUri, keyWord, parser)
+                Weather().mainPart(sessionUri, keyWord!!, parser!!)
             sessionUri.startsWith("/devices/") -> main2 =
                 Main().main(sessionUri)
             sessionUri.startsWith("/deviceinfo/") -> main2 =
@@ -99,54 +99,41 @@ class Run private constructor(port: Int) : NanoHTTPD(port) {
         //Output response
         return newFixedLengthResponse(main2)
     }
-
-    companion object {
         // Static function, to be run on start.
         @JvmStatic
         fun main(args: Array<String>) { // If this is in a heroku environment, get the port number
-            var webPort = System.getenv("PORT")
-            if (webPort == null || webPort.isEmpty()) { // If not set to 8080
-                webPort = "8080"
+            start(SOCKET_READ_TIMEOUT, false)
+            println(" Ara server is running and is available on your domain, IP, or http://localhost:8080/")
+            println(
+                "This program is free software: you can redistribute it and/or modify\n" +
+                        "    it under the terms of the GNU General Public License as published by\n" +
+                        "    the Free Software Foundation, either version 3 of the License, or\n" +
+                        "    (at your option) any later version.\n" +
+                        "\n" +
+                        "    This program is distributed in the hope that it will be useful,\n" +
+                        "    but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
+                        "    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
+                        "    GNU General Public License for more details.\n" +
+                        "\n" +
+                        "    You should have received a copy of the GNU General Public License\n" +
+                        "    along with this program.  If not, see <https://www.gnu.org/licenses/>."
+            )
+            //new MsSql().getSkills();
+            val classloader = javaClass.classLoader
+            var `is` = classloader.getResourceAsStream("resources/parse.bin")
+            println("test")
+            if (`is` == null) {
+                val url =
+                    URL("https://arafilestore.file.core.windows.net/ara-server-files/parse.bin?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2024-04-01T22:11:11Z&st=2019-12-19T15:11:11Z&spr=https&sig=lfjMHSahA6fw8enCbx0hFTE1uAVJWvPmC4m6blVSuuo%3D")
+                `is` = url.openStream()
             }
-            //Get port value and start server
-            try {
-                Run(webPort.toInt())
-            } catch (ioe: IOException) {
-                System.err.println("Couldn't start server:\n$ioe")
-            }
-        }
+            model = ParserModel(`is`)
+            parser = ParserFactory.create(model)
+            keyWord = KeyWord(`is`!!)
+            println("Press any key to exit...")
+
+
     }
 
-    //Function to declare port
-    init { //Get Port
-        //Start Server
-        start(SOCKET_READ_TIMEOUT, false)
-        println(" Ara server is running and is available on your domain, IP, or http://localhost:$port/")
-        println(
-            "This program is free software: you can redistribute it and/or modify\n" +
-                    "    it under the terms of the GNU General Public License as published by\n" +
-                    "    the Free Software Foundation, either version 3 of the License, or\n" +
-                    "    (at your option) any later version.\n" +
-                    "\n" +
-                    "    This program is distributed in the hope that it will be useful,\n" +
-                    "    but WITHOUT ANY WARRANTY; without even the implied warranty of\n" +
-                    "    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" +
-                    "    GNU General Public License for more details.\n" +
-                    "\n" +
-                    "    You should have received a copy of the GNU General Public License\n" +
-                    "    along with this program.  If not, see <https://www.gnu.org/licenses/>."
-        )
-        //new MsSql().getSkills();
-        val classloader = javaClass.classLoader
-        var `is` = classloader.getResourceAsStream("resources/parse.bin")
-        println("test")
-        if (`is` == null) {
-            val url =
-                URL("https://arafilestore.file.core.windows.net/ara-server-files/parse.bin?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2024-04-01T22:11:11Z&st=2019-12-19T15:11:11Z&spr=https&sig=lfjMHSahA6fw8enCbx0hFTE1uAVJWvPmC4m6blVSuuo%3D")
-            `is` = url.openStream()
-        }
-        model = ParserModel(`is`)
-        parser = ParserFactory.create(model)
-        keyWord = KeyWord(`is`!!)
-    }
+
 }
