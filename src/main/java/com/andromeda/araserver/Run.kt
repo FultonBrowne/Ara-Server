@@ -90,7 +90,7 @@ object Run  {
             parser = ParserFactory.create(model)
             keyWord = KeyWord(`is`!!)
             println("Press any key to exit...")
-            server.start(wait = false)
+            server.start(wait = true)
 
 
     }
