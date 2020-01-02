@@ -143,7 +143,5 @@ class Run private constructor(port: Int) : NanoHTTPD(port) {
         model = ParserModel(`is`)
         parser = ParserFactory.create(model)
         keyWord = KeyWord(`is`!!)
-        println(" reeeeesut")
-        println(SortWords(keyWord, "weather in portland oregon in two days").getComplexDate(parser))
     }
 }
