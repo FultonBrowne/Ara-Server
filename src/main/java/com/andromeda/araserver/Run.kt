@@ -1,6 +1,7 @@
 package com.andromeda.araserver
 
 import com.andromeda.araserver.iot.Main
+import com.andromeda.araserver.iot.NewDevice
 import com.andromeda.araserver.iot.Status
 import com.andromeda.araserver.pages.ApiStart
 import com.andromeda.araserver.pages.GetSkillData
@@ -50,6 +51,10 @@ class Run private constructor(port: Int) : NanoHTTPD(port) {
                 Status().main(sessionUri)
             sessionUri.startsWith("/search") -> {
                 main2 = GetInfo().main(sessionUri)
+            }
+            sessionUri.startsWith("/newdevice/") -> {
+                main2 = ""
+                NewDevice().main(sessionUri)
             }
             sessionUri.startsWith("/math") -> main2 =
                 Equations().main(sessionUri)
