@@ -60,7 +60,7 @@ object Run  {
         // Static function, to be run on start.
         @JvmStatic
         fun main(args: Array<String>) {
-            val server = embeddedServer(Netty, 8080){
+            val server = embeddedServer(Netty, 80){
                 serverCode(this)
             }
             println(" Ara server is running and is available on your domain, IP, or http://localhost:8080/")
