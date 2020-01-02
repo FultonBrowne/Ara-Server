@@ -6,6 +6,7 @@ import com.rometools.rome.feed.synd.SyndFeed
 import com.rometools.rome.feed.synd.SyndFeedImpl
 import com.rometools.rome.io.FeedException
 import com.rometools.rome.io.SyndFeedInput
+import com.rometools.rome.io.SyndFeedOutput
 import com.rometools.rome.io.XmlReader
 
 
@@ -113,5 +114,31 @@ object RssMain {
         feed.entries = sortedEntries.reversed()
         //return the value
         return feed
+    }
+    fun inString(url: String): String {
+        val tag = when (url) {
+            "/world" -> 1
+            "/us" -> 2
+            "/tech" -> 3
+            "/money" -> 4
+            else -> 0
+        }
+        var main2 = ""
+        var syndFeed:SyndFeed? = null
+        try { // get Rss feed from RssMain.kt
+            syndFeed = rssMain1(tag)
+        } catch (e: IOException) { // if any issues
+            e.printStackTrace()
+        } catch (e: FeedException) {
+            e.printStackTrace()
+        }
+        // turn feed content in to XML text
+        try {
+            assert(syndFeed != null)
+            main2 = SyndFeedOutput().outputString(syndFeed)
+        } catch (e: FeedException) {
+            e.printStackTrace()
+        }
+        return main2
     }
 }
