@@ -22,11 +22,11 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
             graph.show()
 
             while (working) {
-                when {
-                    graph?.childCount == 1 -> {
+                when (graph?.childCount) {
+                    1 -> {
                         graph = graph.children?.get(0)
                     }
-                    graph?.childCount == 0 -> {
+                    0 -> {
                         working = false
                     }
                     else -> {
@@ -35,7 +35,6 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
                         }
                         working = false
                     }
-
                 }
             }
         } else {
