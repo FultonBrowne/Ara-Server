@@ -1,5 +1,6 @@
 package com.andromeda.araserver
 
+import com.andromeda.araserver.iot.GetDeviceClass
 import com.andromeda.araserver.iot.Main
 import com.andromeda.araserver.iot.NewDevice
 import com.andromeda.araserver.iot.Status
@@ -62,6 +63,8 @@ object Run : NanoHTTPD(80) {
                 GetSkillData().main(sessionUri)
             sessionUri.startsWith("/update") -> main2 =
                 Update().update(sessionUri)
+            sessionUri.startsWith("/class") -> main2 =
+                GetDeviceClass().main(sessionUri)
             sessionUri.startsWith("/what") -> main2 =
                 SocialSkills().doYouLike(sessionUri.replace("/what/", ""))
             sessionUri.startsWith("/store") -> {
