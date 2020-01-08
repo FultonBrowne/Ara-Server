@@ -22,7 +22,7 @@ import java.net.URL
 import java.sql.SQLException
 import java.util.*
 
-object Run : NanoHTTPD(80) {
+object Run : NanoHTTPD(8080) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
@@ -59,6 +59,8 @@ object Run : NanoHTTPD(80) {
             }
             sessionUri.startsWith("/math") -> main2 =
                 Equations().main(sessionUri)
+            sessionUri.startsWith("/call") ->
+                    main2 = keyWord?.let { parser?.let { it1 -> Call().main(sessionUri, it1, it) } }
             sessionUri.startsWith("/skillsdata/") -> main2 =
                 GetSkillData().main(sessionUri)
             sessionUri.startsWith("/update") -> main2 =
