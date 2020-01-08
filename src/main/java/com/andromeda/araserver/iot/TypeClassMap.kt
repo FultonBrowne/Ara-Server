@@ -14,6 +14,6 @@ class TypeClassMap {
             ac = false,
             heat = false
         ))
-        return map[main]
+        return arrayListOf(map[main])
     }
 }
