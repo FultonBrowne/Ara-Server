@@ -22,7 +22,7 @@ import java.net.URL
 import java.sql.SQLException
 import java.util.*
 
-object Run : NanoHTTPD(8080) {
+object Run : NanoHTTPD(80) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null

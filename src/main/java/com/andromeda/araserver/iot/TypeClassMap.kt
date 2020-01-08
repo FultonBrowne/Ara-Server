@@ -10,7 +10,8 @@ class TypeClassMap {
         return map[type] as Class<Any>? ?: error("")
     }
     fun DeafaultVals(main:String): Any? {
-        val map = mapOf(DeviceConst.LIGHT to LightStatusModel(false, 0, 0), DeviceConst.TEMP to TempModel(30,
+        val map = mapOf(DeviceConst.LIGHT to LightStatusModel(false, 0, 0), DeviceConst.TEMP to TempModel(
+            temp = 30,
             ac = false,
             heat = false
         ))
