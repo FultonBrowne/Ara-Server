@@ -24,7 +24,7 @@ import java.sql.SQLException
 import java.sql.Time
 import java.util.*
 
-object Run : NanoHTTPD(80) {
+object Run : NanoHTTPD(8080) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
