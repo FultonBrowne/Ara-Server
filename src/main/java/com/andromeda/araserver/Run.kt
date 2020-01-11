@@ -9,6 +9,7 @@ import com.andromeda.araserver.pages.GetSkillData
 import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.pages.Update
 import com.andromeda.araserver.skills.*
+import com.andromeda.araserver.skills.Timer
 import com.andromeda.araserver.util.KeyWord
 import com.rometools.rome.feed.synd.SyndFeed
 import com.rometools.rome.io.FeedException
@@ -20,6 +21,7 @@ import opennlp.tools.parser.ParserModel
 import java.io.IOException
 import java.net.URL
 import java.sql.SQLException
+import java.sql.Time
 import java.util.*
 
 object Run : NanoHTTPD(80) {
@@ -69,6 +71,8 @@ object Run : NanoHTTPD(80) {
                 GetDeviceClass().main(sessionUri)
             sessionUri.startsWith("/what") -> main2 =
                 SocialSkills().doYouLike(sessionUri.replace("/what/", ""))
+            sessionUri.startsWith("/time") -> main2 =
+                parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri, it1, it) } }
             sessionUri.startsWith("/store") -> {
 
                     main2 = com.andromeda.araserver.store.Main().GetStoreContent()
