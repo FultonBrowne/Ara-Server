@@ -15,12 +15,14 @@ class Timer {
         term = pairs[0]
         val words = SortWords(keyWord = keyWord, mainVal = term).getComplexDate(graph)
         println(words)
-        var numOfUnits:Int?
-        var unit:String?
+        var numOfUnits:Int? = null
+        var unit:String? = null
         for(i in words){
             if(i.type == "CD") numOfUnits = i.word.toInt()
             else unit = i.word
         }
+        val map = mapOf("minutes" to 60 * 1000, "minute" to 60 * 1000, "hours" to 60 * 60 * 1000, "hour" to 60 * 60 * 1000, "second" to 1000, "seconds" to 1000)
+        val time = numOfUnits?.times(map[unit]!!)
         return ""
     }
 }
