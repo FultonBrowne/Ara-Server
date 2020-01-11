@@ -15,6 +15,12 @@ class Timer {
         term = pairs[0]
         val words = SortWords(keyWord = keyWord, mainVal = term).getComplexDate(graph)
         println(words)
+        var numOfUnits:Int?
+        var unit:String?
+        for(i in words){
+            if(i.type == "CD") numOfUnits = i.word.toInt()
+            else unit = i.word
+        }
         return ""
     }
 }
