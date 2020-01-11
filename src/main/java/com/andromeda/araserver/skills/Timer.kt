@@ -1,7 +1,11 @@
 package com.andromeda.araserver.skills
 
 import com.andromeda.araserver.util.KeyWord
+import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.SortWords
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
+import com.google.gson.Gson
 import opennlp.tools.parser.Parser
 import java.util.ArrayList
 
@@ -23,6 +27,10 @@ class Timer {
         }
         val map = mapOf("minutes" to 60 * 1000, "minute" to 60 * 1000, "hours" to 60 * 60 * 1000, "hour" to 60 * 60 * 1000, "second" to 1000, "seconds" to 1000)
         val time = numOfUnits?.times(map[unit]!!)
+        val gson = Gson()
+        val mapper = YAMLMapper()
+        gson.toJson(OutputModel("setting a timer", "", "" , "", "setting timer", mapper.writeValueAsString(SkillsModel("TIMER", time.toString(), ""))))
+
         return ""
     }
 }
