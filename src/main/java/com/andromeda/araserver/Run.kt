@@ -24,10 +24,11 @@ import java.sql.SQLException
 import java.sql.Time
 import java.util.*
 
-object Run : NanoHTTPD(80) {
+public object Run : NanoHTTPD(80) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
+    const val port = this.listeningPort
     //If connected to
     override fun serve(session: IHTTPSession): Response {
         val tag: Int
