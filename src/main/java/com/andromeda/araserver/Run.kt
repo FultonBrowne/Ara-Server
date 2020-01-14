@@ -19,6 +19,7 @@ import opennlp.tools.parser.Parser
 import opennlp.tools.parser.ParserFactory
 import opennlp.tools.parser.ParserModel
 import java.io.IOException
+import java.math.BigDecimal
 import java.net.URL
 import java.sql.SQLException
 import java.sql.Time
@@ -28,7 +29,7 @@ public object Run : NanoHTTPD(80) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
-    const val port = this.listeningPort
+    var port = listeningPort
     //If connected to
     override fun serve(session: IHTTPSession): Response {
         val tag: Int

@@ -7,6 +7,6 @@ import org.junit.Test;
 public class TestThePort {
     @Test
     public void test(){
-        Assert.assertEquals(Run.port, 80);
+        Assert.assertEquals(Run.INSTANCE.getListeningPort(), 80);
     }
 }
