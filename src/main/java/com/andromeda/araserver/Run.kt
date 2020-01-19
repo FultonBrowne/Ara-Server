@@ -19,13 +19,9 @@ import opennlp.tools.parser.Parser
 import opennlp.tools.parser.ParserFactory
 import opennlp.tools.parser.ParserModel
 import java.io.IOException
-import java.math.BigDecimal
 import java.net.URL
-import java.sql.SQLException
-import java.sql.Time
-import java.util.*
 
-public object Run : NanoHTTPD(80) {
+public object Run : NanoHTTPD(8080) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
@@ -64,7 +60,7 @@ public object Run : NanoHTTPD(80) {
             sessionUri.startsWith("/math") -> main2 =
                 Equations().main(sessionUri)
             sessionUri.startsWith("/call") ->
-                    main2 = keyWord?.let { parser?.let { it1 -> Call().main(sessionUri, it1, it) } }
+                    main2 = keyWord?.let { parser?.let { it1 -> Call().main(sessionUri) } }
             sessionUri.startsWith("/skillsdata/") -> main2 =
                 GetSkillData().main(sessionUri)
             sessionUri.startsWith("/update") -> main2 =
