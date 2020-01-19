@@ -8,7 +8,7 @@ import java.util.ArrayList
 class Text {
     fun main(url: String): String {
         var term: String
-        val mainVal = url.replace("/call/", "")
+        val mainVal = url.replace("/text/", "")
         //parse for search term
         val pairs =
             ArrayList(listOf(*mainVal.split("&").toTypedArray()))

@@ -61,6 +61,8 @@ public object Run : NanoHTTPD(8080) {
                 Equations().main(sessionUri)
             sessionUri.startsWith("/call") ->
                     main2 = keyWord?.let { parser?.let { it1 -> Call().main(sessionUri) } }
+            sessionUri.startsWith("/call") ->
+                main2 = keyWord?.let { parser?.let { it1 -> Text().main(sessionUri) } }
             sessionUri.startsWith("/skillsdata/") -> main2 =
                 GetSkillData().main(sessionUri)
             sessionUri.startsWith("/update") -> main2 =
