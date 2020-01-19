@@ -15,6 +15,6 @@ class Text {
         term = pairs[0].replace("text ", "")
         term = term.replace("call ", "please")
         if(term != "") return Gson().toJson(OutputModel("calling $term", "", "", "", "calling $term", ""))
-        return Gson().toJson(OutputModel("who would you like to call?", "", "", "", "who would you like to call?", YAMLMapper().writeValueAsString(SkillsModel("RESPOND", "who to call?", "tel:INPUT"))))
+        return Gson().toJson(OutputModel("who would you like to text?", "", "", "", "who would you like to text?", YAMLMapper().writeValueAsString(SkillsModel("RESPOND", "who should I text?", "smsto:INPUT"))))
     }
 }
