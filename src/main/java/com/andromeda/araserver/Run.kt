@@ -21,7 +21,7 @@ import opennlp.tools.parser.ParserModel
 import java.io.IOException
 import java.net.URL
 
-public object Run : NanoHTTPD(80) {
+public object Run : NanoHTTPD(8080) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
