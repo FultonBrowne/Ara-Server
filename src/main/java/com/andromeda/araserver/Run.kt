@@ -19,9 +19,10 @@ import opennlp.tools.parser.Parser
 import opennlp.tools.parser.ParserFactory
 import opennlp.tools.parser.ParserModel
 import java.io.IOException
+import com.andromeda.araserver.util.Port
 import java.net.URL
 
-public object Run : NanoHTTPD(80) {
+public object Run : NanoHTTPD(Port().main()) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
