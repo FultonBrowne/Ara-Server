@@ -36,6 +36,7 @@ public object Run : NanoHTTPD(Port().main()) {
         var syndFeed: SyndFeed? = null
         //Text to be outputted
         var main2: String? = "err"
+
         //Functions related to the search api
         //Start API function
         when {
