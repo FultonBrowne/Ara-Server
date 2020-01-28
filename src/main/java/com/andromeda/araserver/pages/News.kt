@@ -1,5 +1,6 @@
 package com.andromeda.araserver.pages
 class News{
-    fun main(){
+    fun main(url:String){
+        
     }
 }
