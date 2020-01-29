@@ -7,6 +7,7 @@
           <entry key="IP" value="http://52.141.222.41/cache/" />
           <entry key="PASS" value="$PASSWORD$" />
           <entry key="PASSWORD" value="$PASSWORD$" />
+          <entry key="PORT" value="$PORT$" />
         </map>
       </option>
       <option name="executionName" />

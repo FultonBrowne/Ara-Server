@@ -6,6 +6,7 @@ import com.andromeda.araserver.iot.NewDevice
 import com.andromeda.araserver.iot.Status
 import com.andromeda.araserver.pages.ApiStart
 import com.andromeda.araserver.pages.GetSkillData
+import com.andromeda.araserver.pages.News
 import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.pages.Update
 import com.andromeda.araserver.skills.*
@@ -40,6 +41,7 @@ public object Run : NanoHTTPD(Port().main()) {
         //Functions related to the search api
         //Start API function
         when {
+            sessionUri.startsWith("/news") -> main2 = News().main(sessionUri)
             sessionUri.startsWith("/api") -> main2 =
                 ApiStart().apiMain(sessionUri, keyWord, parser)
             sessionUri.startsWith("/hi") -> main2 =
