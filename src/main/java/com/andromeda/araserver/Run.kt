@@ -27,7 +27,6 @@ public object Run : NanoHTTPD(Port().main()) {
     var port = listeningPort
     //If connected to
     override fun serve(session: IHTTPSession): Response {
-        News()
         val tag: Int
         //URI passed from client
         val sessionUri = session.uri
@@ -117,6 +116,7 @@ public object Run : NanoHTTPD(Port().main()) {
     @JvmStatic
     fun main(args: Array<String>) { // If this is in a heroku environment, get the port number
         start(SOCKET_READ_TIMEOUT, false)
+        News()
         println(" Ara server is running and is available on your domain, IP, or http://localhost:8080/")
         println(
             "This program is free software: you can redistribute it and/or modify\n" +
