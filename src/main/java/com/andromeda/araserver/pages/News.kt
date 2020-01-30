@@ -56,6 +56,13 @@ class News{
         }
         NewsCache.ukNews = Gson().toJson(newsData)
         newsData.clear()
+        data = URL("https://newsapi.org/v2/top-headlines?country=de&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1").readText()
+        JsonParser().parse(data).asJsonObject.get("articles").asJsonArray.forEach{
+            val json = it.asJsonObject
+            newsData.add(NewsData(json.get("title").asString, json.get("content").asString, json.get("description").asString, json.get("url").asString,json.get("urlToImage").asString))
+        }
+        NewsCache.deNews = Gson().toJson(newsData)
+        newsData.clear()
 
     }
 

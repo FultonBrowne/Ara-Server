@@ -42,6 +42,9 @@ public object Run : NanoHTTPD(Port().main()) {
             sessionUri.startsWith("/news/us") -> main2 = NewsCache.usNews
             sessionUri.startsWith("/news/tech") -> main2 = NewsCache.tech
             sessionUri.startsWith("/news/money") -> main2 = NewsCache.money
+            sessionUri.startsWith("/news/mex") -> main2 = NewsCache.mexNews
+            sessionUri.startsWith("/news/de") -> main2 = NewsCache.deNews
+            sessionUri.startsWith("/news/uk") -> main2 = NewsCache.ukNews
             sessionUri.startsWith("/api") -> main2 =
                 ApiStart().apiMain(sessionUri, keyWord, parser)
             sessionUri.startsWith("/hi") -> main2 =
