@@ -4,11 +4,8 @@ import com.andromeda.araserver.iot.GetDeviceClass
 import com.andromeda.araserver.iot.Main
 import com.andromeda.araserver.iot.NewDevice
 import com.andromeda.araserver.iot.Status
-import com.andromeda.araserver.pages.ApiStart
-import com.andromeda.araserver.pages.GetSkillData
-import com.andromeda.araserver.pages.News
+import com.andromeda.araserver.pages.*
 import com.andromeda.araserver.pages.RssMain.rssMain1
-import com.andromeda.araserver.pages.Update
 import com.andromeda.araserver.skills.*
 import com.andromeda.araserver.skills.Timer
 import com.andromeda.araserver.util.KeyWord
@@ -30,6 +27,7 @@ public object Run : NanoHTTPD(Port().main()) {
     var port = listeningPort
     //If connected to
     override fun serve(session: IHTTPSession): Response {
+        News()
         val tag: Int
         //URI passed from client
         val sessionUri = session.uri
@@ -41,7 +39,9 @@ public object Run : NanoHTTPD(Port().main()) {
         //Functions related to the search api
         //Start API function
         when {
-            sessionUri.startsWith("/news") -> main2 = News().main(sessionUri)
+            sessionUri.startsWith("/news/us") -> main2 = NewsCache.usNews
+            sessionUri.startsWith("/news/tech") -> main2 = NewsCache.tech
+            sessionUri.startsWith("/news/money") -> main2 = NewsCache.money
             sessionUri.startsWith("/api") -> main2 =
                 ApiStart().apiMain(sessionUri, keyWord, parser)
             sessionUri.startsWith("/hi") -> main2 =
