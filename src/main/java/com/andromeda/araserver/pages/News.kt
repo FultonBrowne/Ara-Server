@@ -16,7 +16,7 @@ class News{
                 getData()
             }
         }
-        time.schedule(refresh, 0, 900000)
+        time.schedule(refresh, 0, 1800000)
     }
 
     fun getData() {
