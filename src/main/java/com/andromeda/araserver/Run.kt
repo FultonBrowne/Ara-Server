@@ -75,8 +75,8 @@ public object Run : NanoHTTPD(Port().main()) {
                 Update().update(sessionUri)
             sessionUri.startsWith("/class") -> main2 =
                 GetDeviceClass().main(sessionUri)
-            sessionUri.startsWith("/what") -> main2 =
-                SocialSkills().doYouLike(sessionUri.replace("/what/", ""))
+            sessionUri.startsWith("/person") -> main2 =
+                keyWord?.let { com.andromeda.araserver.persona.Main().main(sessionUri, it, parser) }
             sessionUri.startsWith("/time") -> main2 =
                 parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri, it1, it) } }
             sessionUri.startsWith("/store") -> {
