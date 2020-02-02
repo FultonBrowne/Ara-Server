@@ -191,6 +191,16 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         }
         return toReturn
     }
+    private fun sortForNN(graph: Parse): ArrayList<WordGraph> {
+        var toReturn = ArrayList<WordGraph>()
+        for (i in graph.children!!) {
+            if (i.type == "NN" ) {
+                toReturn.add(WordGraph(i.coveredText, "NN"))
+            }
+            if (i.childCount > 0) toReturn.addAll(sortForNN(i))
+        }
+        return toReturn
+    }
     private fun sorter(graph: Parse, type:String): Boolean {
         var toReturn = false
         for (i in graph.children){
@@ -208,6 +218,35 @@ class SortWords(keyWord: KeyWord, mainVal: String) {
         for (i in graph.children){
             if (i.childCount > 1) toReturn.addAll(sortForAll(i))
             else if(i.type != "TK")toReturn.add(WordGraph(i.coveredText, i.type))
+        }
+        return toReturn
+    }
+
+    fun getNN(parse: Parser): ArrayList<WordGraph> {
+        val toReturn = ArrayList<WordGraph>()
+
+        var graph = key.getKeyWords(mainText,parse)?.get(0)
+
+
+        var working = true
+        if (graph != null) {
+            while (working) {
+                graph?.show()
+                when (graph?.childCount) {
+                    1 -> graph = graph.children?.get(0)
+                    0 -> working = false
+                    else -> {
+                        if (graph != null) {
+                            val toTest = sortForNN(graph)
+                            toReturn.addAll(toTest)
+                        }
+                        working = false
+                    }
+                }
+            }
+        } else {
+            print("null")
+            println("fail")
         }
         return toReturn
     }

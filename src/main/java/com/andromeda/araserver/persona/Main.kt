@@ -13,7 +13,7 @@ class Main {
         val pairs =
             ArrayList(listOf(*mainVal.split("&").toTypedArray()))
         term = pairs[0].replace("dial ", "")
-        val topics = graph?.let { SortWords(keyWord, term).getTopics(it) }
+        val topics = graph?.let { SortWords(keyWord, term).getNN(it) }
         println(topics)
         return ""
     }
