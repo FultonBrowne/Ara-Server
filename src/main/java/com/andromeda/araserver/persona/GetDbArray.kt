@@ -17,14 +17,15 @@ class GetDbArray {
     fun likes(search: String){
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
         val connection: Connection = DriverManager.getConnection(url)
-        var link = ""
         println(password)
         val statement = connection.createStatement()
         val selectSql = "SELECT * from likes"
         val resultSet = statement.executeQuery(selectSql)
         while (resultSet.next())
         {
+            if (resultSet.getString("name") == search){
 
+            }
         }
     }
 }
