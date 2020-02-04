@@ -17,7 +17,7 @@ class Main {
         println(topics)
         var text = ""
         topics?.forEach { text += " ${it.word}" }
-        println(text)
+        println(text.removePrefix(" "))
         return GetDbArray().likes(text.removePrefix(" "))
     }
 }
