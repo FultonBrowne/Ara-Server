@@ -1,6 +1,8 @@
 package com.andromeda.araserver.persona
 
+import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.SortWords
+import com.google.gson.Gson
 import java.sql.Connection
 import java.sql.DriverManager
 
@@ -14,7 +16,7 @@ class GetDbArray {
         "ara",
         userName,
         password)
-    fun likes(search: String){
+    fun likes(search: String): String? {
         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
         val connection: Connection = DriverManager.getConnection(url)
         println(password)
@@ -24,8 +26,12 @@ class GetDbArray {
         while (resultSet.next())
         {
             if (resultSet.getString("name") == search){
-
+                val response = Responses.main(resultSet.getInt("level"))!!.replace("TERM", search)
+                val outputModel =  arrayListOf(OutputModel(response, "", "", "", response, "" ))
+                return Gson().toJson(outputModel)
             }
         }
+        val outputModel =  arrayListOf(OutputModel("I am sorry I don't know that one", "", "", "", "I am sorry I don't know that one", "" ))
+        return Gson().toJson(outputModel)
     }
 }
