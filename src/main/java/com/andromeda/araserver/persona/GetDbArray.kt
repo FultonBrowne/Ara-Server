@@ -21,7 +21,7 @@ class GetDbArray {
         val connection: Connection = DriverManager.getConnection(url)
         println(password)
         val statement = connection.createStatement()
-        val selectSql = "SELECT name, level from likes"
+        val selectSql = "SELECT * FROM araPersona.likes"
         val resultSet = statement.executeQuery(selectSql)
         while (resultSet.next())
         {

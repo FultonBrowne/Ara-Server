@@ -12,11 +12,12 @@ class Main {
         //parse for search term
         val pairs =
             ArrayList(listOf(*mainVal.split("&").toTypedArray()))
-        term = pairs[0].replace("dial ", "")
+        term = pairs[0]
         val topics = graph?.let { SortWords(keyWord, term).getNN(it) }
         println(topics)
         var text = ""
-        term.forEach { text += it }
-        return GetDbArray().likes(term)
+        topics?.forEach { text += " $it" }
+        println(text)
+        return GetDbArray().likes(text)
     }
 }
