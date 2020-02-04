@@ -6,7 +6,7 @@ import opennlp.tools.parser.Parser
 import java.util.ArrayList
 
 class Main {
-    fun main(url:String, keyWord: KeyWord, graph: Parser?): String {
+    fun main(url:String, keyWord: KeyWord, graph: Parser?): String? {
         val term: String
         val mainVal = url.replace("/person/", "")
         //parse for search term
@@ -15,6 +15,8 @@ class Main {
         term = pairs[0].replace("dial ", "")
         val topics = graph?.let { SortWords(keyWord, term).getNN(it) }
         println(topics)
-        return ""
+        var text = ""
+        term.forEach { text += it }
+        return GetDbArray().likes(term)
     }
 }
