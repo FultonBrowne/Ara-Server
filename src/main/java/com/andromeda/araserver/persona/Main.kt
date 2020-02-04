@@ -16,8 +16,8 @@ class Main {
         val topics = graph?.let { SortWords(keyWord, term).getNN(it) }
         println(topics)
         var text = ""
-        topics?.forEach { text += " $it" }
+        topics?.forEach { text += " ${it.word}" }
         println(text)
-        return GetDbArray().likes(text)
+        return GetDbArray().likes(text.removePrefix(" "))
     }
 }
