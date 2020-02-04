@@ -25,8 +25,11 @@ class GetDbArray {
         val resultSet = statement.executeQuery(selectSql)
         while (resultSet.next())
         {
+            println(resultSet.getString("name"))
+            val level = resultSet.getInt("level")
+            println(level)
             if (resultSet.getString("name").contains(search)){
-                val response = Responses.main(resultSet.getInt("level"))!!.replace("TERM", search)
+                val response = Responses.main(level)!!.replace("TERM", search)
                 val outputModel =  arrayListOf(OutputModel(response, "", "", "", response, "" ))
                 return Gson().toJson(outputModel)
             }
