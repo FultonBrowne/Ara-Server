@@ -20,11 +20,10 @@ import java.io.IOException
 import com.andromeda.araserver.util.Port
 import java.net.URL
 
-public object Run : NanoHTTPD(Port().main()) {
+object Run : NanoHTTPD(Port().main()) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
-    var port = listeningPort
     //If connected to
     override fun serve(session: IHTTPSession): Response {
         val tag: Int
