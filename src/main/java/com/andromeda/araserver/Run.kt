@@ -4,6 +4,7 @@ import com.andromeda.araserver.iot.GetDeviceClass
 import com.andromeda.araserver.iot.Main
 import com.andromeda.araserver.iot.NewDevice
 import com.andromeda.araserver.iot.Status
+import com.andromeda.araserver.localSearchData.GetData
 import com.andromeda.araserver.pages.*
 import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.skills.*
@@ -62,6 +63,7 @@ object Run : NanoHTTPD(Port().main()) {
                 main2 = ""
                 NewDevice().main(sessionUri)
             }
+            sessionUri.startsWith("/getforcache")-> main2 = GetData().main()
             sessionUri.startsWith("/math") -> main2 =
                 Equations().main(sessionUri)
             sessionUri.startsWith("/call") ->

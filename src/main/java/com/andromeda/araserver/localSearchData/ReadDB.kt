@@ -8,9 +8,10 @@ class ReadDB {
         val skillsFromDB = ArrayList<SkillsFromDB>()
         val options = FeedOptions()
         options.partitionKey = PartitionKey("readonly")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options)
+        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
         for (i in queryResults.queryIterator){
             val json = i.get("document") as JSONObject
+            println(json)
             val model = SkillsFromDB(
                 pre = json.getString("pre"),
                 end = "",
