@@ -37,21 +37,27 @@ class DevicesDB {
 
 
     }
-    fun listDB(client: DocumentClient, key:String): ArrayList<DeviceModel> {
-        val devices = ArrayList<DeviceModel>()
+    fun listDB(client: DocumentClient, key:String): ArrayList<DeviceModelIndexed> {
+        val devices = ArrayList<DeviceModelIndexed>()
         val options = FeedOptions()
         options.partitionKey = PartitionKey("user-$key")
         val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
         for (i in queryResults.queryIterator){
             val json = i.get("document") as JSONObject
-            val deviceModel = DeviceModel(
-                name = json.getString("name"),
-                type = json.getString("type"),
-                status = json.getString("status"),
-                group = ""
-            )
-            document = i
-            devices.add(deviceModel)
+            try {
+                val deviceModel = DeviceModelIndexed(
+                    name = json.getString("name"),
+                    type = json.getString("type"),
+                    status = json.getString("status"),
+                    group = "",
+                    index = i.id
+                )
+                document = i
+                devices.add(deviceModel)
+            }
+            catch (e:Exception){
+                e.printStackTrace()
+            }
         }
         return devices
     }

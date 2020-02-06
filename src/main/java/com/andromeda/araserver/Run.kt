@@ -1,9 +1,6 @@
 package com.andromeda.araserver
 
-import com.andromeda.araserver.iot.GetDeviceClass
-import com.andromeda.araserver.iot.Main
-import com.andromeda.araserver.iot.NewDevice
-import com.andromeda.araserver.iot.Status
+import com.andromeda.araserver.iot.*
 import com.andromeda.araserver.localSearchData.GetData
 import com.andromeda.araserver.pages.*
 import com.andromeda.araserver.pages.RssMain.rssMain1
@@ -54,6 +51,8 @@ object Run : NanoHTTPD(Port().main()) {
                 Weather().mainPart(sessionUri, keyWord!!, parser!!)
             sessionUri.startsWith("/devices/") -> main2 =
                 Main().main(sessionUri)
+            sessionUri.startsWith("/devicelist/") -> main2 =
+                ListDevices().main(sessionUri)
             sessionUri.startsWith("/deviceinfo/") -> main2 =
                 Status().main(sessionUri)
             sessionUri.startsWith("/search") -> {
