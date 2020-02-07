@@ -2,6 +2,7 @@ package com.andromeda.araserver
 
 import com.andromeda.araserver.iot.*
 import com.andromeda.araserver.localSearchData.GetData
+import com.andromeda.araserver.localSearchData.GetUserSkills
 import com.andromeda.araserver.pages.*
 import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.skills.*
@@ -43,6 +44,8 @@ object Run : NanoHTTPD(Port().main()) {
             sessionUri.startsWith("/news/uk") -> main2 = NewsCache.ukNews
             sessionUri.startsWith("/api") -> main2 =
                 ApiStart().apiMain(sessionUri, keyWord, parser)
+            sessionUri.startsWith("/user") -> main2 =
+                GetUserSkills().list(sessionUri)
             sessionUri.startsWith("/hi") -> main2 =
                 Hello().hello()
             sessionUri.startsWith("/yelpclient") -> main2 =

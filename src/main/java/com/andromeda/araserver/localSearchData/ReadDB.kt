@@ -1,5 +1,6 @@
 package com.andromeda.araserver.localSearchData
 
+import com.andromeda.araserver.skills.SkillsModel
 import com.microsoft.azure.documentdb.*
 import org.json.JSONObject
 
@@ -21,7 +22,25 @@ class ReadDB {
         }
         return skillsFromDB
     }
-    fun userSkill(){
+    fun userSkill(client: DocumentClient, key: String): ArrayList<SkillsDBModel> {
+        val skillsFromDB = ArrayList<SkillsDBModel>()
+        val options = FeedOptions()
+        options.partitionKey = PartitionKey("user-$key")
+        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
+        for (i in queryResults.queryIterator) {
+            val json = i.get("document") as JSONObject
+            println(json)
+            try {
+                val action = json.get("action") as JSONObject
 
+                val model = SkillsDBModel(name = json.getString("name"), action = SkillsModel(action.getString("action"), "", ""))
+                skillsFromDB.add(model)
+            }
+            catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+        println(skillsFromDB)
+        return skillsFromDB
     }
 }
