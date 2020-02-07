@@ -9,7 +9,7 @@ class GetData {
     fun main(): String? {
         val dbLink = System.getenv("IOTDB")
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
-        return Gson().toJson(ReadDB().main(client))
+        return Gson().toJson(ReadDB().skills(client))
 
 
     }

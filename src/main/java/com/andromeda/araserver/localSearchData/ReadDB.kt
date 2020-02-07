@@ -4,7 +4,7 @@ import com.microsoft.azure.documentdb.*
 import org.json.JSONObject
 
 class ReadDB {
-    fun main(client: DocumentClient): ArrayList<SkillsFromDB> {
+    fun skills(client: DocumentClient): ArrayList<SkillsFromDB> {
         val skillsFromDB = ArrayList<SkillsFromDB>()
         val options = FeedOptions()
         options.partitionKey = PartitionKey("readonly")
@@ -20,5 +20,8 @@ class ReadDB {
             skillsFromDB.add(model)
         }
         return skillsFromDB
+    }
+    fun userSkill(){
+
     }
 }
