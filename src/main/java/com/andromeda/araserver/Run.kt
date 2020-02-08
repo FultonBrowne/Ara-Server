@@ -35,8 +35,10 @@ object Run : NanoHTTPD(Port().main()) {
 
         //Functions related to the search api
         //Start API function
+
         when {
             sessionUri.startsWith("/news/us") -> main2 = NewsCache.usNews
+            sessionUri.startsWith("/posupdate/") ->println(session.parameters)
             sessionUri.startsWith("/news/tech") -> main2 = NewsCache.tech
             sessionUri.startsWith("/news/money") -> main2 = NewsCache.money
             sessionUri.startsWith("/news/mex") -> main2 = NewsCache.mexNews
