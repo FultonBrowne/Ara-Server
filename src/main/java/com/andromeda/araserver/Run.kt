@@ -56,6 +56,7 @@ object Run : NanoHTTPD(Port().main()) {
                 Weather().mainPart(sessionUri, keyWord!!, parser!!)
             sessionUri.startsWith("/devices/") -> main2 =
                 Main().main(sessionUri)
+            sessionUri.startsWith("/updateuserdata/") -> main2 = UpdateDB().main(sessionUri)
             sessionUri.startsWith("/devicelist/") -> main2 =
                 ListDevices().main(sessionUri)
             sessionUri.startsWith("/deviceinfo/") -> main2 =
