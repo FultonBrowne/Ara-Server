@@ -46,6 +46,8 @@ object Run : NanoHTTPD(Port().main()) {
                 ApiStart().apiMain(sessionUri, keyWord, parser)
             sessionUri.startsWith("/user") -> main2 =
                 GetUserSkills().list(sessionUri)
+            sessionUri.startsWith("/1user") -> main2 =
+                GetUserSkills().one(sessionUri)
             sessionUri.startsWith("/hi") -> main2 =
                 Hello().hello()
             sessionUri.startsWith("/yelpclient") -> main2 =

@@ -16,4 +16,18 @@ class GetUserSkills {
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
         return Gson().toJson(ReadDB().userSkill(client, key!!))
     }
+    fun one(url:String): String? {
+        val mainVal = url.replace("/1user/", "")
+        val actions = mainVal.split("&")
+        val dbLink = System.getenv("IOTDB")
+        var id:String? = null
+        var key:String? = null
+        println("test")
+        for (i in actions) when {
+            i.startsWith("id=") -> id = i.replace("id=", "")
+            i.startsWith("user=") -> key = i.replace("user=", "")
+        }
+        val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
+        return Gson().toJson(ReadDB().userSkill(client, key!!, id!!))
+    }
 }
