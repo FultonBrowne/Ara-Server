@@ -18,4 +18,4 @@ package com.andromeda.araserver.localSearchData
 
 import com.andromeda.araserver.skills.SkillsModel
 
-data class SkillsDBModel(val action: SkillsModel, var name: String)
+data class SkillsDBModel(val action: SkillsModel, var name: String, val index:String)

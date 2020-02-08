@@ -33,7 +33,7 @@ class ReadDB {
             try {
                 val action = json.get("action") as JSONObject
 
-                val model = SkillsDBModel(name = json.getString("name"), action = SkillsModel(action.getString("action"), "", ""))
+                val model = SkillsDBModel(name = json.getString("name"), action = SkillsModel(action.getString("action"), "", ""), index = i.id)
                 skillsFromDB.add(model)
             }
             catch (e:Exception){
@@ -59,7 +59,7 @@ class ReadDB {
 
                 val action = json.get("action") as JSONObject
 
-                val model = SkillsDBModel(name = json.getString("name"), action = SkillsModel(action.getString("action"), "", ""))
+                val model = SkillsDBModel(name = json.getString("name"), action = SkillsModel(action.getString("action"), "", ""), index = i.id)
                 skillsFromDB.add(model)
             }
             catch (e:Exception){
