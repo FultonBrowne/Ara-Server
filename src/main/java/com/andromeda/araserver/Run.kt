@@ -38,7 +38,9 @@ object Run : NanoHTTPD(Port().main()) {
 
         when {
             sessionUri.startsWith("/news/us") -> main2 = NewsCache.usNews
-            sessionUri.startsWith("/posupdate/") ->println(session.parameters)
+            sessionUri.startsWith("/postupdate/") ->UpdateDB().arrayUpdate(sessionUri,
+                session.parameters["data"]?.get(0)!!
+            )
             sessionUri.startsWith("/news/tech") -> main2 = NewsCache.tech
             sessionUri.startsWith("/news/money") -> main2 = NewsCache.money
             sessionUri.startsWith("/news/mex") -> main2 = NewsCache.mexNews
