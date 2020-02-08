@@ -8,6 +8,7 @@ import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.skills.*
 import com.andromeda.araserver.skills.Timer
 import com.andromeda.araserver.util.KeyWord
+import com.andromeda.araserver.util.NewDoc
 import com.rometools.rome.feed.synd.SyndFeed
 import com.rometools.rome.io.FeedException
 import com.rometools.rome.io.SyndFeedOutput
@@ -71,6 +72,9 @@ object Run : NanoHTTPD(Port().main()) {
             sessionUri.startsWith("/newdevice/") -> {
                 main2 = ""
                 NewDevice().main(sessionUri)
+            }
+            sessionUri.startsWith("/newdoc/")->{
+                NewDoc().main(sessionUri, session.parameters["data"]?.get(0)!!)
             }
             sessionUri.startsWith("/getforcache")-> main2 = GetData().main()
             sessionUri.startsWith("/math") -> main2 =
