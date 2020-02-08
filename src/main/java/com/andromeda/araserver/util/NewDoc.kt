@@ -2,10 +2,7 @@ package com.andromeda.araserver.util
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.microsoft.azure.documentdb.DocumentClient
-import com.microsoft.azure.documentdb.FeedOptions
-import com.microsoft.azure.documentdb.PartitionKey
-import com.microsoft.azure.documentdb.RequestOptions
+import com.microsoft.azure.documentdb.*
 
 class NewDoc {
     fun main(url:String, postData:String){
@@ -21,14 +18,19 @@ class NewDoc {
             i.startsWith("prop=") -> prop = i.replace("prop=", "")
 
         }
+        val dbLink = System.getenv("IOTDB")
+        val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
+
+        newDoc(client, key!!, newVal, id!!)
     }
     fun fromJson(jsontxt: String?): Any {
         val gson = Gson()
         return gson.fromJson(jsontxt, object : TypeToken<Any>(){}.type)
     }
-    fun newDoc(client: DocumentClient, key:String, data:Any){
+    fun newDoc(client: DocumentClient, key:String, data:Any, id:String){
         val options =RequestOptions()
+
         options.partitionKey = PartitionKey("user-$key")
-        client.createDocument("/dbs/Ara-android-database/colls/Ara-android-collection", Document(data),options, true )
+        client.createDocument("/dbs/Ara-android-database/colls/Ara-android-collection", Document(data, id, "user-$key"),options, false )
     }
 }
