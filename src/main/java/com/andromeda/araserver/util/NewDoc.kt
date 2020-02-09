@@ -31,7 +31,7 @@ class NewDoc {
     fun newDoc(key: String, data: Any, id: String){
         val document = Document(data, id, "user-$key")
         val client = CosmosClient.create("https://ara-account-data.documents.azure.com:443/",System.getenv("IOTDB") )
-        val cosmosItemRequestOptions = CosmosItemRequestOptions("PartitionKey")
+        val cosmosItemRequestOptions = CosmosItemRequestOptions()
         val database = client.getDatabase("Ara-android-database")
         val container = database.getContainer("Ara-android-collection")
         container.createItem(document, cosmosItemRequestOptions).block()
