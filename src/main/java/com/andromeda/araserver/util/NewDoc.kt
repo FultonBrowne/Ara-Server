@@ -1,12 +1,11 @@
 package com.andromeda.araserver.util
 
 import com.google.gson.Gson
-import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
 import com.microsoft.azure.cosmos.CosmosClient
 import com.microsoft.azure.cosmos.CosmosItemRequestOptions
-import com.microsoft.azure.cosmosdb.PartitionKey
-import com.microsoft.azure.documentdb.*
+import com.microsoft.azure.cosmosdb.ConsistencyLevel
+import org.bouncycastle.crypto.tls.ConnectionEnd.client
 
 
 class NewDoc {
@@ -22,7 +21,6 @@ class NewDoc {
 
         }
         val dbLink = System.getenv("IOTDB")
-        val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
 
         newDoc(key!!, newVal, id!!)
     }
@@ -31,12 +29,13 @@ class NewDoc {
         return gson.fromJson(jsontxt, object : TypeToken<Any>(){}.type)
     }
     fun newDoc(key: String, data: Any, id: String){
-        val client = CosmosClient.create("https://ara-account-data.documents.azure.com:443/",System.getenv("IOTDB") )
         val document = Document(data, id, "user-$key")
+        val client = CosmosClient.create("https://ara-account-data.documents.azure.com:443/",System.getenv("IOTDB") )
         val cosmosItemRequestOptions = CosmosItemRequestOptions("PartitionKey")
         val database = client.getDatabase("Ara-android-database")
         val container = database.getContainer("Ara-android-collection")
         container.createItem(document, cosmosItemRequestOptions).block()
-        //client.createDocument("/dbs/Ara-android-database/colls/Ara-android-collection", document,options, true )
+
+
     }
 }
