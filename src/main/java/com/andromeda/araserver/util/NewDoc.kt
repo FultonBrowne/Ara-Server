@@ -43,7 +43,7 @@ class NewDoc {
             .withConsistencyLevel(ConsistencyLevel.Eventual)
             .build()
         val doc =
-            Document(document, id, document.PartitionKey)
+            Document(data, id, document.PartitionKey)
         val createDocumentObservable: Observable<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> =
             asyncClient.createDocument("dbs/Ara-android-database/colls/Ara-android-collection", doc, null, false)
         createDocumentObservable
