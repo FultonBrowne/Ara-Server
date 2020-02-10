@@ -43,19 +43,20 @@ class NewDoc {
             .withConsistencyLevel(ConsistencyLevel.Eventual)
             .build()
         val doc =
-            Document(String.format(Gson().toJson(document), 1, 1), id, document.PartitionKey)
+            Document(document, id, document.PartitionKey)
         val createDocumentObservable: Observable<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> =
-            asyncClient.createDocument("Ara-android-collection", doc, null, false)
+            asyncClient.createDocument("dbs/Ara-android-database/colls/Ara-android-collection", doc, null, false)
         createDocumentObservable
             .single() // we know there will be one response
             .subscribe(
-                Action1<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> { documentResourceResponse: ResourceResponse<com.microsoft.azure.cosmosdb.Document> ->
+                { documentResourceResponse: ResourceResponse<com.microsoft.azure.cosmosdb.Document> ->
                     println(
                         documentResourceResponse.requestCharge
                     )
                 },
-                Action1 { error: Throwable ->
+                { error: Throwable ->
                     System.err.println("an error happened: " + error.message)
+                    throw  error
                 }
             )
 
