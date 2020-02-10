@@ -2,13 +2,17 @@ package com.andromeda.araserver.util
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.microsoft.azure.cosmos.CosmosClient
-import com.microsoft.azure.cosmos.CosmosItemRequestOptions
+import com.microsoft.azure.cosmosdb.ConnectionMode
+import com.microsoft.azure.cosmosdb.ConnectionPolicy
 import com.microsoft.azure.cosmosdb.ConsistencyLevel
-import org.bouncycastle.crypto.tls.ConnectionEnd.client
+import com.microsoft.azure.cosmosdb.ResourceResponse
+import com.microsoft.azure.cosmosdb.rx.AsyncDocumentClient
+import rx.Observable
+import rx.functions.Action1
 
 
 class NewDoc {
+   val policy = ConnectionPolicy();
     fun main(url:String, postData:String){
         val mainVal = url.replace("/newdoc/", "")
         val actions = mainVal.split("&")
@@ -22,7 +26,7 @@ class NewDoc {
         }
         val dbLink = System.getenv("IOTDB")
 
-        newDoc(key!!, newVal, id!!)
+        newDoc(key!!, newVal!!, id!!)
     }
     fun fromJson(jsontxt: String?): Any {
         val gson = Gson()
@@ -30,12 +34,30 @@ class NewDoc {
     }
     fun newDoc(key: String, data: Any, id: String){
         val document = Document(data, id, "user-$key")
-        val client = CosmosClient.create("https://ara-account-data.documents.azure.com:443/",System.getenv("IOTDB") )
-        val cosmosItemRequestOptions = CosmosItemRequestOptions()
-        val database = client.getDatabase("Ara-android-database")
-        val container = database.getContainer("Ara-android-collection")
-        container.createItem(document, cosmosItemRequestOptions).block()
+        policy.setConnectionMode(ConnectionMode.Direct);
 
+        val asyncClient = AsyncDocumentClient.Builder()
+            .withServiceEndpoint("https://ara-account-data.documents.azure.com:443/")
+            .withMasterKeyOrResourceToken(System.getenv("IOTDB") )
+            .withConnectionPolicy(policy)
+            .withConsistencyLevel(ConsistencyLevel.Eventual)
+            .build()
+        val doc =
+            Document(String.format(Gson().toJson(document), 1, 1), id, document.PartitionKey)
+        val createDocumentObservable: Observable<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> =
+            asyncClient.createDocument("Ara-android-collection", doc, null, false)
+        createDocumentObservable
+            .single() // we know there will be one response
+            .subscribe(
+                Action1<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> { documentResourceResponse: ResourceResponse<com.microsoft.azure.cosmosdb.Document> ->
+                    println(
+                        documentResourceResponse.requestCharge
+                    )
+                },
+                Action1 { error: Throwable ->
+                    System.err.println("an error happened: " + error.message)
+                }
+            )
 
     }
 }

@@ -58,7 +58,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.2'
     compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.9.2'
     compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.4.1.jre11'
-    compile group: 'com.microsoft.azure', name: 'azure-cosmosdb', version: '3.0.0-beta-3'
+    compile group: 'com.microsoft.azure', name: 'azure-cosmosdb', version: '2.6.5'
 
     implementation 'com.google.code.gson:gson:2.8.6'
     // https://mvnrepository.com/artifact/postgresql/postgresql
