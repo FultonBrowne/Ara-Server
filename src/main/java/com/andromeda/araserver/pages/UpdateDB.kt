@@ -33,11 +33,13 @@ class UpdateDB {
     private fun update(client:DocumentClient, key: String, id:String, prop:String, newVal:Any){
 
         val options = FeedOptions()
-        options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options)
+        options.enableCrossPartitionQuery = true
+        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
         queryResults.queryIterable.forEach{
+            println(it.id)
             if (it.id == id){
         (it.get("document") as JSONObject).putOpt(prop, newVal)
+                println("got it")
         client.replaceDocument(it, RequestOptions())}}
     }
     fun arrayUpdate(url: String, postData:String): String {
