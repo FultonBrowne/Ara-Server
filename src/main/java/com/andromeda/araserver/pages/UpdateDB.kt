@@ -34,10 +34,11 @@ class UpdateDB {
 
         val options = FeedOptions()
         options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c WHERE c.id = '$id'", options)
-        val doc:Document =queryResults.queryIterable.first()
-        (doc.get("document") as JSONObject).putOpt(prop, newVal)
-        client.replaceDocument(doc, RequestOptions())
+        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options)
+        queryResults.queryIterable.forEach{
+            if (it.id == id){
+        (it.get("document") as JSONObject).putOpt(prop, newVal)
+        client.replaceDocument(it, RequestOptions())}}
     }
     fun arrayUpdate(url: String, postData:String): String {
         val mainVal = url.replace("/postupdate/", "")
