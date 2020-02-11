@@ -61,6 +61,7 @@ class UpdateDB {
         return "ok"
     }
     fun fromJson(jsontxt: String?): Any {
+        println(jsontxt)
         val gson = Gson()
         return gson.fromJson(jsontxt, object : TypeToken<Any>(){}.type)
     }

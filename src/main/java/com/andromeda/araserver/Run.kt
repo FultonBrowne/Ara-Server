@@ -40,7 +40,7 @@ object Run : NanoHTTPD(Port().main()) {
         when {
             sessionUri.startsWith("/news/us") -> main2 = NewsCache.usNews
             sessionUri.startsWith("/postupdate/") ->UpdateDB().arrayUpdate(sessionUri,
-                session.parameters["data"]?.get(0)!!
+                session.headers["data"]!!
             )
             sessionUri.startsWith("/news/tech") -> main2 = NewsCache.tech
             sessionUri.startsWith("/news/money") -> main2 = NewsCache.money
@@ -74,7 +74,7 @@ object Run : NanoHTTPD(Port().main()) {
                 NewDevice().main(sessionUri)
             }
             sessionUri.startsWith("/newdoc/")->{
-                NewDoc().main(sessionUri, session.parameters["data"]?.get(0)!!)
+                NewDoc().main(sessionUri, session.headers["data"]!!)
             }
             sessionUri.startsWith("/getforcache")-> main2 = GetData().main()
             sessionUri.startsWith("/math") -> main2 =
