@@ -24,6 +24,7 @@ class NewDoc {
             i.startsWith("user=") -> key = i.replace("user=", "")
 
         }
+        if(key.equals("")) throw SecurityException("not a valid user")
         val dbLink = System.getenv("IOTDB")
 
         newDoc(key!!, newVal!!, id!!)
