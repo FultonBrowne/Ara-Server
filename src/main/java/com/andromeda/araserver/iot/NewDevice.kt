@@ -21,6 +21,7 @@ class NewDevice {
             i.startsWith("user=") -> key = i.replace("user=", "")
             else -> throw SecurityException("not a valid set of arguments")
         }
+        if(key.equals("")) throw SecurityException("not a valid user")
         val idDB =key+id
         DevicesDB().getDB(client, key!!, id!!)
         val rm = RegistryManager.createFromConnectionString("HostName=Ara-iot.azure-devices.net;SharedAccessKeyName=registryReadWrite;SharedAccessKey=jCfMMHFTQdud0aBUNy0fzWgmJLEh9T/xe0S4OZ6Xhtg=")

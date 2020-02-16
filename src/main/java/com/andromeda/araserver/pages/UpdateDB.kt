@@ -55,6 +55,7 @@ class UpdateDB {
             i.startsWith("prop=") -> prop = i.replace("prop=", "")
 
         }
+        if(key.equals("")) throw SecurityException("not a valid user")
         val dbLink = System.getenv("IOTDB")
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
         update(client, key!!, id!!, prop!!, newVal)
