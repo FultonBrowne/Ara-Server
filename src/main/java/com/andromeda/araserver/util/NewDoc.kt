@@ -2,10 +2,7 @@ package com.andromeda.araserver.util
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.microsoft.azure.cosmosdb.ConnectionMode
-import com.microsoft.azure.cosmosdb.ConnectionPolicy
-import com.microsoft.azure.cosmosdb.ConsistencyLevel
-import com.microsoft.azure.cosmosdb.ResourceResponse
+import com.microsoft.azure.cosmosdb.*
 import com.microsoft.azure.cosmosdb.rx.AsyncDocumentClient
 import rx.Observable
 import rx.functions.Action1
@@ -44,9 +41,9 @@ class NewDoc {
             .withConsistencyLevel(ConsistencyLevel.Eventual)
             .build()
         val doc =
-            Document(data, id, document.PartitionKey)
+            Document(data, id, "user-$key")
         val createDocumentObservable: Observable<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> =
-            asyncClient.createDocument("dbs/Ara-android-database/colls/Ara-android-collection", doc, null, false)
+            asyncClient.createDocument("dbs/Ara-android-database/colls/Ara-android-collection", doc, RequestOptions(), true)
         createDocumentObservable
             .single() // we know there will be one response
             .subscribe(
