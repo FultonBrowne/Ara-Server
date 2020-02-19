@@ -3,6 +3,7 @@
     <ExternalSystemSettings>
       <option name="env">
         <map>
+          <entry key="BING" value="92a4005e9ce94f8ea70bf62a3bd42bd9" />
           <entry key="IOTDB" value="Xk3bLVzuVKKWhTyDGRh8FLXgh78tiCLmDsuqKGD1Kt1W9MG4ugZoJwrPuApl4oDQRr6xUyj7d4MpK1D7sRA62Q==" />
           <entry key="IP" value="http://52.141.222.41/cache/" />
           <entry key="PASS" value="$PASSWORD$" />

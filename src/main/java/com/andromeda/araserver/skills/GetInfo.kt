@@ -67,12 +67,68 @@ class GetInfo {
         val jsonArray = jsonObject.getAsJsonArray("value")
         for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
             val title = jsonArray[i].asJsonObject["name"].asString
-            //System.out.println(title);
             val info = jsonArray[i].asJsonObject["snippet"].asString
             println(info)
             val link = jsonArray[i].asJsonObject["url"].asString
-            //System.out.println(link);
             mainList.add(OutputModel(title, info, link, "", "", ""))
+        }
+        return mainList
+    }
+    fun imageSearch(mainurl: String): String? {
+        val gson = Gson()
+        //place holder values
+        val outputModels = ArrayList<OutputModel>()
+        //get url
+        val term: String
+        //parse for search term
+        val pairs =
+            ArrayList(Arrays.asList(*mainurl.split("&").toTypedArray()))
+        term = pairs[0]
+        println(term)
+        //NLP
+//ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
+        try {
+            outputModels.addAll(getImages(term))
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        //Return gson values
+        return gson.toJson(outputModels)
+    }
+
+    fun getImages(searchQuery: String): ArrayList<OutputModel> {
+        var searchQuery = searchQuery
+        println(searchQuery)
+        searchQuery = searchQuery.replace("/searchi/", "")
+        val mainList = ArrayList<OutputModel>()
+        try {
+            mainList.addAll(getFast(searchQuery))
+            mainList[0]
+            return mainList
+        } catch (e: Exception) {
+
+        }
+        val url = URL(
+            "$host$imagePath?q=" + URLEncoder.encode(
+                searchQuery,
+                "UTF-8"
+            )
+        )
+        // Open the connection.
+        val connection = url.openConnection() as HttpsURLConnection
+        connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey)
+        // Receive the JSON response body.
+        val stream = connection.inputStream
+        val response = Scanner(stream).useDelimiter("\\A").next()
+        val jelement = JsonParser().parse(response)
+        var jsonObject = jelement.asJsonObject
+        val jsonArray = jsonObject.getAsJsonArray("value")
+        for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
+            val title = jsonArray[i].asJsonObject["name"].asString
+            val info = jsonArray[i].asJsonObject["contentUrl"].asString
+            println(info)
+            val link = jsonArray[i].asJsonObject["hostPageUrl"].asString
+            mainList.add(OutputModel(title, "", link, info, "", ""))
         }
         return mainList
     }
@@ -108,6 +164,7 @@ class GetInfo {
     companion object {
         var subscriptionKey = System.getenv("BING")
         var host = "https://api.cognitive.microsoft.com"
+        var imagePath = "/bing/v7.0/images/search?q=andr"
         var path = "/bing/v7.0/search"
     }
 }

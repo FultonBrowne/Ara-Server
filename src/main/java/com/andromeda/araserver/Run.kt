@@ -66,8 +66,11 @@ object Run : NanoHTTPD(Port().main()) {
                 ListDevices().main(sessionUri)
             sessionUri.startsWith("/deviceinfo/") -> main2 =
                 Status().main(sessionUri)
-            sessionUri.startsWith("/search") -> {
+            sessionUri.startsWith("/searcht/") -> {
                 main2 = GetInfo().main(sessionUri)
+            }
+            sessionUri.startsWith("/searchi/") -> {
+                main2 = GetInfo().imageSearch(sessionUri)
             }
             sessionUri.startsWith("/newdevice/") -> {
                 main2 = ""
