@@ -17,6 +17,7 @@ import kotlin.collections.ArrayList
 /**
  * Object used to handle RSS Feeds.
  */
+@Deprecated(message = "this will be replaced with the new news system")
 object RssMain {
     /**
      * Main Function. Returns feeds based on the passed in mode.
