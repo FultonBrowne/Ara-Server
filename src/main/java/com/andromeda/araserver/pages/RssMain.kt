@@ -44,13 +44,6 @@ object RssMain {
                 feeds[2] = "http://feeds.reuters.com/Reuters/domesticNews"
                 feeds[3] = "http://news.yahoo.com/rss/"
             }
-            3 -> {
-                //Tech news in english
-                feeds[0] = "https://www.cnet.com/rss/news/"
-                feeds[1] = "http://www.foxnews.com/about/rss"
-                feeds[2] = "http://feeds.bbci.co.uk/news/technology/rss.xml"
-                feeds[3] = "https://hnrss.org/newest"
-            }
             4 -> {
                 //Business news in english
                 feeds[0] = "http://feeds.reuters.com/reuters/businessNews"
