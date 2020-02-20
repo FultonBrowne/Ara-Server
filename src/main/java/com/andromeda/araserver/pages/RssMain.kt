@@ -59,19 +59,6 @@ object RssMain {
                 feeds[3] = "http://feeds.reuters.com/reuters/businessNews"
 
             }
-            5 -> {
-                //world news in spanish
-                feeds[0] = "https://e00-elmundo.uecdn.es/elmundo/rss/internacional.xml"
-
-            }
-            6-> {
-                //tech news in spanish
-                feeds[0] = "http://ep00.epimg.net/rss/tecnologia/portada.xml"
-            }
-            7-> {
-                //Business news in spanish
-                feeds[0] = "https://e00-elmundo.uecdn.es/elmundo/rss/economia.xml"
-            }
             else -> {
                 // general news in english
                 feeds[0] = "https://www.cbsnews.com/latest/rss/main"

@@ -21,6 +21,7 @@
       <option name="taskNames">
         <list>
           <option value="build" />
+          <option value="test" />
           <option value="run" />
         </list>
       </option>
