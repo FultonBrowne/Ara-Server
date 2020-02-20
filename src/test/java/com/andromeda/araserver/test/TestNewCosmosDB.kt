@@ -9,6 +9,6 @@ class TestNewCosmosDB {
     @Test
     fun runTest(){
         val testData = OutputModel("test", "test", "test","test", "test", "test")
-        NewDoc().newDoc("", testData, 123.toString())
+        NewDoc().newDoc("test", testData, 123.toString())
     }
 }
