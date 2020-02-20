@@ -1,5 +1,6 @@
 package com.andromeda.araserver.pages
 
+import com.andromeda.araserver.util.CosmosClients
 import com.andromeda.araserver.util.OutputModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -56,9 +57,7 @@ class UpdateDB {
 
         }
         if(key.equals("")) throw SecurityException("not a valid user")
-        val dbLink = System.getenv("IOTDB")
-        val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
-        update(client, key!!, id!!, prop!!, newVal)
+        update(CosmosClients.client, key!!, id!!, prop!!, newVal)
         return "ok"
     }
     fun fromJson(jsontxt: String?): Any {

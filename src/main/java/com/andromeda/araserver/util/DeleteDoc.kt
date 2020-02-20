@@ -24,6 +24,7 @@ class DeleteDoc {
         queryResults.queryIterator.forEach {
             val ro = RequestOptions()
             ro.partitionKey = PartitionKey("user-$key")
+
             client.deleteDocument(it.selfLink, ro)
         }
 
