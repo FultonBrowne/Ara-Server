@@ -32,6 +32,7 @@ class NewDoc {
     }
     fun newDoc(key: String, data: Any, id: String){
         policy.setConnectionMode(ConnectionMode.Direct);
+        val document = Document(data, id, "user-$key")
 
         val asyncClient = AsyncDocumentClient.Builder()
             .withServiceEndpoint("https://ara-account-data.documents.azure.com:443/")
@@ -40,7 +41,7 @@ class NewDoc {
             .withConsistencyLevel(ConsistencyLevel.Eventual)
             .build()
         val doc =
-            Document(data, id, "user-$key")
+            Document(Gson().toJson(document))
         val options = RequestOptions()
         options.partitionKey = PartitionKey("user-$key")
         val createDocumentObservable: Observable<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> =
