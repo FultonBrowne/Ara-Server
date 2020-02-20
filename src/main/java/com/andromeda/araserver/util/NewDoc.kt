@@ -31,7 +31,6 @@ class NewDoc {
         return gson.fromJson(jsontxt, object : TypeToken<Any>(){}.type)
     }
     fun newDoc(key: String, data: Any, id: String){
-        val document = Document(data, id, "user-$key")
         policy.setConnectionMode(ConnectionMode.Direct);
 
         val asyncClient = AsyncDocumentClient.Builder()
@@ -42,8 +41,10 @@ class NewDoc {
             .build()
         val doc =
             Document(data, id, "user-$key")
+        val options = RequestOptions()
+        options.partitionKey = PartitionKey("user-$key")
         val createDocumentObservable: Observable<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> =
-            asyncClient.createDocument("dbs/Ara-android-database/colls/Ara-android-collection", doc, RequestOptions(), true)
+            asyncClient.createDocument("dbs/Ara-android-database/colls/Ara-android-collection", doc, options, true)
         createDocumentObservable
             .single() // we know there will be one response
             .subscribe(
