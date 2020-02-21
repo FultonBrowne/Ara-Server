@@ -1,13 +1,10 @@
 package com.andromeda.araserver.pages
 
 import com.andromeda.araserver.util.CosmosClients
-import com.andromeda.araserver.util.OutputModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.microsoft.azure.documentdb.*
 import org.json.JSONObject
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class UpdateDB {
@@ -27,11 +24,16 @@ class UpdateDB {
         }
         val dbLink = System.getenv("IOTDB")
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
-        update(client, key!!, id!!, prop!!, newVal!!)
+        update(client, id!!, prop!!, newVal!!)
         return "ok"
     }
 
-    private fun update(client:DocumentClient, key: String, id:String, prop:String, newVal:Any){
+    fun update(
+        client: DocumentClient,
+        id: String,
+        prop: String,
+        newVal: Any
+    ){
 
         val options = FeedOptions()
         options.enableCrossPartitionQuery = true
@@ -57,7 +59,7 @@ class UpdateDB {
 
         }
         if(key.equals("")) throw SecurityException("not a valid user")
-        update(CosmosClients.client, key!!, id!!, prop!!, newVal)
+        update(CosmosClients.client, id!!, prop!!, newVal)
         return "ok"
     }
     fun fromJson(jsontxt: String?): Any {
