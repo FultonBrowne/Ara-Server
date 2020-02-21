@@ -9,8 +9,10 @@ import org.junit.Test
 class TestNewCosmosDB {
     @Test
     fun runTest(){
+        if (System.getenv().contains("IOTDB")){
         val testData = OutputModel("test", "test", "test","test", "test", "test")
-        //NewDoc().newDoc("test", testData, 123.toString())
+        NewDoc().newDoc("test", testData, 123.toString())
         //DeleteDoc().delDoc(CosmosClients.client, "test", 123.toString())
+             }
     }
 }

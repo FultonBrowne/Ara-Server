@@ -35,11 +35,4 @@ public class ApiStart {
         return new MsSql().getSkills(term, searchterm, keyWord, parse);//ParseApi(searchterm);
     }
 
-    private static Connection getConnection() throws SQLException {
-        //get a SQL connection (Note these creds are for test DB)
-        String dbUrl = "jdbc:postgresql://" + "ec2-54-221-214-3.compute-1.amazonaws.com" + ':' + "5432" + "/d40qc3ivndkhlh" + "?ssl=true" + "&sslfactory=org.postgresql.ssl.NonValidatingFactory";
-        return DriverManager.getConnection(dbUrl,
-                "ztpysbtdtzkeyt", "344eac98ba90d4b8b94166fbdc368bc1b3e887c20bce983cf469b2d1b64293a6");
-    }
-
 }

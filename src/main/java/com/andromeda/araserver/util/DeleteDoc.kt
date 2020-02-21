@@ -2,6 +2,7 @@ package com.andromeda.araserver.util
 
 import com.microsoft.azure.cosmosdb.ConnectionPolicy
 import com.microsoft.azure.documentdb.*
+import com.microsoft.azure.documentdb.Document
 
 class DeleteDoc {
 
@@ -17,19 +18,20 @@ class DeleteDoc {
         delDoc(CosmosClients.client, key!!, id!!)
         return ""
     }
-    private fun delDoc(client: DocumentClient, key: String, id:String): String {
+    fun delDoc(client: DocumentClient, key: String, id:String): String {
         val options = FeedOptions()
-        options.enableCrossPartitionQuery = true
-        val queryResults: FeedResponse<com.microsoft.azure.documentdb.Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
+        val queryResults: FeedResponse<Document> = CosmosClients.feedResponse(options, key, client)
         queryResults.queryIterator.forEach {
             if (it.id == id){
             val ro = RequestOptions()
                 println(it.resourceId)
                 println(it.selfLink)
-            ro.partitionKey = PartitionKey("user-$key")
-            client.deleteDocument("dbs/Ara-android-database/colls/Ara-android-collection/${it.resourceId}", ro)
+            ro.partitionKey = PartitionKey(CosmosClients.getKey(key))
+            client.deleteDocument(it.selfLink, ro)
             }
         }
         return ""
     }
+
+
 }
