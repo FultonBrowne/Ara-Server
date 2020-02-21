@@ -21,7 +21,7 @@ class DeleteDoc {
         val options = FeedOptions()
         options.enableCrossPartitionQuery = true
         val queryResults: FeedResponse<com.microsoft.azure.documentdb.Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
-        queryResults.queryIterator.forEach {
+        queryResults.queryIterable.forEach {
             val ro = RequestOptions()
             ro.partitionKey = PartitionKey("user-$key")
 
