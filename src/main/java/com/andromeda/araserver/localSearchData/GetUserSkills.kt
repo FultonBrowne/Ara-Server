@@ -25,7 +25,7 @@ class GetUserSkills {
             i.startsWith("id=") -> id = i.replace("id=", "")
             i.startsWith("user=") -> key = i.replace("user=", "")
         }
-        val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
+        val client = client
         return Gson().toJson(ReadDB().userSkill(client, key!!, id!!))
     }
 }

@@ -7,6 +7,7 @@ import com.andromeda.araserver.pages.*
 import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.skills.*
 import com.andromeda.araserver.skills.Timer
+import com.andromeda.araserver.util.DeleteDoc
 import com.andromeda.araserver.util.KeyWord
 import com.andromeda.araserver.util.NewDoc
 import com.rometools.rome.feed.synd.SyndFeed
@@ -55,6 +56,8 @@ object Run : NanoHTTPD(Port().main()) {
                 GetUserSkills().one(sessionUri)
             sessionUri.startsWith("/hi") -> main2 =
                 Hello().hello()
+            sessionUri.startsWith("/del") -> main2 =
+                DeleteDoc().main(sessionUri)
             sessionUri.startsWith("/yelpclient") -> main2 =
                 Locdec().main(sessionUri, keyWord, parser)
             sessionUri.startsWith("/weath") -> main2 =
@@ -83,9 +86,9 @@ object Run : NanoHTTPD(Port().main()) {
             sessionUri.startsWith("/math") -> main2 =
                 Equations().main(sessionUri)
             sessionUri.startsWith("/call") ->
-                    main2 = keyWord?.let { parser?.let { it1 -> Call().main(sessionUri) } }
+                    main2 = keyWord?.let { parser?.let { Call().main(sessionUri) } }
             sessionUri.startsWith("/call") ->
-                main2 = keyWord?.let { parser?.let { it1 -> Text().main(sessionUri) } }
+                main2 = keyWord?.let { parser?.let { Text().main(sessionUri) } }
             sessionUri.startsWith("/skillsdata/") -> main2 =
                 GetSkillData().main(sessionUri)
             sessionUri.startsWith("/update") -> main2 =
@@ -93,7 +96,7 @@ object Run : NanoHTTPD(Port().main()) {
             sessionUri.startsWith("/class") -> main2 =
                 GetDeviceClass().main(sessionUri)
             sessionUri.startsWith("/person") -> main2 =
-                com.andromeda.araserver.persona.Main().main(sessionUri, this!!.keyWord!!, parser)
+                com.andromeda.araserver.persona.Main().main(sessionUri, this.keyWord!!, parser)
             sessionUri.startsWith("/time") -> main2 =
                 parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri, it1, it) } }
             sessionUri.startsWith("/store") -> {
