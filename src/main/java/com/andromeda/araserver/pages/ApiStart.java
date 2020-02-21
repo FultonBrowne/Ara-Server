@@ -1,9 +1,6 @@
 package com.andromeda.araserver.pages;
 
-import com.andromeda.araserver.util.KeyWord;
-import com.andromeda.araserver.util.MsSql;
-import com.andromeda.araserver.util.OutputModel;
-import com.andromeda.araserver.util.SqlModel;
+import com.andromeda.araserver.util.*;
 import com.google.gson.Gson;
 import opennlp.tools.parser.Parser;
 
@@ -28,8 +25,7 @@ public class ApiStart {
     public String apiMain(String mainUri, KeyWord keyWord, Parser parse) {
         String searchterm = mainUri.replaceFirst("/api/", "");
         outputModels.add(new OutputModel("Blank Input Received", "Please Try Again", "https://github.com/fultonbrowne/ara-android", "", "Error Was Encountered", ""));
-        ArrayList<String> pairs = new ArrayList<>(Arrays.asList(searchterm.split("&")));
-        String term = pairs.get(0);
+        String term = new ParseUrl().parseApi(mainUri, "/api/").getTerm();
 
 
         return new MsSql().getSkills(term, searchterm, keyWord, parse);//ParseApi(searchterm);
