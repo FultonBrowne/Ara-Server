@@ -42,11 +42,14 @@ public class Locdec {
         ArrayList<OutputModel> returedval = new ArrayList<>();
         // http client
         OkHttpClient client2 = new OkHttpClient();
+        String url;
+        if (term == "") url = "https://api.yelp.com/v3/businesses/search?latitude=" + lat + "&longitude=" + log + "&limit=25&sort_by=rating";
+        else url = "https://api.yelp.com/v3/businesses/search?term=" + term + "&latitude=" + lat + "&longitude=" + log + "&limit=25&sort_by=rating";
+
         //swo url in logs or on console
-        System.out.println("https://api.yelp.com/v3/businesses/search?term=" + term + "&latitude=" + lat + "&longitude=" + log + "&limit=25&sort_by=rating");
         //new http request
         Request request2 = new Request.Builder()
-                .url("https://api.yelp.com/v3/businesses/search?term=" + term + "&latitude=" + lat + "&longitude=" + log + "&limit=25&sort_by=rating")
+                .url(url)
                 .get()
                 .addHeader("Authorization", "Bearer " + System.getenv("YELPKEY"))
                 .addHeader("cache-control", "no-cache")
