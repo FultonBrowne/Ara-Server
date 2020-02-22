@@ -31,7 +31,7 @@ public class Locdec {
                 lat = pair.replace("lat=", "");
             } else term = pair.replace("/yelpclient/", "");
         }
-        term = new SortWords(keyWord, term).getNNS(parser);
+        if(!term.equals(""))term = new SortWords(keyWord, term).getNNS(parser);
         System.out.println(term);
         //return new gson value from the yelpsearch() function
         return new Gson().toJson(yelpSearch());
