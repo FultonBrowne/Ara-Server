@@ -67,6 +67,7 @@ public class Locdec {
             JsonArray jsonArray = jobject.getAsJsonArray("businesses");
             OutputModel outputModel;
             //keep parsing
+
             for (int i = 0; i < jsonArray.size(); i++) {
                 jobject = jsonArray.get(i).getAsJsonObject();
                 System.out.println(jobject.get("name").getAsString());

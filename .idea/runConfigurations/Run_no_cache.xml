@@ -9,6 +9,7 @@
           <entry key="PASS" value="$PASSWORD$" />
           <entry key="PASSWORD" value="$PASSWORD$" />
           <entry key="PORT" value="$PORT$" />
+          <entry key="YELPKEY" value="TysaYZNEZB4aK1JhLAMT0BCeG0sdxDffcoFmnFnsEcVN5U9d4YA3UeRnrrw0FovvCsmWIalZQwexcPAqecflXv51tAXEtctkOgrdD3CIUculH7ieskJc6fKTguo4XXYx" />
         </map>
       </option>
       <option name="executionName" />
