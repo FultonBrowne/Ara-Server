@@ -1,8 +1,12 @@
 package com.andromeda.araserver.persona
 
+import com.andromeda.araserver.util.CosmosClients
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.SortWords
 import com.google.gson.Gson
+import com.microsoft.azure.documentdb.FeedOptions
+import com.microsoft.azure.documentdb.PartitionKey
+import org.json.JSONObject
 import java.sql.Connection
 import java.sql.DriverManager
 
@@ -17,18 +21,13 @@ class GetDbArray {
         userName,
         password)
     fun likes(search: String): String? {
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver")
-        val connection: Connection = DriverManager.getConnection(url)
-        println(password)
-        val statement = connection.createStatement()
-        val selectSql = "SELECT * FROM araPersona.likes"
-        val resultSet = statement.executeQuery(selectSql)
-        while (resultSet.next())
-        {
-            println(resultSet.getString("name"))
-            val level = resultSet.getInt("level")
+        val options = FeedOptions()
+        options.partitionKey = PartitionKey("likes")
+        CosmosClients.client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options).queryIterable.forEach{
+            val json = it.get("document") as JSONObject
+            val level = json.getInt("level")
             println(level)
-            if (resultSet.getString("name").contains(search)){
+            if (json.getString("name").contains(search)){
                 val response = Responses.main(level)!!.replace("TERM", search)
                 val outputModel =  arrayListOf(OutputModel(response, "", "", "", response, "" ))
                 return Gson().toJson(outputModel)
