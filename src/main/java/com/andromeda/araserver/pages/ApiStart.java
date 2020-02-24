@@ -1,17 +1,9 @@
 package com.andromeda.araserver.pages;
 
 import com.andromeda.araserver.util.*;
-import com.google.gson.Gson;
 import opennlp.tools.parser.Parser;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 
 
 public class ApiStart {
@@ -28,7 +20,7 @@ public class ApiStart {
         String term = new ParseUrl().parseApi(mainUri, "/api/").getTerm();
 
 
-        return new MsSql().getSkills(term, searchterm, keyWord, parse);//ParseApi(searchterm);
+        return new Skills().getSkills(term, searchterm, keyWord, parse);//ParseApi(searchterm);
     }
 
 }

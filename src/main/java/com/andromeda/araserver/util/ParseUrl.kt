@@ -8,7 +8,7 @@ class ParseUrl {
         var term = ""
         split.forEach{
             when {
-                it.startsWith("loc") -> loc = it.replace("loc=", "")
+                it.startsWith("log") -> loc = it.replace("loc=", "")
                 it.startsWith("lat") -> lat= it.replace("lat=", "")
                 else -> term = it
             }
