@@ -10,7 +10,6 @@ public class ApiStart {
     //output to be printed if error
     private ArrayList<OutputModel> outputModels = new ArrayList<>();
     //output from DB
-    private ArrayList<SqlModel> sqlmodel = new ArrayList<>();
     private String linkval;
 
 

@@ -1,10 +1,15 @@
 package com.andromeda.araserver.util
 class Port {
-    fun main():Int{
-        val port:Int? = System.getenv("PORT").toInt()
-        if(port == null){
-            return 8080
+    fun main(): Int? {
+        try {
+            val port: Int? = System.getenv("PORT").toInt()
+            return port
+
         }
-        return port
+        catch (e:NullPointerException){
+            e.printStackTrace()
+            println("please add port environment variable using 8080")
+        }
+        return 8080
     }
 }
