@@ -21,7 +21,7 @@ import java.io.IOException
 import com.andromeda.araserver.util.Port
 import java.net.URL
 
-object Run : NanoHTTPD(Port().main()) {
+object Run : NanoHTTPD(Port().main()!!) {
     private var keyWord: KeyWord? = null
     private var model: ParserModel? = null
     private var parser: Parser? = null
@@ -164,7 +164,7 @@ object Run : NanoHTTPD(Port().main()) {
         model = ParserModel(`is`)
         parser = ParserFactory.create(model)
         keyWord = KeyWord(`is`!!)
-        println("Press any key to exit...")
+        println("start")
 
 
     }
