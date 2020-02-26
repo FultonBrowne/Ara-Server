@@ -91,8 +91,6 @@ object Run : NanoHTTPD(Port().main()!!) {
                 main2 = keyWord?.let { parser?.let { Text().main(sessionUri) } }
             sessionUri.startsWith("/skillsdata/") -> main2 =
                 GetSkillData().main(sessionUri)
-            sessionUri.startsWith("/update") -> main2 =
-                Update().update(sessionUri)
             sessionUri.startsWith("/class") -> main2 =
                 GetDeviceClass().main(sessionUri)
             sessionUri.startsWith("/person") -> main2 =

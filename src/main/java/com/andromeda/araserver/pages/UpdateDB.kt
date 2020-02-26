@@ -12,12 +12,10 @@ class UpdateDB {
         val mainVal = url.replace("/updateuserdata/", "")
         val actions = mainVal.split("&")
         var id:String? = null
-        var key:String? = null
         var newVal:String? = null
         var prop:String? = null
         for (i in actions) when {
             i.startsWith("id=") -> id = i.replace("id=", "")
-            i.startsWith("user=") -> key = i.replace("user=", "")
             i.startsWith("newval=") -> newVal = i.replace("newval=", "")
             i.startsWith("prop=") -> prop = i.replace("prop=", "")
 
