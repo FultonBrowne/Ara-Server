@@ -15,10 +15,11 @@ class IotTest {
         val newIot = NewDevice()
         val newDoc = NewDoc()
         val id = "test$time"
-        newDoc.newDoc("test", DeviceModel(id,"LIGHT", "---\\n- \\\"on\\\": true\\n  powerLevel: null\\n  color: null\\n\"", "unit test"), id)
+        newDoc.newDoc("test", DeviceModel(id,"LIGHT", "---\n- \"on\": true\n  powerLevel: null\n  color: null\n", "unit test"), id)
         newIot.main("/newdevice/id=$id&user=test")
         val main = Main()
-        main.main("/devices/id=$id&user=test&run=on:true")
+        Thread.sleep(5000L)
+        main.main("/devices/run=on:true&user=test&id=$id")
 
 
 
