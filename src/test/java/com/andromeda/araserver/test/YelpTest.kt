@@ -10,6 +10,7 @@ import java.net.URL
 class YelpTest {
     @Test
     fun test(){
+        if (!System.getenv().contains("YELPKEY")) return
         val locdec = Locdec()
         val classloader = javaClass.classLoader
         var `is` = classloader.getResourceAsStream("resources/parse.bin")
@@ -22,7 +23,7 @@ class YelpTest {
         val model = ParserModel(`is`)
         val parser = ParserFactory.create(model)
         val keyWord = KeyWord(`is`!!)
-        //locdec.main("/yelpclient/", keyWord, parser)
+        locdec.main("/yelpclient/log=-122.676483&lat=45.523064", keyWord, parser)
 
     }
 
