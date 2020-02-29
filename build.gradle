@@ -47,6 +47,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.13'
+    compile('com.microsoft.graph:microsoft-graph:1.5.+')
     compile group: 'com.rometools', name: 'rome', version: '1.12.1'
     compile group:'org.eclipse.swt.gtk.solaris', name: 'sparc', version: '3.3.0-v3346'
     compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.30"
