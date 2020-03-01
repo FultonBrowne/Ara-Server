@@ -7,9 +7,7 @@ import com.andromeda.araserver.pages.*
 import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.skills.*
 import com.andromeda.araserver.skills.Timer
-import com.andromeda.araserver.util.DeleteDoc
-import com.andromeda.araserver.util.KeyWord
-import com.andromeda.araserver.util.NewDoc
+import com.andromeda.araserver.util.*
 import com.rometools.rome.feed.synd.SyndFeed
 import com.rometools.rome.io.FeedException
 import com.rometools.rome.io.SyndFeedOutput
@@ -18,7 +16,6 @@ import opennlp.tools.parser.Parser
 import opennlp.tools.parser.ParserFactory
 import opennlp.tools.parser.ParserModel
 import java.io.IOException
-import com.andromeda.araserver.util.Port
 import java.net.URL
 
 object Run : NanoHTTPD(Port().main()!!) {
@@ -135,6 +132,7 @@ object Run : NanoHTTPD(Port().main()!!) {
     fun main(args: Array<String>) { // If this is in a heroku environment, get the port number
         start(SOCKET_READ_TIMEOUT, false)
         News()
+        SecurityDBCheck()
         println(" Ara server is running and is available on your domain, IP, or http://localhost:8080/")
         println(
             "This program is free software: you can redistribute it and/or modify\n" +
