@@ -29,7 +29,8 @@ class Timer {
         val time = numOfUnits?.times(map[unit]!!)
         val gson = Gson()
         val mapper = YAMLMapper()
-        return gson.toJson(arrayListOf(OutputModel("setting a timer", "", "" , "", "setting timer", mapper.writeValueAsString(SkillsModel("TIMER", time.toString(), "")))))
+        return gson.toJson(arrayListOf(OutputModel("setting a timer", "", "" , "", "setting timer", mapper.writeValueAsString(
+            arrayListOf(SkillsModel("TIMER", time.toString(), ""))))))
 
 
     }
