@@ -17,11 +17,6 @@ class Skills {
         link,
         "ara",
         userName,
-
-
-
-
-
         password
     )
     fun getSkills(phrase:String,fullDir:String, keyWord: KeyWord, parse: Parser): String {
@@ -30,6 +25,7 @@ class Skills {
         println(phrases.size)
         var link = ""
         val options = FeedOptions()
+        println(phrases)
         options.partitionKey = PartitionKey("search")
         CosmosClients.client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options).queryIterable.forEach        {
             val json = it.get("document") as JSONObject
