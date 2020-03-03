@@ -1,6 +1,7 @@
 package com.andromeda.araserver.skills
 
 import com.andromeda.araserver.util.OutputModel
+import com.andromeda.araserver.util.ParseUrl
 import com.andromeda.araserver.util.Url
 import com.google.gson.Gson
 import com.google.gson.JsonParser
@@ -82,13 +83,13 @@ class GetInfo {
         val term: String
         //parse for search term
         val pairs =
-            ArrayList(Arrays.asList(*mainurl.split("&").toTypedArray()))
-        term = pairs[0]
+            ParseUrl().parseApi(mainurl, "/searchi/")
+        term = pairs.term
         println(term)
         //NLP
 //ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
         try {
-            outputModels.addAll(getImages(term))
+            outputModels.addAll(getImages(term, pairs.cc))
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -96,7 +97,7 @@ class GetInfo {
         return gson.toJson(outputModels)
     }
 
-    fun getImages(searchQuery: String): ArrayList<OutputModel> {
+    fun getImages(searchQuery: String, cc:Locale): ArrayList<OutputModel> {
         var searchQuery = searchQuery
         println(searchQuery)
         searchQuery = searchQuery.replace("/searchi/", "")
@@ -117,6 +118,8 @@ class GetInfo {
         // Open the connection.
         val connection = url.openConnection() as HttpsURLConnection
         connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey)
+        println(cc.language)
+        connection.setRequestProperty("BingAPIs-Market",cc.language +"-" +  cc.country)
         // Receive the JSON response body.
         val stream = connection.inputStream
         val response = Scanner(stream).useDelimiter("\\A").next()
