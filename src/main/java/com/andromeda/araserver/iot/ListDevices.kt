@@ -12,7 +12,6 @@ class ListDevices {
     fun main(url:String): String? {
         val db = DevicesDB()
         val mainVal = url.replace("/devicelist/", "")
-        val actions = mainVal.split("&")
         val dbLink = System.getenv("IOTDB")
         val key:String? = mainVal
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
