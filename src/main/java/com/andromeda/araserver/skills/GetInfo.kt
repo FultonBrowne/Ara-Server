@@ -113,11 +113,12 @@ class GetInfo {
             "$host$imagePath?q=" + URLEncoder.encode(
                 searchQuery,
                 "UTF-8"
-            ) + "&setLang=${cc.language}-${cc.country}"
+            )
         )
         // Open the connection.
         val connection = url.openConnection() as HttpsURLConnection
         connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey)
+        connection.addRequestProperty("Accept-Language", "en-GB")
         println(cc.language)
         println(cc.country
 
