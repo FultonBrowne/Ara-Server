@@ -113,13 +113,16 @@ class GetInfo {
             "$host$imagePath?q=" + URLEncoder.encode(
                 searchQuery,
                 "UTF-8"
-            )
+            ) + "&setLang=${cc.language}-${cc.country}"
         )
         // Open the connection.
         val connection = url.openConnection() as HttpsURLConnection
         connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey)
         println(cc.language)
-        connection.setRequestProperty("BingAPIs-Market",cc.language +"-" +  cc.country)
+        println(cc.country
+
+        )
+        connection.setRequestProperty("Accept-Language",cc.language)
         // Receive the JSON response body.
         val stream = connection.inputStream
         val response = Scanner(stream).useDelimiter("\\A").next()
