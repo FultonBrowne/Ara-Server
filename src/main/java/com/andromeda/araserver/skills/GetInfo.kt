@@ -2,17 +2,17 @@ package com.andromeda.araserver.skills
 
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.ParseUrl
-import com.andromeda.araserver.util.Url
 import com.google.gson.Gson
 import com.google.gson.JsonParser
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import java.io.IOException
-import java.lang.NullPointerException
 import java.net.URL
 import java.net.URLEncoder
 import java.util.*
 import javax.net.ssl.HttpsURLConnection
+
 
 class GetInfo {
     fun main(mainurl: String): String { //new gson instance
@@ -87,7 +87,6 @@ class GetInfo {
         term = pairs.term
         println(term)
         //NLP
-//ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
         try {
             outputModels.addAll(getImages(term, pairs.cc))
         } catch (e: IOException) {
@@ -102,31 +101,15 @@ class GetInfo {
         println(searchQuery)
         searchQuery = searchQuery.replace("/searchi/", "")
         val mainList = ArrayList<OutputModel>()
-        try {
-            mainList.addAll(getFast(searchQuery))
-            mainList[0]
-            return mainList
-        } catch (e: Exception) {
-
-        }
-        val url = URL(
-            "$host$imagePath?q=" + URLEncoder.encode(
-                searchQuery,
-                "UTF-8"
-            )
-        )
-        // Open the connection.
-        val connection = url.openConnection() as HttpsURLConnection
-        connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey)
-        connection.addRequestProperty("Accept-Language", "en-GB")
-        println(cc.language)
-        println(cc.country
-
-        )
-        connection.setRequestProperty("Accept-Language",cc.language)
-        // Receive the JSON response body.
-        val stream = connection.inputStream
-        val response = Scanner(stream).useDelimiter("\\A").next()
+        val client = OkHttpClient().newBuilder()
+            .build()
+        val request: Request = Request.Builder()
+            .url("https://ara.cognitiveservices.azure.com/bing/v7.0/images/search/?q=$searchQuery")
+            .method("GET", null)
+            .addHeader("Ocp-Apim-Subscription-Key", subscriptionKey)
+            .addHeader("Accept-Language", "en")
+            .build()
+        val response= client.newCall(request).execute().body!!.string()
         val jelement = JsonParser().parse(response)
         var jsonObject = jelement.asJsonObject
         val jsonArray = jsonObject.getAsJsonArray("value")
@@ -171,7 +154,7 @@ class GetInfo {
     companion object {
         var subscriptionKey = System.getenv("BING")
         var host = "https://api.cognitive.microsoft.com"
-        var imagePath = "/bing/v7.0/images/search?q=andr"
+        var imagePath = "/bing/v7.0/images/search"
         var path = "/bing/v7.0/search"
     }
 }
