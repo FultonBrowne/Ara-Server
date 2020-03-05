@@ -6,6 +6,7 @@ import com.andromeda.araserver.util.NewDoc
 import com.andromeda.araserver.util.DeviceModel
 import org.junit.Test
 import com.andromeda.araserver.iot.Main
+import com.andromeda.araserver.iot.Status
 
 class IotTest {
     @Test
@@ -20,6 +21,7 @@ class IotTest {
         val main = Main()
         Thread.sleep(5000L)
         main.main("/devices/run=on:true&user=test&id=$id")
+        Status().main("/deviceinfo/user=test&id=$id")
 
 
 
