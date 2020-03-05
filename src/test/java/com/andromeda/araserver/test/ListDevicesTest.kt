@@ -7,6 +7,6 @@ class ListDevicesTest {
     @Test
     fun test(){
         if (!System.getenv().contains("IOTDB")) return
-        ListDevices().main("/test/")
+        ListDevices().main("/devicelist/test")
     }
 }
