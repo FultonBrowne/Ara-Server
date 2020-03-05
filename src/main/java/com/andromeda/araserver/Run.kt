@@ -94,11 +94,6 @@ object Run : NanoHTTPD(Port().main()!!) {
                 com.andromeda.araserver.persona.Main().main(sessionUri, this.keyWord!!, parser)
             sessionUri.startsWith("/time") -> main2 =
                 parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri, it1, it) } }
-            sessionUri.startsWith("/store") -> {
-
-                    main2 = com.andromeda.araserver.store.Main().GetStoreContent()
-
-            }
             else -> { // if getting RSS info set tag value this will be used to get the correct feed
                 tag = when (sessionUri) {
                     "/world" -> 1
