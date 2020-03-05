@@ -107,7 +107,7 @@ class GetInfo {
             .url("https://ara.cognitiveservices.azure.com/bing/v7.0/images/search/?q=$searchQuery")
             .method("GET", null)
             .addHeader("Ocp-Apim-Subscription-Key", subscriptionKey)
-            .addHeader("Accept-Language", "en")
+            .addHeader("Accept-Language", cc.language)
             .build()
         val response= client.newCall(request).execute().body!!.string()
         val jelement = JsonParser().parse(response)
