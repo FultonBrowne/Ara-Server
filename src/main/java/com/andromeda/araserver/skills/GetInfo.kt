@@ -23,13 +23,13 @@ class GetInfo {
         val term: String
         //parse for search term
         val pairs =
-            ArrayList(Arrays.asList(*mainurl.split("&").toTypedArray()))
-        term = pairs[0]
+            ParseUrl().parseApi(mainurl, "/searchi/")
+        term = pairs.term
         println(term)
         //NLP
 //ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
         try {
-            outputModels.addAll(searchBing(term))
+            outputModels.addAll(searchBing(term, pairs.cc))
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -38,7 +38,7 @@ class GetInfo {
     }
 
     @Throws(IOException::class)
-    private fun searchBing(searchQuery: String): ArrayList<OutputModel> {
+    private fun searchBing(searchQuery: String, cc:Locale): ArrayList<OutputModel> {
         var searchQuery = searchQuery
         println(searchQuery)
         searchQuery = searchQuery.replace("/searcht/", "")
@@ -50,18 +50,10 @@ class GetInfo {
         } catch (e: Exception) {
 
         }
-        val url = URL(
-            "$host$path?q=" + URLEncoder.encode(
-                searchQuery,
-                "UTF-8"
-            )
-        )
-        // Open the connection.
-        val connection = url.openConnection() as HttpsURLConnection
-        connection.setRequestProperty("Ocp-Apim-Subscription-Key", subscriptionKey)
-        // Receive the JSON response body.
-        val stream = connection.inputStream
-        val response = Scanner(stream).useDelimiter("\\A").next()
+        val response = getBingText("$host$path?q=" + URLEncoder.encode(
+            searchQuery,
+            "UTF-8"
+        ),cc )
         val jelement = JsonParser().parse(response)
         var jsonObject = jelement.asJsonObject
         jsonObject = jsonObject.getAsJsonObject("webPages")
@@ -101,15 +93,7 @@ class GetInfo {
         println(searchQuery)
         searchQuery = searchQuery.replace("/searchi/", "")
         val mainList = ArrayList<OutputModel>()
-        val client = OkHttpClient().newBuilder()
-            .build()
-        val request: Request = Request.Builder()
-            .url("https://ara.cognitiveservices.azure.com/bing/v7.0/images/search/?q=$searchQuery")
-            .method("GET", null)
-            .addHeader("Ocp-Apim-Subscription-Key", subscriptionKey)
-            .addHeader("Accept-Language", cc.language)
-            .build()
-        val response= client.newCall(request).execute().body!!.string()
+        val response = getBingText("https://ara.cognitiveservices.azure.com/bing/v7.0/images/search/?q=$searchQuery", cc)
         val jelement = JsonParser().parse(response)
         var jsonObject = jelement.asJsonObject
         val jsonArray = jsonObject.getAsJsonArray("value")
@@ -121,6 +105,19 @@ class GetInfo {
             mainList.add(OutputModel(title, "", link, info, "", ""))
         }
         return mainList
+    }
+
+    private fun getBingText(url: String, cc: Locale): String {
+        val client = OkHttpClient().newBuilder()
+            .build()
+        val request: Request = Request.Builder()
+            .url(url)
+            .method("GET", null)
+            .addHeader("Ocp-Apim-Subscription-Key", subscriptionKey)
+            .addHeader("Accept-Language", cc.language)
+            .build()
+        val response = client.newCall(request).execute().body!!.string()
+        return response
     }
 
     @Throws(IOException::class)
