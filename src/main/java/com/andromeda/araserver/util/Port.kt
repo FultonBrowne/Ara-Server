@@ -6,7 +6,7 @@ class Port {
             return port
 
         }
-        catch (e:NullPointerException){
+        catch (e:Exception){
             e.printStackTrace()
             println("please add port environment variable using 8080")
         }
