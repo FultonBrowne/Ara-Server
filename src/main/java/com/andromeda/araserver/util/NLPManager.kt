@@ -1,5 +1,8 @@
 package com.andromeda.araserver.util
 
+import com.andromeda.araserver.Run
+import opennlp.tools.parser.Parser
+import opennlp.tools.parser.ParserFactory
 import opennlp.tools.parser.ParserModel
 import java.net.URL
 import java.util.*
@@ -18,11 +21,19 @@ class NLPManager {
             URL(link)
         val inStream = url.openStream()
         val model = ParserModel(inStream)
+        val parser = ParserFactory.create(model)
+        val keyWord = KeyWord(inStream!!)
         cc.forEach {
             parserModel[it] = model
+            keyWordModel[it] = keyWord
+            parserMap[it] = parser
+
         }
     }
     companion object{
         val parserModel = mutableMapOf<Locale, ParserModel>()
+        val keyWordModel = mutableMapOf<Locale, KeyWord>()
+        val parserMap = mutableMapOf<Locale, Parser>()
+
     }
 }

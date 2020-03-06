@@ -10,10 +10,7 @@ import java.io.InputStream
 
 class KeyWord(var parseIS:InputStream) {
 
-
-
     fun getKeyWords(mainVal:String, parser: Parser): Array<out Parse>? {
-
         return ParserTool.parseLine(mainVal, parser, 1)
     }
 
