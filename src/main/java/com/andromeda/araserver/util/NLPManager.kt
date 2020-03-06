@@ -29,6 +29,8 @@ class NLPManager {
             parserMap[it] = parser
 
         }
+        inStream.close()
+        println("done")
     }
     companion object{
         val parserModel = mutableMapOf<Locale, ParserModel>()
