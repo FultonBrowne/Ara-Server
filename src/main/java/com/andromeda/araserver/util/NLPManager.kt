@@ -36,6 +36,5 @@ class NLPManager {
         val parserModel = mutableMapOf<Locale, ParserModel>()
         val keyWordModel = mutableMapOf<Locale, KeyWord>()
         val parserMap = mutableMapOf<Locale, Parser>()
-
     }
 }
