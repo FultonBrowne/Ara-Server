@@ -42,6 +42,26 @@ class GetInfo {
         //Return gson values
         return gson.toJson(outputModels)
     }
+    fun getBing(mainurl: String): String? {
+        val gson = Gson()
+        //place holder values
+        val outputModels = ArrayList<OutputModel>()
+        //get url
+        val term: String
+        //parse for search term
+        val pairs =
+            ParseUrl().parseApi(mainurl, "/searchi/")
+        term = pairs.term
+        println(term)
+        try {
+            outputModels.addAll(searchBing(term, pairs.cc))
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return gson.toJson(outputModels)
+
+    }
+
 
     @Throws(IOException::class)
     private fun searchBing(searchQuery: String, cc:Locale): ArrayList<OutputModel> {

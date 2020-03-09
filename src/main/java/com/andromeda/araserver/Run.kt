@@ -90,6 +90,8 @@ object Run : NanoHTTPD(Port().main()!!) {
                 GetSkillData().main(sessionUri)
             sessionUri.startsWith("/class") -> main2 =
                 GetDeviceClass().main(sessionUri)
+            sessionUri.startsWith("/searchb") -> main2 =
+                GetInfo().getBing(sessionUri)
             sessionUri.startsWith("/person") -> main2 =
                 com.andromeda.araserver.persona.Main().main(sessionUri, this.keyWord!!, parser)
             sessionUri.startsWith("/time") -> main2 =
