@@ -11,6 +11,8 @@ import java.net.URL
 class WeatherTest {
     @Test
     fun test(){
+        if (!System.getenv().contains("IOTDB")) return
+
         val weather = Weather()
         val apiStart = ApiStart()
         val classloader = javaClass.classLoader
