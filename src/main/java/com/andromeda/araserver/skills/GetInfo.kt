@@ -29,10 +29,16 @@ class GetInfo {
         //NLP
 //ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
         try {
-            outputModels.addAll(searchBing(term, pairs.cc))
-        } catch (e: IOException) {
-            e.printStackTrace()
+            outputModels.addAll(getFast(term))
+            outputModels[0]
+        } catch (e: Exception) {
+            try {
+                outputModels.addAll(searchBing(term, pairs.cc))
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
+
         //Return gson values
         return gson.toJson(outputModels)
     }
@@ -43,13 +49,7 @@ class GetInfo {
         println(searchQuery)
         searchQuery = searchQuery.replace("/searcht/", "")
         val mainList = ArrayList<OutputModel>()
-        try {
-            mainList.addAll(getFast(searchQuery))
-            mainList[0]
-            return mainList
-        } catch (e: Exception) {
 
-        }
         val response = getBingText("$host$path?q=" + URLEncoder.encode(
             searchQuery,
             "UTF-8"
@@ -153,5 +153,8 @@ class GetInfo {
         var host = "https://api.cognitive.microsoft.com"
         var imagePath = "/bing/v7.0/images/search"
         var path = "/bing/v7.0/search"
+    }
+    fun bingOnly(){
+
     }
 }

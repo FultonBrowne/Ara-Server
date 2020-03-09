@@ -1,6 +1,5 @@
 package com.andromeda.araserver.util
 
-import com.andromeda.araserver.Run
 import opennlp.tools.parser.Parser
 import opennlp.tools.parser.ParserFactory
 import opennlp.tools.parser.ParserModel

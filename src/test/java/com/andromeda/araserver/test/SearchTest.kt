@@ -24,6 +24,7 @@ class SearchTest {
         val model = ParserModel(`is`)
         val parser = ParserFactory.create(model)
         val keyWord = KeyWord(`is`!!)
+        `is`.close()
         apiStart.apiMain("/api/hello ara&log=0.0&lat=0.0", keyWord, parser)
         apiStart.apiMain("/api/what is pi&log=0.0&lat=0.0", keyWord, parser)
         apiStart.apiMain("/api/microsoft&log=0.0&lat=0.0", keyWord, parser)
