@@ -20,7 +20,7 @@ class GetInfo {
         val term: String
         //parse for search term
         val pairs =
-            ParseUrl().parseApi(mainurl, "/searchi/")
+            ParseUrl().parseApi(mainurl, "/searcht/")
         term = pairs.term
         println(term)
         //NLP
