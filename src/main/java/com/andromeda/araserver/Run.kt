@@ -70,7 +70,7 @@ object Run : NanoHTTPD(Port().main()!!) {
                 main2 = GetInfo().main(sessionUri)
             }
             sessionUri.startsWith("/searchn/") -> {
-                main2 = GetInfo().getBing(sessionUri)
+                main2 = GetInfo().bingNews(sessionUri)
             }
             sessionUri.startsWith("/searchi/") -> {
                 main2 = GetInfo().imageSearch(sessionUri)
