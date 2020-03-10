@@ -6,12 +6,9 @@ import com.google.gson.Gson
 import com.google.gson.JsonParser
 import okhttp3.OkHttpClient
 import okhttp3.Request
-import okhttp3.Response
 import java.io.IOException
-import java.net.URL
 import java.net.URLEncoder
 import java.util.*
-import javax.net.ssl.HttpsURLConnection
 
 
 class GetInfo {
@@ -67,7 +64,7 @@ class GetInfo {
     private fun searchBing(searchQuery: String, cc:Locale): ArrayList<OutputModel> {
         var searchQuery = searchQuery
         println(searchQuery)
-        searchQuery = searchQuery.replace("/searcht/", "")
+        searchQuery = searchQuery.replace("/searchb/", "")
         val mainList = ArrayList<OutputModel>()
 
         val response = getBingText("$host$path?q=" + URLEncoder.encode(
@@ -174,7 +171,24 @@ class GetInfo {
         var imagePath = "/bing/v7.0/images/search"
         var path = "/bing/v7.0/search"
     }
-    fun bingOnly(){
-
+    fun bingNews(mainurl: String): String? {
+        val gson = Gson()
+        //place holder values
+        val outputModels = ArrayList<OutputModel>()
+        //get url
+        val term: String
+        //parse for search term
+        val pairs =
+            ParseUrl().parseApi(mainurl, "/search/")
+        term = pairs.term
+        println(term)
+        //NLP
+        try {
+            outputModels.addAll(getImages(term, pairs.cc))
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        //Return gson values
+        return gson.toJson(outputModels)
     }
 }
