@@ -69,6 +69,9 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/searcht/") -> {
                 main2 = GetInfo().main(sessionUri)
             }
+            sessionUri.startsWith("/searchn/") -> {
+                main2 = GetInfo().getBing(sessionUri)
+            }
             sessionUri.startsWith("/searchi/") -> {
                 main2 = GetInfo().imageSearch(sessionUri)
             }

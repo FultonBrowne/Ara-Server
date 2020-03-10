@@ -39,6 +39,7 @@ class GetInfo {
         //Return gson values
         return gson.toJson(outputModels)
     }
+
     fun getBing(mainurl: String): String? {
         val gson = Gson()
         //place holder values
@@ -61,16 +62,18 @@ class GetInfo {
 
 
     @Throws(IOException::class)
-    private fun searchBing(searchQuery: String, cc:Locale): ArrayList<OutputModel> {
+    private fun searchBing(searchQuery: String, cc: Locale): ArrayList<OutputModel> {
         var searchQuery = searchQuery
         println(searchQuery)
         searchQuery = searchQuery.replace("/searchb/", "")
         val mainList = ArrayList<OutputModel>()
 
-        val response = getBingText("$host$path?q=" + URLEncoder.encode(
-            searchQuery,
-            "UTF-8"
-        ),cc )
+        val response = getBingText(
+            "$host$path?q=" + URLEncoder.encode(
+                searchQuery,
+                "UTF-8"
+            ), cc
+        )
         val jelement = JsonParser().parse(response)
         var jsonObject = jelement.asJsonObject
         jsonObject = jsonObject.getAsJsonObject("webPages")
@@ -84,6 +87,7 @@ class GetInfo {
         }
         return mainList
     }
+
     fun imageSearch(mainurl: String): String? {
         val gson = Gson()
         //place holder values
@@ -105,14 +109,15 @@ class GetInfo {
         return gson.toJson(outputModels)
     }
 
-    fun getImages(searchQuery: String, cc:Locale): ArrayList<OutputModel> {
+    fun getImages(searchQuery: String, cc: Locale): ArrayList<OutputModel> {
         var searchQuery = searchQuery
         println(searchQuery)
         searchQuery = searchQuery.replace("/searchi/", "")
         val mainList = ArrayList<OutputModel>()
-        val response = getBingText("https://ara.cognitiveservices.azure.com/bing/v7.0/images/search/?q=$searchQuery", cc)
+        val response =
+            getBingText("https://ara.cognitiveservices.azure.com/bing/v7.0/images/search/?q=$searchQuery", cc)
         val jelement = JsonParser().parse(response)
-        var jsonObject = jelement.asJsonObject
+        val jsonObject = jelement.asJsonObject
         val jsonArray = jsonObject.getAsJsonArray("value")
         for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
             val title = jsonArray[i].asJsonObject["name"].asString
@@ -143,25 +148,34 @@ class GetInfo {
         val url = "https://api.duckduckgo.com/?q=$mainVal&format=json"
         val client = OkHttpClient()
         var json = ""
-            val request = Request.Builder()
-                .url(url)
-                //.header("User-Agent", "OkHttp Headers.java")
+        val request = Request.Builder()
+            .url(url)
+            //.header("User-Agent", "OkHttp Headers.java")
             .addHeader("Accept", "application/x-javascript")
             //.addHeader("Accept", "application/vnd.github.v3+json")
-                .build()
+            .build()
 
-            client.newCall(request).execute().use { response ->
-                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+        client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) throw IOException("Unexpected code $response")
 
-                json = response.body!!.string()
-                println(json)
-            }
+            json = response.body!!.string()
+            println(json)
+        }
         println(json)
         val jsonParser = JsonParser().parse(json).asJsonObject
         val describe = jsonParser["AbstractText"].asString
-        if ( describe == "") throw NullPointerException()
+        if (describe == "") throw NullPointerException()
         val outputModelArrayList = ArrayList<OutputModel>()
-        outputModelArrayList.add(OutputModel("Search result by DuckDuckGo", describe, jsonParser["AbstractURL"].asString, "", describe, ""))
+        outputModelArrayList.add(
+            OutputModel(
+                "Search result by DuckDuckGo",
+                describe,
+                jsonParser["AbstractURL"].asString,
+                "",
+                describe,
+                ""
+            )
+        )
         return outputModelArrayList
     }
 
@@ -171,6 +185,23 @@ class GetInfo {
         var imagePath = "/bing/v7.0/images/search"
         var path = "/bing/v7.0/search"
     }
+    fun getNews(searchQuery: String, cc: Locale): ArrayList<OutputModel> {
+        println(searchQuery)
+        val mainList = ArrayList<OutputModel>()
+        val response =
+            getBingText("https://ara.cognitiveservices.azure.com/bing/v7.0/news/search/?q=$searchQuery", cc)
+        val jelement = JsonParser().parse(response)
+        val jsonObject = jelement.asJsonObject
+        val jsonArray = jsonObject.getAsJsonArray("value")
+        for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
+            val title = jsonArray[i].asJsonObject["name"].asString
+            val info = jsonArray[i].asJsonObject["image"].asJsonObject["thumbnail"].asJsonObject["contentUrl"].asString
+            val desc = jsonArray[i].asJsonObject["description"].asString
+            val link = jsonArray[i].asJsonObject["url"].asString
+            mainList.add(OutputModel(title, desc, link, info, "", ""))
+        }
+        return mainList
+    }
     fun bingNews(mainurl: String): String? {
         val gson = Gson()
         //place holder values
@@ -179,12 +210,12 @@ class GetInfo {
         val term: String
         //parse for search term
         val pairs =
-            ParseUrl().parseApi(mainurl, "/search/")
+            ParseUrl().parseApi(mainurl, "/searchn/")
         term = pairs.term
         println(term)
         //NLP
         try {
-            outputModels.addAll(getImages(term, pairs.cc))
+            outputModels.addAll(getNews(term, pairs.cc))
         } catch (e: IOException) {
             e.printStackTrace()
         }
