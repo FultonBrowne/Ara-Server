@@ -45,36 +45,22 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/news/mex") -> main2 = NewsCache.mexNews
             sessionUri.startsWith("/news/de") -> main2 = NewsCache.deNews
             sessionUri.startsWith("/news/uk") -> main2 = NewsCache.ukNews
-            sessionUri.startsWith("/api") -> main2 =
-                ApiStart().apiMain(sessionUri, keyWord, parser)
-            sessionUri.startsWith("/user") -> main2 =
-                GetUserSkills().list(sessionUri)
-            sessionUri.startsWith("/1user") -> main2 =
-                GetUserSkills().one(sessionUri)
-            sessionUri.startsWith("/hi") -> main2 =
-                Hello().hello()
-            sessionUri.startsWith("/del") -> main2 =
-                DeleteDoc().main(sessionUri)
-            sessionUri.startsWith("/yelpclient") -> main2 =
-                Locdec().main(sessionUri, keyWord, parser)
-            sessionUri.startsWith("/weath") -> main2 =
-                Weather().mainPart(sessionUri, keyWord!!, parser!!)
-            sessionUri.startsWith("/devices/") -> main2 =
-                Main().main(sessionUri)
+            sessionUri.startsWith("/api") -> main2 = ApiStart().apiMain(sessionUri, keyWord, parser)
+            sessionUri.startsWith("/user/") -> main2 = GetUserSkills().list(sessionUri)
+            sessionUri.startsWith("/1user/") -> main2 = GetUserSkills().one(sessionUri)
+            sessionUri.startsWith("/hi/") -> main2 = Hello().hello()
+            sessionUri.startsWith("/del") -> main2 = DeleteDoc().main(sessionUri)
+            sessionUri.startsWith("/yelpclient") -> main2 = Locdec().main(sessionUri, keyWord, parser)
+            sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(sessionUri, keyWord!!, parser!!)
+            sessionUri.startsWith("/devices/") -> main2 = Main().main(sessionUri)
             sessionUri.startsWith("/updateuserdata/") -> main2 = UpdateDB().main(sessionUri)
-            sessionUri.startsWith("/devicelist/") -> main2 =
-                ListDevices().main(sessionUri)
-            sessionUri.startsWith("/deviceinfo/") -> main2 =
-                Status().main(sessionUri)
-            sessionUri.startsWith("/searcht/") -> {
-                main2 = GetInfo().main(sessionUri)
-            }
-            sessionUri.startsWith("/searchn/") -> {
-                main2 = GetInfo().bingNews(sessionUri)
-            }
-            sessionUri.startsWith("/searchi/") -> {
-                main2 = GetInfo().imageSearch(sessionUri)
-            }
+            sessionUri.startsWith("/devicelist/") -> main2 = ListDevices().main(sessionUri)
+            sessionUri.startsWith("/deviceinfo/") -> main2 = Status().main(sessionUri)
+            sessionUri.startsWith("/searcht/") -> main2 = GetInfo().main(sessionUri)
+            sessionUri.startsWith("/searchn/") -> main2 = GetInfo().bingNews(sessionUri)
+            sessionUri.startsWith("/searchi/") -> main2 = GetInfo().imageSearch(sessionUri)
+            sessionUri.startsWith("/searchv/") -> main2 = GetInfo().bingVideos(sessionUri)
+
             sessionUri.startsWith("/newdevice/") -> {
                 main2 = ""
                 NewDevice().main(sessionUri)
@@ -148,7 +134,6 @@ object Run : NanoHTTPD(Port().main()!!) {
                     "    You should have received a copy of the GNU General Public License\n" +
                     "    along with this program.  If not, see <https://www.gnu.org/licenses/>."
         )
-        //new MsSql().getSkills();
         val classloader = javaClass.classLoader
         var `is` = classloader.getResourceAsStream("resources/parse.bin")
         println("test")

@@ -14,17 +14,12 @@ import java.util.*
 class GetInfo {
     fun main(mainurl: String): String { //new gson instance
         val gson = Gson()
-        //place holder values
         val outputModels = ArrayList<OutputModel>()
-        //get url
         val term: String
-        //parse for search term
         val pairs =
             ParseUrl().parseApi(mainurl, "/searcht/")
         term = pairs.term
         println(term)
-        //NLP
-//ArrayList<WordGraph> graph = new SortWords(keyWord, "term").getTopics(parse);
         try {
             outputModels.addAll(getFast(term))
             outputModels[0]
@@ -35,8 +30,6 @@ class GetInfo {
                 e.printStackTrace()
             }
         }
-
-        //Return gson values
         return gson.toJson(outputModels)
     }
 
@@ -221,5 +214,42 @@ class GetInfo {
         }
         //Return gson values
         return gson.toJson(outputModels)
+    }
+    fun bingVideos(mainurl: String): String? {
+        val gson = Gson()
+        val outputModels = ArrayList<OutputModel>()
+        val term: String
+        val pairs =
+            ParseUrl().parseApi(mainurl, "/searchv/")
+        term = pairs.term
+        println(term)
+        try {
+            outputModels.addAll(getBingVideos(term, pairs.cc))
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return gson.toJson(outputModels)
+    }
+    private fun getBingVideos(searchQuery: String, cc: Locale): ArrayList<OutputModel> {
+        println(searchQuery)
+        val mainList = ArrayList<OutputModel>()
+        val response =
+            getBingText("https://ara.cognitiveservices.azure.com/bing/v7.0/news/search/?q=$searchQuery", cc)
+        val jelement = JsonParser().parse(response)
+        val jsonObject = jelement.asJsonObject
+        val jsonArray = jsonObject.getAsJsonArray("value")
+        for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
+            val title = jsonArray[i].asJsonObject["name"].asString
+            val info = try {
+            jsonArray[i].asJsonObject["thumbnailUrl"].asString
+            }
+            catch (e:Exception){
+                ""
+            }
+            val desc = jsonArray[i].asJsonObject["description"].asString
+            val link = jsonArray[i].asJsonObject["hostPageUrl"].asString
+            mainList.add(OutputModel(title, desc, link, info, "", ""))
+        }
+        return mainList
     }
 }
