@@ -1,6 +1,5 @@
 package com.andromeda.araserver.util;
 
-@SuppressWarnings({"FieldCanBeLocal", "unused"})
 //this is the modal for output to to the client
 public class OutputModel {
     public String title;
