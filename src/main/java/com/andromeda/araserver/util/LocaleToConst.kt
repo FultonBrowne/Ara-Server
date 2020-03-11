@@ -10,7 +10,9 @@ class LocaleToConst {
             Locale.UK to LanguageConst.en,
             Locale.FRANCE to LanguageConst.fr,
             Locale.FRENCH to LanguageConst.fr,
-            Locale.CANADA_FRENCH to LanguageConst.fr
+            Locale.CANADA_FRENCH to LanguageConst.fr,
+            Locale.GERMAN to LanguageConst.de,
+            Locale.GERMANY to LanguageConst.de
         )
         return map.getOrDefault(locale, LanguageConst.en)
     }
