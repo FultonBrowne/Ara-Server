@@ -239,16 +239,22 @@ class GetInfo {
         val jsonObject = jelement.asJsonObject
         val jsonArray = jsonObject.getAsJsonArray("value")
         for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
-            val title = jsonArray[i].asJsonObject["name"].asString
-            val info = try {
-            jsonArray[i].asJsonObject["thumbnailUrl"].asString
+            try {
+                val title = jsonArray[i].asJsonObject["name"].asString
+                val info = try {
+                    jsonArray[i].asJsonObject["thumbnailUrl"].asString
+                } catch (e: Exception) {
+                    ""
+                }
+                val desc = jsonArray[i].asJsonObject["description"].asString
+
+
+                val link = jsonArray[i].asJsonObject["hostPageUrl"].asString
+                mainList.add(OutputModel(title, desc, link, info, "", ""))
             }
             catch (e:Exception){
-                ""
+                e.printStackTrace()
             }
-            val desc = jsonArray[i].asJsonObject["description"].asString
-            val link = jsonArray[i].asJsonObject["hostPageUrl"].asString
-            mainList.add(OutputModel(title, desc, link, info, "", ""))
         }
         return mainList
     }
