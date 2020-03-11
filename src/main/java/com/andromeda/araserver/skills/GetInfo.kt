@@ -188,10 +188,10 @@ class GetInfo {
         val jsonArray = jsonObject.getAsJsonArray("value")
         for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
             val title = jsonArray[i].asJsonObject["name"].asString
-            val info = jsonArray[i].asJsonObject["image"].asJsonObject["thumbnail"].asJsonObject["contentUrl"].asString
+
             val desc = jsonArray[i].asJsonObject["description"].asString
             val link = jsonArray[i].asJsonObject["url"].asString
-            mainList.add(OutputModel(title, desc, link, info, "", ""))
+            mainList.add(OutputModel(title, desc, link, "", "", ""))
         }
         return mainList
     }
