@@ -25,12 +25,12 @@ class SearchTest {
         val parser = ParserFactory.create(model)
         val keyWord = KeyWord(`is`!!)
         `is`.close()
-        apiStart.apiMain("/api/hello ara&log=0.0&lat=0.0", keyWord, parser)
-        apiStart.apiMain("/api/what is pi&log=0.0&lat=0.0", keyWord, parser)
-        apiStart.apiMain("/api/microsoft&log=0.0&lat=0.0", keyWord, parser)
-        apiStart.apiMain("/api/start a timer for 5 minutes&log=0.0&lat=0.0", keyWord, parser)
-        apiStart.apiMain("/api/rem music videos&log=0.0&lat=0.0", keyWord, parser)
-        apiStart.apiMain("/api/ara voice assistant&log=0.0&lat=0.0", keyWord, parser)
+        apiStart.apiMain("/api/hello ara&log=0.0&lat=0.0&cc=US", keyWord, parser)
+        apiStart.apiMain("/api/what is pi&log=0.0&lat=0.0&cc=US", keyWord, parser)
+        apiStart.apiMain("/api/microsoft&log=0.0&lat=0.0&cc=US", keyWord, parser)
+        apiStart.apiMain("/api/start a timer for 5 minutes&log=0.0&lat=0.0&cc=US", keyWord, parser)
+        apiStart.apiMain("/api/rem music videos&log=0.0&lat=0.0&cc=US", keyWord, parser)
+        apiStart.apiMain("/api/ara voice assistant&log=0.0&lat=0.0&cc=US", keyWord, parser)
 
 
 
