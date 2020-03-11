@@ -249,7 +249,7 @@ class GetInfo {
                 val desc = jsonArray[i].asJsonObject["description"].asString
 
 
-                val link = jsonArray[i].asJsonObject["hostPageUrl"].asString
+                val link = jsonArray[i].asJsonObject["url"].asString
                 mainList.add(OutputModel(title, desc, link, info, "", ""))
             }
             catch (e:Exception){
