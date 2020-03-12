@@ -234,7 +234,7 @@ class GetInfo {
         println(searchQuery)
         val mainList = ArrayList<OutputModel>()
         val response =
-            getBingText("https://ara.cognitiveservices.azure.com/bing/v7.0/news/search/?q=$searchQuery", cc)
+            getBingText("https://ara.cognitiveservices.azure.com/bing/v7.0/videos/search/?q=$searchQuery", cc)
         val jelement = JsonParser().parse(response)
         val jsonObject = jelement.asJsonObject
         val jsonArray = jsonObject.getAsJsonArray("value")
@@ -249,7 +249,7 @@ class GetInfo {
                 val desc = jsonArray[i].asJsonObject["description"].asString
 
 
-                val link = jsonArray[i].asJsonObject["url"].asString
+                val link = jsonArray[i].asJsonObject["contentUrl"].asString
                 mainList.add(OutputModel(title, desc, link, info, "", ""))
             }
             catch (e:Exception){

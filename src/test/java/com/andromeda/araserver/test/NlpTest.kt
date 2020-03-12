@@ -6,6 +6,6 @@ import org.junit.Test
 class NlpTest {
     @Test
     fun nlpTest(){
-        val nlp = NLPManager()
+        //val nlp = NLPManager()
     }
 }
