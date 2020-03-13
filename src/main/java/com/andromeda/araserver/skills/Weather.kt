@@ -66,7 +66,7 @@ class Weather {
 
     private fun getLocAndTime(term: String, parse: Parser): LocLatTime {
         println("Start NLP pls")
-        val toSort = SortWords(term).getTopicsPhrase(parse)
+        val toSort = SortWords(term).getTopicsPhrase()
         val dateArray = ArrayList<String>()
         var time = ""
         dateArray.add("tomorrow")
@@ -119,11 +119,8 @@ class Weather {
         val c = Calendar.getInstance()
         c.time = date
         val dayOfWeek = c[Calendar.DAY_OF_WEEK] - 1
-
-
-
         println(date)
-        if (timeWord == "" && timeWord != "tomorrow") phrase.addAll(SortWords(mainVal).getComplexDate(parse))
+        if (timeWord == "" && timeWord != "tomorrow") phrase.addAll(SortWords(mainVal).getComplexDate())
         else if (timeWord == "tomorrow") returnVal = 1
         else returnVal = timeMap(timeWord)?.let { getTime(dayOfWeek, it) }!!
         println("num is $returnVal")

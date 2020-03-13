@@ -45,12 +45,12 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/news/mex") -> main2 = NewsCache.mexNews
             sessionUri.startsWith("/news/de") -> main2 = NewsCache.deNews
             sessionUri.startsWith("/news/uk") -> main2 = NewsCache.ukNews
-            sessionUri.startsWith("/api") -> main2 = ApiStart().apiMain(sessionUri, parser)
+            sessionUri.startsWith("/api") -> main2 = ApiStart().apiMain(sessionUri)
             sessionUri.startsWith("/user/") -> main2 = GetUserSkills().list(sessionUri)
             sessionUri.startsWith("/1user/") -> main2 = GetUserSkills().one(sessionUri)
             sessionUri.startsWith("/hi/") -> main2 = Hello().hello()
             sessionUri.startsWith("/del") -> main2 = DeleteDoc().main(sessionUri)
-            sessionUri.startsWith("/yelpclient") -> main2 = Locdec().main(sessionUri, parser)
+            sessionUri.startsWith("/yelpclient") -> main2 = Locdec().main(sessionUri)
             sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(sessionUri, parser!!)
             sessionUri.startsWith("/devices/") -> main2 = Main().main(sessionUri)
             sessionUri.startsWith("/updateuserdata/") -> main2 = UpdateDB().main(sessionUri)
@@ -82,7 +82,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/searchb") -> main2 =
                 GetInfo().getBing(sessionUri)
             sessionUri.startsWith("/person") -> main2 =
-                com.andromeda.araserver.persona.Main().main(sessionUri, parser)
+                com.andromeda.araserver.persona.Main().main(sessionUri)
             sessionUri.startsWith("/time") -> main2 =
                 parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri, it) } }
             else -> { // if getting RSS info set tag value this will be used to get the correct feed

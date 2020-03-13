@@ -2,7 +2,6 @@ package com.andromeda.araserver.util
 
 import com.microsoft.azure.documentdb.FeedOptions
 import com.microsoft.azure.documentdb.PartitionKey
-import opennlp.tools.parser.Parser
 import org.json.JSONObject
 import java.net.URL
 
@@ -17,9 +16,9 @@ class Skills {
         userName,
         password
     )
-    fun getSkills(phrase: String, fullDir: String, parse: Parser): String {
+    fun getSkills(phrase: String, fullDir: String): String {
         println(phrase)
-        val phrases = SortWords(phrase).getTopics(parse)
+        val phrases = SortWords(phrase).getTopics()
         println(phrases.size)
         var link = ""
         val options = FeedOptions()

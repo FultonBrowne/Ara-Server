@@ -6,8 +6,9 @@ import java.util.ArrayList
 class SortWords(mainVal: String, loc:Int) {
     constructor(mainVal: String) :this(mainVal, LanguageConst.en)
     private var key = NLPManager.keyWordModel[loc]!!
+    private val parse = NLPManager.parserMap[loc]!!
     private var mainText = mainVal
-    fun getTopics(parse: Parser): ArrayList<WordGraph> {
+    fun getTopics(): ArrayList<WordGraph> {
         println("go")
         val toReturn = ArrayList<WordGraph>()
         print("start")
@@ -57,7 +58,7 @@ class SortWords(mainVal: String, loc:Int) {
         return toReturn
 
     }
-    fun getNNS(parse: Parser): String {
+    fun getNNS(): String {
         var toReturn = "qwertyuio"
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
@@ -107,7 +108,7 @@ class SortWords(mainVal: String, loc:Int) {
         return toReturn
 
     }
-    fun getTopicsPhrase(parse: Parser): ArrayList<WordGraph> {
+    fun getTopicsPhrase(): ArrayList<WordGraph> {
         var toReturn = ArrayList<WordGraph>()
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
@@ -153,7 +154,7 @@ class SortWords(mainVal: String, loc:Int) {
             }
         return toReturn
         }
-    fun getComplexDate(parse: Parser): ArrayList<WordGraph> {
+    fun getComplexDate(): ArrayList<WordGraph> {
         val toReturn = ArrayList<WordGraph>()
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
@@ -222,7 +223,7 @@ class SortWords(mainVal: String, loc:Int) {
         return toReturn
     }
 
-    fun getNN(parse: Parser): ArrayList<WordGraph> {
+    fun getNN(): ArrayList<WordGraph> {
         val toReturn = ArrayList<WordGraph>()
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)

@@ -6,7 +6,6 @@ import com.google.gson.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import opennlp.tools.parser.Parse;
 import opennlp.tools.parser.Parser;
 
 import java.io.IOException;
@@ -19,7 +18,7 @@ public class Locdec {
     private String lat;
     private String term;
 
-    public String main(String search, Parser parser) {
+    public String main(String search) {
         //get api params
         ArrayList<String> pairs = new ArrayList<>(Arrays.asList(search.split("&")));
         //Finish the job an get the raw values
@@ -30,7 +29,7 @@ public class Locdec {
                 lat = pair.replace("lat=", "");
             } else term = pair.replace("/yelpclient/", "");
         }
-        if(!term.equals(""))term = new SortWords(term).getNNS(parser);
+        if(!term.equals(""))term = new SortWords(term).getNNS();
         System.out.println(term);
         //return new gson value from the yelpsearch() function
         return new Gson().toJson(yelpSearch());
