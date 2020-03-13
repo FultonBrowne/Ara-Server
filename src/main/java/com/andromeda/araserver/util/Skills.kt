@@ -5,8 +5,6 @@ import com.microsoft.azure.documentdb.PartitionKey
 import opennlp.tools.parser.Parser
 import org.json.JSONObject
 import java.net.URL
-import java.sql.Connection
-import java.sql.DriverManager
 
 class Skills {
     private val link = "araresdb.database.windows.net"
@@ -21,7 +19,7 @@ class Skills {
     )
     fun getSkills(phrase:String,fullDir:String, keyWord: KeyWord, parse: Parser): String {
         println(phrase)
-        val phrases = SortWords(keyWord,phrase).getTopics(parse)
+        val phrases = SortWords(phrase).getTopics(parse)
         println(phrases.size)
         var link = ""
         val options = FeedOptions()

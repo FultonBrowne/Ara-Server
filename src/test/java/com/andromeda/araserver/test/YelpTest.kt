@@ -24,7 +24,7 @@ class YelpTest {
         val parser = ParserFactory.create(model)
         val keyWord = KeyWord(`is`!!)
         `is`.close()
-        locdec.main("/yelpclient/log=-122.676483&lat=45.523064", keyWord, parser)
+        locdec.main("/yelpclient/log=-122.676483&lat=45.523064", parser)
 
     }
 

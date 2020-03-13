@@ -13,7 +13,7 @@ class Main {
         val pairs =
             ArrayList(listOf(*mainVal.split("&").toTypedArray()))
         term = pairs[0]
-        val topics = graph?.let { SortWords(keyWord, term).getNN(it) }
+        val topics = graph?.let { SortWords(term).getNN(it) }
         println(topics)
         var text = ""
         topics?.forEach { text += " ${it.word}" }

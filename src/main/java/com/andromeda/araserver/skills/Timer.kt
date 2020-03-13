@@ -3,7 +3,6 @@ package com.andromeda.araserver.skills
 import com.andromeda.araserver.util.KeyWord
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.SortWords
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.google.gson.Gson
 import opennlp.tools.parser.Parser
@@ -17,7 +16,7 @@ class Timer {
         val pairs =
             ArrayList(listOf(*mainVal.split("&").toTypedArray()))
         term = pairs[0]
-        val words = SortWords(keyWord = keyWord, mainVal = term).getComplexDate(graph)
+        val words = SortWords(mainVal = term).getComplexDate(graph)
         println(words)
         var numOfUnits:Int? = null
         var unit:String? = null

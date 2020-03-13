@@ -16,7 +16,7 @@ class Weather {
     private var term: String? = null
     private var time: Int? = null
 
-    fun mainPart(url: String, key: KeyWord, parse: Parser): String? {
+    fun mainPart(url: String, parse: Parser): String? {
         val pairs =
             ArrayList(listOf(*url.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
         //Finish the job an get the raw values
@@ -29,7 +29,7 @@ class Weather {
             }
         }
         try {
-            val loc = term?.let { getLocAndTime(it, key, parse) }
+            val loc = term?.let { getLocAndTime(it, parse) }
             if (loc != null) {
                 log = loc.loc
                 lat = loc.lat
@@ -64,9 +64,9 @@ class Weather {
         return Gson().toJson(toReturn)
     }
 
-    private fun getLocAndTime(term: String, key: KeyWord, parse: Parser): LocLatTime {
+    private fun getLocAndTime(term: String, parse: Parser): LocLatTime {
         println("Start NLP pls")
-        val toSort = SortWords(key, term).getTopicsPhrase(parse)
+        val toSort = SortWords(term).getTopicsPhrase(parse)
         val dateArray = ArrayList<String>()
         var time = ""
         dateArray.add("tomorrow")
@@ -97,7 +97,7 @@ class Weather {
         val jArray = JsonParser().parse(jsonRawText).asJsonObject.getAsJsonArray("results")
         val lat = jArray[0].asJsonObject.getAsJsonObject("position").get("lat").asString
         val log = jArray[0].asJsonObject.getAsJsonObject("position").get("lon").asString
-        return LocLatTime(log, lat, dateWord(term, time, log, lat, key, parse))
+        return LocLatTime(log, lat, dateWord(term, time, log, lat, parse))
 
     }
 
@@ -106,7 +106,6 @@ class Weather {
         timeWord: String,
         log: String,
         lat: String,
-        key: KeyWord,
         parse: Parser
     ): Int {
         val url =
@@ -124,7 +123,7 @@ class Weather {
 
 
         println(date)
-        if (timeWord == "" && timeWord != "tomorrow") phrase.addAll(SortWords(key, mainVal).getComplexDate(parse))
+        if (timeWord == "" && timeWord != "tomorrow") phrase.addAll(SortWords(mainVal).getComplexDate(parse))
         else if (timeWord == "tomorrow") returnVal = 1
         else returnVal = timeMap(timeWord)?.let { getTime(dayOfWeek, it) }!!
         println("num is $returnVal")

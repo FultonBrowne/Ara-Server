@@ -7,10 +7,13 @@ import java.net.URL
 
 class NLPManager {
     init {
+        isRunning = true
+        hasRun = true
         download(
             "https://arafilestore.file.core.windows.net/ara-server-files/parse.bin?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2024-04-01T22:11:11Z&st=2019-12-19T15:11:11Z&spr=https&sig=lfjMHSahA6fw8enCbx0hFTE1uAVJWvPmC4m6blVSuuo%3D",
             LanguageConst.en
         )
+        hasRun = false
     }
     fun download(link:String, int: Int){
         val url =
@@ -26,6 +29,8 @@ class NLPManager {
         println("done")
     }
     companion object{
+        var hasRun= false
+        var isRunning = false
         val parserModel = mutableMapOf<Int, ParserModel>()
         val keyWordModel = mutableMapOf<Int, KeyWord>()
         val parserMap = mutableMapOf<Int, Parser>()

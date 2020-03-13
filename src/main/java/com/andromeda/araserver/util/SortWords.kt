@@ -3,10 +3,14 @@ package com.andromeda.araserver.util
 import opennlp.tools.parser.Parse
 import opennlp.tools.parser.Parser
 import java.util.ArrayList
-class SortWords(keyWord: KeyWord, mainVal: String) {
-
-    private val key = keyWord
-    private val mainText = mainVal
+class SortWords(mainVal: String, loc:Int) {
+    constructor(mainVal: String)
+    {
+        this.mainText = mainVal
+        this.key = NLPManager.keyWordModel[LanguageConst.en]!!
+    }
+    private var key = NLPManager.keyWordModel[loc]!!
+    private var mainText = mainVal
     fun getTopics(parse: Parser): ArrayList<WordGraph> {
         println("go")
         val toReturn = ArrayList<WordGraph>()

@@ -20,7 +20,7 @@ public class Locdec {
     private String lat;
     private String term;
 
-    public String main(String search, KeyWord keyWord, Parser parser) {
+    public String main(String search, Parser parser) {
         //get api params
         ArrayList<String> pairs = new ArrayList<>(Arrays.asList(search.split("&")));
         //Finish the job an get the raw values
@@ -31,7 +31,7 @@ public class Locdec {
                 lat = pair.replace("lat=", "");
             } else term = pair.replace("/yelpclient/", "");
         }
-        if(!term.equals(""))term = new SortWords(keyWord, term).getNNS(parser);
+        if(!term.equals(""))term = new SortWords(term).getNNS(parser);
         System.out.println(term);
         //return new gson value from the yelpsearch() function
         return new Gson().toJson(yelpSearch());
