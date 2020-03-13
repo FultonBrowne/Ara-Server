@@ -19,9 +19,7 @@ import java.io.IOException
 import java.net.URL
 
 object Run : NanoHTTPD(Port().main()!!) {
-    private var keyWord: KeyWord? = null
-    private var model: ParserModel? = null
-    private var parser: Parser? = null
+
     //If connected to
     override fun serve(session: IHTTPSession): Response {
         val tag: Int
@@ -72,9 +70,9 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/math") -> main2 =
                 Equations().main(sessionUri)
             sessionUri.startsWith("/call") ->
-                    main2 = keyWord?.let { parser?.let { Call().main(sessionUri) } }
+                    main2 =  Call().main(sessionUri)
             sessionUri.startsWith("/call") ->
-                main2 = keyWord?.let { parser?.let { Text().main(sessionUri) } }
+                main2 =  Text().main(sessionUri)
             sessionUri.startsWith("/skillsdata/") -> main2 =
                 GetSkillData().main(sessionUri)
             sessionUri.startsWith("/class") -> main2 =
@@ -84,7 +82,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/person") -> main2 =
                 com.andromeda.araserver.persona.Main().main(sessionUri)
             sessionUri.startsWith("/time") -> main2 =
-                parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri) } }
+                 Timer().main(sessionUri)
             else -> { // if getting RSS info set tag value this will be used to get the correct feed
                 tag = when (sessionUri) {
                     "/world" -> 1
@@ -134,21 +132,12 @@ object Run : NanoHTTPD(Port().main()!!) {
                     "    You should have received a copy of the GNU General Public License\n" +
                     "    along with this program.  If not, see <https://www.gnu.org/licenses/>."
         )
-        val classloader = javaClass.classLoader
-        var `is` = classloader.getResourceAsStream("resources/parse.bin")
         println("test")
         Thread{
             NLPManager()
             println("done")
         }.start()
-        if (`is` == null) {
-            val url =
-                URL("https://arafilestore.file.core.windows.net/ara-server-files/parse.bin?sv=2019-02-02&ss=bfqt&srt=sco&sp=rwdlacup&se=2024-04-01T22:11:11Z&st=2019-12-19T15:11:11Z&spr=https&sig=lfjMHSahA6fw8enCbx0hFTE1uAVJWvPmC4m6blVSuuo%3D")
-            `is` = url.openStream()
-        }
-        model = ParserModel(`is`)
-        parser = ParserFactory.create(model)
-        keyWord = KeyWord()
+
         println("start")
 
 
