@@ -1,6 +1,5 @@
 package com.andromeda.araserver.test
 
-import com.andromeda.araserver.Run
 import com.andromeda.araserver.pages.ApiStart
 import com.andromeda.araserver.util.KeyWord
 import opennlp.tools.parser.ParserFactory
@@ -23,14 +22,14 @@ class SearchTest {
         }
         val model = ParserModel(`is`)
         val parser = ParserFactory.create(model)
-        val keyWord = KeyWord(`is`!!)
+        val keyWord = KeyWord()
         `is`.close()
-        apiStart.apiMain("/api/hello ara&log=0.0&lat=0.0&cc=US", keyWord, parser)
-        apiStart.apiMain("/api/what is pi&log=0.0&lat=0.0&cc=US", keyWord, parser)
-        apiStart.apiMain("/api/microsoft&log=0.0&lat=0.0&cc=US", keyWord, parser)
-        apiStart.apiMain("/api/start a timer for 5 minutes&log=0.0&lat=0.0&cc=US", keyWord, parser)
-        apiStart.apiMain("/api/rem music videos&log=0.0&lat=0.0&cc=US", keyWord, parser)
-        apiStart.apiMain("/api/ara voice assistant&log=0.0&lat=0.0&cc=US", keyWord, parser)
+        apiStart.apiMain("/api/hello ara&log=0.0&lat=0.0&cc=US", parser)
+        apiStart.apiMain("/api/what is pi&log=0.0&lat=0.0&cc=US", parser)
+        apiStart.apiMain("/api/microsoft&log=0.0&lat=0.0&cc=US", parser)
+        apiStart.apiMain("/api/start a timer for 5 minutes&log=0.0&lat=0.0&cc=US", parser)
+        apiStart.apiMain("/api/rem music videos&log=0.0&lat=0.0&cc=US", parser)
+        apiStart.apiMain("/api/ara voice assistant&log=0.0&lat=0.0&cc=US", parser)
 
 
 

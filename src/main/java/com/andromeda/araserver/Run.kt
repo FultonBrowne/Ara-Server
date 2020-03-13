@@ -45,7 +45,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/news/mex") -> main2 = NewsCache.mexNews
             sessionUri.startsWith("/news/de") -> main2 = NewsCache.deNews
             sessionUri.startsWith("/news/uk") -> main2 = NewsCache.ukNews
-            sessionUri.startsWith("/api") -> main2 = ApiStart().apiMain(sessionUri, keyWord, parser)
+            sessionUri.startsWith("/api") -> main2 = ApiStart().apiMain(sessionUri, parser)
             sessionUri.startsWith("/user/") -> main2 = GetUserSkills().list(sessionUri)
             sessionUri.startsWith("/1user/") -> main2 = GetUserSkills().one(sessionUri)
             sessionUri.startsWith("/hi/") -> main2 = Hello().hello()
@@ -82,9 +82,9 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/searchb") -> main2 =
                 GetInfo().getBing(sessionUri)
             sessionUri.startsWith("/person") -> main2 =
-                com.andromeda.araserver.persona.Main().main(sessionUri, this.keyWord!!, parser)
+                com.andromeda.araserver.persona.Main().main(sessionUri, parser)
             sessionUri.startsWith("/time") -> main2 =
-                parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri, it1, it) } }
+                parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri, it) } }
             else -> { // if getting RSS info set tag value this will be used to get the correct feed
                 tag = when (sessionUri) {
                     "/world" -> 1
@@ -148,7 +148,7 @@ object Run : NanoHTTPD(Port().main()!!) {
         }
         model = ParserModel(`is`)
         parser = ParserFactory.create(model)
-        keyWord = KeyWord(`is`!!)
+        keyWord = KeyWord()
         println("start")
 
 

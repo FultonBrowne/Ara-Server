@@ -17,7 +17,7 @@ class Skills {
         userName,
         password
     )
-    fun getSkills(phrase:String,fullDir:String, keyWord: KeyWord, parse: Parser): String {
+    fun getSkills(phrase: String, fullDir: String, parse: Parser): String {
         println(phrase)
         val phrases = SortWords(phrase).getTopics(parse)
         println(phrases.size)

@@ -24,7 +24,7 @@ class WeatherTest {
         }
         val model = ParserModel(`is`)
         val parser = ParserFactory.create(model)
-        val keyWord = KeyWord(`is`!!)
+        val keyWord = KeyWord()
         `is`.close()
         weather.mainPart("/weather in portland oregon tomorrow&log=0.0=lat=0.0", parser)
     }

@@ -1,6 +1,5 @@
 package com.andromeda.araserver.skills;
 
-import com.andromeda.araserver.util.KeyWord;
 import com.andromeda.araserver.util.OutputModel;
 import com.andromeda.araserver.util.SortWords;
 import com.google.gson.*;

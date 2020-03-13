@@ -21,7 +21,7 @@ class NLPManager {
         val inStream = url.openStream()
         val model = ParserModel(inStream)
         val parser = ParserFactory.create(model)
-        val keyWord = KeyWord(inStream!!)
+        val keyWord = KeyWord()
             parserModel[int] = model
             keyWordModel[int] = keyWord
             parserMap[int] = parser

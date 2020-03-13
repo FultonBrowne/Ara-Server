@@ -1,6 +1,5 @@
 package com.andromeda.araserver.skills
 
-import com.andromeda.araserver.util.KeyWord
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.SortWords
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
@@ -9,7 +8,7 @@ import opennlp.tools.parser.Parser
 import java.util.ArrayList
 
 class Timer {
-    fun main(url:String, keyWord: KeyWord, graph:Parser):String{
+    fun main(url: String, graph: Parser):String{
         val term: String
         val mainVal = url.replace("/time/", "")
         //parse for search term

@@ -13,13 +13,13 @@ public class ApiStart {
     private String linkval;
 
 
-    public String apiMain(String mainUri, KeyWord keyWord, Parser parse) {
+    public String apiMain(String mainUri, Parser parse) {
         String searchterm = mainUri.replaceFirst("/api/", "");
         outputModels.add(new OutputModel("Blank Input Received", "Please Try Again", "https://github.com/fultonbrowne/ara-android", "", "Error Was Encountered", ""));
         String term = new ParseUrl().parseApi(mainUri, "/api/").getTerm();
 
 
-        return new Skills().getSkills(term, searchterm, keyWord, parse);//ParseApi(searchterm);
+        return new Skills().getSkills(term, searchterm, parse);
     }
 
 }
