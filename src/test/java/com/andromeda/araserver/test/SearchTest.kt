@@ -2,6 +2,7 @@ package com.andromeda.araserver.test
 
 import com.andromeda.araserver.pages.ApiStart
 import com.andromeda.araserver.util.KeyWord
+import com.andromeda.araserver.util.NLPManager
 import opennlp.tools.parser.ParserFactory
 import opennlp.tools.parser.ParserModel
 import org.junit.Test
@@ -10,6 +11,7 @@ import java.net.URL
 class SearchTest {
     @Test
     fun test(){
+        if (!NLPManager.hasRun) NLPManager()
         if(!System.getenv().contains("IOTDB")) return
         val apiStart = ApiStart()
         println("test")

@@ -51,7 +51,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/hi/") -> main2 = Hello().hello()
             sessionUri.startsWith("/del") -> main2 = DeleteDoc().main(sessionUri)
             sessionUri.startsWith("/yelpclient") -> main2 = Locdec().main(sessionUri)
-            sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(sessionUri, parser!!)
+            sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(sessionUri)
             sessionUri.startsWith("/devices/") -> main2 = Main().main(sessionUri)
             sessionUri.startsWith("/updateuserdata/") -> main2 = UpdateDB().main(sessionUri)
             sessionUri.startsWith("/devicelist/") -> main2 = ListDevices().main(sessionUri)
@@ -84,7 +84,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/person") -> main2 =
                 com.andromeda.araserver.persona.Main().main(sessionUri)
             sessionUri.startsWith("/time") -> main2 =
-                parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri, it) } }
+                parser?.let { keyWord?.let { it1 -> Timer().main(sessionUri) } }
             else -> { // if getting RSS info set tag value this will be used to get the correct feed
                 tag = when (sessionUri) {
                     "/world" -> 1

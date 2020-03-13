@@ -4,7 +4,6 @@ import com.andromeda.araserver.util.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import opennlp.tools.parser.Parser
 import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
@@ -16,7 +15,7 @@ class Weather {
     private var term: String? = null
     private var time: Int? = null
 
-    fun mainPart(url: String, parse: Parser): String? {
+    fun mainPart(url: String): String? {
         val pairs =
             ArrayList(listOf(*url.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
         //Finish the job an get the raw values
@@ -29,7 +28,7 @@ class Weather {
             }
         }
         try {
-            val loc = term?.let { getLocAndTime(it, parse) }
+            val loc = term?.let { getLocAndTime(it) }
             if (loc != null) {
                 log = loc.loc
                 lat = loc.lat
@@ -64,7 +63,7 @@ class Weather {
         return Gson().toJson(toReturn)
     }
 
-    private fun getLocAndTime(term: String, parse: Parser): LocLatTime {
+    private fun getLocAndTime(term: String): LocLatTime {
         println("Start NLP pls")
         val toSort = SortWords(term).getTopicsPhrase()
         val dateArray = ArrayList<String>()
@@ -97,7 +96,7 @@ class Weather {
         val jArray = JsonParser().parse(jsonRawText).asJsonObject.getAsJsonArray("results")
         val lat = jArray[0].asJsonObject.getAsJsonObject("position").get("lat").asString
         val log = jArray[0].asJsonObject.getAsJsonObject("position").get("lon").asString
-        return LocLatTime(log, lat, dateWord(term, time, log, lat, parse))
+        return LocLatTime(log, lat, dateWord(term, time, log, lat))
 
     }
 
@@ -105,8 +104,7 @@ class Weather {
         mainVal: String,
         timeWord: String,
         log: String,
-        lat: String,
-        parse: Parser
+        lat: String
     ): Int {
         val url =
             URL("http://api.timezonedb.com/v2.1/get-time-zone?key=54K85TD0SUQQ&format=json&by=position&lat=$lat&lng=$log")

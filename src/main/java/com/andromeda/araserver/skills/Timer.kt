@@ -4,18 +4,17 @@ import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.SortWords
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.google.gson.Gson
-import opennlp.tools.parser.Parser
 import java.util.ArrayList
 
 class Timer {
-    fun main(url: String, graph: Parser):String{
+    fun main(url: String):String{
         val term: String
         val mainVal = url.replace("/time/", "")
         //parse for search term
         val pairs =
             ArrayList(listOf(*mainVal.split("&").toTypedArray()))
         term = pairs[0]
-        val words = SortWords(mainVal = term).getComplexDate(graph)
+        val words = SortWords(mainVal = term).getComplexDate()
         println(words)
         var numOfUnits:Int? = null
         var unit:String? = null
