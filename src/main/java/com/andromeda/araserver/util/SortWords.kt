@@ -5,6 +5,12 @@ import opennlp.tools.parser.Parser
 import java.util.ArrayList
 class SortWords(mainVal: String, loc:Int) {
     constructor(mainVal: String) :this(mainVal, LanguageConst.en)
+
+
+
+
+
+
     private var key = NLPManager.keyWordModel[loc]!!
     private var mainText = mainVal
     fun getTopics(parse: Parser): ArrayList<WordGraph> {
