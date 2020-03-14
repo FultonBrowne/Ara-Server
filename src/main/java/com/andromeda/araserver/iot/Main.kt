@@ -29,6 +29,7 @@ class Main {
         }
         val client = DocumentClient("https://ara-account-data.documents.azure.com:443/", dbLink, ConnectionPolicy(), ConsistencyLevel.Session)
         val devices = id?.let { key?.let { it1 -> db.getDB(client, it, it1) } }
+        Thread.sleep(1000)
         val device = devices?.get(0)
         val deviceClass = Any::class.java
         val currentState = GetDeviceValues().yamlArrayToObjectList(device!!.status, deviceClass)
