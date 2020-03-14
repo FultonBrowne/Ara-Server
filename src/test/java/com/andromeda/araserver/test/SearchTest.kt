@@ -25,6 +25,7 @@ class SearchTest {
         apiStart.apiMain("/api/ara voice assistant&log=0.0&lat=0.0&cc=US")
         getInfo.getBing("/searchb/ara voice assistant&log=0.0&lat=0.0&cc=US")
         getInfo.bingNews("/searchn/ara voice assistant&log=0.0&lat=0.0&cc=US")
+        getInfo.bingVideos("/searchn/ara voice assistant&log=0.0&lat=0.0&cc=US")
         getInfo.main("/searcht/ara voice assistant&log=0.0&lat=0.0&cc=US")
 
 
