@@ -251,6 +251,9 @@ class SortWords(mainVal: String, loc:Int) {
         }
         return toReturn
     }
+    fun reminderSort(){
+
+    }
 
 
 }
