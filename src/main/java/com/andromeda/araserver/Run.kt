@@ -71,6 +71,7 @@ object Run : NanoHTTPD(Port().main()!!) {
                 Equations().main(sessionUri)
             sessionUri.startsWith("/call") ->
                     main2 =  Call().main(sessionUri)
+            sessionUri.startsWith("/remindern/") -> main2 = Reminders().new(sessionUri)
             sessionUri.startsWith("/call") ->
                 main2 =  Text().main(sessionUri)
             sessionUri.startsWith("/skillsdata/") -> main2 =
