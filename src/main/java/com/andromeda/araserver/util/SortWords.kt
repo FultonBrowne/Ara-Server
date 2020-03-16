@@ -281,11 +281,15 @@ class SortWords(mainVal: String, loc:Int) {
     }
     private fun getReminderData(graph: Parse): ArrayList<WordGraph> {
         val  toReturn = ArrayList<WordGraph>()
+        var isTo = false
         for (i in graph.children!!) {
-            if (i.type == "NN" || i.type == "JJ"|| i.type == "PRP"|| i.type == "IN" || i.type == "NNS" || i.type == "VB") {
-                toReturn.add(WordGraph(i.coveredText, i.type))
+             if (i.type == "TO" ) {
+                 isTo = true
             }
-            if (i.childCount > 0) toReturn.addAll(sortForNoun(i))
+            else if (isTo || i.type == "VP"){
+                 toReturn.add(WordGraph(i.coveredText, i.type))
+             }
+            else if (i.childCount > 0) toReturn.addAll(getReminderData(i))
         }
         return toReturn
     }

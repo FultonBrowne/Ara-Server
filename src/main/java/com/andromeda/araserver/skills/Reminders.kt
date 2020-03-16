@@ -11,7 +11,7 @@ class Reminders {
         val term = apiParams.term
         val cc = LocaleToConst().main(apiParams.cc)
         val sortWords = SortWords(term, cc)
-        val topics = sortWords.getTopics()
+        val topics = sortWords.reminderSort()
         println(topics)
         return "ok"
     }
