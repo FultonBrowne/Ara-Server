@@ -284,12 +284,21 @@ class SortWords(mainVal: String, loc:Int) {
         var isTo = false
         for (i in graph.children!!) {
              if (i.type == "TO" ) {
-                 isTo = true
+                 toReturn.addAll(getAllButNotTo(graph.parent))
             }
-            else if (isTo || i.type == "VP"){
-                 toReturn.add(WordGraph(i.coveredText, i.type))
-             }
             else if (i.childCount > 0) toReturn.addAll(getReminderData(i))
+        }
+        return toReturn
+    }
+    fun getAllButNotTo(graph: Parse): ArrayList<WordGraph> {
+        val  toReturn = ArrayList<WordGraph>()
+        var isTo = false
+        for (i in graph.children!!) {
+            if (i.childCount > 0 ) {
+                toReturn.add(WordGraph(i.coveredText, i.type))
+            }
+            else if (i.type != "TO") toReturn.addAll(getAllButNotTo(i))
+
         }
         return toReturn
     }
