@@ -294,7 +294,7 @@ class SortWords(mainVal: String, loc:Int) {
         val  toReturn = ArrayList<WordGraph>()
         var isTo = false
         for (i in graph.children!!) {
-            if (i.childCount > 0 ) {
+            if (i.childCount == 0 ) {
                 toReturn.add(WordGraph(i.coveredText, i.type))
             }
             else if (i.type != "TO") toReturn.addAll(getAllButNotTo(i))
