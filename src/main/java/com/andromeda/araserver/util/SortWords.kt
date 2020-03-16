@@ -251,8 +251,41 @@ class SortWords(mainVal: String, loc:Int) {
         }
         return toReturn
     }
-    fun reminderSort(){
+    fun reminderSort(): ArrayList<WordGraph> {
+        val toReturn = ArrayList<WordGraph>()
 
+        var graph = key.getKeyWords(mainText,parse)?.get(0)
+
+
+        var working = true
+        if (graph != null) {
+            while (working) {
+                graph?.show()
+                when (graph?.childCount) {
+                    1 -> graph = graph.children?.get(0)
+                    0 -> working = false
+                    else -> {
+                        if (graph != null) {
+                            val toTest = getReminderData(graph)
+                            toReturn.addAll(toTest)
+                        }
+                        working = false
+                    }
+                }
+            }
+        } else {
+            print("null")
+            println("fail")
+        }
+        return toReturn
+    }
+    private fun getReminderData(graph: Parse): ArrayList<WordGraph> {
+        val  toReturn = ArrayList<WordGraph>()
+        for (i in graph.children){
+            if (i.childCount > 1) toReturn.addAll(sortForAll(i))
+            else if(i.type != "TK")toReturn.add(WordGraph(i.coveredText, i.type))
+        }
+        return toReturn
     }
 
 
