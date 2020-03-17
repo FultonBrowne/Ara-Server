@@ -1,6 +1,8 @@
 package com.andromeda.araserver.skills
 
+import com.andromeda.araserver.localSearchData.ReadDB
 import com.andromeda.araserver.util.*
+import com.google.gson.Gson
 import java.util.*
 
 class Reminders {
@@ -16,5 +18,16 @@ class Reminders {
         val model = RemindersModel(word, null, null)
         apiParams.userKey?.let { NewDoc().newDoc(it, model, Random().nextInt().toString()) }
         return "ok"
+    }
+    fun getAll(mainUrl:String): String {
+        val apiParams = ParseUrl().parseApi(mainUrl, "/reminderga/")
+        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminder(CosmosClients.client, it) })!!
+
+    }
+    //TODO add second param setting
+    fun getOne(mainUrl:String): String? {
+        val apiParams = ParseUrl().parseApi(mainUrl, "/reminderg/")
+        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminder(CosmosClients.client, it) })!!
+
     }
 }
