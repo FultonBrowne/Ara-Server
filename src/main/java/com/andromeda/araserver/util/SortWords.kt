@@ -292,7 +292,6 @@ class SortWords(mainVal: String, loc:Int) {
     }
     fun getAllButNotTo(graph: Parse): ArrayList<WordGraph> {
         val  toReturn = ArrayList<WordGraph>()
-        var isTo = false
         for (i in graph.children!!) {
             if (i.childCount > 1 ) {
                 toReturn.addAll(getAllButNotTo(i))
