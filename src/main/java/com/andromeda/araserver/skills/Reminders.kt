@@ -13,7 +13,7 @@ class Reminders {
         val sortWords = SortWords(term, cc)
         val topics = sortWords.reminderSort()
         var word = ""
-        topics.forEach { word = " $word" }
+        topics.forEach { word = "$word ${it.word}" }
         println(word)
         return "ok"
     }
