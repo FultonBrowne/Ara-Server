@@ -81,8 +81,7 @@ class ReadDB {
                 val json = i.get("document") as JSONObject
                 println(json)
                 try {
-                    val action = json.get("action") as JSONObject
-                    val model = RemindersModel(title = json.getString("name"), body = try { json.getString("body") }
+                    val model = RemindersModel(header = json.getString("header"), body = try { json.getString("body") }
                         catch (e:Exception){ "" }, time = try { json.getLong("body") }
                     catch (e:Exception){ 0L })
                     skillsFromDB.add(model)
@@ -104,8 +103,7 @@ class ReadDB {
                 val json = i.get("document") as JSONObject
                 println(json)
                 try {
-                    val action = json.get("action") as JSONObject
-                    val model = RemindersModel(title = json.getString("name"), body = try { json.getString("body") }
+                    val model = RemindersModel(header = json.getString("header"), body = try { json.getString("body") }
                     catch (e:Exception){ "" }, time = try { json.getLong("body") }
                     catch (e:Exception){ 0L })
                     skillsFromDB.add(model)
