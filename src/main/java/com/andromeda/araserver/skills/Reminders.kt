@@ -1,8 +1,6 @@
 package com.andromeda.araserver.skills
 
-import com.andromeda.araserver.util.LocaleToConst
-import com.andromeda.araserver.util.ParseUrl
-import com.andromeda.araserver.util.SortWords
+import com.andromeda.araserver.util.*
 import java.util.*
 
 class Reminders {
@@ -15,6 +13,8 @@ class Reminders {
         var word = ""
         topics.forEach { word = "$word ${it.word}" }
         println(word)
+        val model = RemindersModel(word, null, null)
+        apiParams.userKey?.let { NewDoc().newDoc(it, model, Random().nextInt().toString()) }
         return "ok"
     }
 }
