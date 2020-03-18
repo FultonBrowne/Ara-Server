@@ -73,6 +73,11 @@ object Run : NanoHTTPD(Port().main()!!) {
                     main2 =  Call().main(sessionUri)
             sessionUri.startsWith("/remindern/") -> main2 = Reminders().new(sessionUri)
             sessionUri.startsWith("/reminderga/") -> main2 = Reminders().getAll(sessionUri)
+            sessionUri.startsWith("/remindergaapi/") -> main2 = Reminders().getAllApi(sessionUri)
+            sessionUri.startsWith("/remindergapi/") -> main2 = Reminders().getOneApi(sessionUri)
+            sessionUri.startsWith("/reminderg/") -> main2 = Reminders().getOne(sessionUri)
+
+
             sessionUri.startsWith("/call") ->
                 main2 =  Text().main(sessionUri)
             sessionUri.startsWith("/skillsdata/") -> main2 =
