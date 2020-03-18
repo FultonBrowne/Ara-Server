@@ -27,5 +27,20 @@ class ParseUrl {
         val split = mainVal.split("&")
         return split
     }
+    fun parseUserAction(url: String, toReplace:String): UserActionParams {
+        val split = list(url, toReplace)
+        var user = ""
+        var id = ""
+        split.forEach{
+            when {
+                it.startsWith("user") -> user = it.replace("user=", "")
+                it.startsWith("id") -> id= it.replace("id=", "")
+
+            }
+        }
+        return UserActionParams(user, id)
+    }
     data class ApiParams(val term:String, val loc:String, val lat:String,val  cc:Locale, val userKey:String?)
+    data class UserActionParams(val user:String, val id:String)
+
 }

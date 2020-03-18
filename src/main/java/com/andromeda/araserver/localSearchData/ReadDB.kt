@@ -93,17 +93,6 @@ class ReadDB {
                 val json = i.get("document") as JSONObject
                 println(json)
                 try {
-                    val model = RemindersModel(
-                        header = json.getString("header"), body = try {
-                            json.getString("body")
-                        } catch (e: Exception) {
-                            ""
-                        }, time = try {
-                            json.getLong("time")
-                        } catch (e: Exception) {
-                            0L
-                        }
-                    )
                     val outputModel = OutputModel(json.getString("header"),try {
                         json.getString("body")
                     } catch (e: Exception) {
@@ -130,17 +119,7 @@ class ReadDB {
                 val json = i.get("document") as JSONObject
                 println(json)
                 try {
-                    val model = RemindersModel(
-                        header = json.getString("header"), body = try {
-                            json.getString("body")
-                        } catch (e: Exception) {
-                            ""
-                        }, time = try {
-                            json.getLong("time")
-                        } catch (e: Exception) {
-                            0L
-                        }
-                    )
+
                     val outputModel = OutputModel(json.getString("header"),try {
                         json.getString("body")
                     } catch (e: Exception) {

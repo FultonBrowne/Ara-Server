@@ -28,14 +28,13 @@ class Reminders {
         val apiParams = ParseUrl().parseApi(mainUrl, "/remindergaapi/")
         return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminder(CosmosClients.client, it) })!!
     }
-    //TODO add second param setting
     fun getOne(mainUrl:String): String? {
-        val apiParams = ParseUrl().parseApi(mainUrl, "/reminderg/")
-        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminderDBFormat(CosmosClients.client, it) })!!
+        val apiParams = ParseUrl().parseUserAction(mainUrl, "/reminderg/")
+        return Gson().toJson(ReadDB().userReminderDBFormat(CosmosClients.client, apiParams.id))!!
 
     }
     fun getOneApi(mainUrl:String): String? {
-        val apiParams = ParseUrl().parseApi(mainUrl, "/reminderg/")
-        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminder(CosmosClients.client, it) })!!
+        val apiParams = ParseUrl().parseUserAction(mainUrl, "/reminderg/")
+        return Gson().toJson(ReadDB().userReminder(CosmosClients.client, apiParams.id))!!
     }
 }
