@@ -10,108 +10,136 @@ class ReadDB {
         val skillsFromDB = ArrayList<SkillsFromDB>()
         val options = FeedOptions()
         options.partitionKey = PartitionKey("readonly")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
-        for (i in queryResults.queryIterator){
+        val queryResults: FeedResponse<Document> =
+            client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
+        for (i in queryResults.queryIterator) {
             val json = i.get("document") as JSONObject
             println(json)
             val model = SkillsFromDB(
                 pre = json.getString("pre"),
                 end = "",
-                action= json.getString("action")
+                action = json.getString("action")
             )
             skillsFromDB.add(model)
         }
         return skillsFromDB
     }
+
     fun userSkill(client: DocumentClient, key: String): ArrayList<SkillsDBModel> {
         val skillsFromDB = ArrayList<SkillsDBModel>()
         val options = FeedOptions()
         options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
+        val queryResults: FeedResponse<Document> =
+            client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
         for (i in queryResults.queryIterator) {
             val json = i.get("document") as JSONObject
             println(json)
             try {
                 val action = json.get("action") as JSONObject
 
-                val model = SkillsDBModel(name = json.getString("name"), action = SkillsModel(action.getString("action"), "", ""), index = i.id)
+                val model = SkillsDBModel(
+                    name = json.getString("name"),
+                    action = SkillsModel(action.getString("action"), "", ""),
+                    index = i.id
+                )
                 skillsFromDB.add(model)
-            }
-            catch (e:Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
         println(skillsFromDB)
         return skillsFromDB
     }
-    fun userSkill(client: DocumentClient, key: String, id:String): ArrayList<SkillsDBModel> {
+
+    fun userSkill(client: DocumentClient, key: String, id: String): ArrayList<SkillsDBModel> {
         val skillsFromDB = ArrayList<SkillsDBModel>()
         val options = FeedOptions()
-        println(id + "  " +key)
         options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
+        val queryResults: FeedResponse<Document> =
+            client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
         for (i in queryResults.queryIterator) {
             println(i.id)
-            if(i.id == id){
-            val json = i.get("document") as JSONObject
-                println(json)
-
-                try {
-
-                val action = json.get("action") as JSONObject
-
-                val model = SkillsDBModel(name = json.getString("name"), action = SkillsModel(action.getString("action"), "", ""), index = i.id)
-                skillsFromDB.add(model)
-            }
-            catch (e:Exception){
-                e.printStackTrace()
-            }
-        }}
-        println(skillsFromDB)
-        return skillsFromDB
-    }
-    fun userReminder(client: DocumentClient, key: String, id:String): ArrayList<RemindersModel> {
-        val skillsFromDB = ArrayList<RemindersModel>()
-        val options = FeedOptions()
-        options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
-        for (i in queryResults.queryIterator) {
-            println(i.id)
-            if(i.id == id){
+            if (i.id == id) {
                 val json = i.get("document") as JSONObject
                 println(json)
                 try {
-                    val model = RemindersModel(header = json.getString("header"), body = try { json.getString("body") }
-                        catch (e:Exception){ "" }, time = try { json.getLong("body") }
-                    catch (e:Exception){ 0L })
+                    val action = json.get("action") as JSONObject
+
+                    val model = SkillsDBModel(
+                        name = json.getString("name"),
+                        action = SkillsModel(action.getString("action"), "", ""),
+                        index = i.id
+                    )
                     skillsFromDB.add(model)
-                }
-                catch (e:Exception){
+                } catch (e: Exception) {
                     e.printStackTrace()
                 }
-            }}
+            }
+        }
         println(skillsFromDB)
         return skillsFromDB
     }
+
+    fun userReminder(client: DocumentClient, key: String, id: String): ArrayList<RemindersModel> {
+        val skillsFromDB = ArrayList<RemindersModel>()
+        val options = FeedOptions()
+        options.partitionKey = PartitionKey("user-$key")
+        val queryResults: FeedResponse<Document> =
+            client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
+        for (i in queryResults.queryIterator) {
+            println(i.id)
+            if (i.id == id) {
+                val json = i.get("document") as JSONObject
+                println(json)
+                try {
+                    val model = RemindersModel(
+                        header = json.getString("header"), body = try {
+                            json.getString("body")
+                        } catch (e: Exception) {
+                            ""
+                        }, time = try {
+                            json.getLong("body")
+                        } catch (e: Exception) {
+                            0L
+                        }
+                    )
+                    skillsFromDB.add(model)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        println(skillsFromDB)
+        return skillsFromDB
+    }
+
     fun userReminder(client: DocumentClient, key: String): ArrayList<RemindersModel> {
         val skillsFromDB = ArrayList<RemindersModel>()
         val options = FeedOptions()
         options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
+        val queryResults: FeedResponse<Document> =
+            client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
         for (i in queryResults.queryIterator) {
             println(i.id)
-                val json = i.get("document") as JSONObject
-                println(json)
-                try {
-                    val model = RemindersModel(header = json.getString("header"), body = try { json.getString("body") }
-                    catch (e:Exception){ "" }, time = try { json.getLong("body") }
-                    catch (e:Exception){ 0L })
-                    skillsFromDB.add(model)
-                }
-                catch (e:Exception){
-                    e.printStackTrace()
-                }
+            val json = i.get("document") as JSONObject
+            println(json)
+            try {
+                val model = RemindersModel(
+                    header = json.getString("header"), body = try {
+                        json.getString("body")
+                    } catch (e: Exception) {
+                        ""
+                    }, time = try {
+                        json.getLong("body")
+                    } catch (e: Exception) {
+                        0L
+                    }
+                )
+                skillsFromDB.add(model)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
+        }
         println(skillsFromDB)
         return skillsFromDB
     }
