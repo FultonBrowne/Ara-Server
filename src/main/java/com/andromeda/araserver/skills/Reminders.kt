@@ -18,8 +18,10 @@ class Reminders {
         apiParams.userKey?.let { NewDoc().newDoc(it, model, Random().nextInt().toString()) }
         return "ok"
     }
-    fun newJustData(){
-
+    fun newJustData(mainUrl:String): String {
+        val apiParams = ParseUrl().parseNewReminder(mainUrl, "/remindernn/")
+        NewDoc().newDoc(apiParams.key, apiParams.reminder, Random().nextInt().toString())
+        return "ok"
     }
     fun getAll(mainUrl:String): String {
         val apiParams = ParseUrl().parseApi(mainUrl, "/reminderga/")
