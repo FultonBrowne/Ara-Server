@@ -14,10 +14,12 @@ class Reminders {
         val topics = sortWords.reminderSort()
         var word = ""
         topics.forEach { word = "$word ${it.word}" }
-        println(word)
         val model = RemindersModel(word, null, null)
         apiParams.userKey?.let { NewDoc().newDoc(it, model, Random().nextInt().toString()) }
         return "ok"
+    }
+    fun newJustData(){
+
     }
     fun getAll(mainUrl:String): String {
         val apiParams = ParseUrl().parseApi(mainUrl, "/reminderga/")
