@@ -72,6 +72,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/call") ->
                     main2 =  Call().main(sessionUri)
             sessionUri.startsWith("/remindern/") -> main2 = Reminders().new(sessionUri)
+            sessionUri.startsWith("/remindernn/") -> main2 = Reminders().newJustData(sessionUri)
             sessionUri.startsWith("/reminderga/") -> main2 = Reminders().getAll(sessionUri)
             sessionUri.startsWith("/remindergaapi/") -> main2 = Reminders().getAllApi(sessionUri)
             sessionUri.startsWith("/remindergapi/") -> main2 = Reminders().getOneApi(sessionUri)
@@ -118,13 +119,18 @@ object Run : NanoHTTPD(Port().main()!!) {
     }
     // Static function, to be run on start.
     @JvmStatic
-    fun main(args: Array<String>) { // If this is in a heroku environment, get the port number
+    fun main(args: Array<String>) {
         start(SOCKET_READ_TIMEOUT, false)
         News()
         SecurityDBCheck()
+        println("|  \\/  |__ _ __| |___  | |__ _  _  | __|  _| | |_ ___ _ _   | _ )_ _ _____ __ ___ _  ___ \n" +
+                " | |\\/| / _` / _` / -_) | '_ \\ || | | _| || | |  _/ _ \\ ' \\  | _ \\ '_/ _ \\ V  V / ' \\/ -_)\n" +
+                " |_|  |_\\__,_\\__,_\\___| |_.__/\\_, | |_| \\_,_|_|\\__\\___/_||_| |___/_| \\___/\\_/\\_/|_||_\\___|\n" +
+                "                              |__/                                                        ")
         println(" Ara server is running and is available on your domain, IP, or http://localhost:8080/")
         println(
-            "This program is free software: you can redistribute it and/or modify\n" +
+            "Copy write (c) 2020 Fulton Browne " +
+                    "This program is free software: you can redistribute it and/or modify\n" +
                     "    it under the terms of the GNU General Public License as published by\n" +
                     "    the Free Software Foundation, either version 3 of the License, or\n" +
                     "    (at your option) any later version.\n" +
@@ -140,7 +146,11 @@ object Run : NanoHTTPD(Port().main()!!) {
         println("test")
         Thread{
             NLPManager()
-            println("done")
+            println(" /\\ \\ \\/ /   / _ \\  _ __ ___  __ _  __| |_   _ \n" +
+                    " /  \\/ / /   / /_)/ | '__/ _ \\/ _` |/ _` | | | |\n" +
+                    "/ /\\  / /___/ ___/  | | |  __/ (_| | (_| | |_| |\n" +
+                    "\\_\\ \\/\\____/\\/      |_|  \\___|\\__,_|\\__,_|\\__, |\n" +
+                    "                                          |___/")
         }.start()
 
         println("start")
