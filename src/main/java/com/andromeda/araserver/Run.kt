@@ -123,10 +123,6 @@ object Run : NanoHTTPD(Port().main()!!) {
         start(SOCKET_READ_TIMEOUT, false)
         News()
         SecurityDBCheck()
-        println("|  \\/  |__ _ __| |___  | |__ _  _  | __|  _| | |_ ___ _ _   | _ )_ _ _____ __ ___ _  ___ \n" +
-                " | |\\/| / _` / _` / -_) | '_ \\ || | | _| || | |  _/ _ \\ ' \\  | _ \\ '_/ _ \\ V  V / ' \\/ -_)\n" +
-                " |_|  |_\\__,_\\__,_\\___| |_.__/\\_, | |_| \\_,_|_|\\__\\___/_||_| |___/_| \\___/\\_/\\_/|_||_\\___|\n" +
-                "                              |__/                                                        ")
         println(" Ara server is running and is available on your domain, IP, or http://localhost:8080/")
         println(
             "Copy write (c) 2020 Fulton Browne " +
@@ -146,11 +142,7 @@ object Run : NanoHTTPD(Port().main()!!) {
         println("test")
         Thread{
             NLPManager()
-            println(" /\\ \\ \\/ /   / _ \\  _ __ ___  __ _  __| |_   _ \n" +
-                    " /  \\/ / /   / /_)/ | '__/ _ \\/ _` |/ _` | | | |\n" +
-                    "/ /\\  / /___/ ___/  | | |  __/ (_| | (_| | |_| |\n" +
-                    "\\_\\ \\/\\____/\\/      |_|  \\___|\\__,_|\\__,_|\\__, |\n" +
-                    "                                          |___/")
+
         }.start()
 
         println("start")

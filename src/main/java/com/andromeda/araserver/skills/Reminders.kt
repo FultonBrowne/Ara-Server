@@ -1,6 +1,7 @@
 package com.andromeda.araserver.skills
 
 import com.andromeda.araserver.localSearchData.ReadDB
+import com.andromeda.araserver.pages.UpdateDB
 import com.andromeda.araserver.util.*
 import com.google.gson.Gson
 import java.util.*
@@ -40,5 +41,10 @@ class Reminders {
     fun getOneApi(mainUrl:String): String? {
         val apiParams = ParseUrl().parseUserAction(mainUrl, "/remindergapi/")
         return Gson().toJson(ReadDB().userReminder(CosmosClients.client, apiParams.id))!!
+    }
+    fun update(mainUrl:String){
+        val apiParams = ParseUrl().parseNewReminder(mainUrl, "/reminderu/")
+        //UpdateDB().update()
+
     }
 }
