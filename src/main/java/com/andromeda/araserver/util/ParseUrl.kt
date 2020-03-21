@@ -51,7 +51,7 @@ class ParseUrl {
         split.forEach{
             when {
                 it.startsWith("user") -> user = it.replace("user=", "")
-                it.startsWith("name") -> name= it.replace("id=", "")
+                it.startsWith("name") -> name= it.replace("name=", "")
                 it.startsWith("time") -> time = it.replace("time=", "").toLong()
                 it.startsWith("info") -> info = it.replace("info=", "")
 
