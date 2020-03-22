@@ -42,9 +42,10 @@ class Reminders {
         val apiParams = ParseUrl().parseUserAction(mainUrl, "/remindergapi/")
         return Gson().toJson(ReadDB().userReminder(CosmosClients.client, apiParams.id))!!
     }
-    fun update(mainUrl:String){
+    fun update(mainUrl:String): String {
         val apiParams = ParseUrl().parseEditReminder(mainUrl, "/reminderu/")
         UpdateDB().update(CosmosClients.client,apiParams.id, apiParams.key, apiParams.reminder)
+        return "ok"
 
     }
 }
