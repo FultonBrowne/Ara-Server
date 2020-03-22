@@ -47,8 +47,9 @@ class Reminders {
         UpdateDB().update(CosmosClients.client,apiParams.id, apiParams.key, apiParams.reminder)
         return "ok"
     }
-    fun delete(mainUrl:String){
+    fun delete(mainUrl:String): String {
         val apiParams = ParseUrl().parseUserAction(mainUrl, "/reminderd/")
         DeleteDoc().delDoc(CosmosClients.client, apiParams.user, apiParams.id)
+        return "o"
     }
 }
