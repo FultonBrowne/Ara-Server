@@ -60,8 +60,31 @@ class ParseUrl {
         }
         return ReminderWithId(RemindersModel(name, info, time), user)
     }
+    fun parseEditReminder(url: String, toReplace:String): ReminderWithUserAndId {
+        val split = list(url, toReplace)
+        var user = ""
+        var name = ""
+        var info:String? = null
+        var time:Long? = null
+        var id:String? = null
+
+        split.forEach{
+            when {
+                it.startsWith("user") -> user = it.replace("user=", "")
+                it.startsWith("name") -> name= it.replace("name=", "")
+                it.startsWith("id") -> id = it.replace("id=", "")
+                it.startsWith("time") -> time = it.replace("time=", "").toLong()
+                it.startsWith("info") -> info = it.replace("info=", "")
+
+
+            }
+        }
+        return ReminderWithUserAndId(RemindersModel(name, info, time), user, id!!)
+    }
     data class ApiParams(val term:String, val loc:String, val lat:String,val  cc:Locale, val userKey:String?)
     data class UserActionParams(val user:String, val id:String)
     data class ReminderWithId(val reminder: RemindersModel, val key:String)
+    data class ReminderWithUserAndId(val reminder: RemindersModel, val key:String, val id:String)
+
 
 }
