@@ -44,7 +44,10 @@ class Reminders {
     }
     fun update(mainUrl:String): String {
         val apiParams = ParseUrl().parseEditReminder(mainUrl, "/reminderu/")
-        UpdateDB().update(CosmosClients.client,apiParams.id, apiParams.key, apiParams.reminder)
+        UpdateDB().update(CosmosClients.client,apiParams.id, "header", apiParams.reminder.header)
+        apiParams.reminder.body?.let { UpdateDB().update(CosmosClients.client,apiParams.id, "body", it) }
+        apiParams.reminder.time?.let { UpdateDB().update(CosmosClients.client,apiParams.id, "time", it) }
+
         return "ok"
     }
     fun delete(mainUrl:String): String {

@@ -43,6 +43,7 @@ class UpdateDB {
                 println("got it")
         client.replaceDocument(it, RequestOptions())}}
     }
+
     fun arrayUpdate(url: String, postData:String): String {
         val mainVal = url.replace("/postupdate/", "")
         val actions = mainVal.split("&")
