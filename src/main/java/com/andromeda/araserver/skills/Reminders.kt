@@ -35,7 +35,7 @@ class Reminders {
     }
     fun getOne(mainUrl:String): String? {
         val apiParams = ParseUrl().parseUserAction(mainUrl, "/reminderg/")
-        return Gson().toJson(ReadDB().userReminderDBFormat(CosmosClients.client, apiParams.id))!!
+        return Gson().toJson(ReadDB().userReminderDBFormat(CosmosClients.client,apiParams.user, apiParams.id))!!
 
     }
     fun getOneApi(mainUrl:String): String? {
