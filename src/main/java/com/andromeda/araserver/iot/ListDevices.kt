@@ -7,6 +7,7 @@ import com.microsoft.azure.documentdb.ConnectionPolicy
 import com.microsoft.azure.documentdb.ConsistencyLevel
 import com.microsoft.azure.documentdb.DocumentClient
 import java.util.ArrayList
+@Deprecated("replaced with HA")
 
 class ListDevices {
     fun main(url:String): String? {

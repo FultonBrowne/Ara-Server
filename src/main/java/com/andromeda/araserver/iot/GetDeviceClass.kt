@@ -5,6 +5,7 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.google.gson.GsonBuilder
 import java.lang.reflect.Modifier.TRANSIENT
 
+@Deprecated("replaced with HA")
 
 class GetDeviceClass {
     fun main(url:String):String{

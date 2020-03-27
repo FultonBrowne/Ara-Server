@@ -1,4 +1,5 @@
 package com.andromeda.araserver.iot
+@Deprecated("replaced with HA")
 
 class TypeClassMap {
     fun DeafaultVals(main:String): Any? {

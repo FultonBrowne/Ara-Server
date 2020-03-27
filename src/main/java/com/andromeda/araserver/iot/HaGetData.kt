@@ -8,6 +8,5 @@ class HaGetData {
     fun main(url:String): String? {
         val mainVal = url.replace("/getha/", "")
         return Gson().toJson(ReadDB().useHaData(CosmosClients.client, mainVal))
-
     }
 }

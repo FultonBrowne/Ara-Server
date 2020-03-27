@@ -7,6 +7,7 @@ import com.microsoft.azure.sdk.iot.service.Device
 import com.microsoft.azure.sdk.iot.service.RegistryManager
 import com.microsoft.azure.sdk.iot.service.auth.AuthenticationType
 
+@Deprecated("replaced with HA")
 
 class NewDevice {
     fun main(url: String){

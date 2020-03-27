@@ -11,6 +11,7 @@ import com.microsoft.azure.documentdb.Document
 import com.microsoft.azure.documentdb.DocumentClient
 import java.util.ArrayList
 import kotlin.reflect.full.memberProperties
+@Deprecated("replaced with HA")
 
 class Main {
     fun main(url:String): String {

@@ -6,6 +6,7 @@ import org.json.JSONObject
 import java.util.*
 import kotlin.reflect.KProperty1
 
+@Deprecated("replaced with HA")
 
 class DevicesDB {
     var document:Document? = null

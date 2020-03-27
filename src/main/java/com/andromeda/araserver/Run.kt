@@ -47,7 +47,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/user/") -> main2 = GetUserSkills().list(sessionUri)
             sessionUri.startsWith("/1user/") -> main2 = GetUserSkills().one(sessionUri)
             sessionUri.startsWith("/hi/") -> main2 = Hello().hello()
-            sessionUri.startsWith("/del") -> main2 = DeleteDoc().main(sessionUri)
+            sessionUri.startsWith("/del/") -> main2 = DeleteDoc().main(sessionUri)
             sessionUri.startsWith("/yelpclient") -> main2 = Locdec().main(sessionUri)
             sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(sessionUri)
             sessionUri.startsWith("/devices/") -> main2 = Main().main(sessionUri)

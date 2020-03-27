@@ -2,6 +2,7 @@ package com.andromeda.araserver.iot
 
 import com.microsoft.azure.sdk.iot.service.*
 
+@Deprecated("replaced with HA")
 
 class SendData {
     private val protocol = IotHubServiceClientProtocol.AMQPS

@@ -3,6 +3,7 @@ package com.andromeda.araserver.iot
 
 import kotlin.reflect.KMutableProperty
 import kotlin.reflect.full.memberProperties
+@Deprecated("replaced with HA")
 
 class WriteNewVal {
     fun main(actionPair: List<String>?, any: Any, text:Any): Any {

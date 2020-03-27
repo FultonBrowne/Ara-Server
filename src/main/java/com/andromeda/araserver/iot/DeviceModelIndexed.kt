@@ -15,5 +15,6 @@
  */
 
 package com.andromeda.araserver.iot
+@Deprecated("replaced with HA")
 
 data class DeviceModelIndexed(val name: String, val type: String, var status: String, var group:String, val index:String)

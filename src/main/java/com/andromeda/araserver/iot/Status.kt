@@ -3,6 +3,7 @@ package com.andromeda.araserver.iot
 import com.microsoft.azure.documentdb.ConnectionPolicy
 import com.microsoft.azure.documentdb.ConsistencyLevel
 import com.microsoft.azure.documentdb.DocumentClient
+@Deprecated("replaced with HA")
 
 class Status {
     fun main(url:String): String {
