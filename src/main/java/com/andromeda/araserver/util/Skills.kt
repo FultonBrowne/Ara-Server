@@ -6,16 +6,6 @@ import org.json.JSONObject
 import java.net.URL
 
 class Skills {
-    private val link = "araresdb.database.windows.net"
-    private val userName = "pholtor"
-    private val password =  System.getenv("PASSWORD");
-    private var url = String.format(
-        "jdbc:sqlserver://%s:1433;database=%s;user=%s;password=%s;encrypt=true;" + "hostNameInCertificate=*.database.windows.net;loginTimeout=30;",
-        link,
-        "ara",
-        userName,
-        password
-    )
     fun getSkills(phrase: String, fullDir: String): String {
         println(phrase)
         val phrases = SortWords(phrase).getTopics()

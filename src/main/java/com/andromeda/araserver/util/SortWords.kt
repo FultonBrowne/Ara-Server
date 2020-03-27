@@ -43,10 +43,7 @@ class SortWords(mainVal: String, loc:Int) {
             println("fail")
         }
         return toReturn
-
-
     }
-
     private fun sortForNoun(graph: Parse): ArrayList<WordGraph> {
         val toReturn = ArrayList<WordGraph>()
         for (i in graph.children!!) {
