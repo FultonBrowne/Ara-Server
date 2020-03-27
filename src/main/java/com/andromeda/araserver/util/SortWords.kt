@@ -1,7 +1,6 @@
 package com.andromeda.araserver.util
 
 import opennlp.tools.parser.Parse
-import opennlp.tools.parser.Parser
 import java.util.ArrayList
 class SortWords(mainVal: String, loc:Int) {
     constructor(mainVal: String) :this(mainVal, LanguageConst.en)
@@ -66,11 +65,11 @@ class SortWords(mainVal: String, loc:Int) {
             graph.show()
 
             while (working) {
-                when {
-                    graph?.childCount == 1 -> {
+                when (graph?.childCount) {
+                    1 -> {
                         graph = graph.children?.get(0)
                     }
-                    graph?.childCount == 0 -> {
+                    0 -> {
                         working = false
                     }
                     else -> {
@@ -80,7 +79,6 @@ class SortWords(mainVal: String, loc:Int) {
                         }
                         working = false
                     }
-
                 }
             }
         } else {
