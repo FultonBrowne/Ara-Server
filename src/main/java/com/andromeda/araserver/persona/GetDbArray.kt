@@ -20,7 +20,7 @@ class GetDbArray {
                 return Gson().toJson(outputModel)
             }
         }
-        val outputModel =  arrayListOf(OutputModel("I am sorry I don't know that one", "", "", "", "I am sorry I don't know that one", "" ))
+        val outputModel =  arrayListOf(OutputModel("I don't know, what do you think?", "", "", "", "I don't know, what do you think?", "" ))
         return Gson().toJson(outputModel)
     }
 }
