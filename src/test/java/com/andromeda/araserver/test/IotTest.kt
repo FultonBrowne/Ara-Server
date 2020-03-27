@@ -7,6 +7,7 @@ import com.andromeda.araserver.util.DeviceModel
 import org.junit.Test
 import com.andromeda.araserver.iot.Main
 import com.andromeda.araserver.iot.Status
+@Deprecated("replaced with HA")
 
 class IotTest {
     @Test
