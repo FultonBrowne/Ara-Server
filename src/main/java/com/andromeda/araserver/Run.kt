@@ -58,7 +58,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/searchn/") -> main2 = GetInfo().bingNews(sessionUri)
             sessionUri.startsWith("/searchi/") -> main2 = GetInfo().imageSearch(sessionUri)
             sessionUri.startsWith("/searchv/") -> main2 = GetInfo().bingVideos(sessionUri)
-
+            sessionUri.startsWith("/getha/") -> main2 = HaGetData().main(sessionUri)
             sessionUri.startsWith("/newdevice/") -> {
                 main2 = ""
                 NewDevice().main(sessionUri)
