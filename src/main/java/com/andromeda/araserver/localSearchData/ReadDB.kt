@@ -1,6 +1,7 @@
 package com.andromeda.araserver.localSearchData
 
 import com.andromeda.araserver.skills.SkillsModel
+import com.andromeda.araserver.util.HaModel
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.RemindersModel
 import com.microsoft.azure.documentdb.*
@@ -170,6 +171,27 @@ class ReadDB {
                 val model = RemindersModel(header = json.getString("header"), body = try { json.getString("body") }
                 catch (e:Exception){ "" }, time = try { json.getLong("body") }
                 catch (e:Exception){ 0L })
+                skillsFromDB.add(model)
+            }
+            catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+        println(skillsFromDB)
+        return skillsFromDB
+    }
+
+    fun useHaData(client: DocumentClient, key: String): ArrayList<HaModel> {
+        val skillsFromDB = ArrayList<HaModel>()
+        val options = FeedOptions()
+        options.partitionKey = PartitionKey("user-$key")
+        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
+        for (i in queryResults.queryIterator) {
+            println(i.id)
+            val json = i.get("document") as JSONObject
+            println(json)
+            try {
+                val model = HaModel(link = json.getString("header"), key =  json.getString("body"))
                 skillsFromDB.add(model)
             }
             catch (e:Exception){

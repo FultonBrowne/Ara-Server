@@ -30,7 +30,6 @@ class SecurityDBCheck {
         val request: Request = Request.Builder()
             .url("https://login.microsoftonline.com/AraLogin.onmicrosoft.com/oauth2/token")
             .method("POST", formBody)
-
             .build()
         val response: Response = client.newCall(request).execute()
         val jsonForKey = response.body?.string()
