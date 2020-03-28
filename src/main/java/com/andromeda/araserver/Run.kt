@@ -72,6 +72,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/call") ->
                     main2 =  Call().main(sessionUri)
             sessionUri.startsWith("/remindern/") -> main2 = Reminders().new(sessionUri)
+            sessionUri.startsWith("/likesinput/") -> main2 = com.andromeda.araserver.persona.Main().newLikes(sessionUri);
             sessionUri.startsWith("/remindernn/") -> main2 = Reminders().newJustData(sessionUri)
             sessionUri.startsWith("/reminderga/") -> main2 = Reminders().getAll(sessionUri)
             sessionUri.startsWith("/remindergaapi/") -> main2 = Reminders().getAllApi(sessionUri)
