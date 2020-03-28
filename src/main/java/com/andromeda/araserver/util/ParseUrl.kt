@@ -41,6 +41,20 @@ class ParseUrl {
         }
         return UserActionParams(user, id)
     }
+    fun parseWordParam(url: String, toReplace:String): WordParams {
+        val split = list(url, toReplace)
+        var user = ""
+        var id = ""
+        split.forEach{
+            when {
+                it.startsWith("word=") -> user = it.replace("word=", "")
+                it.startsWith("term=") -> id= it.replace("term=", "")
+
+
+            }
+        }
+        return WordParams(user, id)
+    }
     fun parseNewReminder(url: String, toReplace:String): ReminderWithId {
         val split = list(url, toReplace)
         var user = ""
@@ -83,6 +97,7 @@ class ParseUrl {
     }
     data class ApiParams(val term:String, val loc:String, val lat:String,val  cc:Locale, val userKey:String?)
     data class UserActionParams(val user:String, val id:String)
+    data class WordParams(val word:String, val input:String)
     data class ReminderWithId(val reminder: RemindersModel, val key:String)
     data class ReminderWithUserAndId(val reminder: RemindersModel, val key:String, val id:String)
 

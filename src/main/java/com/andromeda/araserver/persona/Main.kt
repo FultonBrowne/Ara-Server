@@ -1,5 +1,6 @@
 package com.andromeda.araserver.persona
 
+import com.andromeda.araserver.util.ParseUrl
 import com.andromeda.araserver.util.SortWords
 import java.util.ArrayList
 
@@ -17,5 +18,8 @@ class Main {
         topics?.forEach { text += " ${it.word}" }
         println(text.removePrefix(" "))
         return GetDbArray().likes(text.removePrefix(" "))
+    }
+    fun newLikes(url:String){
+        val params = ParseUrl().parseWordParam(url, "/likesinput/")
     }
 }

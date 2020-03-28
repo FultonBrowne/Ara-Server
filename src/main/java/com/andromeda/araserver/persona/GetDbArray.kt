@@ -21,7 +21,7 @@ class GetDbArray {
                 return Gson().toJson(outputModel)
             }
         }
-        val yml = SkillsModel("RESPOND", "I don't know yet, what do you think?", "ARASERVERlikesinput/TERM")
+        val yml = SkillsModel("RESPOND", "I don't know yet, what do you think?", "ARASERVERlikesinput/term=TERM&word=$search")
         val outputModel =  arrayListOf(OutputModel("I don't know, what do you think?", "", "", "", "I don't know, what do you think?", "" ))
         return Gson().toJson(outputModel)
     }
