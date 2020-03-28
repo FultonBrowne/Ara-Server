@@ -104,7 +104,10 @@ class SortWords(mainVal: String, loc:Int) {
 
     }
     fun getTopicsPhrase(): ArrayList<WordGraph> {
-        var toReturn = ArrayList<WordGraph>()
+
+
+
+        val toReturn = ArrayList<WordGraph>()
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
         graph?.show()
