@@ -111,8 +111,6 @@ class SortWords(mainVal: String, loc:Int) {
 
         var graph = key.getKeyWords(mainText,parse)?.get(0)
         graph?.show()
-
-
         var working = true
         if (graph != null) {
             graph.show()

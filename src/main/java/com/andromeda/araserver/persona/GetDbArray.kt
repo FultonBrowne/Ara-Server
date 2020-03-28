@@ -1,5 +1,6 @@
 package com.andromeda.araserver.persona
 
+import com.andromeda.araserver.skills.SkillsModel
 import com.andromeda.araserver.util.CosmosClients
 import com.andromeda.araserver.util.OutputModel
 import com.google.gson.Gson
@@ -16,10 +17,11 @@ class GetDbArray {
             val level = json.getString("level")
             println(level)
             if (json.getString("name").contains(search)){
-                val outputModel =  arrayListOf(OutputModel(search, "", "", "", level, "" ))
+                val outputModel =  arrayListOf(OutputModel(level, "", "", "", level, "" ))
                 return Gson().toJson(outputModel)
             }
         }
+        val yml = SkillsModel("RESPOND", "I don't know yet, what do you think?", "ARASERVERlikesinput/TERM")
         val outputModel =  arrayListOf(OutputModel("I don't know, what do you think?", "", "", "", "I don't know, what do you think?", "" ))
         return Gson().toJson(outputModel)
     }
