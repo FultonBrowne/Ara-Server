@@ -31,7 +31,7 @@ class GetDbArray {
             "",
             "",
             "I don't know, what do you think?",
-            mapper.writeValueAsString(yml)
+            mapper.writeValueAsString(arrayListOf(yml))
         ))
         return Gson().toJson(outputModel)
     }
