@@ -1,5 +1,6 @@
 package com.andromeda.araserver.persona
 
+import com.andromeda.araserver.pages.UpdateDB
 import com.andromeda.araserver.util.CosmosClients
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.ParseUrl
@@ -33,9 +34,13 @@ class Main {
         options.partitionKey = PartitionKey("likesmodel")
         CosmosClients.client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options).queryIterable.forEach{
             val json = it.get("document") as JSONObject
-            val level = json.getString("level")
-            println(level)
-            if (json.getString("name").contains(params.word)){
+            val total = json.getInt("total")
+            val yes = json.getInt("yes")
+            val no = json.getInt("no")
+            println(total)
+            if (json.getString("name") == params.word){
+                UpdateDB().update(CosmosClients.client, it.id, "total", total + 1)
+
                 return Gson().toJson(outputModel)
             }
         }
