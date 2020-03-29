@@ -40,6 +40,7 @@ class Main {
                 if(params.word.contains("no", true)) UpdateDB().update(CosmosClients.client, it.id, "no", no + 1)
                 else UpdateDB().update(CosmosClients.client, it.id, "yes", yes + 1)
                 UpdateDB().update(CosmosClients.client, it.id, "total", total + 1)
+                if (total + 1 == 11) addToMainDataBase(params.word, yes >= no)
                 return Gson().toJson(outputModel)
             }
         }
@@ -49,5 +50,13 @@ class Main {
         NewDoc().generate(data, Random().nextInt().toString(), "likesmodel", optionsDB)
         return Gson().toJson(outputModel)
 
+    }
+    fun addToMainDataBase(name:String, like:Boolean){
+        val text = if (like){"I am a fan of $name"}
+        else "I am personally not a fan of $name"
+        val model = LikesModel(text, name)
+        val optionsDB = RequestOptions()
+        optionsDB.partitionKey = com.microsoft.azure.cosmosdb.PartitionKey("likes")
+        NewDoc().generate(model, Random().nextInt().toString(), "likes", optionsDB)
     }
 }
