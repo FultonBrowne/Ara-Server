@@ -1,10 +1,7 @@
 package com.andromeda.araserver.persona
 
 import com.andromeda.araserver.pages.UpdateDB
-import com.andromeda.araserver.util.CosmosClients
-import com.andromeda.araserver.util.OutputModel
-import com.andromeda.araserver.util.ParseUrl
-import com.andromeda.araserver.util.SortWords
+import com.andromeda.araserver.util.*
 import com.google.gson.Gson
 import com.microsoft.azure.documentdb.FeedOptions
 import com.microsoft.azure.documentdb.PartitionKey
