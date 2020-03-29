@@ -33,19 +33,30 @@ class NewDoc {
         return gson.fromJson(jsontxt, object : TypeToken<Any>(){}.type)
     }
     fun newDoc(key: String, data: Any, id: String){
+        val options = RequestOptions()
+        options.partitionKey = PartitionKey("user-$key")
+        generate(data, id, "user-$key", options)
+
+    }
+
+    fun generate(
+        data: Any,
+        id: String,
+        key: String,
+        options: RequestOptions
+    ) {
         policy.setConnectionMode(ConnectionMode.Direct);
-        val document = Document(data, id, "user-$key")
+        val document = Document(data, id, key)
 
         val asyncClient = AsyncDocumentClient.Builder()
             .withServiceEndpoint("https://ara-account-data.documents.azure.com:443/")
-            .withMasterKeyOrResourceToken(System.getenv("IOTDB") )
+            .withMasterKeyOrResourceToken(System.getenv("IOTDB"))
             .withConnectionPolicy(policy)
             .withConsistencyLevel(ConsistencyLevel.Eventual)
             .build()
         val doc =
             Document(Gson().toJson(document))
-        val options = RequestOptions()
-        options.partitionKey = PartitionKey("user-$key")
+
         val createDocumentObservable: Observable<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> =
             asyncClient.createDocument("dbs/Ara-android-database/colls/Ara-android-collection", doc, options, true)
         createDocumentObservable
@@ -61,6 +72,5 @@ class NewDoc {
                     throw  error
                 }
             )
-
     }
 }

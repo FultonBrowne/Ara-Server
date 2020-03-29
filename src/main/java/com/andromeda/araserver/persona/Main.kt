@@ -3,10 +3,11 @@ package com.andromeda.araserver.persona
 import com.andromeda.araserver.pages.UpdateDB
 import com.andromeda.araserver.util.*
 import com.google.gson.Gson
+import com.microsoft.azure.cosmosdb.RequestOptions
 import com.microsoft.azure.documentdb.FeedOptions
 import com.microsoft.azure.documentdb.PartitionKey
 import org.json.JSONObject
-import java.util.ArrayList
+import java.util.*
 
 class Main {
     fun main(url: String): String? {
@@ -42,7 +43,10 @@ class Main {
                 return Gson().toJson(outputModel)
             }
         }
-
+        val optionsDB = RequestOptions()
+        optionsDB.partitionKey = com.microsoft.azure.cosmosdb.PartitionKey("likesmodel")
+        val data = WordTrainingModel(1, 1, 0, params.word)
+        NewDoc().generate(data, Random().nextInt().toString(), "likesmodel", optionsDB)
         return Gson().toJson(outputModel)
 
     }
