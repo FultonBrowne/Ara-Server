@@ -39,8 +39,9 @@ class Main {
             val no = json.getInt("no")
             println(total)
             if (json.getString("name") == params.word){
+                if(params.word.contains("no", true)) UpdateDB().update(CosmosClients.client, it.id, "no", no + 1)
+                else UpdateDB().update(CosmosClients.client, it.id, "yes", yes + 1)
                 UpdateDB().update(CosmosClients.client, it.id, "total", total + 1)
-
                 return Gson().toJson(outputModel)
             }
         }
