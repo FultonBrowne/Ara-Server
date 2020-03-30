@@ -53,6 +53,7 @@ class ParseUrl {
 
             }
         }
+        println(id)
         return WordParams(user, id)
     }
     fun parseNewReminder(url: String, toReplace:String): ReminderWithId {

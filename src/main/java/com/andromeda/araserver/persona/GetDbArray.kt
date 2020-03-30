@@ -18,7 +18,6 @@ class GetDbArray {
         CosmosClients.client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options).queryIterable.forEach{
             val json = it.get("document") as JSONObject
             val level = json.getString("level")
-            println(level)
             if (json.getString("name").equals(search)){
                 val outputModel =  arrayListOf(OutputModel(level, "", "", "", level, "" ))
                 return Gson().toJson(outputModel)

@@ -37,9 +37,10 @@ class Main {
             val total = json.getInt("total")
             val yes = json.getInt("yes")
             val no = json.getInt("no")
-            println(total)
             if (json.getString("name") == params.word){
-                if(params.word.contains("no", true)) UpdateDB().update(CosmosClients.client, it.id, "no", no + 1)
+                if(params.input.contains("no", true)){ UpdateDB().update(CosmosClients.client, it.id, "no", no + 1)
+                    println("no")
+                }
                 else UpdateDB().update(CosmosClients.client, it.id, "yes", yes + 1)
                 UpdateDB().update(CosmosClients.client, it.id, "total", total + 1)
                 if (total + 1 == 11) addToMainDataBase(params.word, yes >= no)

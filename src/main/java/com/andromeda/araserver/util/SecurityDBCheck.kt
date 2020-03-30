@@ -33,7 +33,6 @@ class SecurityDBCheck {
             .build()
         val response: Response = client.newCall(request).execute()
         val jsonForKey = response.body?.string()
-        println(jsonForKey)
         val tokenJson = JsonParser.parseString(jsonForKey)
         val token = tokenJson.asJsonObject.get("access_token").asString
         val finalData: Request = Request.Builder()
