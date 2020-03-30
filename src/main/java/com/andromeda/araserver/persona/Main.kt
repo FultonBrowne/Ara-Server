@@ -26,6 +26,8 @@ class Main {
     }
     fun newLikes(url:String): String? {
         val params = ParseUrl().parseWordParam(url, "/likesinput/")
+
+
         val options = FeedOptions()
         val outputModel =  arrayListOf(OutputModel("Thanks for the input", "I'll use this to form an opinion and a better understanding of the world.", "", "", "Thanks for the input", "" ))
 
