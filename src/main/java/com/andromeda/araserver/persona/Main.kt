@@ -12,17 +12,14 @@ import java.util.*
 class Main {
     fun main(url: String): String? {
         val term: String
-        val mainVal = url.replace("/person/", "")
-        //parse for search term
-        val pairs =
-            ArrayList(listOf(*mainVal.split("&").toTypedArray()))
-        term = pairs[0]
+        val params = ParseUrl().parseApi(url, "/person/")
+        term = params.term
         val topics = SortWords(term).getNN()
         println(topics)
         var text = ""
         topics.forEach { text += " ${it.word}" }
         println(text.removePrefix(" "))
-        return GetDbArray().likes(text.removePrefix(" "))
+        return GetDbArray().likes(text.removePrefix(" "), params.cc)
     }
     fun newLikes(url:String): String? {
         val params = ParseUrl().parseWordParam(url, "/likesinput/")

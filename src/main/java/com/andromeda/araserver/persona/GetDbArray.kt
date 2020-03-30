@@ -8,16 +8,20 @@ import com.google.gson.Gson
 import com.microsoft.azure.documentdb.FeedOptions
 import com.microsoft.azure.documentdb.PartitionKey
 import org.json.JSONObject
+import java.util.*
 
 class GetDbArray {
-    fun likes(search: String): String? {
+    fun likes(search: String, cc: Locale): String? {
         val options = FeedOptions()
         val mapper = YAMLMapper()
 
         options.partitionKey = PartitionKey("likes")
         CosmosClients.client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options).queryIterable.forEach{
             val json = it.get("document") as JSONObject
-            val level = json.getString("level")
+            val level = try{
+                json.getString(cc.language)
+            }
+                catch (e:Exception){json.getString("level")}
             if (json.getString("name").equals(search)){
                 val outputModel =  arrayListOf(OutputModel(level, "", "", "", level, "" ))
                 return Gson().toJson(outputModel)
