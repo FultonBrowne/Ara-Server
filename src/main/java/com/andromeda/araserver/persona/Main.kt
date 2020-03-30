@@ -35,7 +35,7 @@ class Main {
             val yes = json.getInt("yes")
             val no = json.getInt("no")
             if (json.getString("name") == params.word){
-                if(params.input.contains("no", true)){ UpdateDB().update(CosmosClients.client, it.id, "no", no + 1)
+                if(LocaleData.containsNoWord(params.input)){ UpdateDB().update(CosmosClients.client, it.id, "no", no + 1)
                     println("no")
                 }
                 else UpdateDB().update(CosmosClients.client, it.id, "yes", yes + 1)
