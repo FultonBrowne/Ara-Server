@@ -16,7 +16,7 @@ object LocaleData {
     private val listOf = listOf("hello", "hi", "hey, how can I help?", "whats up?")
     private val helloMap = mapOf(Locale.ENGLISH to listOf)
     fun getHelloData(cc:Locale): String {
-        return helloMap.getOrDefault(cc, listOf).random(Random(Random().nextInt()))[0].toString()
+        return helloMap.getOrDefault(cc, listOf).random(Random(Random.nextInt()))[0].toString()
     }
 
 }
