@@ -5,7 +5,7 @@ import kotlin.random.Random
 
 
 object LocaleData {
-    private val noWords = listOf("no", "nope")
+    private val noWords = listOf("no", "nope", "can't")
     fun containsNoWord(word:String): Boolean {
         noWords.forEach {
             if(word.contains(it)) return true
@@ -14,7 +14,7 @@ object LocaleData {
     }
 
     private val listOf = listOf("hello", "hi", "hey, how can I help?", "whats up?")
-    private val helloMap = mapOf(Locale.ENGLISH to listOf)
+    private val helloMap = mapOf(Locale.ENGLISH to listOf, Locale.US to listOf,Locale.UK to listOf)
     fun getHelloData(cc:Locale): String {
         return helloMap.getOrDefault(cc, listOf).random(Random(Random.nextInt()))[0].toString()
     }
