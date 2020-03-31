@@ -18,5 +18,9 @@ object LocaleData {
     fun getHelloData(cc:Locale): String {
         return helloMap.getOrDefault(cc, listOf).random(Random(Random.nextInt()))[0].toString()
     }
+    fun getNewLikeData(word:String): WordsTranslationModel {
+        return WordsTranslationModel("I am A big fan of $word", "Soy un gran fan de $word", "Ich bin ein großer Fan von $word")
+    }
+    data class WordsTranslationModel(val en:String, val es:String, val de:String)
 
 }
