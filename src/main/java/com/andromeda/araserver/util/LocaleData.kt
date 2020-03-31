@@ -5,7 +5,7 @@ import kotlin.random.Random
 
 
 object LocaleData {
-    private val noWords = listOf("no", "nope", "can't")
+    private val noWords = listOf("no", "nope", "can't", "don't", "cant", "dont", "not", "nein", "tue nicht")
     fun containsNoWord(word:String): Boolean {
         noWords.forEach {
             if(word.contains(it)) return true
