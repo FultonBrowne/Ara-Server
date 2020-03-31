@@ -16,17 +16,10 @@ class Weather {
     private var time: Int? = null
 
     fun mainPart(url: String): String? {
-        val pairs =
-            ArrayList(listOf(*url.split("&".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()))
-        //Finish the job an get the raw values
-        for (pair in pairs) {
-            when {
-                pair.startsWith("log") -> log = pair.replace("log=", "")
-                pair.startsWith("lat") -> lat = pair.replace("lat=", "")
-                else -> term = pair.replace("/weath/", "")
-
-            }
-        }
+        val params = ParseUrl().parseApi(url, "weath")
+        log = params.loc
+        lat = params.lat
+        term = params.term
         try {
             val loc = term?.let { getLocAndTime(it) }
             if (loc != null) {
@@ -37,7 +30,7 @@ class Weather {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        val urlGrid = URL("https://api.darksky.net/forecast/7b7fd158d8733db19ddac66bb71132b2/$lat,$log")
+        val urlGrid = URL("https://api.darksky.net/forecast/7b7fd158d8733db19ddac66bb71132b2/$lat,$log/?lang=${params.cc.language}&units=auto")
         println(urlGrid.toString())
         val finalData = urlGrid.readText()
         println(finalData)

@@ -12,7 +12,7 @@ class ParseUrl {
         var key :String? = null
         split.forEach{
             when {
-                it.startsWith("log") -> loc = it.replace("loc=", "")
+                it.startsWith("log") -> loc = it.replace("log=", "")
                 it.startsWith("lat") -> lat= it.replace("lat=", "")
                 it.startsWith("cc") -> cc= Locale(it.replace("cc=", ""))
                 it.startsWith("key") -> key = it.replace("key=", "")
