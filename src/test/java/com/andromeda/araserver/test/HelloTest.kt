@@ -7,6 +7,6 @@ class HelloTest {
     @Test
     fun test(){
         val hello = Hello()
-        hello.hello()
+        hello.hello(sessionUri)
     }
 }

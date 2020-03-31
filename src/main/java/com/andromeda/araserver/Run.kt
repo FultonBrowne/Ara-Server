@@ -12,11 +12,7 @@ import com.rometools.rome.feed.synd.SyndFeed
 import com.rometools.rome.io.FeedException
 import com.rometools.rome.io.SyndFeedOutput
 import fi.iki.elonen.NanoHTTPD
-import opennlp.tools.parser.Parser
-import opennlp.tools.parser.ParserFactory
-import opennlp.tools.parser.ParserModel
 import java.io.IOException
-import java.net.URL
 
 object Run : NanoHTTPD(Port().main()!!) {
 
@@ -46,7 +42,7 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/api") -> main2 = ApiStart().apiMain(sessionUri)
             sessionUri.startsWith("/user/") -> main2 = GetUserSkills().list(sessionUri)
             sessionUri.startsWith("/1user/") -> main2 = GetUserSkills().one(sessionUri)
-            sessionUri.startsWith("/hi/") -> main2 = Hello().hello()
+            sessionUri.startsWith("/hi/") -> main2 = Hello().hello(sessionUri)
             sessionUri.startsWith("/del/") -> main2 = DeleteDoc().main(sessionUri)
             sessionUri.startsWith("/yelpclient") -> main2 = Locdec().main(sessionUri)
             sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(sessionUri)
