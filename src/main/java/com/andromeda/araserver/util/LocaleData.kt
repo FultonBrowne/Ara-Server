@@ -17,7 +17,7 @@ object LocaleData {
     private val listOfDe = listOf("Hallo", "Hallo, wie kann ich helfen?", "Was ist los?")
     private val helloMap = mapOf(Locale.ENGLISH to listOf, Locale.US to listOf,Locale.UK to listOf, Locale.GERMANY to listOfDe, Locale.GERMAN to listOfDe)
     fun getHelloData(cc:Locale): String {
-        return helloMap.getOrDefault(cc, listOf).random(Random(Random.nextInt()))[0].toString()
+        return helloMap.getOrDefault(cc, listOf).random(Random(Random.nextInt())).toString()
     }
     fun getNewLikeData(word:String): WordsTranslationModel {
         return WordsTranslationModel("I am A big fan of $word", "Soy un gran fan de $word", "Ich bin ein großer Fan von $word")
