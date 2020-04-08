@@ -58,7 +58,7 @@ dependencies {
     compile group: 'com.microsoft.azure.sdk.iot', name: 'iot-service-client', version: '1.21.1'
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.10.3'
     compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.9.2'
-    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.2.2.jre13'
+    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.3.0.jre14-preview'
     compile group: 'com.microsoft.azure', name: 'azure-cosmosdb', version: '2.6.6'
 
     implementation 'com.google.code.gson:gson:2.8.6'
