@@ -193,6 +193,7 @@ class ReadDB {
             try {
                 val model = HaModel(link = json.getString("header"), key =  json.getString("body"))
                 skillsFromDB.add(model)
+                return skillsFromDB
             }
             catch (e:Exception){
                 e.printStackTrace()
