@@ -16,6 +16,6 @@ class OpenApp {
         nn.forEach{
             app = "$app ${it.word}"
         }
-        return Gson().toJson(OutputModel("opening $app", "", "", "", "opening $app", YAMLMapper().writeValueAsString(SkillsModel("OPEN_APP", app, "this does'nt do anything so.... 69420nice"))))
+        return Gson().toJson(arrayListOf(OutputModel("opening $app", "", "", "", "opening $app", YAMLMapper().writeValueAsString(SkillsModel("OPEN_APP", app, "this does'nt do anything so.... 69420nice")))))
     }
 }
