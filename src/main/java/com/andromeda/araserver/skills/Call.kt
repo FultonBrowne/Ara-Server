@@ -15,8 +15,18 @@ class Call {
         term = pairs[0].replace("dial ", "")
         term = term.replace("call ", "")
         term = term.replace("please ", "")
-        if(term != "") return Gson().toJson(OutputModel("calling $term", "", "", "", "calling $term", YAMLMapper().writeValueAsString(SkillsModel("CALL", term, "tel:INPUT"))))
-        return Gson().toJson(arrayListOf(OutputModel("who would you like to call?", "", "", "", "who would you like to call?", YAMLMapper().writeValueAsString(SkillsModel("RESPOND", "who to call?", "tel:INPUT")))))
+        if(term != "") return Gson().toJson(arrayListOf(OutputModel("calling $term", "", "", "", "calling $term", YAMLMapper().writeValueAsString(SkillsModel("CALL", term, "tel:INPUT")))))
+        val arrayListOf = arrayListOf(
+            OutputModel(
+                "who would you like to call?",
+                "",
+                "",
+                "",
+                "who would you like to call?",
+                YAMLMapper().writeValueAsString(SkillsModel("RESPOND", "who to call?", "tel:INPUT"))
+            )
+        )
+        return Gson().toJson(arrayListOf)
 
     }
 }
