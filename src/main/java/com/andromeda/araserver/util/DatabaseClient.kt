@@ -33,7 +33,7 @@ object DatabaseClient {
     val client = MongoClients.create(settings)
     val database = client.getDatabase(dbname)
     val collection = database.getCollection(collectionName)
-    fun new(){
+    fun new(id: String, user:String, data:Any){
 
     }
     fun edit(){
