@@ -7,6 +7,7 @@ import com.mongodb.ServerAddress
 import com.mongodb.client.MongoClients
 import com.mongodb.connection.ClusterSettings
 import com.mongodb.connection.SslSettings
+import org.bson.Document
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -32,14 +33,14 @@ object DatabaseClient {
         .build()
     val client = MongoClients.create(settings)
     val database = client.getDatabase(dbname)
-    val collection = database.getCollection(collectionName)
     fun new(id: String, user:String, data:Any){
-
+        val collection = database.getCollection("user")
+        val document:org.bson.Document = org.bson.Document(id, data)
+        collection.insertOne(document)
     }
     fun edit(){
     }
     fun <T>get(userId:String, id:String):T{
-
     }
     fun <T>getAll(userId:String):ArrayList<T>{
 
