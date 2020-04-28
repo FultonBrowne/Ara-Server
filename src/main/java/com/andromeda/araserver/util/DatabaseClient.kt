@@ -45,10 +45,29 @@ object DatabaseClient {
     }
     fun edit(){
     }
-    fun <T>get(userId:String, id:String):T{
+    fun <T>get(userId:String, id:String): T? {
+        val find = database.getCollection(userId).find()
+        val iterator = find.iterator()
+        iterator.forEach {
+            try {
+                val toReturn = it.toJson() as T
+                if (toReturn == null) println("next..");
+                else return toReturn
+            }
+            catch (e:Exception){
+                e.printStackTrace()
+            }
+        }
+        return null
     }
     fun <T>getAll(userId:String):ArrayList<T>{
+        val toReturn = arrayListOf<T>()
+        val find = database.getCollection(userId).find()
+        val iterator = find.iterator()
+        find.forEach{
 
+        }
+        return toReturn
     }
 
 }
