@@ -34,9 +34,14 @@ object DatabaseClient {
     val client = MongoClients.create(settings)
     val database = client.getDatabase(dbname)
     fun new(id: String, user:String, data:Any){
-        val collection = database.getCollection("user")
+        newUserCollection(user)
+        val collection = database.getCollection(user)
         val document:org.bson.Document = org.bson.Document(id, data)
         collection.insertOne(document)
+    }
+    fun newUserCollection(userId: String){
+        val checkOnList = UserWhiteList.checkOnList(userId)
+        if(checkOnList && !database.listCollectionNames().contains(userId))database.createCollection(userId)
     }
     fun edit(){
     }
