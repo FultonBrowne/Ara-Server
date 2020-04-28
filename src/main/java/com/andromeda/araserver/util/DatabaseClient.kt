@@ -13,6 +13,9 @@ import java.lang.reflect.Type
 import java.lang.reflect.TypeVariable
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.reflect.KMutableProperty
+import kotlin.reflect.KProperty
+import kotlin.reflect.full.memberProperties
 
 
 class DatabaseClient {
@@ -38,8 +41,7 @@ class DatabaseClient {
     fun new(id: String, user:String, data:Any){
         newUserCollection(user)
         val collection = database.getCollection(user)
-        val document:org.bson.Document = org.bson.Document(id, data)
-        collection.insertOne(document)
+        collection.insertOne(generateDocument(data, id))
 
     }
     fun newUserCollection(userId: String){
@@ -71,6 +73,12 @@ class DatabaseClient {
 
         }
         return toReturn
+    }
+    fun generateDocument(type:Any, id:String): Document {
+        val document = Document()
+        document["_id"] = id
+        document["document"] = type
+        return document
     }
 
 }
