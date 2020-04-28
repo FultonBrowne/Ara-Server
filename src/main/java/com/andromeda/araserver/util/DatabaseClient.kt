@@ -1,5 +1,6 @@
 package com.andromeda.araserver.util
 
+import com.google.gson.Gson
 import com.mongodb.MongoClient
 import com.mongodb.MongoClientSettings
 import com.mongodb.MongoCredential
@@ -8,15 +9,16 @@ import com.mongodb.client.MongoClients
 import com.mongodb.connection.ClusterSettings
 import com.mongodb.connection.SslSettings
 import org.bson.Document
+import java.lang.reflect.Type
+import java.lang.reflect.TypeVariable
 import java.util.*
 import kotlin.collections.ArrayList
 
 
-object DatabaseClient {
+class DatabaseClient {
     val address:String = System.getenv("dblink")
     val password = System.getenv("dbpassword")
     val dbname = System.getenv("dbname")
-    val collectionName = System.getenv("collname")
     val cred = MongoCredential.createCredential("ara", dbname, password.toCharArray())
     var settings = MongoClientSettings.builder()
         .credential(cred)
@@ -50,7 +52,7 @@ object DatabaseClient {
         val iterator = find.iterator()
         iterator.forEach {
             try {
-                val toReturn = it.toJson() as T
+                val toReturn = null//Gson().fromJson<T>(it.toJson()) as T
                 if (toReturn == null) println("next..");
                 else return toReturn
             }
