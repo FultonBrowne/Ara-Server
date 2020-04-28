@@ -19,7 +19,7 @@ class DatabaseClient {
     val address:String = System.getenv("dblink")
     val password = System.getenv("dbpassword")
     val dbname = System.getenv("dbname")
-    val cred = MongoCredential.createCredential("ara", dbname, password.toCharArray())
+    val cred = MongoCredential.createScramSha1Credential("ara","admin", password.toCharArray())
     var settings = MongoClientSettings.builder()
         .credential(cred)
         .applyToSslSettings { builder: SslSettings.Builder ->
@@ -40,6 +40,7 @@ class DatabaseClient {
         val collection = database.getCollection(user)
         val document:org.bson.Document = org.bson.Document(id, data)
         collection.insertOne(document)
+
     }
     fun newUserCollection(userId: String){
         val checkOnList = UserWhiteList.checkOnList(userId)
