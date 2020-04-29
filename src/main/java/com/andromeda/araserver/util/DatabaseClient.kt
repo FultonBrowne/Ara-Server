@@ -12,6 +12,7 @@ import com.mongodb.connection.SslSettings
 import org.bson.Document
 import com.mongodb.client.model.Filters;
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DatabaseClient {
@@ -51,35 +52,32 @@ class DatabaseClient {
     fun edit() {
     }
 
-    fun <T> get(userId: String, id: String): T? {
-        val find = database.getCollection(userId).find()
-        val iterator = find.iterator()
-        iterator.forEach {
-            try {
-                val toReturn = null//Gson().fromJson<T>(it.toJson()) as T
-                if (toReturn == null) println("next..")
-                else return toReturn
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+    fun <T> get(userId: String, id: String, clazz: Class<T>): T? {
+        val find = database.getCollection(userId).find(Filters.eq("_id", id))
+        find.forEach {
+            return parse(it, clazz)
         }
         return null
     }
 
     fun <T> getAll(userId: String, clazz: Class<T>): ArrayList<T> {
-        val toReturn = arrayListOf<T>()
         val find = database.getCollection(userId).find()
+        val toReturn = arrayListOf<T>()
         find.forEach {
-            try {
-                val any = it.get("document") as org.bson.Document
-                val toJson = any.toJson()
-                val fromJson = Gson().fromJson<T>(toJson, clazz)
-                toReturn.add(fromJson)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+            parse(it, clazz)?.let { it1 -> toReturn.add(it1) }
         }
         return toReturn
+    }
+
+    private fun <T> parse(it: Document, clazz: Class<T>): T? {
+        try {
+            val any = it.get("document") as Document
+            val toJson = any.toJson()
+            return Gson().fromJson<T>(toJson, clazz)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 
     fun generateDocument(type: Any, id: String): Document {

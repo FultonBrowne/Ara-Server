@@ -16,8 +16,8 @@ class DBtest {
         message.forEach {
             println(it)
         }
+        println(databaseClient.get<OutputModel>("test", id, OutputModel::class.java))
         println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         databaseClient.delete("test", id)
-
     }
 }
