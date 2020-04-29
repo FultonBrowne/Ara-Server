@@ -10,7 +10,7 @@ class DBtest {
         val databaseClient = DatabaseClient()
         databaseClient.new("test-${System.currentTimeMillis()}", "test", OutputModel("", "", "", "", "", ""))
         println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        val message = databaseClient.getAll<OutputModel>("test")
+        val message = databaseClient.getAll<OutputModel>("test", OutputModel::class.java)
         println(message)
         message.forEach {
             println(it)

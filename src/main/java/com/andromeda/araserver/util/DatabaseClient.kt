@@ -71,8 +71,10 @@ class DatabaseClient {
         val iterator = find.iterator()
         find.forEach {
             try {
-                val any = it.get("document", clazz)
-                toReturn.add(any)
+                val any = it.get("document") as org.bson.Document
+                val toJson = any.toJson()
+                val fromJson = Gson().fromJson<T>(toJson, clazz)
+                toReturn.add(fromJson)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
