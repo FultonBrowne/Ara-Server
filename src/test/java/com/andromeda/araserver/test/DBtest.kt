@@ -7,6 +7,15 @@ import org.junit.Test
 class DBtest {
     @Test
     fun test(){
-        DatabaseClient().new("test-${System.currentTimeMillis()}", "test", OutputModel("", "", "", "", "", ""))
+        val databaseClient = DatabaseClient()
+        databaseClient.new("test-${System.currentTimeMillis()}", "test", OutputModel("", "", "", "", "", ""))
+        println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        val message = databaseClient.getAll<OutputModel>("test")
+        println(message)
+        message.forEach {
+            println(it)
+        }
+        println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+
     }
 }
