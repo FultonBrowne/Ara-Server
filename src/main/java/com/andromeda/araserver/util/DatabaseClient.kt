@@ -1,21 +1,17 @@
 package com.andromeda.araserver.util
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.google.gson.Gson
-import com.mongodb.MongoClient
 import com.mongodb.MongoClientSettings
 import com.mongodb.MongoCredential
 import com.mongodb.ServerAddress
 import com.mongodb.client.MongoClients
 import com.mongodb.connection.ClusterSettings
 import com.mongodb.connection.SslSettings
+import org.bson.BSONObject
 import org.bson.Document
-import java.lang.reflect.Type
-import java.lang.reflect.TypeVariable
+import org.bson.io.BsonOutput
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.reflect.KMutableProperty
-import kotlin.reflect.KProperty
-import kotlin.reflect.full.memberProperties
 
 
 class DatabaseClient {
@@ -76,8 +72,9 @@ class DatabaseClient {
     }
     fun generateDocument(type:Any, id:String): Document {
         val document = Document()
+        val toJson = Gson().toJson(type)
         document["_id"] = id
-        document["document"] = type
+        document["document"] = Document.parse(toJson)
         return document
     }
 
