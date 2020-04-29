@@ -16,6 +16,7 @@ class DBtest {
         message.forEach {
             println(it)
         }
+        databaseClient.edit(id, "test", OutputModel("v2", "", "kldshjfiorbhgoiu", "", "", ""))
         println(databaseClient.get<OutputModel>("test", id, OutputModel::class.java))
         println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         databaseClient.delete("test", id)

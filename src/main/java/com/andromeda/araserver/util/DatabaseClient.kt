@@ -11,6 +11,7 @@ import com.mongodb.connection.ClusterSettings
 import com.mongodb.connection.SslSettings
 import org.bson.Document
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -49,7 +50,10 @@ class DatabaseClient {
         if (checkOnList && !database.listCollectionNames().contains(userId)) database.createCollection(userId)
     }
 
-    fun edit() {
+    fun edit(userId: String, id: String, newData: Any) {
+        val toJson = Gson().toJson(newData)
+        val find = database.getCollection(userId).updateOne(Filters.eq("_id", id), Updates.set("document", Document.parse(toJson) ))
+
     }
 
     fun <T> get(userId: String, id: String, clazz: Class<T>): T? {
