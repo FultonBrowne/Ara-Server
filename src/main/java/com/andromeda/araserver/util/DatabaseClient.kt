@@ -10,6 +10,7 @@ import com.mongodb.client.MongoDatabase
 import com.mongodb.connection.ClusterSettings
 import com.mongodb.connection.SslSettings
 import org.bson.Document
+import com.mongodb.client.model.Filters;
 import java.util.*
 
 
@@ -68,7 +69,6 @@ class DatabaseClient {
     fun <T> getAll(userId: String, clazz: Class<T>): ArrayList<T> {
         val toReturn = arrayListOf<T>()
         val find = database.getCollection(userId).find()
-        val iterator = find.iterator()
         find.forEach {
             try {
                 val any = it.get("document") as org.bson.Document
@@ -88,6 +88,11 @@ class DatabaseClient {
         document["_id"] = id
         document["document"] = Document.parse(toJson)
         return document
+    }
+    fun delete(userId: String, id: String){
+        val document = Document()
+        document["_id"] = id
+        database.getCollection(userId).deleteOne(Filters.eq("_id", id))
     }
 
 }

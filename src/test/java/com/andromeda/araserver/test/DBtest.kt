@@ -8,7 +8,8 @@ class DBtest {
     @Test
     fun test(){
         val databaseClient = DatabaseClient()
-        databaseClient.new("test-${System.currentTimeMillis()}", "test", OutputModel("", "", "", "", "", ""))
+        val id = "test-${System.currentTimeMillis()}"
+        databaseClient.new(id, "test", OutputModel("", "", "", "", "", ""))
         println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         val message = databaseClient.getAll<OutputModel>("test", OutputModel::class.java)
         println(message)
@@ -16,6 +17,7 @@ class DBtest {
             println(it)
         }
         println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+        databaseClient.delete("test", id)
 
     }
 }
