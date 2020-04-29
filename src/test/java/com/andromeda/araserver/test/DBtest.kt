@@ -7,6 +7,6 @@ import org.junit.Test
 class DBtest {
     @Test
     fun test(){
-        DatabaseClient().new("test", "test", OutputModel("", "", "", "", "", ""))
+        DatabaseClient().new("test-${System.currentTimeMillis()}", "test", OutputModel("", "", "", "", "", ""))
     }
 }
