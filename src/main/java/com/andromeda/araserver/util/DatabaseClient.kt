@@ -37,12 +37,14 @@ class DatabaseClient {
     }
 
     fun edit(userId: String, id: String, newData: Any) {
+        newUserCollection(userId)
         val toJson = Gson().toJson(newData)
         val find = database.getCollection(userId).updateOne(Filters.eq("_id", id), Updates.set("document", Document.parse(toJson) ))
 
     }
 
     fun <T> get(userId: String, id: String, clazz: Class<T>): T? {
+        newUserCollection(userId)
         val find = database.getCollection(userId).find(Filters.eq("_id", id))
         find.forEach {
             return parse(it, clazz)
@@ -51,6 +53,7 @@ class DatabaseClient {
     }
 
     fun <T> getAll(userId: String, clazz: Class<T>): ArrayList<T> {
+        newUserCollection(userId)
         val find = database.getCollection(userId).find()
         val toReturn = arrayListOf<T>()
         find.forEach {
@@ -60,6 +63,7 @@ class DatabaseClient {
     }
 
     private fun <T> parse(it: Document, clazz: Class<T>): T? {
+
         try {
             val any = it.get("document") as Document
             val toJson = any.toJson()
@@ -78,6 +82,7 @@ class DatabaseClient {
         return document
     }
     fun delete(userId: String, id: String){
+        newUserCollection(userId)
         val document = Document()
         document["_id"] = id
         database.getCollection(userId).deleteOne(Filters.eq("_id", id))
