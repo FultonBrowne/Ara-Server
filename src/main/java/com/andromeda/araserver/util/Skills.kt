@@ -13,18 +13,14 @@ class Skills {
         var link = ""
         val options = FeedOptions()
         println(phrases)
-        options.partitionKey = PartitionKey("search")
-        CosmosClients.client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options).queryIterable.forEach        {
-            val json = it.get("document") as JSONObject
-            val dbLink = json.getString("link")
-            val dbWord = json.getString("word")
-            for (i in phrases){
-                if (i.word.startsWith(dbWord.replace(" ", ""))){
-                    link = dbLink
+        for(i in DatabaseClient().getAll<SearchModel>("search", SearchModel::class.java))
+            for (i2 in phrases){
+                if (i2.word.startsWith(i.word.replace(" ", ""))){
+                    link = i.link
                     break
                 }
             }
-        }
+
         if (link == "") link = "https://ara-server.azurewebsites.net/searcht"
         val url = URL(link.replace(" ", "") + "/" +fullDir.replace(" ", "%20"))
 
