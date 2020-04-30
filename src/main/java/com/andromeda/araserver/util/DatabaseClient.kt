@@ -20,22 +20,8 @@ class DatabaseClient {
     val address: String = System.getenv("dblink")
     val password = System.getenv("dbpassword")
     val dbname = System.getenv("dbname")
-    val cred = MongoCredential.createScramSha1Credential("ara", "ara", password.toCharArray())
-    var settings = MongoClientSettings.builder()
-        .credential(cred)
-        .applyToSslSettings { builder: SslSettings.Builder ->
-            builder.enabled(
-                true
-            )
-        }
-        .applyToClusterSettings { builder: ClusterSettings.Builder ->
-            builder.hosts(
-                Arrays.asList(ServerAddress(address))
-            )
-        }
-        .build()
     var mongoClient: MongoClient = MongoClients.create(
-        "mongodb+srv://ara:$password@aratest-gbnnv.azure.mongodb.net/test?retryWrites=true&w=majority"
+        "mongodb+srv://ara:$password@$address/test?retryWrites=true&w=majority"
     )
     var database: MongoDatabase = mongoClient.getDatabase(dbname)
     fun new(id: String, user: String, data: Any) {
