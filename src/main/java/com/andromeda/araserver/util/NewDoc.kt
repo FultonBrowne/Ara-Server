@@ -35,7 +35,8 @@ class NewDoc {
     fun newDoc(key: String, data: Any, id: String){
         val options = RequestOptions()
         options.partitionKey = PartitionKey("user-$key")
-        generate(data, id, "user-$key", options)
+        //generate(data, id, "user-$key", options)
+        DatabaseClient().get(key, id, data.javaClass)
 
     }
 

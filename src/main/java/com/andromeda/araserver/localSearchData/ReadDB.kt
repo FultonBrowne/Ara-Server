@@ -1,6 +1,7 @@
 package com.andromeda.araserver.localSearchData
 
 import com.andromeda.araserver.skills.SkillsModel
+import com.andromeda.araserver.util.DatabaseClient
 import com.andromeda.araserver.util.HaModel
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.RemindersModel
@@ -200,7 +201,7 @@ class ReadDB {
             }
         }
         println(skillsFromDB)
-        return skillsFromDB
+        return DatabaseClient().getAll(key, HaModel::class.java)
     }
 
 }
