@@ -17,9 +17,9 @@ import kotlin.collections.ArrayList
 
 
 class DatabaseClient {
-    val address: String = System.getenv("dblink")
-    val password = System.getenv("dbpassword")
-    val dbname = System.getenv("dbname")
+    private val address: String = System.getenv("dblink")
+    private val password = System.getenv("dbpassword")
+    private val dbname = System.getenv("dbname")
     var mongoClient: MongoClient = MongoClients.create(
         "mongodb+srv://ara:$password@$address/test?retryWrites=true&w=majority"
     )
