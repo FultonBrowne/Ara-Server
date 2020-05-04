@@ -182,25 +182,7 @@ class ReadDB {
         return skillsFromDB
     }
 
-    fun useHaData(client: DocumentClient, key: String): ArrayList<HaModel> {
-        val skillsFromDB = ArrayList<HaModel>()
-        val options = FeedOptions()
-        options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> = client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
-        for (i in queryResults.queryIterator) {
-            println(i.id)
-            val json = i.get("document") as JSONObject
-            println(json)
-            try {
-                val model = HaModel(link = json.getString("header"), key =  json.getString("body"))
-                skillsFromDB.add(model)
-                return skillsFromDB
-            }
-            catch (e:Exception){
-                e.printStackTrace()
-            }
-        }
-        println(skillsFromDB)
+    fun useHaData(key: String): ArrayList<HaModel> {
         return DatabaseClient().getAll(key, HaModel::class.java)
     }
 
