@@ -14,7 +14,7 @@ class TestNewCosmosDB {
             val testData = OutputModel("test", "test", "test", "test", "test", "test")
             var id = 123.toString()
             NewDoc().newDoc("test", testData, id)
-            UpdateDB().update(CosmosClients.client, id, "title", "test2")
+            UpdateDB().update(CosmosClients.client, id, "title",, "test2")
             DeleteDoc().delDoc(CosmosClients.client, "test", id)
         }
     }

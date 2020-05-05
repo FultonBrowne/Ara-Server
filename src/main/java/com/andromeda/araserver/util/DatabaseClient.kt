@@ -88,4 +88,18 @@ class DatabaseClient {
         database.getCollection(userId).deleteOne(Filters.eq("_id", id))
     }
 
+    fun updateWithProp(userId: String, id: String, prop:String, data: Any){
+        var any:Document? = null
+        val find = database.getCollection(userId).find(Filters.eq("_id", id))
+        find.forEach {
+            try {
+                any = it.get("document") as Document
+                any!![prop] = data
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+        database.getCollection(userId).updateMany(Filters.eq("_id", id), Updates.set("document", any))
+    }
+
 }
