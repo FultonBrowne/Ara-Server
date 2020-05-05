@@ -6,7 +6,6 @@ import com.microsoft.azure.cosmosdb.*
 
 
 class NewDoc {
-   val policy = ConnectionPolicy();
     fun main(url:String, postData:String){
         val mainVal = url.replace("/newdoc/", "")
         val actions = mainVal.split("&")
