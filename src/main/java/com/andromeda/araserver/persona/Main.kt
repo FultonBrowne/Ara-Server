@@ -36,15 +36,15 @@ class Main {
             val no = json.getInt("no")
             if (json.getString("name") == params.word){
                 if(LocaleData.containsNoWord(params.input)){ UpdateDB().update(
-                    CosmosClients.client,
                     it.id,
-                    "no",,
+                    "no",
+                    "personapend",
                     no + 1
                 )
                     println("no")
                 }
-                else UpdateDB().update(CosmosClients.client, it.id, "yes",, yes + 1)
-                UpdateDB().update(CosmosClients.client, it.id, "total",, total + 1)
+                else UpdateDB().update( it.id, "yes","personapend", yes + 1)
+                UpdateDB().update(it.id, "total","personapend", total + 1)
                 if (total + 1 == 11) addToMainDataBase(params.word, yes >= no)
                 return Gson().toJson(outputModel)
             }
