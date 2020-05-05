@@ -3,9 +3,6 @@ package com.andromeda.araserver.util
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.microsoft.azure.cosmosdb.*
-import com.microsoft.azure.cosmosdb.rx.AsyncDocumentClient
-import rx.Observable
-import rx.functions.Action1
 
 
 class NewDoc {
@@ -40,38 +37,7 @@ class NewDoc {
 
     }
 
-    fun generate(
-        data: Any,
-        id: String,
-        key: String,
-        options: RequestOptions
-    ) {
-        policy.setConnectionMode(ConnectionMode.Direct);
-        val document = Document(data, id, key)
-
-        val asyncClient = AsyncDocumentClient.Builder()
-            .withServiceEndpoint("https://ara-account-data.documents.azure.com:443/")
-            .withMasterKeyOrResourceToken(System.getenv("IOTDB"))
-            .withConnectionPolicy(policy)
-            .withConsistencyLevel(ConsistencyLevel.Eventual)
-            .build()
-        val doc =
-            Document(Gson().toJson(document))
-
-        val createDocumentObservable: Observable<ResourceResponse<com.microsoft.azure.cosmosdb.Document>> =
-            asyncClient.createDocument("dbs/Ara-android-database/colls/Ara-android-collection", doc, options, true)
-        createDocumentObservable
-            .single() // we know there will be one response
-            .subscribe(
-                { documentResourceResponse: ResourceResponse<com.microsoft.azure.cosmosdb.Document> ->
-                    println(
-                        documentResourceResponse.requestCharge
-                    )
-                },
-                { error: Throwable ->
-                    System.err.println("an error happened: " + error.message)
-                    throw  error
-                }
-            )
+    fun generate(data: Any, id: String, key: String) {
+        DatabaseClient().new(id, key, data)
     }
 }

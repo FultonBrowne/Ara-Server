@@ -52,7 +52,7 @@ class Main {
         val optionsDB = RequestOptions()
         optionsDB.partitionKey = com.microsoft.azure.cosmosdb.PartitionKey("likesmodel")
         val data = WordTrainingModel(1, 1, 0, params.word)
-        NewDoc().generate(data, Random().nextInt().toString(), "likesmodel", optionsDB)
+        NewDoc().generate(data, Random().nextInt().toString(), "likesmodel")
         return Gson().toJson(outputModel)
 
     }
@@ -62,6 +62,6 @@ class Main {
         val model = LikesModel(text, name)
         val optionsDB = RequestOptions()
         optionsDB.partitionKey = com.microsoft.azure.cosmosdb.PartitionKey("likes")
-        NewDoc().generate(model, Random().nextInt().toString(), "likes", optionsDB)
+        NewDoc().generate(model, Random().nextInt().toString(), "likes")
     }
 }
