@@ -18,20 +18,7 @@ class DeleteDoc {
         DatabaseClient().delete(key!!, id!!)
         return ""
     }
-    fun delDoc(client: DocumentClient, key: String, id:String): String {
-        val options = FeedOptions()
-        val queryResults: FeedResponse<Document> = CosmosClients.feedResponse(options, key, client)
-        queryResults.queryIterator.forEach {
-            if (it.id == id){
-            val ro = RequestOptions()
-                println(it.resourceId)
-                println(it.selfLink)
-            ro.partitionKey = PartitionKey(CosmosClients.getKey(key))
-            client.deleteDocument(it.selfLink, ro)
-            }
-        }
-        return ""
-    }
+
 
 
 }
