@@ -1,5 +1,7 @@
 package com.andromeda.araserver.util
 
+import com.andromeda.araserver.skills.SkillsModel
+import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.google.gson.Gson
 import com.mongodb.MongoClientSettings
 import com.mongodb.MongoCredential
@@ -12,6 +14,8 @@ import com.mongodb.connection.SslSettings
 import org.bson.Document
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates
+import jdk.nashorn.internal.parser.JSONParser
+import org.json.JSONObject
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -62,8 +66,30 @@ class DatabaseClient {
         return toReturn
     }
 
-    fun getInLikesForm(userId: String, term:String){
-        database.getCollection(userId).find()
+    fun getInLikesForm(userId: String, term:String, cc:Locale): String? {
+        val mapper = YAMLMapper()
+        database.getCollection(userId).find().forEach {
+            val json = it.get("document") as JSONObject
+            val level = try{
+                json.getString(cc.language)
+            }
+            catch (e:Exception){json.getString("level")}
+            if (json.getString("name").equals(term)){
+                val outputModel =  arrayListOf(OutputModel(level, "", "", "", level, "" ))
+                return Gson().toJson(outputModel)
+            }
+        }
+        val yml = SkillsModel("RESPOND", "I don't know yet, what do you think?", "ARASERVERlikesinput/term=TERM&word=$term")
+        val outputModel =  arrayListOf(OutputModel(
+            "I don't know, what do you think?",
+            "",
+            "",
+            "",
+            "I don't know, what do you think?",
+            mapper.writeValueAsString(arrayListOf(yml))
+        ))
+        return Gson().toJson(outputModel)
+
 
     }
     private fun <T> parse(it: Document, clazz: Class<T>): T? {
