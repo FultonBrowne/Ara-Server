@@ -15,7 +15,7 @@ class DeleteDoc {
             i.startsWith("id=") -> id = i.replace("id=", "")
             i.startsWith("user=") -> key = i.replace("user=", "")
         }
-        delDoc(CosmosClients.client, key!!, id!!)
+        DatabaseClient().delete(key!!, id!!)
         return ""
     }
     fun delDoc(client: DocumentClient, key: String, id:String): String {
