@@ -1,7 +1,5 @@
 package com.andromeda.araserver.localSearchData
 
-import com.andromeda.araserver.iot.DevicesDB
-import com.andromeda.araserver.util.CosmosClients.client
 import com.google.gson.Gson
 
 class GetUserSkills {
@@ -20,6 +18,6 @@ class GetUserSkills {
             i.startsWith("id=") -> id = i.replace("id=", "")
             i.startsWith("user=") -> key = i.replace("user=", "")
         }
-        return Gson().toJson(arrayListOf(ReadDB().userSkill(client, key!!, id!!)))
+        return Gson().toJson(arrayListOf(ReadDB().userSkill(key!!, id!!)))
     }
 }

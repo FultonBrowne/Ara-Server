@@ -26,33 +26,33 @@ class Reminders {
     }
     fun getAll(mainUrl:String): String {
         val apiParams = ParseUrl().parseApi(mainUrl, "/reminderga/")
-        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminderDBFormat(CosmosClients.client, it) })!!
+        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminderDBFormat( it) })!!
 
     }
     fun getAllApi(mainUrl:String): String {
         val apiParams = ParseUrl().parseApi(mainUrl, "/remindergaapi/")
-        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminder(CosmosClients.client, it) })!!
+        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminder( it, apiParams.term) })!!
     }
     fun getOne(mainUrl:String): String? {
         val apiParams = ParseUrl().parseUserAction(mainUrl, "/reminderg/")
-        return Gson().toJson(ReadDB().userReminderDBFormat(CosmosClients.client,apiParams.user, apiParams.id))!!
+        return Gson().toJson(ReadDB().userReminderDBFormat(apiParams.user, apiParams.id))!!
 
     }
     fun getOneApi(mainUrl:String): String? {
         val apiParams = ParseUrl().parseUserAction(mainUrl, "/remindergapi/")
-        return Gson().toJson(ReadDB().userReminder(CosmosClients.client, apiParams.id))!!
+        return Gson().toJson(ReadDB().userReminder( apiParams.id))!!
     }
     fun update(mainUrl:String): String {
         val apiParams = ParseUrl().parseEditReminder(mainUrl, "/reminderu/")
-        UpdateDB().update(CosmosClients.client, apiParams.id, "header",, apiParams.reminder.header)
-        apiParams.reminder.body?.let { UpdateDB().update(CosmosClients.client, apiParams.id, "body",, it) }
-        apiParams.reminder.time?.let { UpdateDB().update(CosmosClients.client, apiParams.id, "time",, it) }
+        UpdateDB().update( apiParams.id, "header","reminder", apiParams.reminder.header)
+        apiParams.reminder.body?.let { UpdateDB().update( apiParams.id, "body",apiParams.key, it) }
+        apiParams.reminder.time?.let { UpdateDB().update( apiParams.id, "time",apiParams.key, it) }
 
         return "ok"
     }
     fun delete(mainUrl:String): String {
         val apiParams = ParseUrl().parseUserAction(mainUrl, "/reminderd/")
-        DeleteDoc().delDoc(CosmosClients.client, apiParams.user, apiParams.id)
+        DatabaseClient().delete(apiParams.user, apiParams.id)
         return "o"
     }
 }

@@ -1,6 +1,5 @@
 package com.andromeda.araserver.localSearchData
 
-import com.andromeda.araserver.skills.SkillsModel
 import com.andromeda.araserver.util.DatabaseClient
 import com.andromeda.araserver.util.HaModel
 import com.andromeda.araserver.util.OutputModel
@@ -32,19 +31,15 @@ class ReadDB {
         return DatabaseClient().getAll(key, SkillsDBModel::class.java)
     }
 
-    fun userSkill(client: DocumentClient, key: String, id: String): SkillsDBModel{
+    fun userSkill(key: String, id: String): SkillsDBModel{
         return DatabaseClient().get(key, id, SkillsDBModel::class.java)!!
     }
 
-    fun userReminder(client: DocumentClient, key: String, id: String): ArrayList<OutputModel> {
+    fun userReminder(key: String, id: String): ArrayList<OutputModel> {
         val skillsFromDB = ArrayList<OutputModel>()
-        val options = FeedOptions()
-        options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> =
-            client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
-        for (i in queryResults.queryIterator) {
-            println(i.id)
-            if (i.id == id) {
+        for (i in DatabaseClient().database.getCollection(key).find()) {
+            println(i["_id"])
+            if (i["_id"] == id) {
                 val json = i.get("document") as JSONObject
                 println(json)
                 try {
@@ -52,7 +47,7 @@ class ReadDB {
                         json.getString("body")
                     } catch (e: Exception) {
                         ""
-                    }, i.id, "", "", "")
+                    }, i["_id"].toString(), "", "", "")
                     skillsFromDB.add(outputModel)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -63,23 +58,18 @@ class ReadDB {
         return skillsFromDB
     }
 
-    fun userReminder(client: DocumentClient, key: String): ArrayList<OutputModel> {
+    fun userReminder( key: String): ArrayList<OutputModel> {
         val skillsFromDB = ArrayList<OutputModel>()
-        val options = FeedOptions()
-        options.partitionKey = PartitionKey("user-$key")
-        val queryResults: FeedResponse<Document> =
-            client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
-        for (i in queryResults.queryIterator) {
-            println(i.id)
+        for (i in DatabaseClient().database.getCollection(key).find()) {
+            println(i["_id"])
                 val json = i.get("document") as JSONObject
                 println(json)
                 try {
-
                     val outputModel = OutputModel(json.getString("header"),try {
                         json.getString("body")
                     } catch (e: Exception) {
                         ""
-                    }, i.id, "", "", "")
+                    }, i["_id"].toString(), "", "", "")
                     skillsFromDB.add(outputModel)
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -89,10 +79,10 @@ class ReadDB {
         println(skillsFromDB)
         return skillsFromDB
     }
-    fun userReminderDBFormat(client: DocumentClient, key: String, id:String): ArrayList<RemindersModel> {
+    fun userReminderDBFormat( key: String, id:String): ArrayList<RemindersModel> {
         return arrayListOf(DatabaseClient().get(key, id, RemindersModel::class.java)!!)
     }
-    fun userReminderDBFormat(client: DocumentClient, key: String): ArrayList<RemindersModel> {
+    fun userReminderDBFormat( key: String): ArrayList<RemindersModel> {
         return DatabaseClient().getAll(key, RemindersModel::class.java)
     }
 
