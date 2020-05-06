@@ -29,22 +29,22 @@ class Main {
         val outputModel =  arrayListOf(OutputModel("Thanks for the input", "I'll use this to form an opinion and a better understanding of the world.", "", "", "Thanks for the input", "" ))
 
         options.partitionKey = PartitionKey("likesmodel")
-        CosmosClients.client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c ", options).queryIterable.forEach{
-            val json = it.get("document") as JSONObject
+        DatabaseClient().database.getCollection("likesmodel").find().forEach{
+            val json = it["document"] as JSONObject
             val total = json.getInt("total")
             val yes = json.getInt("yes")
             val no = json.getInt("no")
             if (json.getString("name") == params.word){
                 if(LocaleData.containsNoWord(params.input)){ UpdateDB().update(
-                    it.id,
+                    it["_id"].toString(),
                     "no",
                     "personapend",
                     no + 1
                 )
                     println("no")
                 }
-                else UpdateDB().update( it.id, "yes","personapend", yes + 1)
-                UpdateDB().update(it.id, "total","personapend", total + 1)
+                else UpdateDB().update( it["_id"].toString(), "yes","personapend", yes + 1)
+                UpdateDB().update(it["_id"].toString(), "total","personapend", total + 1)
                 if (total + 1 == 11) addToMainDataBase(params.word, yes >= no)
                 return Gson().toJson(outputModel)
             }
@@ -56,7 +56,7 @@ class Main {
         return Gson().toJson(outputModel)
 
     }
-    fun addToMainDataBase(name:String, like:Boolean){
+    private fun addToMainDataBase(name:String, like:Boolean){
         val text = if (like){"I am a fan of $name"}
         else "I am personally not a fan of $name"
         val model = LikesModel(text, name)
