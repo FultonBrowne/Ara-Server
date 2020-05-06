@@ -62,6 +62,10 @@ class DatabaseClient {
         return toReturn
     }
 
+    fun getInLikesForm(userId: String, term:String){
+        database.getCollection(userId).find()
+
+    }
     private fun <T> parse(it: Document, clazz: Class<T>): T? {
 
         try {
