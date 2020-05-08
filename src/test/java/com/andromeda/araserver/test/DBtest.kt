@@ -7,6 +7,7 @@ import org.junit.Test
 class DBtest {
     @Test
     fun test(){
+        if (!System.getenv().contains("IOTDB")) return
         val databaseClient = DatabaseClient()
         val id = "test-${System.currentTimeMillis()}"
         databaseClient.new(id, "test", OutputModel("", "", "", "", "", ""))
