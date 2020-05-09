@@ -31,7 +31,7 @@ class Reminders {
     }
     fun getAllApi(mainUrl:String): String {
         val apiParams = ParseUrl().parseApi(mainUrl, "/remindergaapi/")
-        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminder( it, apiParams.term) })!!
+        return Gson().toJson(apiParams.userKey?.let { ReadDB().userReminder( it) })!!
     }
     fun getOne(mainUrl:String): String? {
         val apiParams = ParseUrl().parseUserAction(mainUrl, "/reminderg/")

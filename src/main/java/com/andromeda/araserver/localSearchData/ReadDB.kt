@@ -62,11 +62,11 @@ class ReadDB {
         val skillsFromDB = ArrayList<OutputModel>()
         for (i in DatabaseClient().database.getCollection(key).find()) {
             println(i["_id"])
-                val json = i.get("document") as JSONObject
+                val json = i.get("document") as org.bson.Document
                 println(json)
                 try {
-                    val outputModel = OutputModel(json.getString("header"),try {
-                        json.getString("body")
+                    val outputModel = OutputModel(json.get("header").toString(),try {
+                        json.get("body").toString()
                     } catch (e: Exception) {
                         ""
                     }, i["_id"].toString(), "", "", "")
