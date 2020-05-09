@@ -12,13 +12,13 @@ class DBtest {
         val id = "test-${System.currentTimeMillis()}"
         databaseClient.new(id, "test", OutputModel("", "", "", "", "", ""))
         println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        val message = databaseClient.getAll<OutputModel>("test", OutputModel::class.java)
+        val message = databaseClient.getAll("test", OutputModel::class.java)
         println(message)
         message.forEach {
             println(it)
         }
         databaseClient.edit(id, "test", OutputModel("v2", "", "kldshjfiorbhgoiu", "", "", ""))
-        println(databaseClient.get<OutputModel>("test", id, OutputModel::class.java))
+        println(databaseClient.get("test", id, OutputModel::class.java))
         println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
         databaseClient.delete("test", id)
     }
