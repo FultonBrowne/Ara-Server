@@ -35,29 +35,6 @@ class ReadDB {
         return DatabaseClient().get(key, id, SkillsDBModel::class.java)!!
     }
 
-    fun userReminder(key: String, id: String): ArrayList<OutputModel> {
-        val skillsFromDB = ArrayList<OutputModel>()
-        for (i in DatabaseClient().database.getCollection(key).find()) {
-            println(i["_id"])
-            if (i["_id"] == id) {
-                val json = i.get("document") as JSONObject
-                println(json)
-                try {
-                    val outputModel = OutputModel(json.getString("header"),try {
-                        json.getString("body")
-                    } catch (e: Exception) {
-                        ""
-                    }, i["_id"].toString(), "", "", "")
-                    skillsFromDB.add(outputModel)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-        }
-        println(skillsFromDB)
-        return skillsFromDB
-    }
-
     fun userReminder( key: String): ArrayList<OutputModel> {
         val skillsFromDB = ArrayList<OutputModel>()
         for (i in DatabaseClient().database.getCollection(key).find()) {
