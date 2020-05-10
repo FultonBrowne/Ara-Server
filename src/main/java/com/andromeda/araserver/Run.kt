@@ -89,33 +89,10 @@ object Run : NanoHTTPD(Port().main()!!) {
                 com.andromeda.araserver.persona.Main().main(sessionUri)
             sessionUri.startsWith("/time") -> main2 =
                  Timer().main(sessionUri)
-            else -> { // if getting RSS info set tag value this will be used to get the correct feed
-                tag = when (sessionUri) {
-                    "/world" -> 1
-                    "/us" -> 2
-                    "/tech" -> 3
-                    "/money" -> 4
-                    else -> 0
-                }
-                try { // get Rss feed from RssMain.kt
-                    syndFeed = rssMain1(tag)
-                } catch (e: IOException) { // if any issues
-                    e.printStackTrace()
-                } catch (e: FeedException) {
-                    e.printStackTrace()
-                }
-                // turn feed content in to XML text
-                try {
-                    assert(syndFeed != null)
-                    main2 = SyndFeedOutput().outputString(syndFeed)
-                } catch (e: FeedException) {
-                    e.printStackTrace()
-                }
-            }
         }
         println(sessionUri)
         //Output response
-        return newFixedLengthResponse(main2)
+        return newFixedLengthResponse(main2?.replace(",{}", "")?.replace("{}", ""))
     }
     // Static function, to be run on start.
     @JvmStatic
