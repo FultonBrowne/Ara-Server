@@ -64,16 +64,20 @@ class ReadDB {
             println(i["_id"])
                 val json = i.get("document") as org.bson.Document
                 println(json)
+            if (json.containsKey("header")) {
                 try {
-                    val outputModel = OutputModel(json.get("header").toString(),try {
-                        json.get("body").toString()
-                    } catch (e: Exception) {
-                        ""
-                    }, i["_id"].toString(), "", "", "")
+                    val outputModel = OutputModel(
+                        json.get("header").toString(), try {
+                            json.get("body").toString()
+                        } catch (e: Exception) {
+                            ""
+                        }, i["_id"].toString(), "", "", ""
+                    )
                     skillsFromDB.add(outputModel)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
+            }
 
         }
         println(skillsFromDB)
