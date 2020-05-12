@@ -59,7 +59,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.0'
     compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.9.2'
     compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.3.0.jre14-preview'
-    compile group: 'com.microsoft.azure', name: 'azure-cosmosdb', version: '2.6.7'
+    compile group: 'com.microsoft.azure', name: 'azure-cosmosdb', version: '2.6.8'
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.4'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.0'
 
