@@ -1,8 +1,5 @@
 package com.andromeda.araserver.util
 
-import com.microsoft.azure.documentdb.FeedOptions
-import com.microsoft.azure.documentdb.PartitionKey
-import org.json.JSONObject
 import java.net.URL
 
 class Skills {
@@ -11,7 +8,6 @@ class Skills {
         val phrases = SortWords(phrase).getTopics()
         println(phrases.size)
         var link = ""
-        val options = FeedOptions()
         println(phrases)
         for(i in DatabaseClient().getAll<SearchModel>("search", SearchModel::class.java))
             for (i2 in phrases){
@@ -25,7 +21,6 @@ class Skills {
         val url = URL(link.replace(" ", "") + "/" +fullDir.replace(" ", "%20"))
 
         println(url.toString())
-
 
         return url.readText()
 

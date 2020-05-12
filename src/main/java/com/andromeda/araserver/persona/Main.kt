@@ -3,9 +3,6 @@ package com.andromeda.araserver.persona
 import com.andromeda.araserver.pages.UpdateDB
 import com.andromeda.araserver.util.*
 import com.google.gson.Gson
-import com.microsoft.azure.cosmosdb.RequestOptions
-import com.microsoft.azure.documentdb.FeedOptions
-import com.microsoft.azure.documentdb.PartitionKey
 import org.json.JSONObject
 import java.util.*
 
@@ -24,11 +21,8 @@ class Main {
     fun newLikes(url:String): String? {
         val params = ParseUrl().parseWordParam(url, "/likesinput/")
 
-
-        val options = FeedOptions()
         val outputModel =  arrayListOf(OutputModel("Thanks for the input", "I'll use this to form an opinion and a better understanding of the world.", "", "", "Thanks for the input", "" ))
 
-        options.partitionKey = PartitionKey("likesmodel")
         DatabaseClient().database.getCollection("likesmodel").find().forEach{
             val json = it["document"] as JSONObject
             val total = json.getInt("total")
@@ -49,8 +43,6 @@ class Main {
                 return Gson().toJson(outputModel)
             }
         }
-        val optionsDB = RequestOptions()
-        optionsDB.partitionKey = com.microsoft.azure.cosmosdb.PartitionKey("likesmodel")
         val data = WordTrainingModel(1, 1, 0, params.word)
         NewDoc().generate(data, Random().nextInt().toString(), "likesmodel")
         return Gson().toJson(outputModel)
@@ -60,8 +52,6 @@ class Main {
         val text = if (like){"I am a fan of $name"}
         else "I am personally not a fan of $name"
         val model = LikesModel(text, name)
-        val optionsDB = RequestOptions()
-        optionsDB.partitionKey = com.microsoft.azure.cosmosdb.PartitionKey("likes")
         NewDoc().generate(model, Random().nextInt().toString(), "likes")
     }
 }

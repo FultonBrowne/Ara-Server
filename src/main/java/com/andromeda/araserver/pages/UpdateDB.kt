@@ -3,7 +3,6 @@ package com.andromeda.araserver.pages
 import com.andromeda.araserver.util.DatabaseClient
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.microsoft.azure.documentdb.*
 
 
 class UpdateDB {

@@ -4,28 +4,9 @@ import com.andromeda.araserver.util.DatabaseClient
 import com.andromeda.araserver.util.HaModel
 import com.andromeda.araserver.util.OutputModel
 import com.andromeda.araserver.util.RemindersModel
-import com.microsoft.azure.documentdb.*
-import org.json.JSONObject
 
 class ReadDB {
-    fun skills(client: DocumentClient): ArrayList<SkillsFromDB> {
-        val skillsFromDB = ArrayList<SkillsFromDB>()
-        val options = FeedOptions()
-        options.partitionKey = PartitionKey("readonly")
-        val queryResults: FeedResponse<Document> =
-            client.queryDocuments("/dbs/Ara-android-database/colls/Ara-android-collection", "SELECT * FROM c", options)
-        for (i in queryResults.queryIterator) {
-            val json = i.get("document") as JSONObject
-            println(json)
-            val model = SkillsFromDB(
-                pre = json.getString("pre"),
-                end = "",
-                action = json.getString("action")
-            )
-            skillsFromDB.add(model)
-        }
-        return skillsFromDB
-    }
+
 
     fun userSkill(key: String): ArrayList<SkillsDBModel> {
         return DatabaseClient().getAll(key, SkillsDBModel::class.java)

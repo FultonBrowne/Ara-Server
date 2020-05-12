@@ -1,8 +1,5 @@
 package com.andromeda.araserver.util
 
-import com.microsoft.azure.cosmosdb.ConnectionPolicy
-import com.microsoft.azure.documentdb.*
-import com.microsoft.azure.documentdb.Document
 
 class DeleteDoc {
 

@@ -1,18 +1,13 @@
 package com.andromeda.araserver
 
 import com.andromeda.araserver.iot.*
-import com.andromeda.araserver.localSearchData.GetData
 import com.andromeda.araserver.localSearchData.GetUserSkills
 import com.andromeda.araserver.pages.*
-import com.andromeda.araserver.pages.RssMain.rssMain1
 import com.andromeda.araserver.skills.*
 import com.andromeda.araserver.skills.Timer
 import com.andromeda.araserver.util.*
 import com.rometools.rome.feed.synd.SyndFeed
-import com.rometools.rome.io.FeedException
-import com.rometools.rome.io.SyndFeedOutput
 import fi.iki.elonen.NanoHTTPD
-import java.io.IOException
 
 object Run : NanoHTTPD(Port().main()!!) {
 
@@ -46,30 +41,23 @@ object Run : NanoHTTPD(Port().main()!!) {
             sessionUri.startsWith("/del/") -> main2 = DeleteDoc().main(sessionUri)
             sessionUri.startsWith("/yelpclient") -> main2 = Locdec().main(sessionUri)
             sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(sessionUri)
-            sessionUri.startsWith("/devices/") -> main2 = Main().main(sessionUri)
             sessionUri.startsWith("/updateuserdata/") -> main2 = UpdateDB().main(sessionUri)
-            sessionUri.startsWith("/devicelist/") -> main2 = ListDevices().main(sessionUri)
-            sessionUri.startsWith("/deviceinfo/") -> main2 = Status().main(sessionUri)
             sessionUri.startsWith("/searcht/") -> main2 = GetInfo().main(sessionUri)
             sessionUri.startsWith("/openapp/") -> main2 = OpenApp().main(sessionUri)
             sessionUri.startsWith("/searchn/") -> main2 = GetInfo().bingNews(sessionUri)
             sessionUri.startsWith("/searchi/") -> main2 = GetInfo().imageSearch(sessionUri)
             sessionUri.startsWith("/searchv/") -> main2 = GetInfo().bingVideos(sessionUri)
             sessionUri.startsWith("/getha/") -> main2 = HaGetData().main(sessionUri)
-            sessionUri.startsWith("/newdevice/") -> {
-                main2 = ""
-                NewDevice().main(sessionUri)
-            }
+
             sessionUri.startsWith("/newdoc/")->{
                 NewDoc().main(sessionUri, session.headers["data"]!!)
             }
-            sessionUri.startsWith("/getforcache")-> main2 = GetData().main()
             sessionUri.startsWith("/math") -> main2 =
                 Equations().main(sessionUri)
             sessionUri.startsWith("/call") ->
                     main2 =  Call().main(sessionUri)
             sessionUri.startsWith("/remindern/") -> main2 = Reminders().new(sessionUri)
-            sessionUri.startsWith("/likesinput/") -> main2 = com.andromeda.araserver.persona.Main().newLikes(sessionUri);
+            sessionUri.startsWith("/likesinput/") -> main2 = com.andromeda.araserver.persona.Main().newLikes(sessionUri)
             sessionUri.startsWith("/remindernn/") -> main2 = Reminders().newJustData(sessionUri)
             sessionUri.startsWith("/reminderga/") -> main2 = Reminders().getAll(sessionUri)
             sessionUri.startsWith("/remindergaapi/") -> main2 = Reminders().getAllApi(sessionUri)
@@ -81,8 +69,6 @@ object Run : NanoHTTPD(Port().main()!!) {
                 main2 =  Text().main(sessionUri)
             sessionUri.startsWith("/skillsdata/") -> main2 =
                 GetSkillData().main(sessionUri)
-            sessionUri.startsWith("/class") -> main2 =
-                GetDeviceClass().main(sessionUri)
             sessionUri.startsWith("/searchb") -> main2 =
                 GetInfo().getBing(sessionUri)
             sessionUri.startsWith("/person") -> main2 =
