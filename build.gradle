@@ -53,6 +53,8 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.30"
     compile 'org.nanohttpd:nanohttpd:2.3.1'
     compile 'org.hibernate:hibernate-agroal:5.4.15.Final'
+    // https://mvnrepository.com/artifact/org.tensorflow/tensorflow
+    compile group: 'org.tensorflow', name: 'tensorflow', version: '1.15.0'
     implementation"com.squareup.okhttp3:okhttp:4.2.0"
     compile group: 'com.microsoft.azure.sdk.iot', name: 'iot-service-client', version: '1.21.1'
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.0'
