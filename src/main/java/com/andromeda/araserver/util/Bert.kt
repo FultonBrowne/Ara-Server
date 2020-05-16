@@ -9,7 +9,7 @@ class Bert {
     var hasRun = false
     init {
         println(TensorFlow.version())
-        val modelBundle = SavedModelBundle.load("model") //This file will not be on git for obuse reasins
+        val modelBundle = SavedModelBundle.load("model")
         graph = modelBundle.graph()
         hasRun = true
     }
