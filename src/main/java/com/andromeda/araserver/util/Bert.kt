@@ -10,7 +10,7 @@ class Bert {
     var hasRun = false
     init {
         println(TensorFlow.version())
-        val modelBundle = SavedModelBundle.load("./albert")
+        val modelBundle = SavedModelBundle.load("./bert2/")
         graph = modelBundle.graph()
         hasRun = true
     }
