@@ -74,7 +74,7 @@ dependencies {
     compile "io.ktor:ktor-server-netty:$ktor_version"
     compile "io.ktor:ktor-websockets:$ktor_version"
     testCompile "io.ktor:ktor-server-test-host:$ktor_version"
-    implementation("com.squareup.okhttp3:okhttp:4.6.0")
+    implementation("com.squareup.okhttp3:okhttp:4.7.2")
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
 
 
