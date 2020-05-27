@@ -1,20 +1,15 @@
 package com.andromeda.araserver.util
 
-import org.tensorflow.Graph
-import org.tensorflow.SavedModelBundle
-import org.tensorflow.Session
-import org.tensorflow.TensorFlow
-
+import java.net.URL
 class Bert {
-    var graph:Graph? = null
-    var hasRun = false
+	val serverUrl:String
     init {
-        println(TensorFlow.version())
-        val modelBundle = SavedModelBundle.load("./bert2/")
-        graph = modelBundle.graph()
-        hasRun = true
+	    serverUrl = System.getenv("nlp-server")
     }
     fun getNames(text:String){
-        println(graph!!.operation(text))
+	    val result = URL("$serverUrl").readTex()
+    }
+    fun getIntent(text:String){
+	    
     }
 }
