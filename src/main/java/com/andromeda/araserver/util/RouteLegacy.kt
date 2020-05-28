@@ -9,13 +9,13 @@ import com.andromeda.araserver.util.*
 import com.rometools.rome.feed.synd.SyndFeed
 
 class RouteLegacy{
-	fun main(sessionUri:String, post:String):String{
+	fun main(sessionUri:String, post:String?):String{
 		var main2 = ""
 
         when {
             sessionUri.startsWith("/news/us") -> main2 = NewsCache.usNews!!
             sessionUri.startsWith("/postupdate/") ->UpdateDB().arrayUpdate(sessionUri,
-                post
+                post!!
             )
             sessionUri.startsWith("/news/tech") -> main2 = NewsCache.tech!!
             sessionUri.startsWith("/news/money") -> main2 = NewsCache.money!!
@@ -38,7 +38,7 @@ class RouteLegacy{
             sessionUri.startsWith("/getha/") -> main2 = HaGetData().main(sessionUri)!!
 
             sessionUri.startsWith("/newdoc/")->{
-                NewDoc().main(sessionUri, post)
+                NewDoc().main(sessionUri, post!!)
             }
             sessionUri.startsWith("/math") -> main2 =
                 Equations().main(sessionUri)
