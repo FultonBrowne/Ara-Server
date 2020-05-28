@@ -8,11 +8,13 @@ class Bert {
     init {
 	    serverUrl = System.getenv("nlp-server")
     }
-    fun getNames(text:String){
+    fun getNames(text:String):ArrayList<NlpFromServer>{
 	    val result = URL("$serverUrl/v0/names?input=$text").readText()
+	    return parese(result)
     }
-    fun getIntent(text:String){
-	    val result = URL("$serverUrl/v0/intent?input=$text").readText() 
+    fun getIntent(text:String):ArrayList<NlpFromServer>{
+	    val result = URL("$serverUrl/v0/intent?input=$text").readText()
+	    return parese(result)
     }
     fun parese(text:String):ArrayList<NlpFromServer>{
 	    val toReturn = arrayListOf<NlpFromServer>()
