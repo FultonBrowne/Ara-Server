@@ -23,6 +23,7 @@ class Bert {
 		    val jobject = it.getAsJsonObject()
 		    val type = jobject.get("type").asString
                     val word = jobject.get("data").asString
+                    ;w
 		    toReturn.add(NlpFromServer(type, word))
 
 	    }

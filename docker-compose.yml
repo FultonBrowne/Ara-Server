@@ -1,0 +1,6 @@
+version: "3.0"
+services:
+        web:
+                image: "fulton/ara-server"
+                ports:
+                        - 80:80
