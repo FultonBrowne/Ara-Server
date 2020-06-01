@@ -4,3 +4,7 @@ services:
                 image: "fulton/ara-server"
                 ports:
                         - 80:80
+        auth:
+                image: ""
+                ports:
+                        -
