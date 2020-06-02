@@ -63,7 +63,7 @@ dependencies {
     compile group: 'com.microsoft.azure.sdk.iot', name: 'iot-service-client', version: '1.21.1'
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.0'
     compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.9.2'
-    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.4'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.5'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
