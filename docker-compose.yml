@@ -7,4 +7,9 @@ services:
         auth:
                 image: ""
                 ports:
-                        -
+                        - 8080:8080
+                enviroment:
+                        - KEYCLOAK_USER=araadmin
+                        - KEYCLOAK_PASSWORD=lol
+                        
+
