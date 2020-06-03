@@ -44,9 +44,10 @@ object Run{
         }.start()
 
         println("start")
-	val server = embeddedServer(Jetty, port = 8080) {
+	val server = embeddedServer(Jetty, port = Port().main()) {
 		  intercept(ApplicationCallPipeline.Features) {
 			  println(call.request.path())
+			  call.respondText(RouteLegacy().main(call.request.path(), call.request.headers["data"]))
 		  }
 
         routing {	
