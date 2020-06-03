@@ -8,31 +8,17 @@ import com.andromeda.araserver.skills.Timer
 import com.andromeda.araserver.util.*
 import com.rometools.rome.feed.synd.SyndFeed
 import fi.iki.elonen.NanoHTTPD
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.server.engine.*
+import io.ktor.server.jetty.*
+import io.ktor.request.path
 
-object Run : NanoHTTPD(Port().main()!!) {
-
-    //If connected to
-    override fun serve(session: IHTTPSession): Response {
-        val tag: Int
-        //URI passed from client
-        val sessionUri = session.uri
-        //Feed if any
-        var syndFeed: SyndFeed? = null
-        //Text to be outputted
-        var main2: String? = "err"
-
-        //Functions related to the search api
-        //Start API function
-
-        println(sessionUri)
-	main2 = RouteLegacy().main(sessionUri, session.headers["data"])
-        //Output response
-        return newFixedLengthResponse(main2?.replace(",{}", "")?.replace("{}", ""))
-    }
-    // Static function, to be run on start.
-    @JvmStatic
+object Run{
+	@JvmStatic
     fun main(args: Array<String>) {
-        start(SOCKET_READ_TIMEOUT, false)
         News()
         SecurityDBCheck()
         println(" Ara server is running and is available on your domain, IP, or http://localhost:8080/")
@@ -58,8 +44,20 @@ object Run : NanoHTTPD(Port().main()!!) {
         }.start()
 
         println("start")
+	val server = embeddedServer(Jetty, port = 8080) {
+		  intercept(ApplicationCallPipeline.Features) {
+			  println(call.request.path())
+		  }
 
-
-    }
+        routing {	
+            get("/") {
+                call.respondText("Hello World!", ContentType.Text.Plain)
+            }
+            get("/demo") {
+                call.respondText("HELLO WORLD!")
+            }
+	}
+}.start()
+}
 
 }
