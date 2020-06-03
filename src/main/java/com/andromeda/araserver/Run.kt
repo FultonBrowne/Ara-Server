@@ -47,13 +47,30 @@ object Run{
 	val server = embeddedServer(Jetty, port = Port().main()) {
 		  intercept(ApplicationCallPipeline.Features) {
 			  println(call.request.path())
-			  call.respondText(RouteLegacy().main(call.request.path(), call.request.headers["data"]))
+			  call.respondText(RouteLegacy().main(call.request.path().replace("//", "/"), call.request.headers["data"]))
 		  }
 
-        routing {	
+        routing {
+		route("/v1"){
+			route("search"){
+				get{
+					println(this.call.request.queryParameters.get("term"))
+				}
+			}
+			route("skills"){
+
+			}
+			route("db"){
+
+			}
+			route("feed"){
+
+			}
+		}
             get("/") {
                 call.respondText("Hello World!", ContentType.Text.Plain)
             }
+	    
             get("/demo") {
                 call.respondText("HELLO WORLD!")
             }
