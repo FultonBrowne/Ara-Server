@@ -1,5 +1,6 @@
 package com.andromeda.araserver.util
 
+import io.ktor.http.Parameters
 import java.util.*
 
 class ParseUrl {
@@ -95,6 +96,9 @@ class ParseUrl {
             }
         }
         return ReminderWithUserAndId(RemindersModel(name, info, time), user, id!!)
+    }
+
+    fun parseApi(parameters:Parameters){
     }
     data class ApiParams(val term:String, val loc:String, val lat:String,val  cc:Locale, val userKey:String?)
     data class UserActionParams(val user:String, val id:String)

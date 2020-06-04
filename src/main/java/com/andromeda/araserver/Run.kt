@@ -54,7 +54,7 @@ object Run{
 		route("/v1"){
 			route("search"){
 				get{
-					println(this.call.request.queryParameters.get("term"))
+					println(this.call.parameters.get("loc"))
 				}
 			}
 			route("skills"){
