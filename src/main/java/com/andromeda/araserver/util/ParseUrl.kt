@@ -98,7 +98,8 @@ class ParseUrl {
         return ReminderWithUserAndId(RemindersModel(name, info, time), user, id!!)
     }
 
-    fun parseApi(parameters:Parameters){
+    fun parseApi(parameters:Parameters):ApiParams{
+	    return ApiParams(parameters["term"]!!, parameters["log"]!!, parameters["lat"]!!, Locale(parameters["cc"]!!), parameters["user"])
     }
     data class ApiParams(val term:String, val loc:String, val lat:String,val  cc:Locale, val userKey:String?)
     data class UserActionParams(val user:String, val id:String)
