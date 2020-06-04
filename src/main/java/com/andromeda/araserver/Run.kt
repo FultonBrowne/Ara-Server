@@ -54,16 +54,31 @@ object Run{
 		route("/v1"){
 			route("search"){
 				get{
-					println(this.call.parameters.get("loc"))
+					val params = ParseUrl().parseApi(call.parameters)
 				}
 			}
 			route("skills"){
+				route("timer")
 
 			}
 			route("db"){
+				route("update"){
+					post{
+
+					}
+				}
+				route("new"){
+
+				}
 
 			}
 			route("feed"){
+				route("newsfeed"){
+
+				}
+				route("food"){
+
+				}
 
 			}
 		}
