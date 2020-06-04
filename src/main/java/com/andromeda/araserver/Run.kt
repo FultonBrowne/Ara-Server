@@ -53,12 +53,18 @@ object Run{
         routing {
 		route("/v1"){
 			route("search"){
-				get{
+				post{
 					val params = ParseUrl().parseApi(call.parameters)
 				}
 			}
 			route("skills"){
-				route("timer")
+				route("timer"){
+
+				}
+
+				route("search"){
+
+				}
 
 			}
 			route("db"){
@@ -68,16 +74,33 @@ object Run{
 					}
 				}
 				route("new"){
+					post{
 
+					}
+				}
+
+				route("get"){
+					post{
+
+					}
+				}
+				route("delete"){
+					post{
+
+					}
 				}
 
 			}
 			route("feed"){
 				route("newsfeed"){
+					post{
 
+					}
 				}
 				route("food"){
+					post{
 
+					}
 				}
 
 			}
