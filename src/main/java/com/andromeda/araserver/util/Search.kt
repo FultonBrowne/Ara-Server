@@ -1,27 +1,29 @@
 package com.andromeda.araserver.util
 
 object Search{
-	fun ara(){
+
+	fun ara(term:String, params:ParseUrl.ApiParams){
+		val data = DatabaseClient().getAll<SearchModel>("search", SearchModel::class.java)
 
 	}
 
-	fun web(){
+	fun web(term:String, params:ParseUrl.ApiParams){
 
 	}
 
-	fun images(){
+	fun images(term:String, params:ParseUrl.ApiParams){
 
 	}
 
-	fun videos(){
+	fun videos(term:String, params:ParseUrl.ApiParams){
 
 	}
 
-	fun news(){
+	fun news(term:String, params:ParseUrl.ApiParams){
 
 	}
 
-	fun quickSearch(){
+	fun quickSearch(term:String, params:ParseUrl.ApiParams){
 
 	}
 
