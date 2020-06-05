@@ -6,6 +6,13 @@ object Search{
 
 	fun ara(params:ParseUrl.ApiParams){
 		val data = DatabaseClient().getAll<SearchModel>("search", SearchModel::class.java)
+		val topic = ""
+		for(i in data){
+			if (i.word.startsWith(topic)){
+                    	val link = i.link
+                    	break
+                	}
+		}
 
 	}
 
