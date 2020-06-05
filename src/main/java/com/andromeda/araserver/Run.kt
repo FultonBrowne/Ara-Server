@@ -52,6 +52,15 @@ object Run{
 
         routing {
 		route("/v1"){
+			post{
+				call.respond(ServerInfo.getAsJson())
+			}
+			get{
+				call.respond(HttpStatusCode.BadRequest, "Please use a post request and follow the REST api guide lines")
+			}
+			post{
+
+			}
 			route("search"){
 				post{
 					val params = ParseUrl().parseApi(call.parameters)
@@ -59,11 +68,15 @@ object Run{
 			}
 			route("skills"){
 				route("timer"){
-
+					post{
+						val params = ParseUrl().parseApi(call.parameters)
+					}
 				}
 
 				route("search"){
-
+					post{
+						val params = ParseUrl().parseApi(call.parameters)
+					}
 				}
 
 			}

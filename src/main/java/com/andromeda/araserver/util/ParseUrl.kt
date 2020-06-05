@@ -101,6 +101,10 @@ class ParseUrl {
     fun parseApi(parameters:Parameters):ApiParams{
 	    return ApiParams(parameters["term"]!!, parameters["log"]!!, parameters["lat"]!!, Locale(parameters["cc"]!!), parameters["user"])
     }
+
+    fun parseUserAction(parameters:Parameters):UserActionParams{
+	    return UserActionParams(parameters["user"]!!, parameters["id"]!!)
+    }
     data class ApiParams(val term:String, val loc:String, val lat:String,val  cc:Locale, val userKey:String?)
     data class UserActionParams(val user:String, val id:String)
     data class WordParams(val word:String, val input:String)
