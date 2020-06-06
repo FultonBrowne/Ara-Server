@@ -18,6 +18,6 @@ object ServerInfo{
 			true
 		}
 	}
-	data class JsonOutput(val version:String, val reqireAuth:String, val skills:List<String>)
+	data class JsonOutput(val version:String, val reqireAuth:Boolean, val skills:List<String>)
 }
 

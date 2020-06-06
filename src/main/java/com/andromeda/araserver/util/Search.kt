@@ -1,7 +1,7 @@
 package com.andromeda.araserver.util
 
 import java.net.URL
-
+import io.ktor.client.*
 object Search{
 
 	fun ara(params:ParseUrl.ApiParams){
@@ -39,6 +39,10 @@ object Search{
 	fun getBingRequest(link:String){
 		val bingData = URL(link).readText()
 
+	}
+
+	fun runSkill(url:String, body:String){
+		    val client = HttpClient()
 	}
 
 }
