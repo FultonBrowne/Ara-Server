@@ -45,10 +45,6 @@ object Run{
 
         println("start")
 	val server = embeddedServer(Jetty, port = Port().main()) {
-		  intercept(ApplicationCallPipeline.Features) {
-			  println(call.request.path())
-			  call.respondText(RouteLegacy().main(call.request.path().replace("//", "/"), call.request.headers["data"]))
-		  }
 
         routing {
 		route("/v1"){
@@ -126,6 +122,14 @@ object Run{
                 call.respondText("HELLO WORLD!")
             }
 	}
+
+	intercept(ApplicationCallPipeline.Features) {
+		 println(call.request.path())
+		 val theData = RouteLegacy().main(call.request.path().replace("//", "/"), call.request.headers["data"])
+		 println(theData)
+		 if(theData == "") return@intercept
+		call.respondText(RouteLegacy().main(call.request.path().replace("//", "/"), call.request.headers["data"]))
+		}
 }.start()
 }
 
