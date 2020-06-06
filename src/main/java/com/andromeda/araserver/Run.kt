@@ -6,6 +6,7 @@ import com.andromeda.araserver.pages.*
 import com.andromeda.araserver.skills.*
 import com.andromeda.araserver.skills.Timer
 import com.andromeda.araserver.util.*
+import com.google.gson.*
 import com.rometools.rome.feed.synd.SyndFeed
 import fi.iki.elonen.NanoHTTPD
 import io.ktor.application.*
@@ -49,13 +50,13 @@ object Run{
         routing {
 		route("/v1"){
 			post{
-				call.respond(ServerInfo.getAsJson())
+				println("test")
+				val payload = (ServerInfo.getAsJson())
+				outputToApi(payload)
+				call.respond(payload)
 			}
 			get{
 				call.respond(HttpStatusCode.BadRequest, "Please use a post request and follow the REST api guide lines")
-			}
-			post{
-
 			}
 			route("search"){
 				post{
@@ -131,6 +132,13 @@ object Run{
 		call.respondText(RouteLegacy().main(call.request.path().replace("//", "/"), call.request.headers["data"]))
 		}
 }.start()
+}
+
+fun outputToApi(payload:Any){
+	val jobj = Gson().toJsonTree(payload)
+	println(jobj)
+	val map  = mapOf<String, JsonElement>("data" to jobj)
+	JsonObject(map)
 }
 
 }
