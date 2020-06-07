@@ -52,8 +52,7 @@ object Run{
 			post{
 				println("test")
 				val payload = (ServerInfo.getAsJson())
-				outputToApi(payload)
-				call.respond(payload)
+				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 			}
 			get{
 				call.respond(HttpStatusCode.BadRequest, "Please use a post request and follow the REST api guide lines")
@@ -134,11 +133,14 @@ object Run{
 }.start()
 }
 
-fun outputToApi(payload:Any){
+fun outputToApi(payload:Any):String{
 	val jobj = Gson().toJsonTree(payload)
 	println(jobj)
-	val map  = mapOf<String, JsonElement>("data" to jobj)
-	JsonObject(map)
+	val toReturn = JsonObject()
+	toReturn.add("version", JsonPrimitive("v1.0.0"))
+	toReturn.add("data", jobj)
+	return toReturn.toString()
+
 }
 
 }
