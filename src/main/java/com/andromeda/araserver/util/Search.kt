@@ -2,6 +2,7 @@ package com.andromeda.araserver.util
 
 import java.net.URL
 import io.ktor.client.*
+import okhttp3.* 
 object Search{
 
 	fun ara(params:ParseUrl.ApiParams){
@@ -42,7 +43,16 @@ object Search{
 	}
 
 	fun runSkill(url:String, body:String){
-		    val client = HttpClient()
+		val requestBody = MultipartBody.Builder()
+        	.setType(MultipartBody.FORM)
+        	.addFormDataPart("somParam", "someValue")
+        	.build();
+
+		val request = Request.Builder()
+		.url(url)
+        	.post(requestBody)
+        	.build();
+		
 	}
 
 }

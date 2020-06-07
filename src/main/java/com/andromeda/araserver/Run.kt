@@ -50,7 +50,6 @@ object Run{
         routing {
 		route("/v1"){
 			post{
-				println("test")
 				val payload = (ServerInfo.getAsJson())
 				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 			}
