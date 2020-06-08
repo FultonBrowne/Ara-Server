@@ -82,28 +82,18 @@ object Run{
 
 			}
 			route("db"){
-				route("update"){
-					post{
+				post{
 
-					}
 				}
-				route("new"){
-					post{
+				get("{user}/{id}"){
 
-					}
 				}
+				put{
 
-				route("get"){
-					post{
-
-					}
 				}
-				route("delete"){
-					post{
+				delete{
 
-					}
 				}
-
 			}
 			route("feed"){
 				route("newsfeed"){
