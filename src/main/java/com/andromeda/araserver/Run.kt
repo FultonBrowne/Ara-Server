@@ -53,9 +53,6 @@ object Run{
 				val payload = (ServerInfo.getAsJson())
 				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 			}
-			get{
-				call.respond(HttpStatusCode.BadRequest, "Please use a post request and follow the REST api guide lines")
-			}
 			route("search"){
 				post{
 					val params = ParseUrl().parseApi(call.parameters)
@@ -71,6 +68,15 @@ object Run{
 				route("search"){
 					post{
 						val params = ParseUrl().parseApi(call.parameters)
+					}
+					route("web"){
+						post{
+							val params = ParseUrl().parseApi(call.parameters)
+							val payload = GetInfo().searchBing(params.term, params.cc)
+							call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+						}
+
+
 					}
 				}
 
@@ -101,7 +107,7 @@ object Run{
 			}
 			route("feed"){
 				route("newsfeed"){
-					post{
+					route("us"){
 
 					}
 				}
