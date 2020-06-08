@@ -5,16 +5,17 @@ import io.ktor.client.*
 import okhttp3.* 
 object Search{
 
-	fun ara(params:ParseUrl.ApiParams){
+	fun ara(params:ParseUrl.ApiParams):String{
 		val data = DatabaseClient().getAll<SearchModel>("search", SearchModel::class.java)
 		val topic = ""
 		for(i in data){
 			if (i.word.startsWith(topic)){
                     	val link = i.link
+			return runSkill(link, params)
                     	break
                 	}
 		}
-
+		return runSkill("", params) //TODO add new search url
 	}
 
 	fun web(params:ParseUrl.ApiParams){
@@ -42,7 +43,7 @@ object Search{
 
 	}
 
-	fun runSkill(url:String, body:ParseUrl.ApiParams){
+	fun runSkill(url:String, body:ParseUrl.ApiParams):String{
 		val requestBody = MultipartBody.Builder()
         	.setType(MultipartBody.FORM)
 		.addFormDataPart("term", body.term)
@@ -57,7 +58,8 @@ object Search{
         	.post(requestBody)
         	.build();
 		val client = OkHttpClient()
-		val result = client.newCall(request).execute().body.string()
+		val result = client.newCall(request).execute().body!!.string()
+		return result
 		
 	}
 
