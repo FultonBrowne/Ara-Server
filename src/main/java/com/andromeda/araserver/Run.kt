@@ -86,7 +86,9 @@ object Run{
 				post{
 
 				}
-				get("{user}/{id}/{type?}"){
+				get("{user}/{id}"){
+					val payload = db.get(call.parameters["user"]!!, call.parameters["id"]!!)!!
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 				put{
 

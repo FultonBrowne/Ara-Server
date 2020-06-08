@@ -54,6 +54,14 @@ class DatabaseClient {
         }
         return null
     }
+    fun get(userId:String, id:String):Any?{
+        newUserCollection(userId)
+        val find = database.getCollection(userId).find(Filters.eq("_id", id))
+        find.forEach {
+		return it.get("document")
+        }
+        return null
+    }
 
     fun <T> getAll(userId: String, clazz: Class<T>): ArrayList<T> {
         newUserCollection(userId)
