@@ -12,10 +12,13 @@ import fi.iki.elonen.NanoHTTPD
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.response.*
+import io.ktor.features.ContentNegotiation
+import io.ktor.jackson.jackson
+import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.jetty.*
-import io.ktor.request.path
+import io.ktor.request.*
 
 object Run{
 	@JvmStatic
@@ -43,19 +46,32 @@ object Run{
             NLPManager()
 
         }.start()
+	
 
         println("start")
 	val server = embeddedServer(Jetty, port = Port().main()) {
-
-        routing {
+        install(ContentNegotiation) {
+            jackson {
+                enable(SerializationFeature.INDENT_OUTPUT)
+            }
+        }
+		routing {
 		route("/v1"){
-			post{
+			get{
 				val payload = (ServerInfo.getAsJson())
 				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 			}
 			route("search"){
 				post{
-					val params = ParseUrl().parseApi(call.parameters)
+					try{
+						println(call.receive<ParseUrl.ApiParams>())
+
+						val params = ParseUrl().parseApi(call.r)
+				}
+				catch(e:Exception){e.printStackTrace()}
+
+					val payload = (ServerInfo.getAsJson())
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 			}
 			route("skills"){
@@ -91,6 +107,7 @@ object Run{
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 				put{
+					db.edit(call.parameters["user"]!!, call.parameters["id"]!!, TODO())
 
 				}
 				delete{
