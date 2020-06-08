@@ -42,16 +42,22 @@ object Search{
 
 	}
 
-	fun runSkill(url:String, body:String){
+	fun runSkill(url:String, body:ParseUrl.ApiParams){
 		val requestBody = MultipartBody.Builder()
         	.setType(MultipartBody.FORM)
-        	.addFormDataPart("somParam", "someValue")
+		.addFormDataPart("term", body.term)
+		.addFormDataPart("log", body.loc)
+		.addFormDataPart("lat", body.lat)
+		.addFormDataPart("user", body.userKey ?: "")
+		.addFormDataPart("cc", body.cc.country)
         	.build();
 
 		val request = Request.Builder()
 		.url(url)
         	.post(requestBody)
         	.build();
+		val client = OkHttpClient()
+		val result = client.newCall(request).execute().body.string()
 		
 	}
 
