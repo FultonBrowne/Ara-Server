@@ -82,17 +82,17 @@ object Run{
 
 			}
 			route("db"){
+				val db = DatabaseClient()
 				post{
 
 				}
-				get("{user}/{id}"){
-
+				get("{user}/{id}/{type?}"){
 				}
 				put{
 
 				}
 				delete{
-
+					db.delete(call.parameters["user"]!!, call.parameters["id"]!!)
 				}
 			}
 			route("feed"){
