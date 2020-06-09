@@ -100,19 +100,25 @@ object Run{
 				val db = DatabaseClient()
 				post{
 
+					val params = this.call.receive<dbActions>()
+					db.new(params.user, params.id, params.data)
+					val payload = ok(true)
+					call.respondText( outputToApi(payload), ContentType.parse("application/json"), HttpStatusCode.Created)
 				}
 				get("{user}/{id}"){
 					val payload = db.get(call.parameters["user"]!!, call.parameters["id"]!!)!!
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
-				put{
-					val params = this.call.receive<dbActions>()
-					db.edit(params.user, params.id, params.data)
+				put("{user}/{id}"){
+					val params = this.call.receive<Any>()
+					db.edit(call.parameters["user"]!!, call.parameters["id"]!!, params)
 					val payload = ok(true)
-				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 				delete{
 					db.delete(call.parameters["user"]!!, call.parameters["id"]!!)
+					val payload = ok(true)
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 			}
 			route("feed"){
