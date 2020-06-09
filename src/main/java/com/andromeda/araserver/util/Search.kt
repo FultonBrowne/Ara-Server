@@ -1,7 +1,6 @@
 package com.andromeda.araserver.util
 
 import java.net.URL
-import io.ktor.client.*
 import okhttp3.* 
 object Search{
 
@@ -44,18 +43,10 @@ object Search{
 	}
 
 	fun runSkill(url:String, body:ParseUrl.ApiParams):String{
-		val requestBody = MultipartBody.Builder()
-        	.setType(MultipartBody.FORM)
-		.addFormDataPart("term", body.term)
-		.addFormDataPart("log", body.loc)
-		.addFormDataPart("lat", body.lat)
-		.addFormDataPart("user", body.userKey ?: "")
-		.addFormDataPart("cc", body.cc.country)
-        	.build();
-
+		var toRun = "$url?term=${body.term}&log=${body.loc}&lat=${body.lat}&cc=${body.cc.toLanguageTag()}"
+		if(body.userKey != null) toRun = toRun +  "&user=${body.userKey}"
 		val request = Request.Builder()
-		.url(url)
-        	.post(requestBody)
+		.url(toRun)
         	.build();
 		val client = OkHttpClient()
 		val result = client.newCall(request).execute().body!!.string()

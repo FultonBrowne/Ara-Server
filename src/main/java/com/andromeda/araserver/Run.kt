@@ -63,13 +63,8 @@ object Run{
 			}
 			route("search"){
 				get{
-					try{
-						println(call.receive<ParseUrl.ApiParams>())
-
-						val params = ParseUrl().parseApi(this.call.request.queryParameters)
-				}
-				catch(e:Exception){e.printStackTrace()}
-
+					
+					val params = ParseUrl().parseApi(this.call.request.queryParameters)
 					val payload = (ServerInfo.getAsJson())
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
