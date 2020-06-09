@@ -63,7 +63,6 @@ object Run{
 			}
 			route("search"){
 				get{
-					
 					val params = ParseUrl().parseApi(this.call.request.queryParameters)
 					val payload = (ServerInfo.getAsJson())
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
@@ -71,19 +70,24 @@ object Run{
 			}
 			route("skills"){
 				route("timer"){
-					post{
-						val params = ParseUrl().parseApi(call.parameters)
+					get{
+					val params = ParseUrl().parseApi(this.call.request.queryParameters)
+					val payload = (ServerInfo.getAsJson())
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 					}
 				}
 
 				route("search"){
-					post{
-						val params = ParseUrl().parseApi(call.parameters)
+					get{
+					val params = ParseUrl().parseApi(this.call.request.queryParameters)
+					val payload = (ServerInfo.getAsJson())
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 					}
 					route("web"){
 						post{
-							val params = ParseUrl().parseApi(call.parameters)
-							val payload = GetInfo().searchBing(params.term, params.cc)
+							
+							val params = ParseUrl().parseApi(this.call.request.queryParameters)
+							val payload = (ServerInfo.getAsJson())
 							call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 						}
 
@@ -102,8 +106,10 @@ object Run{
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 				put{
-					db.edit(call.parameters["user"]!!, call.parameters["id"]!!, TODO())
-
+					val params = this.call.receive<dbActions>()
+					db.edit(params.user, params.id, params.data)
+					val payload = ok(true)
+				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 				delete{
 					db.delete(call.parameters["user"]!!, call.parameters["id"]!!)
@@ -116,7 +122,7 @@ object Run{
 					}
 				}
 				route("food"){
-					post{
+					get{
 
 					}
 				}
@@ -126,6 +132,16 @@ object Run{
             get("/") {
                 call.respondText("Hello World!", ContentType.Text.Plain)
             }
+	    post("/"){
+		    try{
+			    println(call.receiveParameters())
+	    		}
+			catch(e:Exception){
+				e.printStackTrace()
+			}
+
+		    call.respondText("yo mike are town is dope and pretty")
+	    }
 	    
             get("/demo") {
                 call.respondText("HELLO WORLD!")
@@ -151,5 +167,6 @@ fun outputToApi(payload:Any):String{
 	return toReturn.toString()
 
 }
-
+data class dbActions(val user:String, val id:String, val data:Any)
+data class ok(val ok:Boolean)
 }
