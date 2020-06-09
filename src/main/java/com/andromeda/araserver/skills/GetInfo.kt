@@ -55,7 +55,7 @@ class GetInfo {
 
 
     @Throws(IOException::class)
-    private fun searchBing(searchQuery: String, cc: Locale): ArrayList<OutputModel> {
+    fun searchBing(searchQuery: String, cc: Locale): ArrayList<OutputModel> {
         var searchQuery = searchQuery
         println(searchQuery)
         searchQuery = searchQuery.replace("/searchb/", "")

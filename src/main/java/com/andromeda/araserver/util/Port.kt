@@ -1,9 +1,9 @@
 package com.andromeda.araserver.util
 class Port {
-    fun main(): Int? {
+    fun main(): Int {
         try {
             val port: Int? = System.getenv("PORT").toInt()
-            return port
+            return port!!
 
         }
         catch (e:Exception){
