@@ -135,23 +135,6 @@ object Run{
 
 			}
 		}
-            get("/") {
-                call.respondText("Hello World!", ContentType.Text.Plain)
-            }
-	    post("/"){
-		    try{
-			    println(call.receiveParameters())
-	    		}
-			catch(e:Exception){
-				e.printStackTrace()
-			}
-
-		    call.respondText("yo mike are town is dope and pretty")
-	    }
-	    
-            get("/demo") {
-                call.respondText("HELLO WORLD!")
-            }
 	}
 
 	intercept(ApplicationCallPipeline.Features) {
