@@ -47,6 +47,7 @@ object Run{
 
         }.start()
 	
+	
 
         println("start")
 	val server = embeddedServer(Jetty, port = Port().main()) {
@@ -113,6 +114,10 @@ object Run{
 					val params = this.call.receive<Any>()
 					db.edit(call.parameters["user"]!!, call.parameters["id"]!!, params)
 					val payload = ok(true)
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+				}
+				get("{user}"){
+					val payload = db.getAll<Any>(call.parameters["user"]!!, Any::class.java)
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 				delete{
