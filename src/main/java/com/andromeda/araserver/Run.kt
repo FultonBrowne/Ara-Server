@@ -135,7 +135,7 @@ object Run{
 				}
 			}
 			route("feed"){
-				route("newsfeed"){
+				route("news"){
 					get("us"){
 						val payload = NewsCache.us
 						call.respondText(outputToApi(payload), ContentType.parse("application/json"))
