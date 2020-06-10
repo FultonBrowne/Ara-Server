@@ -20,6 +20,15 @@ import io.ktor.server.engine.*
 import io.ktor.server.jetty.*
 import io.ktor.request.*
 
+/** 
+this object starts and handles the server routing and json.
+the server uses the ktor (ktor.io) system to handle request
+
+any bugs in this file are critical and should be fixed at once
+
+no active devolpment of this file on the main branch unless working on a new and/or currently inactive api
+
+ **/
 object Run{
 	@JvmStatic
     fun main(args: Array<String>) {
@@ -41,7 +50,6 @@ object Run{
                     "    You should have received a copy of the GNU General Public License\n" +
                     "    along with this program.  If not, see <https://www.gnu.org/licenses/>."
         )
-        println("test")
         Thread{
             NLPManager()
 
@@ -140,6 +148,9 @@ object Run{
 
 			}
 		}
+			get("teapot"){
+				call.respondText(outputToApi(Message("I preffer coffee")), ContentType.parse("application/json"), HttpStatusCode(418, "I am a teapot"))
+			}
 	}
 
 	intercept(ApplicationCallPipeline.Features) {
@@ -163,4 +174,5 @@ fun outputToApi(payload:Any):String{
 }
 data class dbActions(val user:String, val id:String, val data:Any)
 data class ok(val ok:Boolean)
+data class Message(val message:String)
 }
