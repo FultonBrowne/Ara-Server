@@ -136,7 +136,15 @@ object Run{
 			}
 			route("feed"){
 				route("newsfeed"){
-					route("us"){
+					get("us"){
+
+					}
+
+					get("uk"){
+
+					}
+
+					get("de"){
 
 					}
 				}
