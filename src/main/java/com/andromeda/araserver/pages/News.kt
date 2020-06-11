@@ -21,12 +21,6 @@ class News{
     }
 
     fun getData() {
-        NewsCache.usNews = Gson().toJson(getNews("https://newsapi.org/v2/top-headlines?country=us&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1"))
-        NewsCache.money = Gson().toJson(getNews("https://newsapi.org/v2/top-headlines?category=business&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1"))
-        NewsCache.tech = Gson().toJson(getNews("https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1"))
-        NewsCache.mexNews = Gson().toJson(getNews("https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1"))
-        NewsCache.ukNews = Gson().toJson(getNews("https://newsapi.org/v2/top-headlines?country=gb&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1"))
-        NewsCache.deNews = Gson().toJson(getNews("https://newsapi.org/v2/top-headlines?country=de&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1"))
         NewsCache.us = getNews("https://newsapi.org/v2/top-headlines?country=us&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1")
 	NewsCache.moneyEn = getNews("https://newsapi.org/v2/top-headlines?category=business&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1")
 	NewsCache.techEn = getNews("https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=4e3c5ce2cfff4634b4c4811c01fd2ad1")
