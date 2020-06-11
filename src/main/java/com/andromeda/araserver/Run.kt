@@ -138,32 +138,32 @@ object Run{
 				route("news"){
 					get("us"){
 						val payload = NewsCache.us
-						call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
 
 					}
 
 					get("uk"){
 						val payload = NewsCache.uk
-						call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
 
 					}
 
 					get("de"){
 						val payload = NewsCache.de
-						call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
 					}
 
 					get ("me"){
 						val payload = NewsCache.me
-						call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
 					}
 					get("tech/en"){
 						val payload = NewsCache.techEn
-						call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
 					}
 					get("money/en"){
 						val payload = NewsCache.moneyEn
-						call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
 					}
 				}
 				route("food"){
