@@ -19,7 +19,11 @@ class To {
 	    return Feed("list",null, null, toReturn )
     }
 
-    fun feedModelArray(outPut:ArrayList<OutputModel>){
-
+    fun feedModelArray(ouptut:ArrayList<OutputModel>, longText:Boolean):Feed{
+	    val toReturn = arrayListOf<FeedModel>()
+	    for (i in ouptut){
+		    toReturn.add(FeedModel(i.title, i.description, i.link, i.image, longText))
+	    }
+	    return Feed("list", null, ouptut[0].OutputTxt, toReturn)
     }
 }
