@@ -16,6 +16,10 @@ class To {
 		    val feedModel = FeedModel(i.title, i.info, i.link, i.pic, true)
 		    toReturn.add(feedModel)
 	    }
-	    return Feed("list",null, null toReturn )
+	    return Feed("list",null, null, toReturn )
+    }
+
+    fun feedModelArray(outPut:ArrayList<OutputModel>){
+
     }
 }

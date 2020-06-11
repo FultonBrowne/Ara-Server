@@ -1,3 +1,5 @@
+package com.andromeda.araserver.util
+
 /** 
 This is the type used for the feed list
  **/
