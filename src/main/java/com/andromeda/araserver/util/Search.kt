@@ -2,6 +2,7 @@ package com.andromeda.araserver.util
 
 import java.net.URL
 import okhttp3.* 
+import com.google.gson.*
 object Search{
 
 	fun ara(params:ParseUrl.ApiParams):String{
@@ -18,7 +19,7 @@ object Search{
 	}
 
 	fun web(params:ParseUrl.ApiParams){
-
+		 
 	}
 
 	fun images(params:ParseUrl.ApiParams){
@@ -53,5 +54,24 @@ object Search{
 		return result
 		
 	}
+	fun parseBing(jsonText:String): Feed {
+		val mainList = ArrayList<FeedModel>()
+
+		val jelement = JsonParser().parse(jsonText)
+        	var jsonObject = jelement.asJsonObject
+        	jsonObject = jsonObject.getAsJsonObject("webPages")
+        	val jsonArray = jsonObject.getAsJsonArray("value")
+        	for (i in 0 until jsonArray.size()) { //System.out.println(jsonArray.get(i).isJsonObject());
+            		val title = jsonArray[i].asJsonObject["name"].asString
+            		val info = jsonArray[i].asJsonObject["snippet"].asString
+            		println(info)
+            		val link = jsonArray[i].asJsonObject["url"].asString
+	    		mainList.add(FeedModel(title, info, link))
+        	}
+		return Feed("list", null, null,mainList)
+    }
+    fun runBingUrl(url:String){
+
+    }
 
 }
