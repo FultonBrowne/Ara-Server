@@ -12,7 +12,7 @@ object Search{
         var imagePath = "/bing/v7.0/images/search"
         var path = "/bing/v7.0/search"
 
-	fun ara(params:ParseUrl.ApiParams):String{
+	fun ara(params:ParseUrl.ApiParams):Any{
 		val data = DatabaseClient().getAll<SearchModel>("search", SearchModel::class.java)
 		val topic = ""
 		for(i in data){
@@ -22,7 +22,9 @@ object Search{
                     	break
                 	}
 		}
-		return runSkill("", params) //TODO add new search url
+		val ddg = quickSearch(params)
+		if(ddg.feed.size != 0) return ddg
+		return web(params)
 	}
 
 	fun web(params:ParseUrl.ApiParams):Feed{
@@ -60,7 +62,36 @@ object Search{
 
 	}
 
-	fun quickSearch(params:ParseUrl.ApiParams){
+	fun quickSearch(params:ParseUrl.ApiParams):Feed{
+		val mainVal = params.term.replace(" ", "+")
+        val url = "https://api.duckduckgo.com/?q=$mainVal&format=json"
+        val client = OkHttpClient()
+        var json = ""
+        val request = Request.Builder()
+            .url(url)
+            //.header("User-Agent", "OkHttp Headers.java")
+            .addHeader("Accept", "application/x-javascript")
+            //.addHeader("Accept", "application/vnd.github.v3+json")
+            .build()
+
+        client.newCall(request).execute().use { response ->
+
+            json = response.body!!.string()
+            println(json)
+        }
+        println(json)
+        val jsonParser = JsonParser().parse(json).asJsonObject
+        val describe = jsonParser["AbstractText"].asString
+        if (describe == "") throw NullPointerException()
+	val outputModelArrayList = ArrayList<FeedModel>()
+        outputModelArrayList.add(
+	FeedModel(
+                "Search result by DuckDuckGo",
+                describe,
+                jsonParser["AbstractURL"].asString
+            )
+        )
+	return Feed("list", null, describe, outputModelArrayList)
 
 	}
 
@@ -69,7 +100,7 @@ object Search{
 
 	}
 
-	fun runSkill(url:String, body:ParseUrl.ApiParams):String{
+	fun runSkill(url:String, body:ParseUrl.ApiParams):Feed{
 		var toRun = "$url?term=${body.term}&log=${body.loc}&lat=${body.lat}&cc=${body.cc.toLanguageTag()}"
 		if(body.userKey != null) toRun = toRun +  "&user=${body.userKey}"
 		val request = Request.Builder()
@@ -77,7 +108,7 @@ object Search{
         	.build();
 		val client = OkHttpClient()
 		val result = client.newCall(request).execute().body!!.string()
-		return result
+		return Gson().fromJson<Feed>(result, Feed::class.java)
 		
 	}
 
