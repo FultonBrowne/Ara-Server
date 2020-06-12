@@ -85,25 +85,21 @@ object Run{
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 					}
 				}
+			}
 
-				route("search"){
-					get{
-					val params = ParseUrl().parseApi(this.call.request.queryParameters)
-					val payload = (ServerInfo.getAsJson())
-					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
-					}
-					route("web"){
-						post{
-							
-							val params = ParseUrl().parseApi(this.call.request.queryParameters)
-							val payload = (ServerInfo.getAsJson())
-							call.respondText(outputToApi(payload), ContentType.parse("application/json"))
-						}
-
-
+			route("search"){
+				get{
+				val params = ParseUrl().parseApi(this.call.request.queryParameters)
+				val payload = (ServerInfo.getAsJson())
+				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+				}
+				route("web"){
+					get{	
+						val params = ParseUrl().parseApi(this.call.request.queryParameters)
+						val payload = Search.web(params)
+						call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 					}
 				}
-
 			}
 			route("db"){
 				val db = DatabaseClient()
