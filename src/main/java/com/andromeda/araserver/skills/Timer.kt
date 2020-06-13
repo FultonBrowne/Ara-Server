@@ -1,9 +1,6 @@
 package com.andromeda.araserver.skills
 
-import com.andromeda.araserver.util.OutputModel
-import com.andromeda.araserver.util.SortWords
-import com.andromeda.araserver.util.FeedModel
-import com.andromeda.araserver.util.Feed
+import com.andromeda.araserver.util.*
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.google.gson.Gson
 import java.util.ArrayList
@@ -34,9 +31,9 @@ class Timer {
 
 
     }
-    fun main(term: String, cc:Locale):Feed{
+    fun main(data:ParseUrl.ApiParams):Feed{
         //parse for search term
-        val words = SortWords(mainVal = term).getComplexDate()
+	val words = SortWords(mainVal = data.term).getComplexDate()
         println(words)
         var numOfUnits:Int? = null
         var unit:String? = null
@@ -49,5 +46,5 @@ class Timer {
         val gson = Gson()
         val mapper = YAMLMapper()
         return Feed("list" ,arrayListOf(SkillsModel("TIMER", time.toString(), "")), "timer starting", arrayListOf(FeedModel("Starting a timer", "for $numOfUnits $unit")))
-}
+	}
 }
