@@ -5,8 +5,16 @@ class NLP(val link:String){
 	fun getTimeLength(word:String, lang:String){
 		val array = getDataFromServer("/dpos/", word, lang)
 		val timerData = TimerData(0, "seconds")
+		var length:Int? = null
 		for(i in array){
-			
+			if(i.type == "CD"){
+				try{
+					length = i.word.toInt()
+				}
+				catch(e:Exception){
+					length = NumberUtils.replaceNumbers(i.word).toInt()
+				}
+			}	
 		}
 	}
 

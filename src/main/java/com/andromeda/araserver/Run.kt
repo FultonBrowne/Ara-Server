@@ -81,7 +81,7 @@ object Run{
 				route("timer"){
 					get{
 					val params = ParseUrl().parseApi(this.call.request.queryParameters)
-					val payload = (Timer.main(params))
+					val payload = (Timer().main(params))
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 					}
 				}
