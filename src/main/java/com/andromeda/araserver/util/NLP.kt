@@ -6,6 +6,7 @@ class NLP(val link:String){
 		val array = getDataFromServer("/dpos/", word, lang)
 		val timerData = TimerData(0, "seconds")
 		var length:Int? = null
+		var word:String? = null
 		for(i in array){
 			if(i.type == "CD"){
 				try{
@@ -14,8 +15,14 @@ class NLP(val link:String){
 				catch(e:Exception){
 					length = NumberUtils.replaceNumbers(i.word).toInt()
 				}
-			}	
+			}
+			else if(i.type == ""){
+				word = i.word
+			}
 		}
+		timerData.length = length!!
+		timerData.units = word!!
+
 	}
 
 	private fun getDataFromServer(subUrl:String, word:String, lang:String):ArrayList<Words>{
