@@ -3,6 +3,11 @@ import java.net.URL
 import org.json.*
 class NLP(val link:String){
 	fun getTimeLength(word:String, lang:String){
+		val array = getDataFromServer("/dpos/", word, lang)
+		val timerData = TimerData(0, "seconds")
+		for(i in array){
+			
+		}
 	}
 
 	private fun getDataFromServer(subUrl:String, word:String, lang:String):ArrayList<Words>{
@@ -19,4 +24,5 @@ class NLP(val link:String){
 
 	}
 	data class Words(val word:String, val type:String)
+	data class TimerData(var length:Int, var units:String)
 }
