@@ -2,7 +2,7 @@ package com.andromeda.araserver.util
 import java.net.URL
 import org.json.*
 class NLP(val link:String){
-	fun getTimeLength(word:String, lang:String){
+	fun getTimeLength(word:String, lang:String):TimerData{
 		val array = getDataFromServer("/dpos/", word, lang)
 		val timerData = TimerData(0, "seconds")
 		var length:Int? = null
@@ -22,6 +22,7 @@ class NLP(val link:String){
 		}
 		timerData.length = length!!
 		timerData.units = word!!
+		return timerData
 
 	}
 
