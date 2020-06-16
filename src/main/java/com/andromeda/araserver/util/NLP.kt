@@ -39,6 +39,9 @@ class NLP(val link:String){
 
 
 	}
+	fun getTopic(word:String, lang:String):String{
+		return ""
+	}
 	data class Words(val word:String, val type:String)
 	data class TimerData(var length:Int, var units:String)
 	companion object{
