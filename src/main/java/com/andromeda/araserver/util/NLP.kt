@@ -40,4 +40,7 @@ class NLP(val link:String){
 	}
 	data class Words(val word:String, val type:String)
 	data class TimerData(var length:Int, var units:String)
+	companion object{
+		val baseNlp = NLP(System.getProperty("NLP_URL"))
+	}
 }
