@@ -42,7 +42,12 @@ class NLP(val link:String){
 	fun getTopic(word:String, lang:String):String{
 		return ""
 	}
+	fun getMultipleForTopic(word:String, lang:String){
+		val pos = getDataFromServer("pos", word, lang)
+		val dpos = getDataFromServer("dpos", word, lang)
+	}
 	data class Words(val word:String, val type:String)
+	data class MultiTypeWords(val word:String, val type:Iterable<String>)
 	data class TimerData(var length:Int, var units:String)
 	companion object{
 		val baseNlp = NLP(System.getProperty("NLP_URL"))
