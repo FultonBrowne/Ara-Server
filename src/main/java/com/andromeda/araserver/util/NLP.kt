@@ -42,9 +42,17 @@ class NLP(val link:String){
 	fun getTopic(word:String, lang:String):String{
 		return ""
 	}
-	fun getMultipleForTopic(word:String, lang:String){
-		val pos = getDataFromServer("pos", word, lang)
-		val dpos = getDataFromServer("dpos", word, lang)
+	fun getMultipleForTopic(word:String, lang:String):MultiTypeWords{
+		val toReturn = arrayListOf<MultiTypeWords>()
+		val toParse = URL("$link/v0/$subUrl?input=$word&lang=$lang").readText()
+		val json = JSONObject(toParse).getJSONArray("data")
+		json.forEach{
+			val obj = it as JSONObject	
+			val word = MultiTypeWords(obj.optString("data"), obj.optString("type"))
+			toReturn.add(word)
+		}
+		return toReturn
+
 	}
 	data class Words(val word:String, val type:String)
 	data class MultiTypeWords(val word:String, val type:Iterable<String>)
