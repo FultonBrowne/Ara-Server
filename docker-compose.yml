@@ -11,5 +11,12 @@ services:
                 enviroment:
                         - KEYCLOAK_USER=araadmin
                         - KEYCLOAK_PASSWORD=lol
-                        
+        authbd:
+                image: ""
+                ports: 
+                        -8000:8000
+        nlp:
+                image: ""
+                ports:
+                        -5000:5000
 
