@@ -49,14 +49,14 @@ class NLP(val link:String){
 		val json = JSONObject(toParse).getJSONArray("data")
 		json.forEach{
 			val obj = it as JSONObject	
-			val wordMain = MultiTypeWords(obj.optString("data"), obj.getJSONObject("type") as ArrayList<SkillDbFormat>)
-			toReturn.add(word)
+			val wordMain = MultiTypeWords(obj.optString("data"), obj.getJSONObject("type") as SkillDbFormat)
+			toReturn.add(wordMain)
 		}
 		return toReturn
 
 	}
 	data class Words(val word:String, val type:String)
-	data class MultiTypeWords(val word:String, val type:Iterable<SkillDbFormat>)
+	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
 	data class TimerData(var length:Int, var units:String)
 	companion object{
 		val baseNlp = NLP(System.getProperty("NLP_URL"))
