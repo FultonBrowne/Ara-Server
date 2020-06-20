@@ -13,11 +13,11 @@ object Search{
         var path = "/bing/v7.0/search"
 
 	fun ara(params:ParseUrl.ApiParams):Any{
-		val data = DatabaseClient().getAll<SearchV2>("search", SearchModel::class.java)
+		val data = DatabaseClient().getAll<SearchV2>("search", SearchV2::class.java)
 		val wordsInfo = NLP.baseNlp.getMultipleForTopic(params.term, params.cc.language)
 		for(i in data){
 			if (wordsInfo.contains(i.data)){
-                    	val link = i.link
+				val link = i.url
 			return runSkill(link, params)
                     	break
                 	}
@@ -124,7 +124,7 @@ object Search{
         val response = client.newCall(request).execute().body!!.string()
         return response
     }
-    data class SearchV2(val url:String, val data:SkillDbFormat){
+    data class SearchV2(val url:String, val data:NLP.MultiTypeWords){
     }
 
 }
