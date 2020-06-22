@@ -131,6 +131,12 @@ object Run{
 				}
 			}
 			route("feed"){
+				get{
+					val params = ParseUrl().parseFeed(this.call.request.queryParameters)
+					val payload = NewsCache.us
+					call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
+
+				}
 				route("news"){
 					get("us"){
 						val payload = NewsCache.us
