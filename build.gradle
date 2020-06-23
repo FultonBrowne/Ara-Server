@@ -43,7 +43,7 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: "1.7.30"
     implementation "io.ktor:ktor-client-jetty:$ktor_version"
     compile 'org.nanohttpd:nanohttpd:2.3.1'
-    compile 'org.hibernate:hibernate-agroal:5.4.17.Final'
+    compile 'org.hibernate:hibernate-agroal:5.4.18.Final'
     // https://mvnrepository.com/artifact/org.tensorflow/tensorflow
     compile group: 'org.tensorflow', name: 'tensorflow', version: '1.15.0' //tf here
     // https://mvnrepository.com/artifact/org.tensorflow/tensorflow-lite
