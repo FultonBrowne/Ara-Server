@@ -58,7 +58,7 @@ object Run{
 	
 
         println("start")
-	val server = embeddedServer(Jetty, port = Port().main()) {
+	embeddedServer(Jetty, port = Port().main(), host = "0.0.0.0") {
         install(ContentNegotiation) {
             jackson {
                 enable(SerializationFeature.INDENT_OUTPUT)

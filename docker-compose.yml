@@ -1,24 +1,13 @@
-version: "3.0"
+version: "3"
 services:
-        web:
-                image: "fulton/ara-server"
-                ports:
-                        - 80:80
-        auth:
-                image: "jboss/keycloak"
-                ports:
-                        - 8080:8080
-                enviroment:
-                        - KEYCLOAK_USER=araadmin
-                        - KEYCLOAK_PASSWORD=lol
-        authbd:
-                image: ""
-                ports: 
-                        -8000:8000
-                volumes:
-                        - database-data:/var/lib/postgresql/data/
-        nlp:
-                image: ""
-                ports:
-                        -5000:5000
+   web:
+      build: .
+      ports:
+         - "80:80"
+      environment:
+         - dblink=aratest-gbnnv.azure.mongodb.net
+         - dbname=ara
+         - PORT=80
+         - BING=92a4005e9ce94f8ea70bf62a3bd42bd9
+
 
