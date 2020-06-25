@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.routing.*
 import io.ktor.server.engine.*
 import io.ktor.server.jetty.*
+import io.ktor.server.netty.*
 import io.ktor.request.*
 
 /** 
@@ -58,7 +59,7 @@ object Run{
 	
 
         println("start")
-	embeddedServer(Jetty, port = Port().main(), host = "0.0.0.0") {
+	embeddedServer(Netty, port = Port().main()) {
         install(ContentNegotiation) {
             jackson {
                 enable(SerializationFeature.INDENT_OUTPUT)
@@ -188,7 +189,7 @@ object Run{
 		 if(theData == "") return@intercept
 		call.respondText(RouteLegacy().main(call.request.path().replace("//", "/"), call.request.headers["data"]))
 		}
-}.start()
+	}.start(wait = true)
 }
 
 fun outputToApi(payload:Any):String{
