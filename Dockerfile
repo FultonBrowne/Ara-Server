@@ -13,4 +13,4 @@ WORKDIR /app
 COPY --from=build /app/build/libs /app
 EXPOSE 80
 ENTRYPOINT ["sh", "-c"]
-CMD ["java -jar Ara-Server-1.0-SNAPSHOT-all.jar"]
+CMD ["java -jar ara-server.jar"]
