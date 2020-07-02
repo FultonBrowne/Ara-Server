@@ -1,15 +1,22 @@
 version: "3"
 services:
    web:
-      build: .
+      image: fulton/ara
       ports:
          - "8080:8080"
       expose:
          - 8080
       environment:
-         - dblink=aratest-gbnnv.azure.mongodb.net
+         - dblink=db:27017
          - dbname=ara
          - PORT=8080
          - BING=92a4005e9ce94f8ea70bf62a3bd42bd9
+   db:
+      image: mongo
+      expose:
+         - "27017"
+      environment:
+         ME_CONFIG_MONGODB_ADMINUSERNAME: root
+         ME_CONFIG_MONGODB_ADMINPASSWORD: BigSecurePassword
 
 
