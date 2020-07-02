@@ -9,6 +9,7 @@ services:
       environment:
          - dblink=db:27017
          - dbname=ara
+         - dbpassword=thepassword
          - PORT=8080
          - BING=92a4005e9ce94f8ea70bf62a3bd42bd9
    db:
@@ -18,5 +19,13 @@ services:
       environment:
          ME_CONFIG_MONGODB_ADMINUSERNAME: root
          ME_CONFIG_MONGODB_ADMINPASSWORD: BigSecurePassword
+         MONGO_INITDB_DATABASE: ara
+         MONGODB_USER: "ara"
+         MONGODB_DATABASE: "ara"
+         MONGODB_PASS: "thepassword"
+      volumes:
+         - data-volume:/data/db
+volumes:
+  data-volume:
 
 
