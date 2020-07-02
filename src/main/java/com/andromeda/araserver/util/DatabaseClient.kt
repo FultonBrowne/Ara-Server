@@ -24,7 +24,7 @@ class DatabaseClient {
     private val password = System.getenv("dbpassword")
     private val dbname = System.getenv("dbname")
     var mongoClient: MongoClient = MongoClients.create(
-        "mongodb+srv://ara:$password@$address/test?retryWrites=true&w=majority"
+        "mongodb://ara:$password@$address/ara?retryWrites=true&w=majority"
     )
     var database: MongoDatabase = mongoClient.getDatabase(dbname)
     fun new(id: String, user: String, data: Any) {

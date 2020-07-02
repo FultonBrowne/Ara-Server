@@ -12,6 +12,8 @@ services:
          - dbpassword=thepassword
          - PORT=8080
          - BING=92a4005e9ce94f8ea70bf62a3bd42bd9
+      depends_on:
+        - db
    db:
       image: mongo
       expose:
