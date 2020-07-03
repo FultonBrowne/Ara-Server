@@ -27,6 +27,10 @@ services:
          MONGODB_PASS: "thepassword"
       volumes:
          - data-volume:/data/db
+   nlp:
+      image: fulton/ara-nlp
+      expose: 
+         - 5000
 volumes:
   data-volume:
 
