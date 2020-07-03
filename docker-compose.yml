@@ -15,6 +15,7 @@ services:
          - NLP_URL=nlp:5000
       depends_on:
         - db
+        - nlp
    db:
       image: mongo
       expose:
