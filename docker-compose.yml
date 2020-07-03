@@ -12,6 +12,7 @@ services:
          - dbpassword=thepassword
          - PORT=8080
          - BING=92a4005e9ce94f8ea70bf62a3bd42bd9
+         - NLP_URL=nlp:5000
       depends_on:
         - db
    db:
@@ -31,6 +32,8 @@ services:
       image: fulton/ara-nlp
       expose: 
          - 5000
+      ports:
+         - 5000:5000
 volumes:
   data-volume:
 
