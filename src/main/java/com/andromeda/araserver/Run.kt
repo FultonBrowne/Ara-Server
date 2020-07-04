@@ -71,13 +71,6 @@ object Run{
 				val payload = (ServerInfo.getAsJson())
 				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 			}
-			route("search"){
-				get{
-					val params = ParseUrl().parseApi(this.call.request.queryParameters)
-					val payload = (ServerInfo.getAsJson())
-					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
-				}
-			}
 			route("skills"){
 				route("timer"){
 					get{
@@ -91,7 +84,7 @@ object Run{
 			route("search"){
 				get{
 				val params = ParseUrl().parseApi(this.call.request.queryParameters)
-				val payload = (ServerInfo.getAsJson())
+            val payload = (Search.ara(params))
 				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 				}
 				route("web"){
