@@ -7,12 +7,12 @@ services:
       expose:
          - 8080
       environment:
-         - dblink=mongo:27017
-         - dbname=ara
-         - dbpassword=thepassword
-         - PORT=8080
-         - BING=92a4005e9ce94f8ea70bf62a3bd42bd9
-         - NLP_URL=nlp:5000
+         dblink: mongo:27017
+         dbname: ara
+         dbpassword: thepassword
+         PORT: 8080
+         BING: 92a4005e9ce94f8ea70bf62a3bd42bd9
+         NLP: nlp:5000
       depends_on:
         - mongo
         - nlp
