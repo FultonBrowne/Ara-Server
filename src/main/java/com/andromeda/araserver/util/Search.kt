@@ -22,8 +22,13 @@ object Search{
                     	break
                 	}
 		}
-		val ddg = quickSearch(params)
-		if(ddg.feed.size != 0) return ddg
+      try{
+		   val ddg = quickSearch(params)
+		   if(ddg.feed.size != 0) return ddg
+      }
+      catch(e:NullPointerException){
+         println("ddg failed, going to bing")
+      }
 		return web(params)
 	}
 
