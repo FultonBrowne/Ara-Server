@@ -57,6 +57,10 @@ class NLP(val link:String){
 		return toReturn
 
 	}
+
+   fun getSkillsDbJson(json:JSONObject):SkillDbFormat{
+      return SkillDbFormat(json.optString("dep"), json.optString("pos"), json.optString("tag"),  json.optString("lemma"))
+   }
 	data class Words(val word:String, val type:String)
 	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
 	data class TimerData(var length:Int, var units:String)
