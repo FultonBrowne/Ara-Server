@@ -51,7 +51,7 @@ class NLP(val link:String){
 		val json = JSONObject(toParse).getJSONArray("data")
 		json.forEach{
 			val obj = it as JSONObject	
-			val wordMain = MultiTypeWords(obj.optString("data"), obj.getJSONObject("type") as SkillDbFormat)
+         val wordMain = MultiTypeWords(obj.optString("data"), getSkillsDbJson(obj.getJSONObject("type")))
 			toReturn.add(wordMain)
 		}
 		return toReturn
