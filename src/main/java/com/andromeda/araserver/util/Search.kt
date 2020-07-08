@@ -18,9 +18,8 @@ object Search{
 		for(i in data){
 			if (wordsInfo.contains(i.data)){
 				val link = i.url
-			return runSkill(link, params)
-                    	break
-                	}
+			   return runSkill(link, params)
+         }
 		}
       try{
 		   val ddg = quickSearch(params)
@@ -128,6 +127,20 @@ object Search{
             .build()
         val response = client.newCall(request).execute().body!!.string()
         return response
+    }
+    
+    private fun dataEqualsTo(term:SkillDbFormat, db:SkillDbFormat):Boolean{
+       if(!parseDataEqualsTo(term.lemma, db.lemma)) return false
+       if(!parseDataEqualsTo(term.dep, db.dep)) return false
+       if(!parseDataEqualsTo(term.tag, db.tag)) return false
+       if(!parseDataEqualsTo(term.pos, db.pos)) return false
+       return true
+    }
+
+    private fun parseDataEqualsTo(termData:String dbData:String):Boolean{
+       if(dbData == "*") return true
+       else if(dbData == termData) return true
+       return false
     }
     data class SearchV2(val url:String, val data:NLP.MultiTypeWords){
     }
