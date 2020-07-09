@@ -1,6 +1,17 @@
 json format:
 {dep: "", pos: "", tag: "", lemma: ""}
-
+      {
+         "url": "",
+         "data":{
+            "word": "",
+            "type": {
+               "dep": "",
+               "pos": "",
+               "tag": "",
+               "lemma": ""
+            }
+         }
+      }
 weather:
 {dep: "nsubj", pos: "NOUN", tag: "NNS", lemma: "weather"}
 timer:
