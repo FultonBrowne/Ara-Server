@@ -6,6 +6,6 @@ weather:
 timer:
 {dep: "dobj", pos: "NOUN", tag: "NN", lemma: "timer"}
 phone:
-{dep: "", pos: "", tag: "", lemma: ""}
+{dep: "ROOT", pos: "VERD", tag: "VB", lemma: "call"}
 text:
 {dep: "", pos: "", tag: "", lemma: ""}
