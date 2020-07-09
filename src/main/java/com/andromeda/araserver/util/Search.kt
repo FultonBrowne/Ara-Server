@@ -16,7 +16,8 @@ object Search{
 		val data = DatabaseClient().getAll<SearchV2>("search", SearchV2::class.java)
 		val wordsInfo = NLP.baseNlp.getMultipleForTopic(params.term, params.cc.language)
 		for(i in data){
-			if (wordsInfo.contains(i.data)){
+         for(i2 in wordsInfo)
+         if (dataEqualsTo(i2.type, i.data.type)){
 				val link = i.url
 			   return runSkill(link, params)
          }
