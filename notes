@@ -1,0 +1,11 @@
+json format:
+{dep: "", pos: "", tag: "", lemma: ""}
+
+weather:
+{dep: "", pos: "", tag: "", lemma: ""}
+timer:
+{dep: "", pos: "", tag: "", lemma: ""}
+phone:
+{dep: "", pos: "", tag: "", lemma: ""}
+text:
+{dep: "", pos: "", tag: "", lemma: ""}
