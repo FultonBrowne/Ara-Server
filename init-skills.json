@@ -3,60 +3,60 @@
       {
          "url": "",
          "data":{
-            "word": "",
+            "word": "weather",
             "type": {
-               "dep": "",
-               "pos": "",
-               "tag": "",
-               "lemma": ""
+               "dep": "nsubj",
+               "pos": "NOUN",
+               "tag": "NNS",
+               "lemma": "weather"
             }
          }
       },
       {
          "url": "",
          "data":{
-            "word": "",
+            "word": "timer",
             "type": {
-               "dep": "",
-               "pos": "",
-               "tag": "",
-               "lemma": ""
+               "dep": "dobj",
+               "pos": "NOUN",
+               "tag": "NNS",
+               "lemma": "timer"
             }
          }
       },
       {
          "url": "",
          "data":{
-            "word": "",
+            "word": "call",
             "type": {
-               "dep": "",
-               "pos": "",
-               "tag": "",
-               "lemma": ""
+               "dep": "ROOT",
+               "pos": "VERB",
+               "tag": "VB",
+               "lemma": "call"
             }
          }
       },
       {
          "url": "",
          "data":{
-            "word": "",
+            "word": "text",
             "type": {
-               "dep": "",
-               "pos": "",
-               "tag": "",
-               "lemma": ""
+               "dep": "ROOT",
+               "pos": "NOUN",
+               "tag": "NN",
+               "lemma": "text"
             }
          }
       },
       {
          "url": "",
          "data":{
-            "word": "",
+            "word": "text",
             "type": {
-               "dep": "",
-               "pos": "",
-               "tag": "",
-               "lemma": ""
+               "dep": "compound",
+               "pos": "NOUN",
+               "tag": "NNS",
+               "lemma": "text"
             }
          }
       }
