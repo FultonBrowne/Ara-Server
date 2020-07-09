@@ -137,7 +137,7 @@ object Search{
        return true
     }
 
-    private fun parseDataEqualsTo(termData:String dbData:String):Boolean{
+    private fun parseDataEqualsTo(termData:String, dbData:String):Boolean{
        if(dbData == "*") return true
        else if(dbData == termData) return true
        return false
