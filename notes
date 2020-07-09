@@ -8,4 +8,5 @@ timer:
 phone:
 {dep: "ROOT", pos: "VERD", tag: "VB", lemma: "call"}
 text:
-{dep: "", pos: "", tag: "", lemma: ""}
+{dep: "ROOT", pos: "NOUN", tag: "NN", lemma: "text"}
+{dep: "compound", pos: "NOUN", tag: "NN", lemma: "text"}
