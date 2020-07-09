@@ -4,7 +4,7 @@ json format:
 weather:
 {dep: "nsubj", pos: "NOUN", tag: "NNS", lemma: "weather"}
 timer:
-{dep: "", pos: "", tag: "", lemma: ""}
+{dep: "dobj", pos: "NOUN", tag: "NN", lemma: "timer"}
 phone:
 {dep: "", pos: "", tag: "", lemma: ""}
 text:
