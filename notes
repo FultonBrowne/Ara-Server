@@ -2,7 +2,7 @@ json format:
 {dep: "", pos: "", tag: "", lemma: ""}
 
 weather:
-{dep: "", pos: "", tag: "", lemma: ""}
+{dep: "nsubj", pos: "NOUN", tag: "NNS", lemma: "weather"}
 timer:
 {dep: "", pos: "", tag: "", lemma: ""}
 phone:
