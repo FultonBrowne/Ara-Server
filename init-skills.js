@@ -1,5 +1,6 @@
 //add user
-db.getSiblingDB('ara').createUser(
+let ara = db.getSiblingDB('ara')
+ara.createUser(
    {
       user:'ara',
       pwd:'thepassword',
@@ -11,4 +12,12 @@ db.getSiblingDB('ara').createUser(
       ]
    }
 );
-
+//add search data
+let data = []
+for (let i in data){
+   let toInsert = {
+      "_id": "hvhjvkguk"
+      "document": i
+   }
+   ara.search.insertOne(toInsert)
+}
