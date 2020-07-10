@@ -14,9 +14,9 @@ ara.createUser(
 );
 //add search data
 let data = []
-for (let i in data){
+for (i of data){
    let toInsert = {
-      "_id": "hvhjvkguk"
+      "_id": Math.round(Math.random()).toString()
       "document": i
    }
    ara.search.insertOne(toInsert)
