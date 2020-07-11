@@ -58,6 +58,15 @@ class NLP(val link:String){
 
 	}
 
+   fun getWeatherData(word:String, lang:String):WeatherData{
+      val data = getMultipleForTopic(word, lang)
+      time = System.currentTimeMillis()
+      for (i in data){
+
+      }
+      return WeatherData("", time)
+   }
+
    fun getSkillsDbJson(json:JSONObject):SkillDbFormat{
       return SkillDbFormat(json.optString("dep"), json.optString("pos"), json.optString("tag"),  json.optString("lemma"))
    }
