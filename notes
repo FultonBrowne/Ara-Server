@@ -21,3 +21,69 @@ phone:
 text:
 {dep: "ROOT", pos: "NOUN", tag: "NN", lemma: "text"}
 {dep: "compound", pos: "NOUN", tag: "NN", lemma: "text"}
+
+
+
+
+
+WEATHER STUFF:
+
+{
+  "version": "v0",
+  "data": [
+    {
+      "type": {
+        "dep": "attr",
+        "pos": "PRON",
+        "tag": "WP",
+        "lemma": "what"
+      },
+      "data": "what"
+    },
+    {
+      "type": {
+        "dep": "ROOT",
+        "pos": "AUX",
+        "tag": "VBZ",
+        "lemma": "be"
+      },
+      "data": "is"
+    },
+    {
+      "type": {
+        "dep": "det",
+        "pos": "DET",
+        "tag": "DT",
+        "lemma": "the"
+      },
+      "data": "the"
+    },
+    {
+      "type": {
+        "dep": "nsubj",
+        "pos": "NOUN",
+        "tag": "NN",
+        "lemma": "weather"
+      },
+      "data": "weather"
+    },
+    {
+      "type": {
+        "dep": "prep",
+        "pos": "ADP",
+        "tag": "IN",
+        "lemma": "in"
+      },
+      "data": "in"
+    },
+    {
+      "type": {
+        "dep": "pobj",
+        "pos": "PROPN",
+        "tag": "NNP",
+        "lemma": "portland"
+      },
+      "data": "portland"
+    }
+  ]
+}
