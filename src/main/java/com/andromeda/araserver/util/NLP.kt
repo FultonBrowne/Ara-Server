@@ -60,9 +60,14 @@ class NLP(val link:String){
 
    fun getWeatherData(word:String, lang:String):WeatherData{
       val data = getMultipleForTopic(word, lang)
-      time = System.currentTimeMillis()
+      val time = System.currentTimeMillis()
       for (i in data){
+         if(i == weatherTommorow){
 
+         }
+         else if(){
+
+         }
       }
       return WeatherData("", time)
    }
@@ -70,11 +75,25 @@ class NLP(val link:String){
    fun getSkillsDbJson(json:JSONObject):SkillDbFormat{
       return SkillDbFormat(json.optString("dep"), json.optString("pos"), json.optString("tag"),  json.optString("lemma"))
    }
+    private fun dataEqualsTo(term:SkillDbFormat, db:SkillDbFormat):Boolean{
+       if(!parseDataEqualsTo(term.lemma, db.lemma)) return false
+       if(!parseDataEqualsTo(term.dep, db.dep)) return false
+       if(!parseDataEqualsTo(term.tag, db.tag)) return false
+       if(!parseDataEqualsTo(term.pos, db.pos)) return false
+       return true
+    }
+
+    private fun parseDataEqualsTo(termData:String, dbData:String):Boolean{
+       if(dbData == "*") return true
+       else if(dbData == termData) return true
+       return false
+    }
 	data class Words(val word:String, val type:String)
 	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
 	data class TimerData(var length:Int, var units:String)
    data class WeatherData(val location:String, val time:Long)
 	companion object{
+      val weatherTommorow = SkillDbFormat("punct", "PROPN", "NNP", "*")
       val baseNlp = NLP("http://${System.getenv("NLP")}")
 	}
 }
