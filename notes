@@ -87,3 +87,73 @@ WEATHER STUFF:
     }
   ]
 }
+
+
+{
+  "version": "v0",
+  "data": [
+    {
+      "type": {
+        "dep": "attr",
+        "pos": "PRON",
+        "tag": "WP",
+        "lemma": "what"
+      },
+      "data": "what"
+    },
+    {
+      "type": {
+        "dep": "ROOT",
+        "pos": "AUX",
+        "tag": "VBZ",
+        "lemma": "be"
+      },
+      "data": "is"
+    },
+    {
+      "type": {
+        "dep": "det",
+        "pos": "DET",
+        "tag": "DT",
+        "lemma": "the"
+      },
+      "data": "the"
+    },
+    {
+      "type": {
+        "dep": "nsubj",
+        "pos": "NOUN",
+        "tag": "NN",
+        "lemma": "weather"
+      },
+      "data": "weather"
+    },
+    {
+      "type": {
+        "dep": "prep",
+        "pos": "ADP",
+        "tag": "IN",
+        "lemma": "in"
+      },
+      "data": "in"
+    },
+    {
+      "type": {
+        "dep": "compound",
+        "pos": "PROPN",
+        "tag": "NNP",
+        "lemma": "portland"
+      },
+      "data": "portland"
+    },
+    {
+      "type": {
+        "dep": "pobj",
+        "pos": "PROPN",
+        "tag": "NNP",
+        "lemma": "oregon"
+      },
+      "data": "oregon"
+    }
+  ]
+}

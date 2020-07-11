@@ -64,6 +64,7 @@ class NLP(val link:String){
 	data class Words(val word:String, val type:String)
 	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
 	data class TimerData(var length:Int, var units:String)
+   data class WeatherData(val location:String, val time:Long)
 	companion object{
       val baseNlp = NLP("http://${System.getenv("NLP")}")
 	}
