@@ -82,6 +82,9 @@ class NLP(val link:String){
        if(!parseDataEqualsTo(term.pos, db.pos)) return false
        return true
     }
+    private fun getDayOfWeek(word:String){
+
+    }
 
     private fun parseDataEqualsTo(termData:String, dbData:String):Boolean{
        if(dbData == "*") return true
