@@ -60,10 +60,10 @@ class NLP(val link:String){
 
    fun getWeatherData(word:String, lang:String):WeatherData{
       val data = getMultipleForTopic(word, lang)
-      val time = System.currentTimeMillis()
+      var time = System.currentTimeMillis()
       for (i in data){
-         if(i == weatherTommorow){
-
+         if(i == weatherTommorow){ 
+            time = dateWord()
          }
          else if(){
 
@@ -90,6 +90,30 @@ class NLP(val link:String){
        if(dbData == "*") return true
        else if(dbData == termData) return true
        return false
+    }
+    private fun dateWord(mainVal: String, timeWord: String, log: String,lat: String): Int {
+        val url =
+            URL("http://api.timezonedb.com/v2.1/get-time-zone?key=54K85TD0SUQQ&format=json&by=position&lat=$lat&lng=$log")
+        val rawJson = url.readText()
+        var returnVal = 0
+        val phrase = ArrayList<WordGraph>()
+        val time = JsonParser().parse(rawJson).asJsonObject.get("timestamp").asLong
+        println(time)
+        val date = Date(time * 1000)
+        val c = Calendar.getInstance()
+        c.time = date
+        val dayOfWeek = c[Calendar.DAY_OF_WEEK] - 1
+        println(date)
+        if (timeWord == "tomorrow") returnVal = 1
+        else returnVal = timeMap(timeWord)?.let { getTime(dayOfWeek, it) }!!
+        println("num is $returnVal")
+
+        return returnVal
+    }
+    private fun getTime(currentTime: Int, nextTime: Int): Int {
+        val firstResult = nextTime - currentTime
+        return if (firstResult <= 0) firstResult + 7
+        else firstResult
     }
 	data class Words(val word:String, val type:String)
 	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
