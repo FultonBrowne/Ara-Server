@@ -63,7 +63,7 @@ class NLP(val link:String){
       var time = System.currentTimeMillis()
       for (i in data){
          if(i == weatherTommorow){ 
-            time = dateWord()
+            time = dateWord(i.type.lemma)
          }
          else if(){
 
@@ -91,15 +91,9 @@ class NLP(val link:String){
        else if(dbData == termData) return true
        return false
     }
-    private fun dateWord(timeWord: String, log: String,lat: String): Long {
-        val url =
-            URL("http://api.timezonedb.com/v2.1/get-time-zone?key=54K85TD0SUQQ&format=json&by=position&lat=$lat&lng=$log")
+    private fun dateWord(timeWord: String): Long {
         val rawJson = url.readText()
-        var returnVal = 0
-        val phrase = ArrayList<WordGraph>()
-        val time = JsonParser().parse(rawJson).asJsonObject.get("timestamp").asLong
-        println(time)
-        val date = Date(time * 1000)
+        val date = Date(System.currentTimeMillis())
         val c = Calendar.getInstance()
         c.time = date
         val dayOfWeek = c[Calendar.DAY_OF_WEEK] - 1
@@ -108,7 +102,7 @@ class NLP(val link:String){
         else returnVal = timeMap(timeWord)?.let { getTime(dayOfWeek, it) }!!
         println("num is $returnVal")
 
-        return returnVal
+        return returnVal * 1000 * 60 * 60 * 24 + System.currentTimeMillis()
     }
     private fun getTime(currentTime: Int, nextTime: Int): Int {
         val firstResult = nextTime - currentTime
