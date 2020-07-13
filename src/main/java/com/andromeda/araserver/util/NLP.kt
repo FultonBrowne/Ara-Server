@@ -2,6 +2,7 @@ package com.andromeda.araserver.util
 
 import java.net.URL
 import org.json.*
+import java.util.*
 
 class NLP(val link:String){
 	fun getTimeLength(word:String, lang:String):TimerData{
@@ -62,10 +63,10 @@ class NLP(val link:String){
       val data = getMultipleForTopic(word, lang)
       var time = System.currentTimeMillis()
       for (i in data){
-         if(i == weatherTommorow){ 
+         if(i.type == weatherTommorow){ 
             time = dateWord(i.type.lemma)
          }
-         else if(){
+         else if(true){
 
          }
       }
@@ -92,7 +93,7 @@ class NLP(val link:String){
        return false
     }
     private fun dateWord(timeWord: String): Long {
-        val rawJson = url.readText()
+       var returnVal = 0
         val date = Date(System.currentTimeMillis())
         val c = Calendar.getInstance()
         c.time = date
@@ -108,6 +109,19 @@ class NLP(val link:String){
         val firstResult = nextTime - currentTime
         return if (firstResult <= 0) firstResult + 7
         else firstResult
+    }
+    private fun timeMap(mainVal: String): Int? {
+        val mainMap = mapOf(
+            "sunday" to 0,
+            "monday" to 1,
+            "tuesday" to 2,
+            "wednesday" to 3,
+            "thursday" to 4,
+            "friday" to 5,
+            "saturday" to 6
+        )
+        return mainMap[mainVal]
+
     }
 	data class Words(val word:String, val type:String)
 	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
