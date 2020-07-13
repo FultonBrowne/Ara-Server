@@ -61,13 +61,15 @@ class NLP(val link:String){
 
    fun getWeatherData(word:String, lang:String):WeatherData{
       val data = getMultipleForTopic(word, lang)
+      var location = ""
       var time = System.currentTimeMillis()
       for (i in data){
-         if(i.type == weatherTommorow){ 
+         if(dataEqualsTo(i.type, weatherDate)){ 
             time = dateWord(i.type.lemma)
          }
-         else if(true){
-
+         else if(dataEqualsTo(i.type, locationData)){
+            location = if(location == ""){ i.type.lemma }
+            else { (" ${i.type.lemma}") }
          }
       }
       return WeatherData("", time)
@@ -128,7 +130,8 @@ class NLP(val link:String){
 	data class TimerData(var length:Int, var units:String)
    data class WeatherData(val location:String, val time:Long)
 	companion object{
-      val weatherTommorow = SkillDbFormat("punct", "PROPN", "NNP", "*")
+      val weatherDate = SkillDbFormat("npadvmod", "*", "*", "*")
+      val locationData = SkillDbFormat("*", "PROPN", "NNP", "*") 
       val baseNlp = NLP("http://${System.getenv("NLP")}")
 	}
 }
