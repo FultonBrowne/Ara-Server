@@ -25,68 +25,7 @@ text:
 
 
 
-
-WEATHER STUFF:
-
-{
-  "version": "v0",
-  "data": [
-    {
-      "type": {
-        "dep": "attr",
-        "pos": "PRON",
-        "tag": "WP",
-        "lemma": "what"
-      },
-      "data": "what"
-    },
-    {
-      "type": {
-        "dep": "ROOT",
-        "pos": "AUX",
-        "tag": "VBZ",
-        "lemma": "be"
-      },
-      "data": "is"
-    },
-    {
-      "type": {
-        "dep": "det",
-        "pos": "DET",
-        "tag": "DT",
-        "lemma": "the"
-      },
-      "data": "the"
-    },
-    {
-      "type": {
-        "dep": "nsubj",
-        "pos": "NOUN",
-        "tag": "NN",
-        "lemma": "weather"
-      },
-      "data": "weather"
-    },
-    {
-      "type": {
-        "dep": "prep",
-        "pos": "ADP",
-        "tag": "IN",
-        "lemma": "in"
-      },
-      "data": "in"
-    },
-    {
-      "type": {
-        "dep": "pobj",
-        "pos": "PROPN",
-        "tag": "NNP",
-        "lemma": "portland"
-      },
-      "data": "portland"
-    }
-  ]
-}
+TIMER:
 
 
 {
@@ -94,66 +33,57 @@ WEATHER STUFF:
   "data": [
     {
       "type": {
-        "dep": "attr",
-        "pos": "PRON",
-        "tag": "WP",
-        "lemma": "what"
-      },
-      "data": "what"
-    },
-    {
-      "type": {
         "dep": "ROOT",
-        "pos": "AUX",
-        "tag": "VBZ",
-        "lemma": "be"
+        "pos": "VERB",
+        "tag": "VB",
+        "lemma": "start"
       },
-      "data": "is"
+      "data": "start"
     },
     {
       "type": {
         "dep": "det",
         "pos": "DET",
         "tag": "DT",
-        "lemma": "the"
+        "lemma": "a"
       },
-      "data": "the"
+      "data": "a"
     },
     {
       "type": {
-        "dep": "nsubj",
+        "dep": "dobj",
         "pos": "NOUN",
         "tag": "NN",
-        "lemma": "weather"
+        "lemma": "timer"
       },
-      "data": "weather"
+      "data": "timer"
     },
     {
       "type": {
         "dep": "prep",
         "pos": "ADP",
         "tag": "IN",
-        "lemma": "in"
+        "lemma": "for"
       },
-      "data": "in"
+      "data": "for"
     },
     {
       "type": {
-        "dep": "compound",
-        "pos": "PROPN",
-        "tag": "NNP",
-        "lemma": "portland"
+        "dep": "nummod",
+        "pos": "NUM",
+        "tag": "CD",
+        "lemma": "5"
       },
-      "data": "portland"
+      "data": "5"
     },
     {
       "type": {
         "dep": "pobj",
-        "pos": "PROPN",
-        "tag": "NNP",
-        "lemma": "oregon"
+        "pos": "NOUN",
+        "tag": "NNS",
+        "lemma": "minute"
       },
-      "data": "oregon"
+      "data": "minutes"
     }
   ]
 }

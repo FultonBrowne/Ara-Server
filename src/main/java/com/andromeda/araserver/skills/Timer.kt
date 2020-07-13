@@ -31,7 +31,7 @@ class Timer {
 
 
     }
-    fun main(data:ParseUrl.ApiParams):Feed{
+   fun main(data:ParseUrl.ApiParams):Feed{
         //parse for search term
 	val wordData = NLP.baseNlp.getTimeLength(data.term, data.cc.language)
 	val numOfUnits = wordData.length
