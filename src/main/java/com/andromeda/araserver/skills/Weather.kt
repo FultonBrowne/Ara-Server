@@ -13,7 +13,7 @@ class Weather {
     private var log: String? = null
     private var lat: String? = null
     private var term: String? = null
-    private var time: Int? = null
+    private var time: Long? = null
 
     fun mainPart(url: String): String? {
         val params = ParseUrl().parseApi(url, "weath")
@@ -21,13 +21,10 @@ class Weather {
         lat = params.lat
         term = params.term
         try {
-            val loc = term?.let { getLocAndTime(it) }
-            if (loc != null) {
-                log = loc.loc
-                lat = loc.lat
+           val loc = NLP.baseNlp.getWeatherData(term!!, "en") 
                 time = loc.time
             }
-        } catch (e: Exception) {
+         catch (e: Exception) {
             e.printStackTrace()
         }
         val urlGrid = URL("https://api.darksky.net/forecast/7b7fd158d8733db19ddac66bb71132b2/$lat,$log/?lang=${params.cc.language}&units=auto")
@@ -35,8 +32,8 @@ class Weather {
         val finalData = urlGrid.readText()
         println(finalData)
         val json = JsonParser().parse(finalData)
-        if (time == null || time == 0) return finishUp(json.asJsonObject.getAsJsonObject("currently"))
-        else return finishUp(json.asJsonObject.getAsJsonObject("daily").getAsJsonArray("data")[time!!].asJsonObject)
+        if (time == null || time == 0L) return finishUp(json.asJsonObject.getAsJsonObject("currently"))
+        else return finishUp(json.asJsonObject.getAsJsonObject("daily").getAsJsonArray("data")[(time!! / 86400000).toInt()].asJsonObject)
     }
     fun finishUp(dataSet: JsonObject): String? {
         println("test 3")
@@ -55,88 +52,4 @@ class Weather {
         toReturn.add(OutputModel(title, "", "", "", title, ""))
         return Gson().toJson(toReturn)
     }
-
-    private fun getLocAndTime(term: String): LocLatTime {
-        println("Start NLP pls")
-        val toSort = SortWords(term).getTopicsPhrase()
-        val dateArray = ArrayList<String>()
-        var time = ""
-        dateArray.add("tomorrow")
-        dateArray.add("monday")
-        dateArray.add("sunday")
-        dateArray.add("tuesday")
-        dateArray.add("saturday")
-        dateArray.add("wednesday")
-        dateArray.add("thursday")
-        dateArray.add("friday")
-        //work on this
-        for (i in dateArray) {
-            for (i2 in toSort) {
-                if (i == i2.word) time = i2.word
-
-            }
-        }
-        println(time)
-        var text = ""
-        for (i in toSort) {
-            if (i.type == "NN" && i.word != time && i.word != "weather") {
-                text += i.word + "%20"
-            }
-        }
-        val urlSearch =
-            URL("https://atlas.microsoft.com/search/address/json?subscription-key=fB86F9IVmt2S20DMe5rlo3kJOpNkaUp1Py5txnPQt-I&api-version=1.0&query=$text")
-        val jsonRawText = urlSearch.readText()
-        val jArray = JsonParser().parse(jsonRawText).asJsonObject.getAsJsonArray("results")
-        val lat = jArray[0].asJsonObject.getAsJsonObject("position").get("lat").asString
-        val log = jArray[0].asJsonObject.getAsJsonObject("position").get("lon").asString
-        return LocLatTime(log, lat, dateWord(term, time, log, lat))
-
-    }
-
-    private fun dateWord(
-        mainVal: String,
-        timeWord: String,
-        log: String,
-        lat: String
-    ): Int {
-        val url =
-            URL("http://api.timezonedb.com/v2.1/get-time-zone?key=54K85TD0SUQQ&format=json&by=position&lat=$lat&lng=$log")
-        val rawJson = url.readText()
-        var returnVal = 0
-        val phrase = ArrayList<WordGraph>()
-        val time = JsonParser().parse(rawJson).asJsonObject.get("timestamp").asLong
-        println(time)
-        val date = Date(time * 1000)
-        val c = Calendar.getInstance()
-        c.time = date
-        val dayOfWeek = c[Calendar.DAY_OF_WEEK] - 1
-        println(date)
-        if (timeWord == "" && timeWord != "tomorrow") phrase.addAll(SortWords(mainVal).getComplexDate())
-        else if (timeWord == "tomorrow") returnVal = 1
-        else returnVal = timeMap(timeWord)?.let { getTime(dayOfWeek, it) }!!
-        println("num is $returnVal")
-
-        return returnVal
-    }
-
-    private fun timeMap(mainVal: String): Int? {
-        val mainMap = mapOf(
-            "sunday" to 0,
-            "monday" to 1,
-            "tuesday" to 2,
-            "wednesday" to 3,
-            "thursday" to 4,
-            "friday" to 5,
-            "saturday" to 6
-        )
-        return mainMap[mainVal]
-
-    }
-
-    private fun getTime(currentTime: Int, nextTime: Int): Int {
-        val firstResult = nextTime - currentTime
-        return if (firstResult <= 0) firstResult + 7
-        else firstResult
-    }
-
 }
