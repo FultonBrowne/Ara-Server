@@ -28,7 +28,7 @@ class RouteLegacy{
             sessionUri.startsWith("/hi/") -> main2 = Hello().hello(sessionUri)
             sessionUri.startsWith("/del/") -> main2 = DeleteDoc().main(sessionUri)
             sessionUri.startsWith("/yelpclient") -> main2 = Locdec().main(sessionUri)
-            sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(sessionUri)!!
+            sessionUri.startsWith("/weath") -> main2 = Weather().mainPart(ParseUrl().parseApi(sessionUri, "weath"))!!
             sessionUri.startsWith("/updateuserdata/") -> main2 = UpdateDB().main(sessionUri)
             sessionUri.startsWith("/searcht/") -> main2 = GetInfo().main(sessionUri)
             sessionUri.startsWith("/openapp/") -> main2 = OpenApp().main(sessionUri)

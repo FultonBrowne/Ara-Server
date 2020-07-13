@@ -15,8 +15,7 @@ class Weather {
     private var term: String? = null
     private var time: Long? = null
 
-    fun mainPart(url: String): String? {
-        val params = ParseUrl().parseApi(url, "weath")
+    fun mainPart(params:ParseUrl.ApiParams): String? {
         log = params.loc
         lat = params.lat
         term = params.term
