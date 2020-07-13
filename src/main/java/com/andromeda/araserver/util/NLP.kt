@@ -105,7 +105,7 @@ class NLP(val link:String){
         else returnVal = timeMap(timeWord)?.let { getTime(dayOfWeek, it) }!!
         println("num is $returnVal")
 
-        return returnVal * 1000 * 60 * 60 * 24 + System.currentTimeMillis()
+        return returnVal.toLong()
     }
     private fun getTime(currentTime: Int, nextTime: Int): Int {
         val firstResult = nextTime - currentTime

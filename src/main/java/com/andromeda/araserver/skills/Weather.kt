@@ -33,7 +33,7 @@ class Weather {
         println(finalData)
         val json = JsonParser().parse(finalData)
         if (time == null || time == 0L) return finishUp(json.asJsonObject.getAsJsonObject("currently"))
-        else return finishUp(json.asJsonObject.getAsJsonObject("daily").getAsJsonArray("data")[(time!! / 86400000).toInt()].asJsonObject)
+        else return finishUp(json.asJsonObject.getAsJsonObject("daily").getAsJsonArray("data")[time!!.toInt()].asJsonObject)
     }
     fun finishUp(dataSet: JsonObject): String? {
         println("test 3")
