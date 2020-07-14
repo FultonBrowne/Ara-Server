@@ -42,4 +42,10 @@ class Timer {
         val mapper = YAMLMapper()
         return Feed("list" ,arrayListOf(SkillsModel("TIMER", time.toString(), "")), "timer starting", arrayListOf(FeedModel("Starting a timer", "for $numOfUnits $unit")))
 	}
+   data class TimerModel(units:ArrayList<Int>, length:ArrayList<Int>)
+   companion object{
+      const val SECONDS = 0
+      const val MINUTES = 1
+      const val HOURS = 2
+   }
 }
