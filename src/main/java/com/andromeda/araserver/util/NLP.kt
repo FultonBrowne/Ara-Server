@@ -2,6 +2,7 @@ package com.andromeda.araserver.util
 
 import java.net.URL
 import org.json.*
+import com.andromeda.araserver.skills.Timer
 import java.util.*
 
 class NLP(val link:String){
@@ -85,9 +86,6 @@ class NLP(val link:String){
        if(!parseDataEqualsTo(term.pos, db.pos)) return false
        return true
     }
-    private fun getDayOfWeek(word:String){
-
-    }
 
     private fun parseDataEqualsTo(termData:String, dbData:String):Boolean{
        if(dbData == "*") return true
@@ -125,13 +123,30 @@ class NLP(val link:String){
         return mainMap[mainVal]
 
     }
+
+    fun getTimerData(phrase:String, lang:String):Timer.TimerModel{
+      val units = arrayListOf<Int>()
+      val length = arrayListOf<Int>()
+      val data = getMultipleForTopic(phrase, lang)
+      for (i in data){
+         if(dataEqualsTo(i.type, number)){ 
+            length.add(i.type.lemma.toInt())
+         }
+         else if(dataEqualsTo(i.type, timeUnit)){
+            units.add(Timer.constMap(i.type.lemma))
+         }
+      }
+      return Timer.TimerModel(units, length)
+    }
 	data class Words(val word:String, val type:String)
 	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
 	data class TimerData(var length:Int, var units:String)
    data class WeatherData(val location:String, val time:Long)
 	companion object{
       val weatherDate = SkillDbFormat("npadvmod", "*", "*", "*")
+      val timeUnit = SkillDbFormat("pobj", "NOUN", "NNS", "*")
       val locationData = SkillDbFormat("*", "PROPN", "NNP", "*") 
+      val number = SkillDbFormat("nummod", "NUM", "cd", "*")
       val baseNlp = NLP("http://${System.getenv("NLP")}")
 	}
 }
