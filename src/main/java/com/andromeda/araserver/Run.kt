@@ -34,7 +34,6 @@ object Run{
 	@JvmStatic
     fun main(args: Array<String>) {
         News()
-        SecurityDBCheck()
         println(" Ara server is running and is available on your domain, IP, or http://localhost:8080/")
         println(
             "Copy write (c) 2020 Fulton Browne " +
