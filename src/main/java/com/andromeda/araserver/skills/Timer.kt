@@ -35,7 +35,6 @@ class Timer {
         //parse for search term
 	val wordData = NLP.baseNlp.getTimeLength(data.term, data.cc.language)
 	val numOfUnits = wordData.length
-        val map = mapOf("minutes" to 60 * 1000, "minute" to 60 * 1000, "hours" to 60 * 60 * 1000, "hour" to 60 * 60 * 1000, "second" to 1000, "seconds" to 1000)
 	val unit = wordData.units
         val time = numOfUnits?.times(map[unit]!!)
         val gson = Gson()
