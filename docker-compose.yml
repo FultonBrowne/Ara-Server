@@ -29,7 +29,7 @@ services:
          - mongo:mongo
       volumes:
          - ./init-skills.js:/data/mongostartup/init-skills.js
-      command: mongo --host mongo --eval > /data/mongostartup/init-skills.js" 
+      command: mongo --host mongo < /data/mongostartup/init-skills.js 
       depends_on:
          - mongo
    nlp:
