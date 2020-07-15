@@ -33,19 +33,19 @@ class Timer {
     }
    fun main(data:ParseUrl.ApiParams):Feed{
         //parse for search term
-	val wordData = NLP.baseNlp.getTimeLength(data.term, data.cc.language)
-	val numOfUnits = wordData.length
-	val unit = wordData.units
-        val time = numOfUnits?.times(map[unit]!!)
+        val wordData = NLP.baseNlp.getTimerData(data.term, data.cc.language)
+	val numOfUnits = wordData.length[0]
+	val unit = wordData.units[0]
+   val time = numOfUnits?.times(unit)
         val gson = Gson()
         val mapper = YAMLMapper()
         return Feed("list" ,arrayListOf(SkillsModel("TIMER", time.toString(), "")), "timer starting", arrayListOf(FeedModel("Starting a timer", "for $numOfUnits $unit")))
 	}
    data class TimerModel(val units:ArrayList<Int>, val length:ArrayList<Int>)
    companion object{
-      const val SECONDS = 0
-      const val MINUTES = 1
-      const val HOURS = 2
+      const val SECONDS = 1000
+      const val MINUTES = 60000
+      const val HOURS = 60 * MINUTES
       fun constMap(data:String):Int{
          return mapOf("senond" to SECONDS, "minute" to MINUTES, "hour" to HOURS)[data]!!
       }

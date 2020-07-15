@@ -29,7 +29,7 @@ services:
          - mongo:mongo
       volumes:
          - ./init-skills.js:/data/mongostartup/init-skills.js
-      command: mongo --host mongo --eval  "db.getSiblingDB('ara').createUser({user:'ara', pwd:'thepassword', roles:[{role:'readWrite',db:'ara'}]});"
+      command: mongo --host mongo --eval > /data/mongostartup/init-skills.js" 
       depends_on:
          - mongo
    nlp:
