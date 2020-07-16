@@ -1,6 +1,5 @@
 //add user
 let ara = db.getSiblingDB('ara')
-try{
    ara.createUser(
       {
          user:'ara',
@@ -13,10 +12,6 @@ try{
          ]
       }
    );
-}
-catch(err){
-
-}
 //add search data
 let data = [
       {
