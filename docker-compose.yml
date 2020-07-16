@@ -1,7 +1,7 @@
 version: "3"
 services:
    web:
-      build: .
+      image: fulton/ara
       ports:
          - "80:8080"
       expose:
