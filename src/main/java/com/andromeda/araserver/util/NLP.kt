@@ -51,7 +51,8 @@ class NLP(val link:String){
 	}
 	fun getMultipleForTopic(word:String, lang:String):ArrayList<MultiTypeWords>{
 		val toReturn = arrayListOf<MultiTypeWords>()
-		val toParse = URL("$link/v0/search?input=$word&lang=$lang").readText()
+		val toParse = URL(URLEncoder.encode("$link/v0/search?input=$word&lang=$lang", StandardCharsets.UTF_8.toString())).readText()
+
 		val json = JSONObject(toParse).getJSONArray("data")
 		json.forEach{
 			val obj = it as JSONObject	
