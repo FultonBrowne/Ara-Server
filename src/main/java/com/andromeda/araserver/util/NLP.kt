@@ -34,7 +34,7 @@ class NLP(val link:String){
 
 	private fun getDataFromServer(subUrl:String, word:String, lang:String):ArrayList<Words>{
 		val toReturn = arrayListOf<Words>()
-      val toParse = URL(URLEncoder.encode("$link/v0/$subUrl?input=$word&lang=$lang", StandardCharsets.UTF_8.toString())).readText()
+      val toParse = URL(URLEncoder.encode("$link/v0/$subUrl?input=${word.replace(" ", "%20")}&lang=$lang", StandardCharsets.UTF_8.toString())).readText()
 		val json = JSONObject(toParse).getJSONArray("data")
 		json.forEach{
 			val obj = it as JSONObject	
