@@ -1,17 +1,22 @@
 //add user
 let ara = db.getSiblingDB('ara')
-ara.createUser(
-   {
-      user:'ara',
-      pwd:'thepassword',
-      roles:[
-         {
-            role:'readWrite',
-            db:'ara'
-         }
-      ]
-   }
-);
+try{
+   ara.createUser(
+      {
+         user:'ara',
+         pwd:'thepassword',
+         roles:[
+            {
+                  role:'readWrite',
+                  db:'ara'
+            }
+         ]
+      }
+   );
+}
+catch(err){
+
+}
 //add search data
 let data = [
       {
@@ -79,7 +84,7 @@ let data = [
 
 for (i of data){
    let toInsert = {
-      "_id": Math.round(Math.random()).toString()
+      "_id": Math.round(Math.random() * 10000000).toString(),
       "document": i
    }
    ara.search.insertOne(toInsert)
