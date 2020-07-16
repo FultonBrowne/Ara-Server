@@ -3,6 +3,8 @@ package com.andromeda.araserver.util
 import java.net.URL
 import org.json.*
 import com.andromeda.araserver.skills.Timer
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*
 
 class NLP(val link:String){
@@ -32,7 +34,7 @@ class NLP(val link:String){
 
 	private fun getDataFromServer(subUrl:String, word:String, lang:String):ArrayList<Words>{
 		val toReturn = arrayListOf<Words>()
-		val toParse = URL("$link/v0/$subUrl?input=$word&lang=$lang").readText()
+      val toParse = URL(URLEncoder.encode("$link/v0/$subUrl?input=$word&lang=$lang", StandardCharsets.UTF_8.toString())).readText()
 		val json = JSONObject(toParse).getJSONArray("data")
 		json.forEach{
 			val obj = it as JSONObject	

@@ -20,7 +20,7 @@ services:
       image: mongo:latest
       container_name: mongo
       volumes:
-         - test-volume:/data/db
+         - test0-volume:/data/db
 
    mongoClientTemp:
       image: mongo:latest
@@ -39,7 +39,7 @@ services:
       ports:
          - 5000:5000
 volumes:
-   test-volume: 
+   test0-volume: 
    production-volume:
 
 
