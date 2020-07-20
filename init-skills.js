@@ -15,7 +15,7 @@ let ara = db.getSiblingDB('ara')
 //add search data
 let data = [
       {
-         "url": "",
+         "url": "SELFv1/skills/weather",
          "data":{
             "word": "weather",
             "type": {

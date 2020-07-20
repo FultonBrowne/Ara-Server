@@ -78,6 +78,13 @@ object Run{
 					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 					}
 				}
+				route("weather"){
+					get{
+					val params = ParseUrl().parseApi(this.call.request.queryParameters)
+               val payload = (Weather().main(params))
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+					}
+				}
 			}
 
 			route("search"){
