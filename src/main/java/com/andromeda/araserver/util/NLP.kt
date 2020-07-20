@@ -34,7 +34,7 @@ class NLP(val link:String){
 
 	private fun getDataFromServer(subUrl:String, word:String, lang:String):ArrayList<Words>{
 		val toReturn = arrayListOf<Words>()
-      val toParse = URL("$link/v0/$subUrl?input=$word&lang=$lang").readText()
+      val toParse = URL("$link/v0/$subUrl?input=$word&lang=$lang".replace(" ", "%20")).readText()
 		val json = JSONObject(toParse).getJSONArray("data")
 		json.forEach{
 			val obj = it as JSONObject	
@@ -51,7 +51,7 @@ class NLP(val link:String){
 	}
 	fun getMultipleForTopic(word:String, lang:String):ArrayList<MultiTypeWords>{
 		val toReturn = arrayListOf<MultiTypeWords>()
-		val toParse = URL("$link/v0/search?input=$word&lang=$lang").readText()
+		val toParse = URL("$link/v0/search?input=$word&lang=$lang".replace(" ", "%20")).readText()
 
 		val json = JSONObject(toParse).getJSONArray("data")
 		json.forEach{
