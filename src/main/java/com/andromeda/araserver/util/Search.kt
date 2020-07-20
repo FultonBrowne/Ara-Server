@@ -54,19 +54,6 @@ object Search{
 		return Feed("list", null, null,mainList)
 		 
 	}
-
-	fun images(params:ParseUrl.ApiParams){
-
-	}
-
-	fun videos(params:ParseUrl.ApiParams){
-
-	}
-
-	fun news(params:ParseUrl.ApiParams){
-
-	}
-
 	fun quickSearch(params:ParseUrl.ApiParams):Feed{
 		val mainVal = params.term.replace(" ", "+")
         val url = "https://api.duckduckgo.com/?q=$mainVal&format=json"
@@ -136,6 +123,11 @@ object Search{
        if(!parseDataEqualsTo(term.tag, db.tag)) return false
        if(!parseDataEqualsTo(term.pos, db.pos)) return false
        return true
+    }
+    private fun parseUrl(url:String):String{
+       var toReturn = url
+       toReturn = toReturn.replace("SELF", "0.0.0.0:${Port().main()}")
+       return toReturn
     }
 
     private fun parseDataEqualsTo(termData:String, dbData:String):Boolean{
