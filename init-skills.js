@@ -27,7 +27,7 @@ let data = [
          }
       },
       {
-         "url": "",
+         "url": "SELFv1/skills/timer",
          "data":{
             "word": "timer",
             "type": {

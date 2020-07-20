@@ -126,7 +126,8 @@ object Search{
     }
     private fun parseUrl(url:String):String{
        var toReturn = url
-       toReturn = toReturn.replace("SELF", "0.0.0.0:${Port().main()}")
+       // POSSIBLE ISSUE----------------------\/-----------------------------
+       toReturn = toReturn.replace("SELF", "https://0.0.0.0:${Port().main()}")
        return toReturn
     }
 
