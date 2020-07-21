@@ -14,9 +14,12 @@ object Search{
 
 	fun ara(params:ParseUrl.ApiParams):Any{
 		val data = DatabaseClient().getAll<SearchV2>("search", SearchV2::class.java)
+      println(data)
 		val wordsInfo = NLP.baseNlp.getMultipleForTopic(params.term, params.cc.language)
 		for(i in data){
          for(i2 in wordsInfo)
+         println(i2.type)
+         println(i.data.type)
          if (dataEqualsTo(i2.type, i.data.type)){
 				val link = i.url
 			   return runSkill(link, params)
