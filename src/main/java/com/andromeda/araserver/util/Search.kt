@@ -22,7 +22,7 @@ object Search{
          println(i.data.type)
          if (dataEqualsTo(i2.type, i.data.type)){
             println("wellllllllllll ok then")
-				val link = i.url
+            val link = parseUrl(i.url)
 			   return runSkill(link, params)
          }
       }
