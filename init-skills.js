@@ -21,7 +21,7 @@ let data = [
             "type": {
                "dep": "nsubj",
                "pos": "NOUN",
-               "tag": "NNS",
+               "tag": "*",
                "lemma": "weather"
             }
          }
@@ -33,7 +33,7 @@ let data = [
             "type": {
                "dep": "dobj",
                "pos": "NOUN",
-               "tag": "NNS",
+               "tag": "*",
                "lemma": "timer"
             }
          }
