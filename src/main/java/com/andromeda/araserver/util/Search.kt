@@ -17,13 +17,15 @@ object Search{
       println(data)
 		val wordsInfo = NLP.baseNlp.getMultipleForTopic(params.term, params.cc.language)
 		for(i in data){
-         for(i2 in wordsInfo)
+         for(i2 in wordsInfo){
          println(i2.type)
          println(i.data.type)
          if (dataEqualsTo(i2.type, i.data.type)){
+            println("wellllllllllll ok then")
 				val link = i.url
 			   return runSkill(link, params)
          }
+      }
 		}
       try{
 		   val ddg = quickSearch(params)
