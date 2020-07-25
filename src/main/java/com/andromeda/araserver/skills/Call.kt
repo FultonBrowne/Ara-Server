@@ -29,4 +29,8 @@ class Call {
         return Gson().toJson(arrayListOf)
 
     }
+
+    fun main(params:ParseUrl.ApiParams){
+
+    }
 }

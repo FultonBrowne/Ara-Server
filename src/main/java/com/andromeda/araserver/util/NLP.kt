@@ -141,6 +141,10 @@ class NLP(val link:String){
       }
       return Timer.TimerModel(units, length)
     }
+
+    fun getContact(text:String){
+
+    }
 	data class Words(val word:String, val type:String)
 	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
 	data class TimerData(var length:Int, var units:String)
