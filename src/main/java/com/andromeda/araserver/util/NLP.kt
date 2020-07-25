@@ -45,10 +45,6 @@ class NLP(val link:String){
 
 
 	}
-	fun getTopic(word:String, lang:String):String{
-		val data = getMultipleForTopic(word, lang)
-		return ""
-	}
 	fun getMultipleForTopic(word:String, lang:String):ArrayList<MultiTypeWords>{
 		val toReturn = arrayListOf<MultiTypeWords>()
 		val toParse = URL("$link/v0/search?input=$word&lang=$lang".replace(" ", "%20")).readText()
@@ -142,15 +138,24 @@ class NLP(val link:String){
       return Timer.TimerModel(units, length)
     }
 
-    fun getContact(text:String){
-
+    fun getContact(word:String, lang:String){
+      val names = arrayListOf<String>()
+      val data = getMultipleForTopic(word, lang)
+      for(i in data){
+         if(dataEqualsTo(i.type, contactName)){
+            names.add(i.word)
+         }
+      }
     }
 	data class Words(val word:String, val type:String)
+
 	data class MultiTypeWords(val word:String, val type:SkillDbFormat)
 	data class TimerData(var length:Int, var units:String)
+   data class ContactData(val name:ArrayList<String>, val type:String)
    data class WeatherData(val location:String, val time:Long)
 	companion object{
       val weatherDate = SkillDbFormat("npadvmod", "*", "*", "*")
+      val contactName = SkillDbFormat("*", "PROPN", "NNP", "*")
       val timeUnit = SkillDbFormat("pobj", "NOUN", "NNS", "*")
       val locationData = SkillDbFormat("*", "PROPN", "NNP", "*") 
       val number = SkillDbFormat("nummod", "NUM", "cd", "*")
