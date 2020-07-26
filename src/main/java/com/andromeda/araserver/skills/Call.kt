@@ -33,6 +33,6 @@ class Call {
     }
 
     fun main(params:ParseUrl.ApiParams){
-
+       contact = NLP.basename.getContact(params.term, params.cc.language)
     }
 }
