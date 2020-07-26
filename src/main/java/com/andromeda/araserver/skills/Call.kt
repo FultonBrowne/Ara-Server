@@ -1,8 +1,6 @@
 package com.andromeda.araserver.skills
 
-import com.andromeda.araserver.util.OutputModel
-import com.andromeda.araserver.util.NLP
-import com.andromeda.araserver.util.ParseUrl
+import com.andromeda.araserver.util.*
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.google.gson.Gson
 import java.util.*
@@ -32,7 +30,17 @@ class Call {
 
     }
 
-    fun main(params:ParseUrl.ApiParams){
+    fun main(params:ParseUrl.ApiParams):Feed{
        contact = NLP.basename.getContact(params.term, params.cc.language)
+       if(contact.name.size == 0){
+          return Feed("list", null, FeedModel("I am sorry, you must provide a phone number", "if this is a bug tap select here to report", "https://github.com/fultonbrowne/ara-android"), "I am sorry, you must provide a phone number")
+       }
+       var name = ""
+       for (i in contact.name){
+          if(name == "") name = name + i
+          else name = "$name $i"
+       }
+
+       return Feed("list", SkillsModel("CALL", name, ""))
     }
 }
