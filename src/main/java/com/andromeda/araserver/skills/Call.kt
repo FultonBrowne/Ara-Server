@@ -31,9 +31,9 @@ class Call {
     }
 
     fun main(params:ParseUrl.ApiParams):Feed{
-       contact = NLP.basename.getContact(params.term, params.cc.language)
+       var contact = NLP.baseNlp.getContact(params.term, params.cc.language)
        if(contact.name.size == 0){
-          return Feed("list", null, FeedModel("I am sorry, you must provide a phone number", "if this is a bug tap select here to report", "https://github.com/fultonbrowne/ara-android"), "I am sorry, you must provide a phone number")
+          return Feed("list", null, "I am sorry, you must provide a phone number", arrayListOf(FeedModel("I am sorry, you must provide a phone number", "if this is a bug tap select here to report", "https://github.com/fultonbrowne/ara-android")))
        }
        var name = ""
        for (i in contact.name){
@@ -41,6 +41,6 @@ class Call {
           else name = "$name $i"
        }
 
-       return Feed("list", SkillsModel("CALL", name, ""))
+       return Feed("list", arrayListOf(SkillsModel("CALL", name, "")), "calling $name", arrayListOf(FeedModel("Calling....", name)))
     }
 }

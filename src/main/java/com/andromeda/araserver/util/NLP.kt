@@ -138,7 +138,7 @@ class NLP(val link:String){
       return Timer.TimerModel(units, length)
     }
 
-    fun getContact(word:String, lang:String){
+    fun getContact(word:String, lang:String):ContactData{
       val names = arrayListOf<String>()
       val data = getMultipleForTopic(word, lang)
       for(i in data){
