@@ -142,10 +142,9 @@ class NLP(val link:String){
       val names = arrayListOf<String>()
       val data = getMultipleForTopic(word.replace("-", ""), lang) 
       for(i in data){
-         if(dataEqualsTo(i.type, contactName)){
+         if(dataEqualsTo(i.type, contactName)||dataEqualsTo(i.type, contactNumber)){ 
             names.add(i.word)
          }
-         else if(dataEqualsTo(i.type, contactNumber))
       }
       return ContactData(names, null)
     }
