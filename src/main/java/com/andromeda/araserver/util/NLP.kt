@@ -140,11 +140,12 @@ class NLP(val link:String){
 
     fun getContact(word:String, lang:String):ContactData{
       val names = arrayListOf<String>()
-      val data = getMultipleForTopic(word, lang)
+      val data = getMultipleForTopic(word.replace("-", ""), lang) 
       for(i in data){
          if(dataEqualsTo(i.type, contactName)){
             names.add(i.word)
          }
+         else if(dataEqualsTo(i.type, contactNumber))
       }
       return ContactData(names, null)
     }
@@ -156,6 +157,7 @@ class NLP(val link:String){
    data class WeatherData(val location:String, val time:Long)
 	companion object{
       val weatherDate = SkillDbFormat("npadvmod", "*", "*", "*")
+      val contactNumber = SkillDbFormat("nummod", "NUM", "CD", "*")
       val contactName = SkillDbFormat("*", "PROPN", "NNP", "*")
       val timeUnit = SkillDbFormat("pobj", "NOUN", "NNS", "*")
       val locationData = SkillDbFormat("*", "PROPN", "NNP", "*") 
