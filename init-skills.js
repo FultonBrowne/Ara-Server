@@ -39,7 +39,7 @@ let data = [
          }
       },
       {
-         "url": "",
+         "url": "SELFv1/skills/call",
          "data":{
             "word": "call",
             "type": {
@@ -51,7 +51,7 @@ let data = [
          }
       },
       {
-         "url": "",
+         "url": "SELFv1/skills/text",
          "data":{
             "word": "text",
             "type": {
