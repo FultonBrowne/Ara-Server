@@ -71,6 +71,22 @@ object Run{
 				call.respondText(outputToApi(payload), ContentType.parse("application/json"))
 			}
 			route("skills"){
+            route("call"){
+					get{
+					val params = ParseUrl().parseApi(this.call.request.queryParameters)
+					val payload = (Call().main(params))
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+					}
+
+            }
+
+            route("text"){
+					get{
+					val params = ParseUrl().parseApi(this.call.request.queryParameters)
+					val payload = (Text().main(params))
+					call.respondText(outputToApi(payload), ContentType.parse("application/json"))
+					}
+            }
 				route("timer"){
 					get{
 					val params = ParseUrl().parseApi(this.call.request.queryParameters)
@@ -136,42 +152,6 @@ object Run{
 					val payload = NewsCache.us
 					call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
 
-				}
-				route("news"){
-					get("us"){
-						val payload = NewsCache.us
-						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
-
-					}
-
-					get("uk"){
-						val payload = NewsCache.uk
-						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
-
-					}
-
-					get("de"){
-						val payload = NewsCache.de
-						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
-					}
-
-					get ("me"){
-						val payload = NewsCache.me
-						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
-					}
-					get("tech/en"){
-						val payload = NewsCache.techEn
-						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
-					}
-					get("money/en"){
-						val payload = NewsCache.moneyEn
-						call.respondText(outputToApi(To().feedModelArray(payload)), ContentType.parse("application/json"))
-					}
-				}
-				route("food"){
-					get{
-
-					}
 				}
 
 			}

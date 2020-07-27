@@ -1,9 +1,9 @@
 package com.andromeda.araserver.skills
 
-import com.andromeda.araserver.util.OutputModel
+import com.andromeda.araserver.util.*
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper
 import com.google.gson.Gson
-import java.util.ArrayList
+import java.util.*
 
 class Text {
     fun main(url: String): String {
