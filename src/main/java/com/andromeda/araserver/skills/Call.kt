@@ -41,6 +41,6 @@ class Call {
           else name = "$name $i"
        }
 
-       return Feed("list", arrayListOf(SkillsModel("CALL", name, "")), "calling $name", arrayListOf(FeedModel("Calling....", name)))
+       return Feed("list", arrayListOf(SkillsModel("CALL", name, contact.type?: "")), "calling $name", arrayListOf(FeedModel("Calling....", name)))
     }
 }
