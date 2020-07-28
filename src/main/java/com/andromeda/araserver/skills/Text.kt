@@ -19,7 +19,7 @@ class Text {
     }
 
     fun main(params:ParseUrl.ApiParams):Feed{
-       var contact = NLP.baseNlp.getContact(params.term, params.cc.language)
+       var contact = NLP.baseNlp.getContact("would you ${params.term}", params.cc.language)
        if(contact.name.size == 0){
           return Feed("list", null, "I am sorry, you must provide a phone number", arrayListOf(FeedModel("I am sorry, you must provide a phone number", "if this is a bug tap select here to report", "https://github.com/fultonbrowne/ara-android")))
        }
