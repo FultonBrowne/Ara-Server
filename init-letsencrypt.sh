@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(fulton.software)
+domains=(fultontestmachine1.fulton.software)
 rsa_key_size=4096
 data_path="./keys"
 email="gprlabs@outlook.com" # Adding a valid address is strongly recommended
