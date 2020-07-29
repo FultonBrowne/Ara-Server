@@ -55,6 +55,8 @@ services:
          - ./keys:/etc/letsencrypt
          - ./keys/certbot/www:/var/www/certbot
       entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+      depends_on:
+        - web
 volumes:
    test2-volume: 
    production-volume:
