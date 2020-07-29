@@ -38,8 +38,6 @@ services:
          - 5000:5000
    nginx:
       image: nginx:latest
-      container_name: reverse
-      hostname: reverse
       ports:
          - 80:80
          - 443:443
