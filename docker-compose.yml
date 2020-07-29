@@ -37,6 +37,7 @@ services:
       ports:
          - 5000:5000
    nginx:
+      restart: unless-stopped
       image: nginx:latest
       ports:
          - 80:80
