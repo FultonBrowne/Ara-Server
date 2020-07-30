@@ -47,6 +47,8 @@ services:
          - ./keys/conf:/etc/letsencrypt
          - ./keys/certbot/www:/var/www/certbot
       command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+      depends_on:
+        - web
    certbot:
       image: certbot/certbot
       restart: unless-stopped
@@ -54,10 +56,30 @@ services:
          - ./keys/conf:/etc/letsencrypt
          - ./keys/certbot/www:/var/www/certbot
       entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+   postgres:
+      image: postgres
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: keycloak
+        POSTGRES_USER: keycloak
+        POSTGRES_PASSWORD: password
+   keycloak:
+      image: jboss/keycloak:10.0.0
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_PASSWORD: password
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: VerySecurePassword
+        
+      ports:
+        - 80:8080
       depends_on:
-        - web
+        - postgres
 volumes:
    test2-volume: 
    production-volume:
-
-
+   postgres_data:
