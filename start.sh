@@ -18,3 +18,10 @@ echo "mongo admin password is $mongoAdminPass"
 
 echo "sql password is $sqlPass"
 
+export KEYCLOAK_PASSWORD=$keycloakPass
+
+export DB_PASSWORD=$sqlPass
+
+if
+
+docker-compose config
