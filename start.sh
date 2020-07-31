@@ -29,4 +29,4 @@ else
    echo generating a validated key
    ./init-letsencrypt.sh $domain
 fi
-docker-compose config
+docker-compose up
