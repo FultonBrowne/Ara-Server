@@ -22,6 +22,11 @@ export KEYCLOAK_PASSWORD=$keycloakPass
 
 export DB_PASSWORD=$sqlPass
 
-if
-
+if [$domain == ""]; then
+   echo no domain generating unvalidated keys
+   ./genTempKey.sh
+else
+   echo generating a validated key
+   ./init-letsencrypt.sh $domain
+fi
 docker-compose config
