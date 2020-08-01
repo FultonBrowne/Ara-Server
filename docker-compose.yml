@@ -61,11 +61,11 @@ services:
    postgres:
       image: postgres
       volumes:
-        - postgres_data1:/var/lib/postgresql/data
+        - postgres_data4:/var/lib/postgresql/data
       environment:
         POSTGRES_DB: keycloak
         POSTGRES_USER: keycloak
-        POSTGRES_PASSWORD: ${DB_PASSWORD}
+        POSTGRES_PASSWORD: password
    keycloak:
       image: jboss/keycloak:10.0.0
       environment:
@@ -73,16 +73,16 @@ services:
         DB_ADDR: postgres
         DB_DATABASE: keycloak
         DB_USER: keycloak
-        DB_PASSWORD: ${DB_PASSWORD}
-        DB_PORT: 8000
+        DB_PASSWORD: password
         KEYCLOAK_USER: admin
         KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
         
       ports:
-        - 8000:8000
+        - 8080:8080
       depends_on:
         - postgres
+
 volumes:
    test2-volume: 
    production-volume:
-   postgres_data1:
+   postgres_data4:
