@@ -39,6 +39,8 @@ services:
    nginx:
       restart: unless-stopped
       image: nginx:latest
+      environment:
+         WEB_SERVER_NAME: ${DOMAIN}
       ports:
          - 80:80
          - 443:443
@@ -59,13 +61,13 @@ services:
    postgres:
       image: postgres
       volumes:
-        - postgres_data:/var/lib/postgresql/data
+        - postgres_data1:/var/lib/postgresql/data
       environment:
         POSTGRES_DB: keycloak
         POSTGRES_USER: keycloak
         POSTGRES_PASSWORD: ${DB_PASSWORD}
    keycloak:
-      image: jboss/keycloak
+      image: jboss/keycloak:10.0.0
       environment:
         DB_VENDOR: POSTGRES
         DB_ADDR: postgres
@@ -83,4 +85,4 @@ services:
 volumes:
    test2-volume: 
    production-volume:
-   postgres_data:
+   postgres_data1:

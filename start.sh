@@ -25,8 +25,13 @@ export DB_PASSWORD=$sqlPass
 if [$domain == ""]; then
    echo no domain generating unvalidated keys
    ./genTempKey.sh
+   export DOMAIN=localhost
 else
    echo generating a validated key
    ./init-letsencrypt.sh $domain
+   export DOMAIN=$domain
 fi
+
+docker-compose config
+
 docker-compose up
