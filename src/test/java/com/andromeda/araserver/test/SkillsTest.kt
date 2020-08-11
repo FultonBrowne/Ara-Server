@@ -25,7 +25,7 @@ class SkillsTest{
       }
       val params = ParseUrl.ApiParams("text bob", "0.0", "0.0", Locale.US, "bvbjrblvrvrkvblfkvn")
       val dataToTest = Text().main(params)
-      assertEquals(dataToTest, Feed("list", arrayListOf(SkillsModel("CALL", name, "")), "callinging $name", arrayListOf(FeedModel("Calling....", name)))
+      assertEquals(dataToTest, Feed("list", arrayListOf(SkillsModel("CALL", name, "")), "calling $name", arrayListOf(FeedModel("Calling....", name))))
 
    }
    @Test
