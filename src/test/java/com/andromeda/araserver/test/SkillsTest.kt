@@ -7,22 +7,25 @@ import org.junit.Test
 import org.junit.Assert.assertEquals
 class SkillsTest{
    @Test
-   fun call(){
+   fun text(){
       val name = "bob"
       if(!checkNlpServerOn()){
          return
       }
-      val params = ParseUrl.ApiParams("call bob", "0.0", "0.0", Locale.US, "bvbjrblvrvrkvblfkvn")
+      val params = ParseUrl.ApiParams("text bob", "0.0", "0.0", Locale.US, "bvbjrblvrvrkvblfkvn")
       val dataToTest = Text().main(params)
       assertEquals(dataToTest, Feed("list", arrayListOf(SkillsModel("TEXT", name, "")), "texting $name", arrayListOf(FeedModel("Opening text app...", name)))
 )
    }
    @Test
-   fun text(){
+   fun call(){
+      val name = "bob"
       if(!checkNlpServerOn()){
          return
       }
       val params = ParseUrl.ApiParams("text bob", "0.0", "0.0", Locale.US, "bvbjrblvrvrkvblfkvn")
+      val dataToTest = Text().main(params)
+      assertEquals(dataToTest, Feed("list", arrayListOf(SkillsModel("CALL", name, "")), "callinging $name", arrayListOf(FeedModel("Calling....", name)))
 
    }
    @Test
