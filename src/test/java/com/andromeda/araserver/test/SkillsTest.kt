@@ -36,7 +36,7 @@ class SkillsTest{
 
    fun checkNlpServerOn():Boolean{
       return try{
-         URL("http://${System.getenv("NLP")}/v0")
+         URL("http://${System.getenv("NLP")}/v0").readText()
          return true
       }
       catch(e:Exception){
