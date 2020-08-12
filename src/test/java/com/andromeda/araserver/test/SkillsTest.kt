@@ -1,5 +1,6 @@
 package com.andromeda.araserver.test
 import com.andromeda.araserver.skills.*
+import com.andromeda.araserver.skills.Timer
 import com.andromeda.araserver.util.*
 import java.util.*
 import java.net.*
@@ -33,7 +34,11 @@ class SkillsTest{
       if(!checkNlpServerOn()){
          return
       }
+      val shouldBe = Feed("list" ,arrayListOf(SkillsModel("TIMER", "300000", "")), "timer starting", arrayListOf(FeedModel("Starting a timer", "for 5 minutes")))
+
       val params = ParseUrl.ApiParams("set a timer for 5 minutes", "0.0", "0.0", Locale.US, "bvbjrblvrvrkvblfkvn")
+      val dataToTest = Timer().main(params)
+      assertEquals(shouldBe, dataToTest)
 
    }
 
