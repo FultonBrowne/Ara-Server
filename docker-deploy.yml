@@ -23,6 +23,7 @@ services:
          - production-volume1:/data/db
 
    mongoClientTemp:
+      restart: on-failure:25
       image: mongo:latest
       container_name: mongoClientTemp
       links:
