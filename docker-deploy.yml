@@ -14,13 +14,13 @@ services:
          BING: 92a4005e9ce94f8ea70bf62a3bd42bd9
          NLP: nlp:5000
       depends_on:
-        - mongoClientTemp
+        - mongo
         - nlp
    mongo:
       image: mongo:latest
       container_name: mongo
       volumes:
-         - test2-volume:/data/db
+         - production-volume1:/data/db
 
    mongoClientTemp:
       image: mongo:latest
@@ -29,7 +29,8 @@ services:
          - mongo:mongo
       volumes:
          - ./init-skills.js:/data/mongostartup/init-skills.js
-      command: sleep 10 && mongo --host mongo < /data/mongostartup/init-skills.js 
+         - ./wait.sh:/wait.sh
+      command: mongo --host mongo < /data/mongostartup/init-skills.js
       depends_on:
          - mongo
    nlp:
@@ -40,5 +41,5 @@ services:
          - 5000:5000
 volumes:
    test2-volume: 
-   production-volume:
+   production-volume1:
    postgres_data4:
