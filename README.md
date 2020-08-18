@@ -11,6 +11,10 @@ The server that powers feed, AI search, and skills to the ara voice assistant
 [![CircleCI](https://circleci.com/gh/FultonBrowne/Ara-Server.svg?style=svg)](https://circleci.com/gh/FultonBrowne/Ara-Server)
 <a href="https://www.buymeacoffee.com/28EcqNL" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-blue.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
+## Running (incomplete)
+make build to build
+
+make test to run tests (note you may have to export nlp location outside of the make file)
 ## Author
 
 👤 **Fulton Browne**

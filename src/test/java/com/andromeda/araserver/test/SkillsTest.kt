@@ -24,8 +24,8 @@ class SkillsTest{
       if(!checkNlpServerOn()){
          return
       }
-      val params = ParseUrl.ApiParams("text bob", "0.0", "0.0", Locale.US, "bvbjrblvrvrkvblfkvn")
-      val dataToTest = Text().main(params)
+      val params = ParseUrl.ApiParams("call bob", "0.0", "0.0", Locale.US, "bvbjrblvrvrkvblfkvn")
+      val dataToTest = Call().main(params)
       assertEquals(dataToTest, Feed("list", arrayListOf(SkillsModel("CALL", name, "")), "calling $name", arrayListOf(FeedModel("Calling....", name))))
 
    }
