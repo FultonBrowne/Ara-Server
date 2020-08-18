@@ -43,11 +43,14 @@ class SkillsTest{
    }
 
    fun checkNlpServerOn():Boolean{
+      URL("https://google.com").readText()
+      val url = "http://${System.getenv("NLP")}/v0"
       return try{
-         URL("http://${System.getenv("NLP")}/v0").readText()
+         URL(url).readText()
          return true
       }
       catch(e:Exception){
+         throw e
          return false
       }
    }

@@ -89,6 +89,7 @@ class NLP(val link:String){
     private fun parseDataEqualsTo(termData:String, dbData:String):Boolean{
        if(dbData == "*") return true
        else if(dbData == termData) return true
+       else if(termData == "*") return true
        return false
     }
     private fun dateWord(timeWord: String): Long {
