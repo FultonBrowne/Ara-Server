@@ -23,7 +23,7 @@ mainClassName = 'com.andromeda.araserver.Run'
 
 group 'ara-server'
 version '1.0-SNAPSHOT'
-ext.ktor_version = '1.3.2'
+ext.ktor_version = '1.4.0'
 sourceCompatibility = 1.8
 
 repositories {
