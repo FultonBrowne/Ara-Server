@@ -126,17 +126,20 @@ class NLP(val link:String){
 
     fun getTimerData(phrase:String, lang:String):Timer.TimerModel{
       val units = arrayListOf<Int>()
+      val unitsPT = arrayListOf<String>()
       val length = arrayListOf<Int>()
       val data = getMultipleForTopic(phrase, lang)
+      println(data)
       for (i in data){
          if(dataEqualsTo(i.type, number)){ 
             length.add(i.type.lemma.toInt())
          }
          else if(dataEqualsTo(i.type, timeUnit)){
             units.add(Timer.constMap(i.type.lemma))
+            unitsPT.add(i.type.lemma)
          }
       }
-      return Timer.TimerModel(units, length)
+      return Timer.TimerModel(units, length, unitsPT)
     }
 
     fun getContact(word:String, lang:String):ContactData{
@@ -161,7 +164,7 @@ class NLP(val link:String){
       val contactName = SkillDbFormat("*", "PROPN", "NNP", "*")
       val timeUnit = SkillDbFormat("pobj", "NOUN", "NNS", "*")
       val locationData = SkillDbFormat("*", "PROPN", "NNP", "*") 
-      val number = SkillDbFormat("nummod", "NUM", "cd", "*")
+      val number = SkillDbFormat("nummod", "NUM", "CD", "*")
       val baseNlp = NLP("http://${System.getenv("NLP")}")
 	}
 }

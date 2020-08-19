@@ -34,7 +34,7 @@ class SkillsTest{
       if(!checkNlpServerOn()){
          return
       }
-      val shouldBe = Feed("list" ,arrayListOf(SkillsModel("TIMER", "300000", "")), "timer starting", arrayListOf(FeedModel("Starting a timer", "for 5 minutes")))
+      val shouldBe = Feed("list" ,arrayListOf(SkillsModel("TIMER", "300000", "")), "timer starting", arrayListOf(FeedModel("Starting a timer", "for 5 minute(s)")))
 
       val params = ParseUrl.ApiParams("set a timer for 5 minutes", "0.0", "0.0", Locale.US, "bvbjrblvrvrkvblfkvn")
       val dataToTest = Timer().main(params)

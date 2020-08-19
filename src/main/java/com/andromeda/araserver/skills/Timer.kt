@@ -39,9 +39,9 @@ class Timer {
    val time = numOfUnits?.times(unit)
         val gson = Gson()
         val mapper = YAMLMapper()
-        return Feed("list" ,arrayListOf(SkillsModel("TIMER", time.toString(), "")), "timer starting", arrayListOf(FeedModel("Starting a timer", "for $numOfUnits $unit")))
+        return Feed("list" ,arrayListOf(SkillsModel("TIMER", time.toString(), "")), "timer starting", arrayListOf(FeedModel("Starting a timer", "for $numOfUnits ${wordData.unitsPT[0]}(s)")))
 	}
-   data class TimerModel(val units:ArrayList<Int>, val length:ArrayList<Int>)
+   data class TimerModel(val units:ArrayList<Int>, val length:ArrayList<Int>, val unitsPT:ArrayList<String>)
    companion object{
       const val SECONDS = 1000
       const val MINUTES = 60000
