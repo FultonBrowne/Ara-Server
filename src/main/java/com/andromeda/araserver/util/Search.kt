@@ -107,8 +107,10 @@ object Search{
 		val result = client.newCall(request).execute().body!!.string()
       println("result:")
       println(result)
-		return Gson().fromJson<Feed>(result, Feed::class.java)
-		
+      val toReturn = Gson().fromJson<Feed>(result, Feed::class.java)
+      println("to return:")
+      println(toReturn)
+      return toReturn		
 	}
 
     private fun getBingText(url: String, cc: Locale): String {
