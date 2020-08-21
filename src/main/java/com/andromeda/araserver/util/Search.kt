@@ -107,10 +107,10 @@ object Search{
 		val result = client.newCall(request).execute().body!!.string()
       println("result:")
       println(result)
-      val toReturn = Gson().fromJson<Feed>(result, Feed::class.java)
+      val toReturn = Gson().fromJson<ReturnedSkillsData>(result, ReturnedSkillsData::class.java)
       println("to return:")
       println(toReturn)
-      return toReturn		
+      return toReturn.data	
 	}
 
     private fun getBingText(url: String, cc: Locale): String {
@@ -144,7 +144,7 @@ object Search{
        else if(dbData == termData) return true
        return false
     }
-    data class SearchV2(val url:String, val data:NLP.MultiTypeWords){
-    }
+    data class SearchV2(val url:String, val data:NLP.MultiTypeWords)
+    data class ReturnedSkillsData(val version:String, val data:Feed)
 
 }
