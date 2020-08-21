@@ -105,6 +105,8 @@ object Search{
         	.build();
 		val client = OkHttpClient()
 		val result = client.newCall(request).execute().body!!.string()
+      println("result:")
+      println(result)
 		return Gson().fromJson<Feed>(result, Feed::class.java)
 		
 	}
