@@ -6,9 +6,10 @@ object UserWhiteList {
     fun checkOnList(data:String): Boolean {
        try{
           val ifExist = System.getenv("AUTH_NEEDED_TO_CREATE")!!
-          return true
        }
        catch(e:Exception){
+          if(data == "" || data.contains(" ")) return false
+          return true
        }
         if (userList.contains(data) || NonUsersList.contains(data)) return true
         return false
