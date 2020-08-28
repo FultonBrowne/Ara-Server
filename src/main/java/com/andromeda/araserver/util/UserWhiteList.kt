@@ -5,7 +5,7 @@ object UserWhiteList {
     var userList = arrayListOf<String>()
     fun checkOnList(data:String): Boolean {
        try{
-          val ifExist = System.getenv("AUTH_NEEDED_TO_CREATE")!!
+          val ifExist = System.getenv("AUTH_NOT_NEEDED_TO_CREATE")!!
           return true
        }
        catch(e:Exception){

@@ -12,6 +12,7 @@ services:
          dbpassword: thepassword
          PORT: 8080
          BING: 92a4005e9ce94f8ea70bf62a3bd42bd9
+         AUTH_NOT_NEEDED_TO_CREATE: "this just has to exist"
          NLP: nlp:5000
       depends_on:
         - mongo
