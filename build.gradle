@@ -59,7 +59,7 @@ dependencies {
     compile "io.ktor:ktor-server-core:$ktor_version"
     compile "io.ktor:ktor-client-core:$ktor_version"
     compile "io.ktor:ktor-jackson:$ktor_version"
-    compile "com.squareup.okhttp3:okhttp:4.8.1"
+    compile "com.squareup.okhttp3:okhttp:4.9.0"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+"
 
 
