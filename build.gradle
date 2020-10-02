@@ -47,7 +47,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.2'
     compile group: 'org.apache.opennlp', name: 'opennlp-tools', version: '1.9.3'
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.7'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.2'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.11.3'
     implementation 'com.google.code.gson:gson:2.8.6'
     compile group: 'postgresql', name: 'postgresql', version: '9.1-901-1.jdbc4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
